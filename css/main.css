@@ -1175,7 +1175,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff6055;
+  background: #46c25c;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2557,5 +2557,5 @@ body {
   padding: 40px;
 }
 :root {
-  --content-bg-color: rgba(255,255,255,0.902);
+  --content-bg-color: rgba(255,238,238,0.902);
 }
