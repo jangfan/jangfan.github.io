@@ -74,32 +74,6 @@
       </tags>
   </entry>
   <entry>
-    <title>周计划</title>
-    <url>/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/</url>
-    <content><![CDATA[<h1 id="大一下学期目标"><a href="#大一下学期目标" class="headerlink" title="大一下学期目标"></a>大一下学期目标</h1><p><strong>完成《深入了解操作系统》的阅读以及lab的练习</strong></p>
-<p><strong>完成<em>MIT.6S081</em>课程学习和lab的练习</strong></p>
-<p><strong>主线</strong>：<strong>学习pwn的栈 堆和内核</strong></p>
-<p><strong>主线</strong>：<strong>完成现代c++的学习</strong></p>
-<h2 id="第4周"><a href="#第4周" class="headerlink" title="第4周"></a>第4周</h2><p>总目标：</p>
-<p><strong>现代c++：</strong>part1，part2，part3. </p>
-<p><strong>pwn：</strong>理解堆</p>
-<p><strong>xv6：</strong>lab1完成</p>
-<p><strong>re:</strong> 简单了解逆向</p>
-<h3 id="周一"><a href="#周一" class="headerlink" title="周一"></a>周一</h3><p>现代c++：程序的执行过程，new关键字及内存内存，命名空间，c++的标准输入输出简历</p>
-<p>pwn：堆理解</p>
-<p>逆向刷题</p>
-<p>pwn刷题</p>
-<h3 id="周二"><a href="#周二" class="headerlink" title="周二"></a>周二</h3><p>现代c++：const关键字介绍 ，auto关键字使用</p>
-<p>pwn ：刷题整理</p>
-]]></content>
-      <categories>
-        <category>计划</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>汇编语言简单摘要</title>
     <url>/2023/02/20/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%91%98%E8%A6%81/</url>
     <content><![CDATA[<h3 id="x86-64位寄存器（16个）"><a href="#x86-64位寄存器（16个）" class="headerlink" title="x86-64位寄存器（16个）"></a>x86-64位寄存器（16个）</h3><p>rax：存放保存函数返回值<br>rbx：被调用者保存<br>rdi rsi rdx rcx 对应第1、2、3、4个参数<br>rsp：栈指针，存放栈帧的栈顶的偏移地址<br>r8 r9对应第5、6个参数</p>
@@ -131,6 +105,32 @@
       </categories>
       <tags>
         <tag>汇编</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>周计划</title>
+    <url>/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/</url>
+    <content><![CDATA[<h1 id="大一下学期目标"><a href="#大一下学期目标" class="headerlink" title="大一下学期目标"></a>大一下学期目标</h1><p><strong>完成《深入了解操作系统》的阅读以及lab的练习</strong></p>
+<p><strong>完成<em>MIT.6S081</em>课程学习和lab的练习</strong></p>
+<p><strong>主线</strong>：<strong>学习pwn的栈 堆和内核</strong></p>
+<p><strong>主线</strong>：<strong>完成现代c++的学习</strong></p>
+<h2 id="第4周"><a href="#第4周" class="headerlink" title="第4周"></a>第4周</h2><p>总目标：</p>
+<p><strong>现代c++：</strong>part1，part2，part3. </p>
+<p><strong>pwn：</strong>理解堆</p>
+<p><strong>xv6：</strong>lab1完成</p>
+<p><strong>re:</strong> 简单了解逆向</p>
+<h3 id="周一"><a href="#周一" class="headerlink" title="周一"></a>周一</h3><p>现代c++：程序的执行过程，new关键字及内存内存，命名空间，c++的标准输入输出简历</p>
+<p>pwn：堆理解</p>
+<p>逆向刷题</p>
+<p>pwn刷题</p>
+<h3 id="周二"><a href="#周二" class="headerlink" title="周二"></a>周二</h3><p>现代c++：const关键字介绍 ，auto关键字使用</p>
+<p>pwn ：刷题整理</p>
+]]></content>
+      <categories>
+        <category>计划</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
       </tags>
   </entry>
   <entry>
