@@ -224,7 +224,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-13 10:46:59" itemprop="dateModified" datetime="2023-03-13T10:46:59+08:00">2023-03-13</time>
+                <time title="修改时间：2023-03-13 11:01:45" itemprop="dateModified" datetime="2023-03-13T11:01:45+08:00">2023-03-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -278,13 +278,13 @@
 
 <h2 id="OGeek2019-babyrop"><a href="#OGeek2019-babyrop" class="headerlink" title="[OGeek2019]babyrop"></a>[OGeek2019]babyrop</h2><p>先checksec一下，nx排除了shellcode的可能，Full RELEO为地址随机化</p>
 <p>先观察主函数，设定了一个闹钟(但是这道题不需要使用解除闹钟的方法)</p>
-<p><img src="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/imgs/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095347.png"></p>
+<p>![](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-03-13 095347.png)</p>
 <p>主函数的思路是生成一个随机数，把这个随机数作为参数传进sub——804871F()函数中，然后再将函数返回结果作为参数传进sub——80487D0()里,sub_80486bb()是初始化，没什么用。<strong>fd&#x3D;open(“&#x2F;dev&#x2F;urandom”,0);if(fd&gt;0) read(fd,&amp;buf,4u)</strong>:获取一个随机数给到buf</p>
 <p><strong>sub_804871f()</strong></p>
 <p>![](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-03-13 095355.png)</p>
 <p>sprintf函数将生成的随机数加到s[32]的数组中，这里题目有read函数，但是没有栈溢出的可能，读入buf之后，读取buf的长度，然后比较buf和s字符串的大小（比较长度为前v1个字符）。此时如果strncmp（）的结果不为0，则直接退出程序。因此我们第一个目的：<strong>使strncmp结果为0</strong></p>
 <p><strong>sub_80487d0()</strong></p>
-<p><img src="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/imgs/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095400.png"></p>
+<p>![](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-03-13 095400.png)</p>
 <p>这个函数将buf[7]作为参数出传进来，将它的ASCII码比对，看到全程序中唯一一个存在栈溢出漏洞可能性的地方。但是必须满足a1的ASCII码值能达到栈溢出的大小。第二个目的：<strong>使a1的ASCII码值（sub_804871F()函数里的buf[7]的ASCII码值尽量大）</strong></p>
 <p><strong>思路</strong></p>
 <p>使用ROP链寻找libc解题</p>
@@ -1062,7 +1062,7 @@
 
   
   
-  <script color='0,0,100' opacity='0.5' zIndex='-1' count='999' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script color='0,0,100' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
