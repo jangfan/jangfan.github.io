@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>周计划</title>
+    <url>/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/</url>
+    <content><![CDATA[<h1 id="大一下学期目标"><a href="#大一下学期目标" class="headerlink" title="大一下学期目标"></a>大一下学期目标</h1><p><strong>主线</strong>：<strong>学习pwn的栈 堆和内核</strong></p>
+<p><strong>主线</strong>：<strong>完成现代c++的学习</strong></p>
+<p><strong>完成《深入了解操作系统》的阅读以及lab的练习</strong></p>
+<p><strong>完成<em>MIT.6S081</em>课程学习和lab的练习</strong></p>
+<h2 id="第4周"><a href="#第4周" class="headerlink" title="第4周"></a>第4周</h2><p>总目标：</p>
+<p><strong>现代c++：</strong>part1，part2 </p>
+<p><strong>pwn：</strong>理解堆</p>
+<p><strong>xv6：</strong>lab1完成</p>
+<p><strong>re:</strong> 简单了解逆向</p>
+<h3 id="周一"><a href="#周一" class="headerlink" title="周一"></a>周一</h3><p>现代c++：程序的执行过程，new关键字及内存内存，命名空间，c++的标准输入输出简历</p>
+<p>pwn：堆理解</p>
+<p>逆向刷题</p>
+<p>pwn刷题</p>
+<h3 id="周二"><a href="#周二" class="headerlink" title="周二"></a>周二</h3><p>现代c++：const关键字介绍 ，auto关键字使用</p>
+<p>pwn ：刷题整理</p>
+<h3 id="周三"><a href="#周三" class="headerlink" title="周三"></a>周三</h3><p>划水</p>
+<h3 id="周四"><a href="#周四" class="headerlink" title="周四"></a>周四</h3><p>现代c++：静态变量，指针和引用 ，左值，右值，左值引用，右值引用，move函数，临时对象 ，可调用对象</p>
+<p>pwn:pwn栈题总结</p>
+<h3 id="周五"><a href="#周五" class="headerlink" title="周五"></a>周五</h3><p>划水</p>
+<h3 id="周六"><a href="#周六" class="headerlink" title="周六"></a>周六</h3><p>xv6操作系统lab1完成</p>
+<h3 id="周日"><a href="#周日" class="headerlink" title="周日"></a>周日</h3><p>划水</p>
+<h2 id="第五周"><a href="#第五周" class="headerlink" title="第五周"></a>第五周</h2><p>总目标：</p>
+<p>现代c++：part3，part4</p>
+<p>堆：深入理解并开始刷题，栈题整理</p>
+<p>csapp：第一章第二章</p>
+]]></content>
+      <categories>
+        <category>计划</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>buuctf刷题记录</title>
     <url>/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="栈问题"><a href="#栈问题" class="headerlink" title="栈问题"></a>栈问题</h1><h2 id="get-started-3dsctf-2016"><a href="#get-started-3dsctf-2016" class="headerlink" title="get_started_3dsctf_2016"></a>get_started_3dsctf_2016</h2><p><strong>checksec</strong></p>
@@ -114,42 +150,6 @@
       </categories>
       <tags>
         <tag>汇编</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>周计划</title>
-    <url>/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/</url>
-    <content><![CDATA[<h1 id="大一下学期目标"><a href="#大一下学期目标" class="headerlink" title="大一下学期目标"></a>大一下学期目标</h1><p><strong>主线</strong>：<strong>学习pwn的栈 堆和内核</strong></p>
-<p><strong>主线</strong>：<strong>完成现代c++的学习</strong></p>
-<p><strong>完成《深入了解操作系统》的阅读以及lab的练习</strong></p>
-<p><strong>完成<em>MIT.6S081</em>课程学习和lab的练习</strong></p>
-<h2 id="第4周"><a href="#第4周" class="headerlink" title="第4周"></a>第4周</h2><p>总目标：</p>
-<p><strong>现代c++：</strong>part1，part2 </p>
-<p><strong>pwn：</strong>理解堆</p>
-<p><strong>xv6：</strong>lab1完成</p>
-<p><strong>re:</strong> 简单了解逆向</p>
-<h3 id="周一"><a href="#周一" class="headerlink" title="周一"></a>周一</h3><p>现代c++：程序的执行过程，new关键字及内存内存，命名空间，c++的标准输入输出简历</p>
-<p>pwn：堆理解</p>
-<p>逆向刷题</p>
-<p>pwn刷题</p>
-<h3 id="周二"><a href="#周二" class="headerlink" title="周二"></a>周二</h3><p>现代c++：const关键字介绍 ，auto关键字使用</p>
-<p>pwn ：刷题整理</p>
-<h3 id="周三"><a href="#周三" class="headerlink" title="周三"></a>周三</h3><p>划水</p>
-<h3 id="周四"><a href="#周四" class="headerlink" title="周四"></a>周四</h3><p>现代c++：静态变量，指针和引用 ，左值，右值，左值引用，右值引用，move函数，临时对象 ，可调用对象</p>
-<p>pwn:pwn栈题总结</p>
-<h3 id="周五"><a href="#周五" class="headerlink" title="周五"></a>周五</h3><p>划水</p>
-<h3 id="周六"><a href="#周六" class="headerlink" title="周六"></a>周六</h3><p>xv6操作系统lab1完成</p>
-<h3 id="周日"><a href="#周日" class="headerlink" title="周日"></a>周日</h3><p>划水</p>
-<h2 id="第五周"><a href="#第五周" class="headerlink" title="第五周"></a>第五周</h2><p>总目标：</p>
-<p>现代c++：part3，part4</p>
-<p>堆：深入理解并开始刷题，栈题整理</p>
-<p>csapp：第一章第二章</p>
-]]></content>
-      <categories>
-        <category>计划</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
       </tags>
   </entry>
   <entry>
@@ -345,8 +345,128 @@
 <p>当然，也可以捕获单独的变量</p>
 <p>(6) [i]：表示以值传递的形式捕获i</p>
 <p>(7) [&amp;i]：表示以引用传递的方式捕获i</p>
-<p>啊，part结束，下周一定减少划水时间，多听课</p>
+<p>啊，part1结束，下周一定减少划水时间，多听课</p>
 <img src="https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图 2023-03-06 160805.png" style="zoom:33%;">
+
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>c++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>现代c++学习笔记(二)</title>
+    <url>/2023/03/13/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C/</url>
+    <content><![CDATA[<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p>类的权限修饰：c++通过 <strong>public、protected、private</strong> 三个关键字来控制成员变量和成员函数的访问权限，它们分别表示公有的、受保护的、私有的，被称为成员访问限定符。所谓访问权限，就是你能不能使用该类中的成员。</p>
+<p>在类的内部（定义类的代码内部），无论成员被声明为 public、protected 还是 private，都是可以互相访问的，没有访问权限的限制。在类的外部（定义类的代码之外），只能通过对象访问成员，并且通过对象只能访问 public 属性的成员，不能访问 private、protected 属性的成员。</p>
+<h2 id="类介绍，构造函数，析构函数"><a href="#类介绍，构造函数，析构函数" class="headerlink" title="(*)类介绍，构造函数，析构函数"></a>(*)类介绍，构造函数，析构函数</h2><p><strong>1.类介绍：</strong></p>
+<p>(1) 对面向对象和面向过程的理解</p>
+<p>① 面向对象和面向过程是一个相对的概念。</p>
+<p>② 面向过程是按照计算机的工作逻辑来编码的方式，最典型的面向过程的语言就是c语言了，c语言直接对应汇编，汇编又对应电路。</p>
+<p>③ 面向对象则是按照人类的思维来编码的一种方式，C++就完全支持面向对象功能，可以按照人类的思维来处理问题。</p>
+<p>④ 举个例子，要把大象装冰箱，按照人类的思路自然是分三步，打开冰箱，将大象装进去，关上冰箱。</p>
+<p>要实现这三步，我们就要首先有人，冰箱这两个对象。人有给冰箱发指令的能	力，冰箱有能够接受指令并打开或关闭门的能力。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//c++</span></span><br><span class="line"><span class="meta">#inlcude<span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">IceChest</span>;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">openIceChest</span><span class="params">(<span class="type">const</span> IceChest&amp; iceChest)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">IceChest</span>:</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">openDoor</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">closeDoor</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//c语言</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Person</span></span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">IceChest</span></span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">personOpenIceChest</span><span class="params">(<span class="type">const</span> Person&amp; person,<span class="type">const</span> IceChest&amp; iceChest)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">personCloseIceChest</span><span class="params">(<span class="type">const</span> Person&amp; person,<span class="type">const</span> IceChest&amp; iceChest)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>但是从计算机的角度讲，计算机只能定义一个叫做人和冰箱的结构体。人有手这个部位，冰箱有门这个部位。然后从天而降一个函数，是这个函数让手打开了冰箱，又是另一个函数让大象进去，再是另一个函数让冰箱门关上。</p>
+<p> 从开发者的角度讲，面向对象显然更利于程序设计。用面向过程的开发方式，程序一旦大了，各种从天而降的函数会非常繁琐，一些用纯c写的大型程序，实际上也是模拟了面向对象的方式。</p>
+<p> 那么，如何用面向过程的c语言模拟出面向对象的能力呢？类就诞生了，在类中可以定义专属于类的函数，让类有了自己的动作。回到那个例子，人的类有了让冰箱开门的能力，冰箱有了让人打开的能力，不再需要天降神秘力量了，hh</p>
+<p> <strong>2.构造函数</strong></p>
+<p> 类是通过面向过程的机器实现的，类相当于定义了一个新类型，该类型生成在堆或栈上的对象时内存排布和c语言相同。但是c++规定，<strong>C++有在类对象创建时就在对应内存将数据初始化的能力</strong>，这就是构造函数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;isotream&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CPPtest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">CPPTest</span>(<span class="type">int</span> i_,<span class="type">int</span> i2_) :<span class="built_in">i</span>(i_),<span class="built_in">i2</span>(i2_)&#123;&#125;<span class="comment">//c++可以在类中构造函数，将参数对应内存初始化;若没有，则自动生成，但是没什么用</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> i2;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">CPPtest <span class="title">cppTest</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;<span class="comment">//初始化i,i2</span></span><br><span class="line">    std::cout&lt;&lt;cppTest.i&lt;&lt;std::endl;</span><br><span class="line">    std::cout&lt;&lt;cppTest.i2&lt;&lt;std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>构造函数有以下类型。</p>
+<ol>
+<li><p>普通构造函数</p>
+</li>
+<li><p>复制构造函数：用另一个对象来初始化对象对应的内存</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">CPPTest</span>(<span class="type">const</span> CPPTest&amp; cppTest) :<span class="built_in">i</span>(cppTest.i), <span class="built_in">i2</span>(cppTest.i2)&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移动构造函数：也是用另一个对象来初始化对象，具体内容会在Part3第13节详细讲解。</p>
+</li>
+<li><p>默认构造函数：当类没有任何构造函数时，编译期会为该类生成一个默认的的构造函数，在最普通的类中，默认构造函数什么都没做，对象对应的内存没有被初始化。</p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">CPPTest</span>()&#123;&#125;;<span class="comment">//作用和构造函数一样</span></span><br></pre></td></tr></table></figure>
+
+<p>构造函数就是C++提供的<strong>必须有的</strong>在对象创建时初始化对象的方法，（默认的什么都不做也是一种初始化的方式）</p>
+<p><strong>3.析构函数</strong></p>
+<p>介绍:</p>
+<p>类对象被销毁时，就会调用析构函数。栈上对象的销毁时机就是函数栈销毁时,堆上的对象销毁时机就是该堆内存被手动释放时，如果用new申请的这块堆内存，那调用delete销毁这块内存时就会调用析构函数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;isotream&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CPPTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">CPPTest</span>(<span class="type">int</span> i_,<span class="type">int</span> i2_) :<span class="built_in">i</span>(i_),<span class="built_in">i2</span>(i2_)&#123;&#125;</span><br><span class="line">    <span class="built_in">CPPTest</span>(<span class="type">const</span> CPPTest&amp; cppTest) :<span class="built_in">i</span>(cppTest.i), <span class="built_in">i2</span>(cppTest.i2)&#123;&#125;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> i2;</span><br><span class="line">    ~<span class="built_in">CPPTest</span>()<span class="comment">//如没有会自动添加</span></span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">CPPTest <span class="title">cppTest</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;<span class="comment">//初始化i,i2</span></span><br><span class="line">    std::cout&lt;&lt;cppTest.i&lt;&lt;std::endl;</span><br><span class="line">    std::cout&lt;&lt;cppTest.i2&lt;&lt;std::endl;</span><br><span class="line">    CPPTest* pCppTest=<span class="keyword">new</span> <span class="built_in">CppTest</span>(<span class="number">1.2</span>);<span class="comment">//调用在堆上，自动销毁</span></span><br><span class="line">    <span class="keyword">delete</span> PCppTest;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是再某些情况下，析构函数必须要干活</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;isotream&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CPPTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">CPPTest</span>(<span class="type">int</span> i_,<span class="type">int</span> i2_) :<span class="built_in">i</span>(i_),<span class="built_in">i2</span>(i2_),<span class="built_in">pi</span>(<span class="keyword">new</span> <span class="built_in">int</span>(i3))&#123;&#125;</span><br><span class="line">    <span class="built_in">CPPTest</span>(<span class="type">const</span> CPPTest&amp; cppTest) :<span class="built_in">i</span>(cppTest.i), <span class="built_in">i2</span>(cppTest.i2),<span class="built_in">pi</span>(<span class="keyword">new</span> <span class="built_in">int</span>(*cppTest.pi))&#123;&#125;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> i2;</span><br><span class="line">    <span class="type">int</span> *pi;</span><br><span class="line">    ~<span class="built_in">CPPTest</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">delete</span> pi;</span><br><span class="line">    &#125;<span class="comment">//当栈上pi指向堆上的i3，如果析构函数中没有delete，那么只会把栈上的释放，堆上的数据没有释放，会造成内存泄漏</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总结，当类对象销毁时有一些我们必须手动操作的步骤时，析构函数就派上了用场。所以，几乎所有的类我们都要写构造函数，析构函数却未必需要</p>
+<h2 id="this-常成员函数与常对象"><a href="#this-常成员函数与常对象" class="headerlink" title="(*)this,常成员函数与常对象"></a>(*)this,常成员函数与常对象</h2><p><strong>1.this关键字：</strong></p>
+<p>(1) this是什么：</p>
+<p>① 编译器将this解释为指向函数所作用的对象的指针，这句话新手有些不好理解，用代码演示一下就好说了。C++类的本质就是C语言的结构体外加几个类外的函数，C++最后都要转化为C语言来实现，类外的函数就是通过this来指向这个类的。</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">clacc Test</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">       <span class="built_in">Test</span>(<span class="type">const</span> std::string&amp; name_, <span class="type">unsigned</span> old_);</span><br><span class="line">       ~<span class="built_in">Test</span>();</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">output</span><span class="params">()</span><span class="type">const</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        std::cout&lt;&lt;<span class="string">&quot;name=&quot;</span>&lt;&lt;<span class="keyword">this</span>-&gt;name&lt;&lt;<span class="string">&quot;     old=&quot;</span>&lt;&lt;<span class="keyword">this</span>-&gt;old&lt;&lt;std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">       std::string name;</span><br><span class="line">       <span class="type">unsigned</span> old;</span><br><span class="line">&#125;;</span><br><span class="line">Test::<span class="built_in">Test</span>(<span class="type">const</span> std::string&amp; name_,<span class="type">unsigned</span> old_):<span class="built_in">name</span>(name_),<span class="built_in">old</span>(old_)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line">Test::~<span class="built_in">Test</span>()</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Test <span class="title">test</span><span class="params">(<span class="string">&quot;fanfan&quot;</span>,<span class="number">20</span>)</span></span>;</span><br><span class="line">    test.<span class="built_in">outPut</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>② 当然，这么说并非完全准确，this是一个关键字，只是我们将它当做指针理解罢了。</p>
+<p> this有很多功能是单纯的指针无法满足的。比如每个类函数的参数根本没有名叫this的指针。这不过是编译器赋予的功能罢了。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">clacc Test</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">       <span class="built_in">Test</span>(<span class="type">const</span> std::string&amp; name_, <span class="type">unsigned</span> old_);</span><br><span class="line">       ~<span class="built_in">Test</span>();</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">output</span><span class="params">()</span><span class="type">const</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        std::cout&lt;&lt;<span class="string">&quot;name=&quot;</span>&lt;&lt;<span class="keyword">this</span>.name&lt;&lt;<span class="string">&quot;     old=&quot;</span>&lt;&lt;<span class="keyword">this</span>.old&lt;&lt;std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">       std::string name;</span><br><span class="line">       <span class="type">unsigned</span> old;</span><br><span class="line">&#125;;</span><br><span class="line">Test::<span class="built_in">Test</span>(<span class="type">const</span> std::string&amp; name_,<span class="type">unsigned</span> old_):<span class="built_in">name</span>(name_),<span class="built_in">old</span>(old_)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line">Test::~<span class="built_in">Test</span>()</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">void</span> (Test::* pf)()=&amp;Test::output;<span class="comment">//空参数的指针能指向类的成员函数，说明类中没有this这个形参变量</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Test <span class="title">test</span><span class="params">(<span class="string">&quot;fanfan&quot;</span>,<span class="number">20</span>)</span></span>;</span><br><span class="line">    (test.*pf)();<span class="comment">//结果一样</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.常成员函数和常对象</strong></p>
+<p>某位大佬说：“常成员函数和常对象很多人并不在意，确实，都写普通变量也可以。但是，我还是要提一点，在大型程序中，尽量加上const关键字可以减少很多不必要的错误。<strong>这一点，开发过大型程序的人应该深有体会，没开发过大型程序的人也不必在意，记住多用const，这是一个很好的习惯</strong>。“</p>
+<p>(1) 常成员函数就是无法修改成员变量的函数。可以理解为将this指针指向对象用const修饰的函数。(例子在本节的第一个代码演示)</p>
+<p>常对象就是用const修饰的对象，定义好之后就再也不需要更改成员变量的值了。</p>
+<p>(2) 常成员函数注意事项：</p>
+<p>因为类的成员函数已经将this指针省略了，只能在函数后面加const关键字来实现无法修改类成员变量的功能了</p>
+<p>① 注意：常函数无法调用了普通函数，无意义。</p>
+<p><strong>②</strong> <strong>成员函数能写作常成员函数就尽量写作常成员函数，可以减少出错几率。</strong></p>
+<p>③ 同名的常成员函数和普通成员函数是可以重载的，常量对象会优先调用常成员函数，普通对象会优先调用普通成员函数。</p>
+<p>(3) 常对象注意事项：</p>
+<p>① 常对象不能调用普通函数</p>
+<p>② 常函数在大型程序中真的很重要，很多时候我们都需要创建好就不再改变的对象</p>
+<p><strong>大佬强调：常对象和常函数要多用</strong></p>
+<h2 id="inline，mutable，default，delete"><a href="#inline，mutable，default，delete" class="headerlink" title="inline，mutable，default，delete"></a><strong>inline，mutable，default，delete</strong></h2><p>inline,mutable知道就行，default和delete需要掌握</p>
+<p><strong>1.inline关键字</strong></p>
+<p>(1) inline关键字的有什么作用：</p>
+<p>① 在函数声明或定义中函数返回类型前加上关键字inline就可以把函数指定为<strong>内联函数</strong>。关键字inline必须与函数定义放在一起才能使函数成为内联，仅仅将inline放在函数声明前不起任何作用。</p>
+<p> ② 内联函数的作用，普通函数在调用时需要给函数分配栈空间以供函数执行，压栈等操作会影响成员运行效率，于是C++提供了<strong>内联函数将函数体放到需要调用函数的地方</strong>，用空间换效率。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">public</span>:  </span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">outPut</span><span class="params">()</span></span>;<span class="comment">//默认有inline，后边的不加，这里加了也是无效的</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">Test::outPut</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;hello world&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Test test;</span><br><span class="line">    test.<span class="built_in">outPut</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p> (2) inline关键字的注意事项：inline关键字只是一个建议，开发者建议编译器将成员函数当做内联函数，一般适合搞内联的情况编译器都会采纳建议。（牺牲空间换取时间）</p>
+<p> (3) **总结:**使用inline关键字就是一种提高效率，但加大编译后文件大小的方式，现在随着硬件性能的提高，inline关键字用的越来越少了。</p>
+<p><strong>2.mutable关键字</strong></p>
+<p>(1) mutable关键字的作用：</p>
+<p>① Mutable意为可变的，与const相对，被mutable修饰的成员变量，永远处于可变的状态，即便处于一个常函数中，该变量也可以被更改。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">outPut</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">    <span class="keyword">mutable</span> <span class="type">unsigned</span> outPutCallCount=<span class="number">0</span>;</span><br><span class="line">   &#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Test::outPut</span><span class="params">()</span><span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ++outPutCallCount;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;hello world&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Test test;</span><br><span class="line">    test.<span class="built_in">outPut</span>();</span><br><span class="line">    std::cout&lt;&lt;test.outPutCallCount&lt;&lt;std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个关键字在现代C++中使用情况并不多，一般来说只有在统计函数调用次数时才会用到。</p>
+<p> (2) mutable关键字的注意事项</p>
+<p>① mutable是一种万不得已的写法，一个程序不得不使用mutable关键字时，可以认为这部分程序是一个糟糕的设计。</p>
+<p>② mutable不能修饰<strong>静态成员变量和常成员变量</strong>。</p>
+<p>(3) <strong>总结：</strong>mutable关键字是一种没有办法的办法，设计时应该尽量避免，只有在统计函数调用次数这类情况下才推荐使用。</p>
+<p><strong>3.default关键字</strong></p>
+<p>(1) default关键字的作用：</p>
+<p>① 在编译时不会生成默认构造函数时便于书写。</p>
+<p>② 也可以对默认复制构造函数，默认的赋值运算符和默认的析构函数使用，表示使用的是系统默认提供的函数，这样可以使代码更加明显。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">Test</span>(<span class="type">unsigned</span> old_):<span class="built_in">old</span>(old_)&#123;&#125;</span><br><span class="line">    <span class="built_in">Test</span>() = <span class="keyword">default</span>;<span class="comment">//以前Test()&#123;&#125;</span></span><br><span class="line">	<span class="built_in">Test</span>(<span class="type">const</span> Test&amp; test)=<span class="keyword">default</span>;<span class="comment">//使用系统默认</span></span><br><span class="line">    Test&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Test&amp; test)=<span class="keyword">default</span>;</span><br><span class="line">    ~<span class="built_in">Test</span>()=<span class="keyword">default</span>;</span><br><span class="line">	<span class="type">unsigned</span> old;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>③</strong> 现代C++中，哪怕没有构造函数，也推荐将构造函数用default关键字标记，可以让代码看起来更加直观，方便。</p>
+<p>总结：default关键字还是推荐使用的，在现代C++代码中，如果需要使用一些默认的函数，推荐用default标记出来。</p>
+<p><strong>4.delete关键字</strong></p>
+<p>(1) Delete关键字的作用：C++会为程序生成默认构造函数，默认复制构造函数，默认重载赋值运算符。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//没有Test(unsigned old_):old(old_)&#123;&#125;，还不想默认生成</span></span><br><span class="line">    <span class="built_in">Test</span>()=<span class="keyword">delete</span>；</span><br><span class="line">    <span class="comment">//Test&amp; operator=(const Test&amp; test)=default;使用系统默认，不想使用就将default换成delete</span></span><br><span class="line">    ~<span class="built_in">Test</span>()=<span class="keyword">default</span>;<span class="comment">//一般不会delete</span></span><br><span class="line">	<span class="type">unsigned</span> old;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 在很多情况下，我们并不希望这些默认的函数被生成，在C++11以前，只能有将此函数声明为私有函数或是将函数只声明不定义两种方式。</p>
+<p> C++11于是提供了delete关键字，只要在函数最后加上“&#x3D;delete”就可以明确告诉编译期不要默认生成该函数。</p>
+<p> 总结：delete关键字还是推荐使用的，在现代C++代码中，如果不希望一些函数默认生成，就用delete表示，这个功能还是很有用的，比如在单例模式中。</p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
