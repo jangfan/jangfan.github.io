@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2023/02/18/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>buuctf刷题记录</title>
     <url>/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="栈问题"><a href="#栈问题" class="headerlink" title="栈问题"></a>栈问题</h1><h2 id="get-started-3dsctf-2016"><a href="#get-started-3dsctf-2016" class="headerlink" title="get_started_3dsctf_2016"></a>get_started_3dsctf_2016</h2><p><strong>checksec</strong></p>
@@ -38,13 +20,13 @@
 
 <h2 id="OGeek2019-babyrop"><a href="#OGeek2019-babyrop" class="headerlink" title="[OGeek2019]babyrop"></a>[OGeek2019]babyrop</h2><p>先checksec一下，nx排除了shellcode的可能，Full RELEO为地址随机化</p>
 <p>先观察主函数，设定了一个闹钟(但是这道题不需要使用解除闹钟的方法)</p>
-<p>![](<a href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-03-13 095347.png)</p>
+<p><img src="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095347-1678706371578-4.png"></p>
 <p>主函数的思路是生成一个随机数，把这个随机数作为参数传进sub——804871F()函数中，然后再将函数返回结果作为参数传进sub——80487D0()里,sub_80486bb()是初始化，没什么用。<strong>fd&#x3D;open(“&#x2F;dev&#x2F;urandom”,0);if(fd&gt;0) read(fd,&amp;buf,4u)</strong>:获取一个随机数给到buf</p>
 <p><strong>sub_804871f()</strong></p>
-<p>![](<a href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-03-13 095410.png)</p>
+<p><img src="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095410.png"></p>
 <p>sprintf函数将生成的随机数加到s[32]的数组中，这里题目有read函数，但是没有栈溢出的可能，读入buf之后，读取buf的长度，然后比较buf和s字符串的大小（比较长度为前v1个字符）。此时如果strncmp（）的结果不为0，则直接退出程序。因此我们第一个目的：<strong>使strncmp结果为0</strong></p>
 <p><strong>sub_80487d0()</strong></p>
-<p>![](<a href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-03-13 095400.png)</p>
+<p><img src="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095400.png"></p>
 <p>这个函数将buf[7]作为参数出传进来，将它的ASCII码比对，看到全程序中唯一一个存在栈溢出漏洞可能性的地方。但是必须满足a1的ASCII码值能达到栈溢出的大小。第二个目的：<strong>使a1的ASCII码值（sub_804871F()函数里的buf[7]的ASCII码值尽量大）</strong></p>
 <p><strong>思路</strong></p>
 <p>使用ROP链寻找libc解题</p>
@@ -80,6 +62,58 @@
       </categories>
       <tags>
         <tag>刷题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/02/18/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>汇编语言简单摘要</title>
+    <url>/2023/02/20/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%91%98%E8%A6%81/</url>
+    <content><![CDATA[<h3 id="x86-64位寄存器（16个）"><a href="#x86-64位寄存器（16个）" class="headerlink" title="x86-64位寄存器（16个）"></a>x86-64位寄存器（16个）</h3><p>rax：存放保存函数返回值<br>rbx：被调用者保存<br>rdi rsi rdx rcx 对应第1、2、3、4个参数<br>rsp：栈指针，存放栈帧的栈顶的偏移地址<br>r8 r9对应第5、6个参数</p>
+<h3 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h3><p>立即数寻址$Imm Imm(立即数)<br>寄存器寻址%ra R[ra] (寄存器)<br>绝对寻址Imm M[Imm] (存储器)<br>间接寻址（%ra）M[R[[ra]]</p>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">下面有一点地址或寄存器的值，写出操作数的值</span><br><span class="line">地址          值              寄存器       值</span><br><span class="line">0x100      0xFF             rax        0x100</span><br><span class="line">0x104      0xab             rcx        0x1</span><br><span class="line">0x108      0x13             rdx        0x3</span><br><span class="line">0x10C      0x11</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">操作数  值</span><br><span class="line">rax 0x100(寄存器)</span><br><span class="line">0x104 0xab（绝对寻址）</span><br><span class="line"><span class="variable">$0x108</span> 0x108（立即数寻址）</span><br><span class="line">(%rax) 0xFF（间接寻址）</span><br></pre></td></tr></table></figure>
+
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>两种汇编模式<br>ATT汇编movq movb<br>普通汇编 mov <strong>rax,rbx</strong>&#x3D;mov<strong>q %rbx,%rax</strong> （ATT）：把rbx的值赋给rax</p>
+<h4 id="mov"><a href="#mov" class="headerlink" title="mov"></a>mov</h4><p>mov 数据传送指令 将数据从一个位置复制到另一个位置的指令<br>mov 寄存器&#x2F;立即数 操作数用来指向一个执行所要使用源数据的值，放置结果的目的位置，mov 源操作数的值是一个立即数，值存放在内存或者寄存器中 目的操作数一个寄存器或者是一个内存地址。</p>
+<p><strong>单位</strong>：1字节 &#x3D; 8bit  1字 &#x3D; 8字节 &#x3D; 64bit</p>
+<p><strong>movb 一个字节</strong> (这个字代表双字节的意思，与上边的字不一样)<br><strong>movw 一个字<br>movl 双字（寄存器的高四字节设置成0）<br>movq 四字<br>movabsq I,R  R&lt;-I 传送的是绝对的四字 目的操作数只能是寄存器</strong><br>movl $0x4050,%eax      4bytes   立即数–寄存器<br>movw %bp,%sp           2bytes   寄存器–寄存器<br>movb (%rdi,%rcx),%al   1bytes  内存–寄存器<br>movb $-17,(%rsp)       1bytes   立即数–内存<br>movq %rax,-12(%rbp)    8bytes   寄存器–内存l</p>
+<h5 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">movabsq <span class="variable">$0x0011223344556677</span> , %rax = 0011223344556677  </span><br><span class="line">（ rax包含了eax eax包含了ax ax包含了al）</span><br><span class="line">-1的16进制是0xFFFFFFFFFFFFFF,第一步结束后每一步rax的值是多少</span><br><span class="line">movb $-1 ,%al           ， %rax = 00112233445566FF   F = 1111</span><br><span class="line">movw $-1 , %ax          ， %rax = 001122334455FFFF   </span><br><span class="line">movl $-1 , %eax         ， %rax = 00000000FFFFFFFF</span><br><span class="line">movq $-1 ,%rax          ， %rax = FFFFFFFFFFFFFFFF </span><br></pre></td></tr></table></figure>
+
+
+<h5 id="例题2"><a href="#例题2" class="headerlink" title="例题2"></a>例题2</h5><p>把下列汇编代码用c语言表示  （rax一直保存的是返回值）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">decode1:</span><br><span class="line">    movq (%rdi) , %r8</span><br><span class="line">    movq (%rsi) , %rcx</span><br><span class="line">    movq (%rdx) , %rax</span><br><span class="line">    movq %r8    , (%rsi)</span><br><span class="line">    movq %rcx   , (%rdx)</span><br><span class="line">    movq %rax ,   (%rdx)      </span><br><span class="line">    ret </span><br></pre></td></tr></table></figure>
+<p>c语言</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">decode1</span><span class="params">(<span class="type">long</span> *xp,<span class="type">long</span> *yp,<span class="type">long</span> *zp)</span>&#123;</span><br><span class="line">     <span class="type">long</span> x = *xp;</span><br><span class="line">     <span class="type">long</span> y = *yp;</span><br><span class="line">     <span class="type">long</span> z = *zp;</span><br><span class="line">     *yp = x;</span><br><span class="line">     *zp = y;</span><br><span class="line">     *xp = z;</span><br><span class="line">     <span class="keyword">return</span> z;</span><br><span class="line"> &#125;    </span><br><span class="line">     </span><br></pre></td></tr></table></figure>
+<h4 id="push和pop"><a href="#push和pop" class="headerlink" title="push和pop"></a>push和pop</h4><p>push压入栈 pop弹出栈（pop弹出的值一直是一个最近压入栈的数据且仍在栈中）<br>由于栈是由大到小增长的，所以栈顶永远是地址最低的 %rsp保存着栈顶的元素<br>pushq popq 将四字压入栈中 将四字弹出栈<br>pushq %rbp &#x3D; subq $8,%rsp  movq %rbp,(%rsp)   （rsp地址减8）<br>popq <strong>%rax</strong>  &lt;&#x3D;&#x3D;&gt; movq (%rsp),(<strong>%rax</strong>) addq $8,%rsp （rsp地址加8）<br><strong>pop之后，值不会被删除，除非有一个新的值覆盖了原先的值</strong></p>
+<h4 id="算数和逻辑操作"><a href="#算数和逻辑操作" class="headerlink" title="算数和逻辑操作"></a>算数和逻辑操作</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">leaq  --&gt; 加载有效地址 </span><br><span class="line">inc --&gt; 加一 </span><br><span class="line">dec --&gt; 减一 </span><br><span class="line">neg --&gt; 取负 </span><br><span class="line">not --&gt; 取补 </span><br><span class="line">add --&gt; 加 </span><br><span class="line">sub --&gt; 减 </span><br><span class="line">imul --&gt; 乘 </span><br><span class="line">xor --&gt; 异或 </span><br><span class="line">or --&gt; 或 </span><br><span class="line">and --&gt; 与 </span><br><span class="line">sal --&gt; 算数左移 </span><br><span class="line"> sar --&gt; 算数右移 </span><br><span class="line"> shl --&gt;逻辑左移</span><br><span class="line">shr --&gt; 逻辑右移</span><br></pre></td></tr></table></figure>
+<h5 id="1-加载地址"><a href="#1-加载地址" class="headerlink" title="1.加载地址"></a>1.加载地址</h5><p>movq的一种变形 从内存读数据到寄存器 但是没有引用内存 不是单纯的读数据，而是将有效地址加载到目的操作数 <strong>描述简单的算数操作</strong></p>
+<h6 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h6><p>rdi &#x3D; x<br> leaq 7(%rdi,%rdi,4),%rax &#x3D;&#x3D; 将rax的值设置为5x+7</p>
+<h5 id="2-一元操作和二元操作"><a href="#2-一元操作和二元操作" class="headerlink" title="2.一元操作和二元操作"></a>2.一元操作和二元操作</h5><p> 只有一个操作数的是一元操作，既是源操作数也是目的操作数<br>地址          值              寄存器       值<br>0x100      0xFF             rax        0x100<br>0x108      0xAB             rcx        0x1<br> 0x118  0x11           rdx        0x3<br><strong>subq</strong> %rax,%rdx rdx &#x3D; rdx -rax<br><strong>addq</strong> %rcx , (%rax)   ;更新的其实是一个内存位置 位置为0x100<br><strong>imulq</strong> $16,(%rax,%rdx,8) ;更新的内存位置是0x118，值对应的是0x11*16&#x3D;0x110<br>他们的目的和最终值写出来<br>imulq 有符号乘法 一个操作数 这个指令要求就是必须两个数都在寄存器rax中 把高64位存放在rdx，低64位存放在rax里面<br><strong>salq</strong> $4,%rax(左移4位，扩大了2的4次方倍)</p>
+<h5 id="控制操作"><a href="#控制操作" class="headerlink" title="控制操作"></a>控制操作</h5><p>t  &#x3D; a + b<br>无符号溢出 <strong>CF</strong> （条件码）<br>  t&#x3D;&#x3D;0 <strong>ZF</strong><br> t &lt; 0  <strong>SF</strong><br> (a&lt;0&amp;&amp;b&lt;0) &amp;&amp; (t&lt;0 !&#x3D; a &lt;0) 有符号溢出 <strong>OF</strong><br><strong>leaq</strong> 不会改变任何条件码 xor 会将进位标志和溢出位标志设置成0<br><strong>cmpb</strong> 比较字节 <strong>cmpw</strong> 比较字  <strong>test</strong> 测试<br><strong>cmp</strong> rsi,rdi<br>cmp根据两个比较数的差来设置条件码 （除了不更新寄存器以外，和sub操作是一样的 test也是除了不更新寄存器以外，和 and 操作是一样的）<br><strong>testq</strong> %rax,%rax 检查rax是负数还是正数还是0<br> set指令设置条件码</p>
+]]></content>
+      <categories>
+        <category>pwn基础</category>
+      </categories>
+      <tags>
+        <tag>汇编</tag>
       </tags>
   </entry>
   <entry>
@@ -119,37 +153,122 @@
       </tags>
   </entry>
   <entry>
-    <title>汇编语言简单摘要</title>
-    <url>/2023/02/20/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%91%98%E8%A6%81/</url>
-    <content><![CDATA[<h3 id="x86-64位寄存器（16个）"><a href="#x86-64位寄存器（16个）" class="headerlink" title="x86-64位寄存器（16个）"></a>x86-64位寄存器（16个）</h3><p>rax：存放保存函数返回值<br>rbx：被调用者保存<br>rdi rsi rdx rcx 对应第1、2、3、4个参数<br>rsp：栈指针，存放栈帧的栈顶的偏移地址<br>r8 r9对应第5、6个参数</p>
-<h3 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h3><p>立即数寻址$Imm Imm(立即数)<br>寄存器寻址%ra R[ra] (寄存器)<br>绝对寻址Imm M[Imm] (存储器)<br>间接寻址（%ra）M[R[[ra]]</p>
-<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">下面有一点地址或寄存器的值，写出操作数的值</span><br><span class="line">地址          值              寄存器       值</span><br><span class="line">0x100      0xFF             rax        0x100</span><br><span class="line">0x104      0xab             rcx        0x1</span><br><span class="line">0x108      0x13             rdx        0x3</span><br><span class="line">0x10C      0x11</span><br></pre></td></tr></table></figure>
+    <title>现代c++学习笔记(二)</title>
+    <url>/2023/03/13/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C/</url>
+    <content><![CDATA[<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p>类的权限修饰：c++通过 <strong>public、protected、private</strong> 三个关键字来控制成员变量和成员函数的访问权限，它们分别表示公有的、受保护的、私有的，被称为成员访问限定符。所谓访问权限，就是你能不能使用该类中的成员。</p>
+<p>在类的内部（定义类的代码内部），无论成员被声明为 public、protected 还是 private，都是可以互相访问的，没有访问权限的限制。在类的外部（定义类的代码之外），只能通过对象访问成员，并且通过对象只能访问 public 属性的成员，不能访问 private、protected 属性的成员。</p>
+<h2 id="类介绍，构造函数，析构函数"><a href="#类介绍，构造函数，析构函数" class="headerlink" title="(*)类介绍，构造函数，析构函数"></a>(*)类介绍，构造函数，析构函数</h2><p><strong>1.类介绍：</strong></p>
+<p>(1) 对面向对象和面向过程的理解</p>
+<p>① 面向对象和面向过程是一个相对的概念。</p>
+<p>② 面向过程是按照计算机的工作逻辑来编码的方式，最典型的面向过程的语言就是c语言了，c语言直接对应汇编，汇编又对应电路。</p>
+<p>③ 面向对象则是按照人类的思维来编码的一种方式，C++就完全支持面向对象功能，可以按照人类的思维来处理问题。</p>
+<p>④ 举个例子，要把大象装冰箱，按照人类的思路自然是分三步，打开冰箱，将大象装进去，关上冰箱。</p>
+<p>要实现这三步，我们就要首先有人，冰箱这两个对象。人有给冰箱发指令的能	力，冰箱有能够接受指令并打开或关闭门的能力。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//c++</span></span><br><span class="line"><span class="meta">#inlcude<span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">IceChest</span>;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">openIceChest</span><span class="params">(<span class="type">const</span> IceChest&amp; iceChest)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">IceChest</span>:</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">openDoor</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">closeDoor</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//c语言</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Person</span></span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">IceChest</span></span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">personOpenIceChest</span><span class="params">(<span class="type">const</span> Person&amp; person,<span class="type">const</span> IceChest&amp; iceChest)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">personCloseIceChest</span><span class="params">(<span class="type">const</span> Person&amp; person,<span class="type">const</span> IceChest&amp; iceChest)</span></span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">操作数  值</span><br><span class="line">rax 0x100(寄存器)</span><br><span class="line">0x104 0xab（绝对寻址）</span><br><span class="line"><span class="variable">$0x108</span> 0x108（立即数寻址）</span><br><span class="line">(%rax) 0xFF（间接寻址）</span><br></pre></td></tr></table></figure>
+<p>但是从计算机的角度讲，计算机只能定义一个叫做人和冰箱的结构体。人有手这个部位，冰箱有门这个部位。然后从天而降一个函数，是这个函数让手打开了冰箱，又是另一个函数让大象进去，再是另一个函数让冰箱门关上。</p>
+<p> 从开发者的角度讲，面向对象显然更利于程序设计。用面向过程的开发方式，程序一旦大了，各种从天而降的函数会非常繁琐，一些用纯c写的大型程序，实际上也是模拟了面向对象的方式。</p>
+<p> 那么，如何用面向过程的c语言模拟出面向对象的能力呢？类就诞生了，在类中可以定义专属于类的函数，让类有了自己的动作。回到那个例子，人的类有了让冰箱开门的能力，冰箱有了让人打开的能力，不再需要天降神秘力量了，hh</p>
+<p> <strong>2.构造函数</strong></p>
+<p> 类是通过面向过程的机器实现的，类相当于定义了一个新类型，该类型生成在堆或栈上的对象时内存排布和c语言相同。但是c++规定，<strong>C++有在类对象创建时就在对应内存将数据初始化的能力</strong>，这就是构造函数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;isotream&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CPPtest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">CPPTest</span>(<span class="type">int</span> i_,<span class="type">int</span> i2_) :<span class="built_in">i</span>(i_),<span class="built_in">i2</span>(i2_)&#123;&#125;<span class="comment">//c++可以在类中构造函数，将参数对应内存初始化;若没有，则自动生成，但是没什么用</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> i2;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">CPPtest <span class="title">cppTest</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;<span class="comment">//初始化i,i2</span></span><br><span class="line">    std::cout&lt;&lt;cppTest.i&lt;&lt;std::endl;</span><br><span class="line">    std::cout&lt;&lt;cppTest.i2&lt;&lt;std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>两种汇编模式<br>ATT汇编movq movb<br>普通汇编 mov <strong>rax,rbx</strong>&#x3D;mov<strong>q %rbx,%rax</strong> （ATT）：把rbx的值赋给rax</p>
-<h4 id="mov"><a href="#mov" class="headerlink" title="mov"></a>mov</h4><p>mov 数据传送指令 将数据从一个位置复制到另一个位置的指令<br>mov 寄存器&#x2F;立即数 操作数用来指向一个执行所要使用源数据的值，放置结果的目的位置，mov 源操作数的值是一个立即数，值存放在内存或者寄存器中 目的操作数一个寄存器或者是一个内存地址。</p>
-<p><strong>单位</strong>：1字节 &#x3D; 8bit  1字 &#x3D; 8字节 &#x3D; 64bit</p>
-<p><strong>movb 一个字节</strong> (这个字代表双字节的意思，与上边的字不一样)<br><strong>movw 一个字<br>movl 双字（寄存器的高四字节设置成0）<br>movq 四字<br>movabsq I,R  R&lt;-I 传送的是绝对的四字 目的操作数只能是寄存器</strong><br>movl $0x4050,%eax      4bytes   立即数–寄存器<br>movw %bp,%sp           2bytes   寄存器–寄存器<br>movb (%rdi,%rcx),%al   1bytes  内存–寄存器<br>movb $-17,(%rsp)       1bytes   立即数–内存<br>movq %rax,-12(%rbp)    8bytes   寄存器–内存l</p>
-<h5 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">movabsq <span class="variable">$0x0011223344556677</span> , %rax = 0011223344556677  </span><br><span class="line">（ rax包含了eax eax包含了ax ax包含了al）</span><br><span class="line">-1的16进制是0xFFFFFFFFFFFFFF,第一步结束后每一步rax的值是多少</span><br><span class="line">movb $-1 ,%al           ， %rax = 00112233445566FF   F = 1111</span><br><span class="line">movw $-1 , %ax          ， %rax = 001122334455FFFF   </span><br><span class="line">movl $-1 , %eax         ， %rax = 00000000FFFFFFFF</span><br><span class="line">movq $-1 ,%rax          ， %rax = FFFFFFFFFFFFFFFF </span><br></pre></td></tr></table></figure>
 
 
-<h5 id="例题2"><a href="#例题2" class="headerlink" title="例题2"></a>例题2</h5><p>把下列汇编代码用c语言表示  （rax一直保存的是返回值）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">decode1:</span><br><span class="line">    movq (%rdi) , %r8</span><br><span class="line">    movq (%rsi) , %rcx</span><br><span class="line">    movq (%rdx) , %rax</span><br><span class="line">    movq %r8    , (%rsi)</span><br><span class="line">    movq %rcx   , (%rdx)</span><br><span class="line">    movq %rax ,   (%rdx)      </span><br><span class="line">    ret </span><br></pre></td></tr></table></figure>
-<p>c语言</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">decode1</span><span class="params">(<span class="type">long</span> *xp,<span class="type">long</span> *yp,<span class="type">long</span> *zp)</span>&#123;</span><br><span class="line">     <span class="type">long</span> x = *xp;</span><br><span class="line">     <span class="type">long</span> y = *yp;</span><br><span class="line">     <span class="type">long</span> z = *zp;</span><br><span class="line">     *yp = x;</span><br><span class="line">     *zp = y;</span><br><span class="line">     *xp = z;</span><br><span class="line">     <span class="keyword">return</span> z;</span><br><span class="line"> &#125;    </span><br><span class="line">     </span><br></pre></td></tr></table></figure>
-<h4 id="push和pop"><a href="#push和pop" class="headerlink" title="push和pop"></a>push和pop</h4><p>push压入栈 pop弹出栈（pop弹出的值一直是一个最近压入栈的数据且仍在栈中）<br>由于栈是由大到小增长的，所以栈顶永远是地址最低的 %rsp保存着栈顶的元素<br>pushq popq 将四字压入栈中 将四字弹出栈<br>pushq %rbp &#x3D; subq $8,%rsp  movq %rbp,(%rsp)   （rsp地址减8）<br>popq <strong>%rax</strong>  &lt;&#x3D;&#x3D;&gt; movq (%rsp),(<strong>%rax</strong>) addq $8,%rsp （rsp地址加8）<br><strong>pop之后，值不会被删除，除非有一个新的值覆盖了原先的值</strong></p>
-<h4 id="算数和逻辑操作"><a href="#算数和逻辑操作" class="headerlink" title="算数和逻辑操作"></a>算数和逻辑操作</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">leaq  --&gt; 加载有效地址 </span><br><span class="line">inc --&gt; 加一 </span><br><span class="line">dec --&gt; 减一 </span><br><span class="line">neg --&gt; 取负 </span><br><span class="line">not --&gt; 取补 </span><br><span class="line">add --&gt; 加 </span><br><span class="line">sub --&gt; 减 </span><br><span class="line">imul --&gt; 乘 </span><br><span class="line">xor --&gt; 异或 </span><br><span class="line">or --&gt; 或 </span><br><span class="line">and --&gt; 与 </span><br><span class="line">sal --&gt; 算数左移 </span><br><span class="line"> sar --&gt; 算数右移 </span><br><span class="line"> shl --&gt;逻辑左移</span><br><span class="line">shr --&gt; 逻辑右移</span><br></pre></td></tr></table></figure>
-<h5 id="1-加载地址"><a href="#1-加载地址" class="headerlink" title="1.加载地址"></a>1.加载地址</h5><p>movq的一种变形 从内存读数据到寄存器 但是没有引用内存 不是单纯的读数据，而是将有效地址加载到目的操作数 <strong>描述简单的算数操作</strong></p>
-<h6 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h6><p>rdi &#x3D; x<br> leaq 7(%rdi,%rdi,4),%rax &#x3D;&#x3D; 将rax的值设置为5x+7</p>
-<h5 id="2-一元操作和二元操作"><a href="#2-一元操作和二元操作" class="headerlink" title="2.一元操作和二元操作"></a>2.一元操作和二元操作</h5><p> 只有一个操作数的是一元操作，既是源操作数也是目的操作数<br>地址          值              寄存器       值<br>0x100      0xFF             rax        0x100<br>0x108      0xAB             rcx        0x1<br> 0x118  0x11           rdx        0x3<br><strong>subq</strong> %rax,%rdx rdx &#x3D; rdx -rax<br><strong>addq</strong> %rcx , (%rax)   ;更新的其实是一个内存位置 位置为0x100<br><strong>imulq</strong> $16,(%rax,%rdx,8) ;更新的内存位置是0x118，值对应的是0x11*16&#x3D;0x110<br>他们的目的和最终值写出来<br>imulq 有符号乘法 一个操作数 这个指令要求就是必须两个数都在寄存器rax中 把高64位存放在rdx，低64位存放在rax里面<br><strong>salq</strong> $4,%rax(左移4位，扩大了2的4次方倍)</p>
-<h5 id="控制操作"><a href="#控制操作" class="headerlink" title="控制操作"></a>控制操作</h5><p>t  &#x3D; a + b<br>无符号溢出 <strong>CF</strong> （条件码）<br>  t&#x3D;&#x3D;0 <strong>ZF</strong><br> t &lt; 0  <strong>SF</strong><br> (a&lt;0&amp;&amp;b&lt;0) &amp;&amp; (t&lt;0 !&#x3D; a &lt;0) 有符号溢出 <strong>OF</strong><br><strong>leaq</strong> 不会改变任何条件码 xor 会将进位标志和溢出位标志设置成0<br><strong>cmpb</strong> 比较字节 <strong>cmpw</strong> 比较字  <strong>test</strong> 测试<br><strong>cmp</strong> rsi,rdi<br>cmp根据两个比较数的差来设置条件码 （除了不更新寄存器以外，和sub操作是一样的 test也是除了不更新寄存器以外，和 and 操作是一样的）<br><strong>testq</strong> %rax,%rax 检查rax是负数还是正数还是0<br> set指令设置条件码</p>
+<p>构造函数有以下类型。</p>
+<ol>
+<li><p>普通构造函数</p>
+</li>
+<li><p>复制构造函数：用另一个对象来初始化对象对应的内存</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">CPPTest</span>(<span class="type">const</span> CPPTest&amp; cppTest) :<span class="built_in">i</span>(cppTest.i), <span class="built_in">i2</span>(cppTest.i2)&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移动构造函数：也是用另一个对象来初始化对象，具体内容会在Part3第13节详细讲解。</p>
+</li>
+<li><p>默认构造函数：当类没有任何构造函数时，编译期会为该类生成一个默认的的构造函数，在最普通的类中，默认构造函数什么都没做，对象对应的内存没有被初始化。</p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">CPPTest</span>()&#123;&#125;;<span class="comment">//作用和构造函数一样</span></span><br></pre></td></tr></table></figure>
+
+<p>构造函数就是C++提供的<strong>必须有的</strong>在对象创建时初始化对象的方法，（默认的什么都不做也是一种初始化的方式）</p>
+<p><strong>3.析构函数</strong></p>
+<p>介绍:</p>
+<p>类对象被销毁时，就会调用析构函数。栈上对象的销毁时机就是函数栈销毁时,堆上的对象销毁时机就是该堆内存被手动释放时，如果用new申请的这块堆内存，那调用delete销毁这块内存时就会调用析构函数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;isotream&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CPPTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">CPPTest</span>(<span class="type">int</span> i_,<span class="type">int</span> i2_) :<span class="built_in">i</span>(i_),<span class="built_in">i2</span>(i2_)&#123;&#125;</span><br><span class="line">    <span class="built_in">CPPTest</span>(<span class="type">const</span> CPPTest&amp; cppTest) :<span class="built_in">i</span>(cppTest.i), <span class="built_in">i2</span>(cppTest.i2)&#123;&#125;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> i2;</span><br><span class="line">    ~<span class="built_in">CPPTest</span>()<span class="comment">//如没有会自动添加</span></span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">CPPTest <span class="title">cppTest</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;<span class="comment">//初始化i,i2</span></span><br><span class="line">    std::cout&lt;&lt;cppTest.i&lt;&lt;std::endl;</span><br><span class="line">    std::cout&lt;&lt;cppTest.i2&lt;&lt;std::endl;</span><br><span class="line">    CPPTest* pCppTest=<span class="keyword">new</span> <span class="built_in">CppTest</span>(<span class="number">1.2</span>);<span class="comment">//调用在堆上，自动销毁</span></span><br><span class="line">    <span class="keyword">delete</span> PCppTest;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是再某些情况下，析构函数必须要干活</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;isotream&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CPPTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">CPPTest</span>(<span class="type">int</span> i_,<span class="type">int</span> i2_) :<span class="built_in">i</span>(i_),<span class="built_in">i2</span>(i2_),<span class="built_in">pi</span>(<span class="keyword">new</span> <span class="built_in">int</span>(i3))&#123;&#125;</span><br><span class="line">    <span class="built_in">CPPTest</span>(<span class="type">const</span> CPPTest&amp; cppTest) :<span class="built_in">i</span>(cppTest.i), <span class="built_in">i2</span>(cppTest.i2),<span class="built_in">pi</span>(<span class="keyword">new</span> <span class="built_in">int</span>(*cppTest.pi))&#123;&#125;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> i2;</span><br><span class="line">    <span class="type">int</span> *pi;</span><br><span class="line">    ~<span class="built_in">CPPTest</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">delete</span> pi;</span><br><span class="line">    &#125;<span class="comment">//当栈上pi指向堆上的i3，如果析构函数中没有delete，那么只会把栈上的释放，堆上的数据没有释放，会造成内存泄漏</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总结，当类对象销毁时有一些我们必须手动操作的步骤时，析构函数就派上了用场。所以，几乎所有的类我们都要写构造函数，析构函数却未必需要</p>
+<h2 id="this-常成员函数与常对象"><a href="#this-常成员函数与常对象" class="headerlink" title="(*)this,常成员函数与常对象"></a>(*)this,常成员函数与常对象</h2><p><strong>1.this关键字：</strong></p>
+<p>(1) this是什么：</p>
+<p>① 编译器将this解释为指向函数所作用的对象的指针，这句话新手有些不好理解，用代码演示一下就好说了。C++类的本质就是C语言的结构体外加几个类外的函数，C++最后都要转化为C语言来实现，类外的函数就是通过this来指向这个类的。</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">clacc Test</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">       <span class="built_in">Test</span>(<span class="type">const</span> std::string&amp; name_, <span class="type">unsigned</span> old_);</span><br><span class="line">       ~<span class="built_in">Test</span>();</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">output</span><span class="params">()</span><span class="type">const</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        std::cout&lt;&lt;<span class="string">&quot;name=&quot;</span>&lt;&lt;<span class="keyword">this</span>-&gt;name&lt;&lt;<span class="string">&quot;     old=&quot;</span>&lt;&lt;<span class="keyword">this</span>-&gt;old&lt;&lt;std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">       std::string name;</span><br><span class="line">       <span class="type">unsigned</span> old;</span><br><span class="line">&#125;;</span><br><span class="line">Test::<span class="built_in">Test</span>(<span class="type">const</span> std::string&amp; name_,<span class="type">unsigned</span> old_):<span class="built_in">name</span>(name_),<span class="built_in">old</span>(old_)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line">Test::~<span class="built_in">Test</span>()</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Test <span class="title">test</span><span class="params">(<span class="string">&quot;fanfan&quot;</span>,<span class="number">20</span>)</span></span>;</span><br><span class="line">    test.<span class="built_in">outPut</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>② 当然，这么说并非完全准确，this是一个关键字，只是我们将它当做指针理解罢了。</p>
+<p> this有很多功能是单纯的指针无法满足的。比如每个类函数的参数根本没有名叫this的指针。这不过是编译器赋予的功能罢了。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">clacc Test</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">       <span class="built_in">Test</span>(<span class="type">const</span> std::string&amp; name_, <span class="type">unsigned</span> old_);</span><br><span class="line">       ~<span class="built_in">Test</span>();</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">output</span><span class="params">()</span><span class="type">const</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        std::cout&lt;&lt;<span class="string">&quot;name=&quot;</span>&lt;&lt;<span class="keyword">this</span>.name&lt;&lt;<span class="string">&quot;     old=&quot;</span>&lt;&lt;<span class="keyword">this</span>.old&lt;&lt;std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">       std::string name;</span><br><span class="line">       <span class="type">unsigned</span> old;</span><br><span class="line">&#125;;</span><br><span class="line">Test::<span class="built_in">Test</span>(<span class="type">const</span> std::string&amp; name_,<span class="type">unsigned</span> old_):<span class="built_in">name</span>(name_),<span class="built_in">old</span>(old_)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line">Test::~<span class="built_in">Test</span>()</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">void</span> (Test::* pf)()=&amp;Test::output;<span class="comment">//空参数的指针能指向类的成员函数，说明类中没有this这个形参变量</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Test <span class="title">test</span><span class="params">(<span class="string">&quot;fanfan&quot;</span>,<span class="number">20</span>)</span></span>;</span><br><span class="line">    (test.*pf)();<span class="comment">//结果一样</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.常成员函数和常对象</strong></p>
+<p>某位大佬说：“常成员函数和常对象很多人并不在意，确实，都写普通变量也可以。但是，我还是要提一点，在大型程序中，尽量加上const关键字可以减少很多不必要的错误。<strong>这一点，开发过大型程序的人应该深有体会，没开发过大型程序的人也不必在意，记住多用const，这是一个很好的习惯</strong>。“</p>
+<p>(1) 常成员函数就是无法修改成员变量的函数。可以理解为将this指针指向对象用const修饰的函数。(例子在本节的第一个代码演示)</p>
+<p>常对象就是用const修饰的对象，定义好之后就再也不需要更改成员变量的值了。</p>
+<p>(2) 常成员函数注意事项：</p>
+<p>因为类的成员函数已经将this指针省略了，只能在函数后面加const关键字来实现无法修改类成员变量的功能了</p>
+<p>① 注意：常函数无法调用了普通函数，无意义。</p>
+<p><strong>②</strong> <strong>成员函数能写作常成员函数就尽量写作常成员函数，可以减少出错几率。</strong></p>
+<p>③ 同名的常成员函数和普通成员函数是可以重载的，常量对象会优先调用常成员函数，普通对象会优先调用普通成员函数。</p>
+<p>(3) 常对象注意事项：</p>
+<p>① 常对象不能调用普通函数</p>
+<p>② 常函数在大型程序中真的很重要，很多时候我们都需要创建好就不再改变的对象</p>
+<p><strong>大佬强调：常对象和常函数要多用</strong></p>
+<h2 id="inline，mutable，default，delete"><a href="#inline，mutable，default，delete" class="headerlink" title="inline，mutable，default，delete"></a><strong>inline，mutable，default，delete</strong></h2><p>inline,mutable知道就行，default和delete需要掌握</p>
+<p><strong>1.inline关键字</strong></p>
+<p>(1) inline关键字的有什么作用：</p>
+<p>① 在函数声明或定义中函数返回类型前加上关键字inline就可以把函数指定为<strong>内联函数</strong>。关键字inline必须与函数定义放在一起才能使函数成为内联，仅仅将inline放在函数声明前不起任何作用。</p>
+<p> ② 内联函数的作用，普通函数在调用时需要给函数分配栈空间以供函数执行，压栈等操作会影响成员运行效率，于是C++提供了<strong>内联函数将函数体放到需要调用函数的地方</strong>，用空间换效率。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">public</span>:  </span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">outPut</span><span class="params">()</span></span>;<span class="comment">//默认有inline，后边的不加，这里加了也是无效的</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">Test::outPut</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;hello world&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Test test;</span><br><span class="line">    test.<span class="built_in">outPut</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p> (2) inline关键字的注意事项：inline关键字只是一个建议，开发者建议编译器将成员函数当做内联函数，一般适合搞内联的情况编译器都会采纳建议。（牺牲空间换取时间）</p>
+<p> (3) **总结:**使用inline关键字就是一种提高效率，但加大编译后文件大小的方式，现在随着硬件性能的提高，inline关键字用的越来越少了。</p>
+<p><strong>2.mutable关键字</strong></p>
+<p>(1) mutable关键字的作用：</p>
+<p>① Mutable意为可变的，与const相对，被mutable修饰的成员变量，永远处于可变的状态，即便处于一个常函数中，该变量也可以被更改。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">outPut</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">    <span class="keyword">mutable</span> <span class="type">unsigned</span> outPutCallCount=<span class="number">0</span>;</span><br><span class="line">   &#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Test::outPut</span><span class="params">()</span><span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ++outPutCallCount;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;hello world&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Test test;</span><br><span class="line">    test.<span class="built_in">outPut</span>();</span><br><span class="line">    std::cout&lt;&lt;test.outPutCallCount&lt;&lt;std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个关键字在现代C++中使用情况并不多，一般来说只有在统计函数调用次数时才会用到。</p>
+<p> (2) mutable关键字的注意事项</p>
+<p>① mutable是一种万不得已的写法，一个程序不得不使用mutable关键字时，可以认为这部分程序是一个糟糕的设计。</p>
+<p>② mutable不能修饰<strong>静态成员变量和常成员变量</strong>。</p>
+<p>(3) <strong>总结：</strong>mutable关键字是一种没有办法的办法，设计时应该尽量避免，只有在统计函数调用次数这类情况下才推荐使用。</p>
+<p><strong>3.default关键字</strong></p>
+<p>(1) default关键字的作用：</p>
+<p>① 在编译时不会生成默认构造函数时便于书写。</p>
+<p>② 也可以对默认复制构造函数，默认的赋值运算符和默认的析构函数使用，表示使用的是系统默认提供的函数，这样可以使代码更加明显。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">Test</span>(<span class="type">unsigned</span> old_):<span class="built_in">old</span>(old_)&#123;&#125;</span><br><span class="line">    <span class="built_in">Test</span>() = <span class="keyword">default</span>;<span class="comment">//以前Test()&#123;&#125;</span></span><br><span class="line">	<span class="built_in">Test</span>(<span class="type">const</span> Test&amp; test)=<span class="keyword">default</span>;<span class="comment">//使用系统默认</span></span><br><span class="line">    Test&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Test&amp; test)=<span class="keyword">default</span>;</span><br><span class="line">    ~<span class="built_in">Test</span>()=<span class="keyword">default</span>;</span><br><span class="line">	<span class="type">unsigned</span> old;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>③</strong> 现代C++中，哪怕没有构造函数，也推荐将构造函数用default关键字标记，可以让代码看起来更加直观，方便。</p>
+<p>总结：default关键字还是推荐使用的，在现代C++代码中，如果需要使用一些默认的函数，推荐用default标记出来。</p>
+<p><strong>4.delete关键字</strong></p>
+<p>(1) Delete关键字的作用：C++会为程序生成默认构造函数，默认复制构造函数，默认重载赋值运算符。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//没有Test(unsigned old_):old(old_)&#123;&#125;，还不想默认生成</span></span><br><span class="line">    <span class="built_in">Test</span>()=<span class="keyword">delete</span>；</span><br><span class="line">    <span class="comment">//Test&amp; operator=(const Test&amp; test)=default;使用系统默认，不想使用就将default换成delete</span></span><br><span class="line">    ~<span class="built_in">Test</span>()=<span class="keyword">default</span>;<span class="comment">//一般不会delete</span></span><br><span class="line">	<span class="type">unsigned</span> old;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 在很多情况下，我们并不希望这些默认的函数被生成，在C++11以前，只能有将此函数声明为私有函数或是将函数只声明不定义两种方式。</p>
+<p> C++11于是提供了delete关键字，只要在函数最后加上“&#x3D;delete”就可以明确告诉编译期不要默认生成该函数。</p>
+<p> 总结：delete关键字还是推荐使用的，在现代C++代码中，如果不希望一些函数默认生成，就用delete表示，这个功能还是很有用的，比如在单例模式中。</p>
 ]]></content>
       <categories>
-        <category>pwn基础</category>
+        <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>汇编</tag>
+        <tag>c++</tag>
       </tags>
   </entry>
   <entry>
@@ -348,125 +467,6 @@
 <p>啊，part1结束，下周一定减少划水时间，多听课</p>
 <img src="https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图 2023-03-06 160805.png" style="zoom:33%;">
 
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>c++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>现代c++学习笔记(二)</title>
-    <url>/2023/03/13/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C/</url>
-    <content><![CDATA[<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p>类的权限修饰：c++通过 <strong>public、protected、private</strong> 三个关键字来控制成员变量和成员函数的访问权限，它们分别表示公有的、受保护的、私有的，被称为成员访问限定符。所谓访问权限，就是你能不能使用该类中的成员。</p>
-<p>在类的内部（定义类的代码内部），无论成员被声明为 public、protected 还是 private，都是可以互相访问的，没有访问权限的限制。在类的外部（定义类的代码之外），只能通过对象访问成员，并且通过对象只能访问 public 属性的成员，不能访问 private、protected 属性的成员。</p>
-<h2 id="类介绍，构造函数，析构函数"><a href="#类介绍，构造函数，析构函数" class="headerlink" title="(*)类介绍，构造函数，析构函数"></a>(*)类介绍，构造函数，析构函数</h2><p><strong>1.类介绍：</strong></p>
-<p>(1) 对面向对象和面向过程的理解</p>
-<p>① 面向对象和面向过程是一个相对的概念。</p>
-<p>② 面向过程是按照计算机的工作逻辑来编码的方式，最典型的面向过程的语言就是c语言了，c语言直接对应汇编，汇编又对应电路。</p>
-<p>③ 面向对象则是按照人类的思维来编码的一种方式，C++就完全支持面向对象功能，可以按照人类的思维来处理问题。</p>
-<p>④ 举个例子，要把大象装冰箱，按照人类的思路自然是分三步，打开冰箱，将大象装进去，关上冰箱。</p>
-<p>要实现这三步，我们就要首先有人，冰箱这两个对象。人有给冰箱发指令的能	力，冰箱有能够接受指令并打开或关闭门的能力。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//c++</span></span><br><span class="line"><span class="meta">#inlcude<span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">IceChest</span>;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">openIceChest</span><span class="params">(<span class="type">const</span> IceChest&amp; iceChest)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">IceChest</span>:</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">openDoor</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">closeDoor</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//c语言</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Person</span></span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">IceChest</span></span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">personOpenIceChest</span><span class="params">(<span class="type">const</span> Person&amp; person,<span class="type">const</span> IceChest&amp; iceChest)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">personCloseIceChest</span><span class="params">(<span class="type">const</span> Person&amp; person,<span class="type">const</span> IceChest&amp; iceChest)</span></span></span><br></pre></td></tr></table></figure>
-
-<p>但是从计算机的角度讲，计算机只能定义一个叫做人和冰箱的结构体。人有手这个部位，冰箱有门这个部位。然后从天而降一个函数，是这个函数让手打开了冰箱，又是另一个函数让大象进去，再是另一个函数让冰箱门关上。</p>
-<p> 从开发者的角度讲，面向对象显然更利于程序设计。用面向过程的开发方式，程序一旦大了，各种从天而降的函数会非常繁琐，一些用纯c写的大型程序，实际上也是模拟了面向对象的方式。</p>
-<p> 那么，如何用面向过程的c语言模拟出面向对象的能力呢？类就诞生了，在类中可以定义专属于类的函数，让类有了自己的动作。回到那个例子，人的类有了让冰箱开门的能力，冰箱有了让人打开的能力，不再需要天降神秘力量了，hh</p>
-<p> <strong>2.构造函数</strong></p>
-<p> 类是通过面向过程的机器实现的，类相当于定义了一个新类型，该类型生成在堆或栈上的对象时内存排布和c语言相同。但是c++规定，<strong>C++有在类对象创建时就在对应内存将数据初始化的能力</strong>，这就是构造函数。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;isotream&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CPPtest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">CPPTest</span>(<span class="type">int</span> i_,<span class="type">int</span> i2_) :<span class="built_in">i</span>(i_),<span class="built_in">i2</span>(i2_)&#123;&#125;<span class="comment">//c++可以在类中构造函数，将参数对应内存初始化;若没有，则自动生成，但是没什么用</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> i2;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">CPPtest <span class="title">cppTest</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;<span class="comment">//初始化i,i2</span></span><br><span class="line">    std::cout&lt;&lt;cppTest.i&lt;&lt;std::endl;</span><br><span class="line">    std::cout&lt;&lt;cppTest.i2&lt;&lt;std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>构造函数有以下类型。</p>
-<ol>
-<li><p>普通构造函数</p>
-</li>
-<li><p>复制构造函数：用另一个对象来初始化对象对应的内存</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">CPPTest</span>(<span class="type">const</span> CPPTest&amp; cppTest) :<span class="built_in">i</span>(cppTest.i), <span class="built_in">i2</span>(cppTest.i2)&#123;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>移动构造函数：也是用另一个对象来初始化对象，具体内容会在Part3第13节详细讲解。</p>
-</li>
-<li><p>默认构造函数：当类没有任何构造函数时，编译期会为该类生成一个默认的的构造函数，在最普通的类中，默认构造函数什么都没做，对象对应的内存没有被初始化。</p>
-</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">CPPTest</span>()&#123;&#125;;<span class="comment">//作用和构造函数一样</span></span><br></pre></td></tr></table></figure>
-
-<p>构造函数就是C++提供的<strong>必须有的</strong>在对象创建时初始化对象的方法，（默认的什么都不做也是一种初始化的方式）</p>
-<p><strong>3.析构函数</strong></p>
-<p>介绍:</p>
-<p>类对象被销毁时，就会调用析构函数。栈上对象的销毁时机就是函数栈销毁时,堆上的对象销毁时机就是该堆内存被手动释放时，如果用new申请的这块堆内存，那调用delete销毁这块内存时就会调用析构函数。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;isotream&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CPPTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">CPPTest</span>(<span class="type">int</span> i_,<span class="type">int</span> i2_) :<span class="built_in">i</span>(i_),<span class="built_in">i2</span>(i2_)&#123;&#125;</span><br><span class="line">    <span class="built_in">CPPTest</span>(<span class="type">const</span> CPPTest&amp; cppTest) :<span class="built_in">i</span>(cppTest.i), <span class="built_in">i2</span>(cppTest.i2)&#123;&#125;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> i2;</span><br><span class="line">    ~<span class="built_in">CPPTest</span>()<span class="comment">//如没有会自动添加</span></span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">CPPTest <span class="title">cppTest</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;<span class="comment">//初始化i,i2</span></span><br><span class="line">    std::cout&lt;&lt;cppTest.i&lt;&lt;std::endl;</span><br><span class="line">    std::cout&lt;&lt;cppTest.i2&lt;&lt;std::endl;</span><br><span class="line">    CPPTest* pCppTest=<span class="keyword">new</span> <span class="built_in">CppTest</span>(<span class="number">1.2</span>);<span class="comment">//调用在堆上，自动销毁</span></span><br><span class="line">    <span class="keyword">delete</span> PCppTest;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>但是再某些情况下，析构函数必须要干活</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;isotream&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CPPTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">CPPTest</span>(<span class="type">int</span> i_,<span class="type">int</span> i2_) :<span class="built_in">i</span>(i_),<span class="built_in">i2</span>(i2_),<span class="built_in">pi</span>(<span class="keyword">new</span> <span class="built_in">int</span>(i3))&#123;&#125;</span><br><span class="line">    <span class="built_in">CPPTest</span>(<span class="type">const</span> CPPTest&amp; cppTest) :<span class="built_in">i</span>(cppTest.i), <span class="built_in">i2</span>(cppTest.i2),<span class="built_in">pi</span>(<span class="keyword">new</span> <span class="built_in">int</span>(*cppTest.pi))&#123;&#125;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> i2;</span><br><span class="line">    <span class="type">int</span> *pi;</span><br><span class="line">    ~<span class="built_in">CPPTest</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">delete</span> pi;</span><br><span class="line">    &#125;<span class="comment">//当栈上pi指向堆上的i3，如果析构函数中没有delete，那么只会把栈上的释放，堆上的数据没有释放，会造成内存泄漏</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>总结，当类对象销毁时有一些我们必须手动操作的步骤时，析构函数就派上了用场。所以，几乎所有的类我们都要写构造函数，析构函数却未必需要</p>
-<h2 id="this-常成员函数与常对象"><a href="#this-常成员函数与常对象" class="headerlink" title="(*)this,常成员函数与常对象"></a>(*)this,常成员函数与常对象</h2><p><strong>1.this关键字：</strong></p>
-<p>(1) this是什么：</p>
-<p>① 编译器将this解释为指向函数所作用的对象的指针，这句话新手有些不好理解，用代码演示一下就好说了。C++类的本质就是C语言的结构体外加几个类外的函数，C++最后都要转化为C语言来实现，类外的函数就是通过this来指向这个类的。</p>
- <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">clacc Test</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">       <span class="built_in">Test</span>(<span class="type">const</span> std::string&amp; name_, <span class="type">unsigned</span> old_);</span><br><span class="line">       ~<span class="built_in">Test</span>();</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">output</span><span class="params">()</span><span class="type">const</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        std::cout&lt;&lt;<span class="string">&quot;name=&quot;</span>&lt;&lt;<span class="keyword">this</span>-&gt;name&lt;&lt;<span class="string">&quot;     old=&quot;</span>&lt;&lt;<span class="keyword">this</span>-&gt;old&lt;&lt;std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">       std::string name;</span><br><span class="line">       <span class="type">unsigned</span> old;</span><br><span class="line">&#125;;</span><br><span class="line">Test::<span class="built_in">Test</span>(<span class="type">const</span> std::string&amp; name_,<span class="type">unsigned</span> old_):<span class="built_in">name</span>(name_),<span class="built_in">old</span>(old_)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line">Test::~<span class="built_in">Test</span>()</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Test <span class="title">test</span><span class="params">(<span class="string">&quot;fanfan&quot;</span>,<span class="number">20</span>)</span></span>;</span><br><span class="line">    test.<span class="built_in">outPut</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>② 当然，这么说并非完全准确，this是一个关键字，只是我们将它当做指针理解罢了。</p>
-<p> this有很多功能是单纯的指针无法满足的。比如每个类函数的参数根本没有名叫this的指针。这不过是编译器赋予的功能罢了。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line">clacc Test</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">       <span class="built_in">Test</span>(<span class="type">const</span> std::string&amp; name_, <span class="type">unsigned</span> old_);</span><br><span class="line">       ~<span class="built_in">Test</span>();</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">output</span><span class="params">()</span><span class="type">const</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        std::cout&lt;&lt;<span class="string">&quot;name=&quot;</span>&lt;&lt;<span class="keyword">this</span>.name&lt;&lt;<span class="string">&quot;     old=&quot;</span>&lt;&lt;<span class="keyword">this</span>.old&lt;&lt;std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">       std::string name;</span><br><span class="line">       <span class="type">unsigned</span> old;</span><br><span class="line">&#125;;</span><br><span class="line">Test::<span class="built_in">Test</span>(<span class="type">const</span> std::string&amp; name_,<span class="type">unsigned</span> old_):<span class="built_in">name</span>(name_),<span class="built_in">old</span>(old_)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line">Test::~<span class="built_in">Test</span>()</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">void</span> (Test::* pf)()=&amp;Test::output;<span class="comment">//空参数的指针能指向类的成员函数，说明类中没有this这个形参变量</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Test <span class="title">test</span><span class="params">(<span class="string">&quot;fanfan&quot;</span>,<span class="number">20</span>)</span></span>;</span><br><span class="line">    (test.*pf)();<span class="comment">//结果一样</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>2.常成员函数和常对象</strong></p>
-<p>某位大佬说：“常成员函数和常对象很多人并不在意，确实，都写普通变量也可以。但是，我还是要提一点，在大型程序中，尽量加上const关键字可以减少很多不必要的错误。<strong>这一点，开发过大型程序的人应该深有体会，没开发过大型程序的人也不必在意，记住多用const，这是一个很好的习惯</strong>。“</p>
-<p>(1) 常成员函数就是无法修改成员变量的函数。可以理解为将this指针指向对象用const修饰的函数。(例子在本节的第一个代码演示)</p>
-<p>常对象就是用const修饰的对象，定义好之后就再也不需要更改成员变量的值了。</p>
-<p>(2) 常成员函数注意事项：</p>
-<p>因为类的成员函数已经将this指针省略了，只能在函数后面加const关键字来实现无法修改类成员变量的功能了</p>
-<p>① 注意：常函数无法调用了普通函数，无意义。</p>
-<p><strong>②</strong> <strong>成员函数能写作常成员函数就尽量写作常成员函数，可以减少出错几率。</strong></p>
-<p>③ 同名的常成员函数和普通成员函数是可以重载的，常量对象会优先调用常成员函数，普通对象会优先调用普通成员函数。</p>
-<p>(3) 常对象注意事项：</p>
-<p>① 常对象不能调用普通函数</p>
-<p>② 常函数在大型程序中真的很重要，很多时候我们都需要创建好就不再改变的对象</p>
-<p><strong>大佬强调：常对象和常函数要多用</strong></p>
-<h2 id="inline，mutable，default，delete"><a href="#inline，mutable，default，delete" class="headerlink" title="inline，mutable，default，delete"></a><strong>inline，mutable，default，delete</strong></h2><p>inline,mutable知道就行，default和delete需要掌握</p>
-<p><strong>1.inline关键字</strong></p>
-<p>(1) inline关键字的有什么作用：</p>
-<p>① 在函数声明或定义中函数返回类型前加上关键字inline就可以把函数指定为<strong>内联函数</strong>。关键字inline必须与函数定义放在一起才能使函数成为内联，仅仅将inline放在函数声明前不起任何作用。</p>
-<p> ② 内联函数的作用，普通函数在调用时需要给函数分配栈空间以供函数执行，压栈等操作会影响成员运行效率，于是C++提供了<strong>内联函数将函数体放到需要调用函数的地方</strong>，用空间换效率。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">public</span>:  </span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">outPut</span><span class="params">()</span></span>;<span class="comment">//默认有inline，后边的不加，这里加了也是无效的</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">Test::outPut</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;hello world&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Test test;</span><br><span class="line">    test.<span class="built_in">outPut</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p> (2) inline关键字的注意事项：inline关键字只是一个建议，开发者建议编译器将成员函数当做内联函数，一般适合搞内联的情况编译器都会采纳建议。（牺牲空间换取时间）</p>
-<p> (3) **总结:**使用inline关键字就是一种提高效率，但加大编译后文件大小的方式，现在随着硬件性能的提高，inline关键字用的越来越少了。</p>
-<p><strong>2.mutable关键字</strong></p>
-<p>(1) mutable关键字的作用：</p>
-<p>① Mutable意为可变的，与const相对，被mutable修饰的成员变量，永远处于可变的状态，即便处于一个常函数中，该变量也可以被更改。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">outPut</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">    <span class="keyword">mutable</span> <span class="type">unsigned</span> outPutCallCount=<span class="number">0</span>;</span><br><span class="line">   &#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Test::outPut</span><span class="params">()</span><span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ++outPutCallCount;</span><br><span class="line">    std::cout&lt;&lt;<span class="string">&quot;hello world&quot;</span>&lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Test test;</span><br><span class="line">    test.<span class="built_in">outPut</span>();</span><br><span class="line">    std::cout&lt;&lt;test.outPutCallCount&lt;&lt;std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个关键字在现代C++中使用情况并不多，一般来说只有在统计函数调用次数时才会用到。</p>
-<p> (2) mutable关键字的注意事项</p>
-<p>① mutable是一种万不得已的写法，一个程序不得不使用mutable关键字时，可以认为这部分程序是一个糟糕的设计。</p>
-<p>② mutable不能修饰<strong>静态成员变量和常成员变量</strong>。</p>
-<p>(3) <strong>总结：</strong>mutable关键字是一种没有办法的办法，设计时应该尽量避免，只有在统计函数调用次数这类情况下才推荐使用。</p>
-<p><strong>3.default关键字</strong></p>
-<p>(1) default关键字的作用：</p>
-<p>① 在编译时不会生成默认构造函数时便于书写。</p>
-<p>② 也可以对默认复制构造函数，默认的赋值运算符和默认的析构函数使用，表示使用的是系统默认提供的函数，这样可以使代码更加明显。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">Test</span>(<span class="type">unsigned</span> old_):<span class="built_in">old</span>(old_)&#123;&#125;</span><br><span class="line">    <span class="built_in">Test</span>() = <span class="keyword">default</span>;<span class="comment">//以前Test()&#123;&#125;</span></span><br><span class="line">	<span class="built_in">Test</span>(<span class="type">const</span> Test&amp; test)=<span class="keyword">default</span>;<span class="comment">//使用系统默认</span></span><br><span class="line">    Test&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Test&amp; test)=<span class="keyword">default</span>;</span><br><span class="line">    ~<span class="built_in">Test</span>()=<span class="keyword">default</span>;</span><br><span class="line">	<span class="type">unsigned</span> old;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>③</strong> 现代C++中，哪怕没有构造函数，也推荐将构造函数用default关键字标记，可以让代码看起来更加直观，方便。</p>
-<p>总结：default关键字还是推荐使用的，在现代C++代码中，如果需要使用一些默认的函数，推荐用default标记出来。</p>
-<p><strong>4.delete关键字</strong></p>
-<p>(1) Delete关键字的作用：C++会为程序生成默认构造函数，默认复制构造函数，默认重载赋值运算符。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//没有Test(unsigned old_):old(old_)&#123;&#125;，还不想默认生成</span></span><br><span class="line">    <span class="built_in">Test</span>()=<span class="keyword">delete</span>；</span><br><span class="line">    <span class="comment">//Test&amp; operator=(const Test&amp; test)=default;使用系统默认，不想使用就将default换成delete</span></span><br><span class="line">    ~<span class="built_in">Test</span>()=<span class="keyword">default</span>;<span class="comment">//一般不会delete</span></span><br><span class="line">	<span class="type">unsigned</span> old;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p> 在很多情况下，我们并不希望这些默认的函数被生成，在C++11以前，只能有将此函数声明为私有函数或是将函数只声明不定义两种方式。</p>
-<p> C++11于是提供了delete关键字，只要在函数最后加上“&#x3D;delete”就可以明确告诉编译期不要默认生成该函数。</p>
-<p> 总结：delete关键字还是推荐使用的，在现代C++代码中，如果不希望一些函数默认生成，就用delete表示，这个功能还是很有用的，比如在单例模式中。</p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
