@@ -92,11 +92,6 @@
       </tags>
   </entry>
   <entry>
-    <title>内核学习</title>
-    <url>/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2023/02/18/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -113,6 +108,11 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>内核学习</title>
+    <url>/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>周计划</title>
@@ -146,32 +146,15 @@
 <p>pwn:栈题整理</p>
 <h3 id="周二-1"><a href="#周二-1" class="headerlink" title="周二"></a>周二</h3><p>现代c++：友元类和友元函数， 重载运算符，普通继承及其实现原理</p>
 <p>pwn:栈题整理，堆理解</p>
+<h3 id="周三-1"><a href="#周三-1" class="headerlink" title="周三"></a>周三</h3><p>理解堆</p>
+<h3 id="周四-1"><a href="#周四-1" class="headerlink" title="周四"></a>周四</h3><p>现代c++：虚函数及其实现原理 override关键字 ，静态成员变量与静态函数 ， 纯虚函数 ，RTTL</p>
+<h3 id="周五-1"><a href="#周五-1" class="headerlink" title="周五"></a>周五</h3><p>现代c++：多继承 ， 虚继承及其实现原理 ，智能指针概述</p>
 ]]></content>
       <categories>
         <category>计划</category>
       </categories>
       <tags>
         <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>堆学习(一)</title>
-    <url>/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<p><strong>前言：栈草草的结束了，只掌握一些简单的rop利用，至于为什么这么早想学习堆，可能跟我的学习理念有关吧，我的学习理念是了解重要的学习框架，先将基础结构的相对简单的内容学会，再同步深入学习更深度的内容。现在相比较学习栈的其他花里胡哨的利用方式，我更想先学习堆的基本内容和简单利用</strong></p>
-<h1 id="什么是堆"><a href="#什么是堆" class="headerlink" title="什么是堆"></a>什么是堆</h1><p>堆不同于栈，堆是动态分配的（由操作系统内核或者堆管理器），只有在程序中需要时才会分配。在 CTF 的 pwn 程序中，栈是程序加载进内存后就会出现，而堆是由 malloc、alloc、realloc 函数分配内存后才会出现。</p>
-<p> <strong>堆的生长方向是从低地址向高地址生长的，而栈是从高地址向低地址生长的。</strong></p>
-<p>实际上堆可以申请到的内存空间比栈要大很多，在 linux 的 4G 的虚拟内存空间里最高可以达到 2.9 G 的空间</p>
-<blockquote>
-<p>对堆操作的<strong>是由堆管理器（ptmalloc2）来实现的，而不是操作系统内核</strong>。因为程序每次申请或者释放堆时都需要进行系统调用，系统调用的开销巨大，当频繁进行堆操作时，就会严重影响程序的性能</p>
-</blockquote>
-<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20120910.png"></p>
-<p>俺以 <strong>glibc 库下的 ptmalloc2 堆管理器</strong>为例学习</p>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>pwn</tag>
       </tags>
   </entry>
   <entry>
@@ -206,6 +189,69 @@
       </categories>
       <tags>
         <tag>汇编</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>堆学习(一)</title>
+    <url>/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p><strong>前言：栈草草的结束了，只掌握一些简单的rop利用，至于为什么这么早想学习堆，可能跟我的学习理念有关吧，我的学习理念是了解重要的学习框架，先将基础结构的相对简单的内容学会，再同步深入学习更深度的内容。现在相比较学习栈的其他花里胡哨的利用方式，我更想先学习堆的基本内容和简单利用</strong></p>
+<h1 id="什么是堆"><a href="#什么是堆" class="headerlink" title="什么是堆"></a>什么是堆</h1><p>堆不同于栈，堆是动态分配的（由操作系统内核或者堆管理器），只有在程序中需要时才会分配。在 CTF 的 pwn 程序中，栈是程序加载进内存后就会出现，而堆是由 malloc、alloc、realloc 函数分配内存后才会出现。</p>
+<p> <strong>堆的生长方向是从低地址向高地址生长的，而栈是从高地址向低地址生长的。</strong></p>
+<p>实际上堆可以申请到的内存空间比栈要大很多，在 linux 的 4G 的虚拟内存空间里最高可以达到 2.9 G 的空间</p>
+<blockquote>
+<p>对堆操作的<strong>是由堆管理器（ptmalloc2）来实现的，而不是操作系统内核</strong>。因为程序每次申请或者释放堆时都需要进行系统调用，系统调用的开销巨大，当频繁进行堆操作时，就会严重影响程序的性能</p>
+</blockquote>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20120910.png"></p>
+<p>俺以 <strong>glibc 库下的 ptmalloc2 堆管理器</strong>为例学习</p>
+<h2 id="堆的基本结构"><a href="#堆的基本结构" class="headerlink" title="堆的基本结构"></a>堆的基本结构</h2><p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20142218.png"></p>
+<p>当用户通过<strong>malloc</strong>等函数申请空间时，实际上是从堆中分配内存，ptmalloc根据用户的需要，为用户分配不同类型的chunk</p>
+<p>malloc_chunk结构</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span> &#123;</span></span><br><span class="line">    INTERNAL_SIZE_T prev_size; <span class="comment">/* Size of previous chunk (if free). */</span></span><br><span class="line">    INTERNAL_SIZE_T size; <span class="comment">/* Size in bytes, including overhead. */</span></span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">fd</span>;</span> <span class="comment">/* double links -- used only if free. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">bk</span>;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* Only used for large blocks: pointer to next larger size. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">fd_nextsize</span>;</span> <span class="comment">/* double links -- used only if free. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">bk_nextsize</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>每个程序分配的内存(这里指的是malloc函数)，在内部被一个叫”堆块”的所替代。一个堆块是由程序返回内存组成的(实际上是malloc的返回值)。这块区域在申请新的内存的时候会不断扩大。同样，当一定数量的内存释放时，堆也可以收缩。</p>
+<p>**1.pre_size 字段:**只有在前面一个堆块是空闲的时候才有值，用来指示前一个堆块的大小。前面一个堆块在使用时，他的值始终为 0<br>**2.size 字段:**是用来指示当前堆块的大小的（头部加上 user data 的大小）。但是这个字段的最后三位相当于三个 flag ，有另外的作用。</p>
+<p>​      <code>NON_MAIN_ARENA</code>，记录当前 chunk 是否不属于主线程，1 表示不属于，0 表示属于。</p>
+<p>​      <code>IS_MAPPED</code>，记录当前 chunk 是否是由 mmap 分配的。</p>
+<p>​      <code> PREV_INUSE</code>，记录前一个 chunk 块是否被分配。一般来说，堆中第一个被分配的内存块的 P 位都会被设置为 1，以便于防止访问前             面的非法内存。当一个 chunk 的 size 的 P 位为 0 时，我们能通过 prev_size 字段来获取上一个 chunk 的大小以及地址。这也方便进行空闲 chunk 之间的合并。</p>
+<p><strong>3..user data</strong> 就是用来存放用户数据的。使用malloc函数分配到的内存的返回地址是指user data(用户数据区)</p>
+<p>例如在64位程序中：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">malloc</span>(<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+
+<p>申请到的堆块总大小为 16 + 8 + 8 + 1 &#x3D; 0x21</p>
+<p>1.第一个 16 字节是<strong>系统最小分配的内存</strong>，也就是说你如果想要申请的内存小于系统最小分配的内存的话，就会按照最小的内存来分配。</p>
+<ul>
+<li>在 64 位系统中这个值是 16 个字节，在 32 位系统中是 8 个字节</li>
+<li>例如，如果代码中是 malloc(0) 的话，<strong>堆管理器也会分配最小内存空间给你</strong></li>
+</ul>
+<p>2.第二个 8 字节是 pre size 字段的大小（32 位的为 4 字节）<br>3.第三个 8 字节为 size 字段的大小（32 位的为 4 字节）<br>4.最后一个 1 字节是 <strong>PREV_INUSE 的值，只有 0 或 1两个值</strong></p>
+<h2 id="指针与地址"><a href="#指针与地址" class="headerlink" title="指针与地址"></a>指针与地址</h2><p>首先要明确用户在调用 malloc 函数时返回的值为<strong>一个指针，指向分配到堆空间（用户数据区）</strong></p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20151811.png"></p>
+<p>first chunk（second chunk）表示第一和第二个结构，<strong>每个结构中都有一个 point_heap 指针来指向存储用户数据的堆块（chunk）。</strong></p>
+<p><strong>左边的这个本身就是一个堆块，用来存放一些全局信息</strong>。比如 max_size 存储了能够存储的最大结构数量；exist_num 表示已经存储的结构的数量。</p>
+<h3 id="IDA-中常见的指针表示形式"><a href="#IDA-中常见的指针表示形式" class="headerlink" title="IDA 中常见的指针表示形式"></a>IDA 中常见的指针表示形式</h3><p>在 IDA 伪代码中的指针形式形如下面的情况：</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">*(qword_6020A8 + <span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>表示取到 qword_6020A8 这个地址加 8 偏移的那个地址存储的值</strong></p>
+<p>汇编代码等同于：</p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="section">.text:0000000000400F85                 mov     rax, cs:qword_6020A8</span></span><br><span class="line"><span class="section">.text:0000000000400F8C                 mov     rax, [rax+8]</span></span><br></pre></td></tr></table></figure>
+
+<p>简单转化一下，也就是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*(addr) = [addr]</span><br></pre></td></tr></table></figure>
+
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>在 pwn 的堆题目中，经常会有像一些”笔记管理系统”之类的题目，例如下面这里例子</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/9mQhGPF.png" alt="img"></p>
+<p>代码提供了最基本的增删查改的功能。这个”笔记”的数据结构<strong>通常就是使用链表连接起来的</strong>，记录了当前 note 的大小、属性、内容等等。</p>
+<p><strong>例如，下面这个例子就是以指针为基础来存储这个 note 结构的</strong>。这里的 i 代表 note 的索引，若这里的 i &#x3D; 0 时：</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/n366Lzt.png" alt="img"></p>
+<p><em>(qword_6020A8 + 16) 就*<em>代表从 qword_6020A8 这个地址出再往后偏移 16 个字节，取到这个地址存储的值，接着把 1 赋值给这个地方（也就是把 1 存入这个地址）</em></em></p>
+<p>同样的 *(qword_6020A8 + 24) 就代表偏移 24 个字节处的值为 len</p>
+<p>依次类推就可以在<strong>不连续的内存空间中</strong>，把整个 note 的数据结构存储下来了。</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>pwn</tag>
       </tags>
   </entry>
   <entry>
