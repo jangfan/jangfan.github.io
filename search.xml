@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2023/02/18/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>内核学习</title>
-    <url>/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>pwn日常刷题记录</title>
     <url>/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="栈问题"><a href="#栈问题" class="headerlink" title="栈问题"></a>栈问题</h1><h2 id="get-started-3dsctf-2016"><a href="#get-started-3dsctf-2016" class="headerlink" title="get_started_3dsctf_2016"></a>get_started_3dsctf_2016</h2><p><strong>checksec</strong></p>
@@ -115,6 +92,29 @@
       </tags>
   </entry>
   <entry>
+    <title>内核学习</title>
+    <url>/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/02/18/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>周计划</title>
     <url>/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/</url>
     <content><![CDATA[<h1 id="大一下学期目标"><a href="#大一下学期目标" class="headerlink" title="大一下学期目标"></a>大一下学期目标</h1><p><strong>主线</strong>：<strong>学习pwn的栈 堆和内核</strong></p>
@@ -149,6 +149,7 @@
 <h3 id="周三-1"><a href="#周三-1" class="headerlink" title="周三"></a>周三</h3><p>理解堆</p>
 <h3 id="周四-1"><a href="#周四-1" class="headerlink" title="周四"></a>周四</h3><p>现代c++：虚函数及其实现原理 override关键字 ，静态成员变量与静态函数 ， 纯虚函数 ，RTTL</p>
 <h3 id="周五-1"><a href="#周五-1" class="headerlink" title="周五"></a>周五</h3><p>现代c++：多继承 ， 虚继承及其实现原理 ，智能指针概述</p>
+<h3 id="周六-1"><a href="#周六-1" class="headerlink" title="周六"></a>周六</h3><p>pwn：堆：main_arena和top chunk ， free函数和bins</p>
 ]]></content>
       <categories>
         <category>计划</category>
@@ -158,77 +159,37 @@
       </tags>
   </entry>
   <entry>
-    <title>堆学习(一)</title>
-    <url>/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<p><strong>前言：栈草草的结束了，只掌握一些简单的rop利用，至于为什么这么早想学习堆，可能跟我的学习理念有关吧，我的学习理念是了解重要的学习框架，先将基础结构的相对简单的内容学会，再同步深入学习更深度的内容。现在相比较学习栈的其他花里胡哨的利用方式，我更想先学习堆的基本内容和简单利用</strong></p>
-<h1 id="什么是堆"><a href="#什么是堆" class="headerlink" title="什么是堆"></a>什么是堆</h1><p>堆不同于栈，堆是动态分配的（由操作系统内核或者堆管理器），只有在程序中需要时才会分配。在 CTF 的 pwn 程序中，栈是程序加载进内存后就会出现，而堆是由 malloc、alloc、realloc 函数分配内存后才会出现。</p>
-<p> <strong>堆的生长方向是从低地址向高地址生长的，而栈是从高地址向低地址生长的。</strong></p>
-<p>实际上堆可以申请到的内存空间比栈要大很多，在 linux 的 4G 的虚拟内存空间里最高可以达到 2.9 G 的空间</p>
-<blockquote>
-<p>对堆操作的<strong>是由堆管理器（ptmalloc2）来实现的，而不是操作系统内核</strong>。因为程序每次申请或者释放堆时都需要进行系统调用，系统调用的开销巨大，当频繁进行堆操作时，就会严重影响程序的性能</p>
-</blockquote>
-<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20120910.png"></p>
-<p>俺以 <strong>glibc 库下的 ptmalloc2 堆管理器</strong>为例学习</p>
-<h2 id="堆的基本结构"><a href="#堆的基本结构" class="headerlink" title="堆的基本结构"></a>堆的基本结构</h2><p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20142218.png"></p>
-<p>当用户通过<strong>malloc</strong>等函数申请空间时，实际上是从堆中分配内存，ptmalloc根据用户的需要，为用户分配不同类型的chunk</p>
-<p>malloc_chunk结构</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span> &#123;</span></span><br><span class="line">    INTERNAL_SIZE_T prev_size; <span class="comment">/* Size of previous chunk (if free). */</span></span><br><span class="line">    INTERNAL_SIZE_T size; <span class="comment">/* Size in bytes, including overhead. */</span></span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">fd</span>;</span> <span class="comment">/* double links -- used only if free. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">bk</span>;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* Only used for large blocks: pointer to next larger size. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">fd_nextsize</span>;</span> <span class="comment">/* double links -- used only if free. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">bk_nextsize</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <title>汇编语言简单摘要</title>
+    <url>/2023/02/20/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%91%98%E8%A6%81/</url>
+    <content><![CDATA[<h3 id="x86-64位寄存器（16个）"><a href="#x86-64位寄存器（16个）" class="headerlink" title="x86-64位寄存器（16个）"></a>x86-64位寄存器（16个）</h3><p>rax：存放保存函数返回值<br>rbx：被调用者保存<br>rdi rsi rdx rcx 对应第1、2、3、4个参数<br>rsp：栈指针，存放栈帧的栈顶的偏移地址<br>r8 r9对应第5、6个参数</p>
+<h3 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h3><p>立即数寻址$Imm Imm(立即数)<br>寄存器寻址%ra R[ra] (寄存器)<br>绝对寻址Imm M[Imm] (存储器)<br>间接寻址（%ra）M[R[[ra]]</p>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">下面有一点地址或寄存器的值，写出操作数的值</span><br><span class="line">地址          值              寄存器       值</span><br><span class="line">0x100      0xFF             rax        0x100</span><br><span class="line">0x104      0xab             rcx        0x1</span><br><span class="line">0x108      0x13             rdx        0x3</span><br><span class="line">0x10C      0x11</span><br></pre></td></tr></table></figure>
 
-<p>每个程序分配的内存(这里指的是malloc函数)，在内部被一个叫”堆块”的所替代。一个堆块是由程序返回内存组成的(实际上是malloc的返回值)。这块区域在申请新的内存的时候会不断扩大。同样，当一定数量的内存释放时，堆也可以收缩。</p>
-<p><strong>1.pre_size 字段:</strong> 只有在前面一个堆块是空闲的时候才有值，用来指示前一个堆块的大小。前面一个堆块在使用时，他的值始终为 0<br><strong>2.size 字段:</strong> 是用来指示当前堆块的大小的（头部加上 user data 的大小）。但是这个字段的最后三位相当于三个 flag ，有另外的作用。</p>
-<p>​      <code>NON_MAIN_ARENA</code>，记录当前 chunk 是否不属于主线程，1 表示不属于，0 表示属于。</p>
-<p>​      <code>IS_MAPPED</code>，记录当前 chunk 是否是由 mmap 分配的。</p>
-<p>​      <code> PREV_INUSE</code>，记录前一个 chunk 块是否被分配。一般来说，堆中第一个被分配的内存块的 P 位都会被设置为 1，以便于防止访问前             面的非法内存。当一个 chunk 的 size 的 P 位为 0 时，我们能通过 prev_size 字段来获取上一个 chunk 的大小以及地址。这也方便进行空闲 chunk 之间的合并。</p>
-<p><strong>3..user data</strong> 就是用来存放用户数据的。使用malloc函数分配到的内存的返回地址是指user data(用户数据区)</p>
-<p>例如在64位程序中：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">malloc</span>(<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">操作数  值</span><br><span class="line">rax 0x100(寄存器)</span><br><span class="line">0x104 0xab（绝对寻址）</span><br><span class="line"><span class="variable">$0x108</span> 0x108（立即数寻址）</span><br><span class="line">(%rax) 0xFF（间接寻址）</span><br></pre></td></tr></table></figure>
 
-<p>申请到的堆块总大小为 16 + 8 + 8 + 1 &#x3D; 0x21</p>
-<p>1.第一个 16 字节是<strong>系统最小分配的内存</strong>，也就是说你如果想要申请的内存小于系统最小分配的内存的话，就会按照最小的内存来分配。</p>
-<ul>
-<li>在 64 位系统中这个值是 16 个字节，在 32 位系统中是 8 个字节</li>
-<li>例如，如果代码中是 malloc(0) 的话，<strong>堆管理器也会分配最小内存空间给你</strong></li>
-</ul>
-<p>2.第二个 8 字节是 pre size 字段的大小（32 位的为 4 字节）<br>3.第三个 8 字节为 size 字段的大小（32 位的为 4 字节）<br>4.最后一个 1 字节是 <strong>PREV_INUSE 的值，只有 0 或 1两个值</strong></p>
-<h2 id="指针与地址"><a href="#指针与地址" class="headerlink" title="指针与地址"></a>指针与地址</h2><p>首先要明确用户在调用 malloc 函数时返回的值为<strong>一个指针，指向分配到堆空间（用户数据区）</strong></p>
-<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20151811.png"></p>
-<p>first chunk（second chunk）表示第一和第二个结构，<strong>每个结构中都有一个 point_heap 指针来指向存储用户数据的堆块（chunk）。</strong></p>
-<p><strong>左边的这个本身就是一个堆块，用来存放一些全局信息</strong>。比如 max_size 存储了能够存储的最大结构数量；exist_num 表示已经存储的结构的数量。</p>
-<h3 id="IDA-中常见的指针表示形式"><a href="#IDA-中常见的指针表示形式" class="headerlink" title="IDA 中常见的指针表示形式"></a>IDA 中常见的指针表示形式</h3><p>在 IDA 伪代码中的指针形式形如下面的情况：</p>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">*(qword_6020A8 + <span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>两种汇编模式<br>ATT汇编movq movb<br>普通汇编 mov <strong>rax,rbx</strong>&#x3D;mov<strong>q %rbx,%rax</strong> （ATT）：把rbx的值赋给rax</p>
+<h4 id="mov"><a href="#mov" class="headerlink" title="mov"></a>mov</h4><p>mov 数据传送指令 将数据从一个位置复制到另一个位置的指令<br>mov 寄存器&#x2F;立即数 操作数用来指向一个执行所要使用源数据的值，放置结果的目的位置，mov 源操作数的值是一个立即数，值存放在内存或者寄存器中 目的操作数一个寄存器或者是一个内存地址。</p>
+<p><strong>单位</strong>：1字节 &#x3D; 8bit  1字 &#x3D; 8字节 &#x3D; 64bit</p>
+<p><strong>movb 一个字节</strong> (这个字代表双字节的意思，与上边的字不一样)<br><strong>movw 一个字<br>movl 双字（寄存器的高四字节设置成0）<br>movq 四字<br>movabsq I,R  R&lt;-I 传送的是绝对的四字 目的操作数只能是寄存器</strong><br>movl $0x4050,%eax      4bytes   立即数–寄存器<br>movw %bp,%sp           2bytes   寄存器–寄存器<br>movb (%rdi,%rcx),%al   1bytes  内存–寄存器<br>movb $-17,(%rsp)       1bytes   立即数–内存<br>movq %rax,-12(%rbp)    8bytes   寄存器–内存l</p>
+<h5 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">movabsq <span class="variable">$0x0011223344556677</span> , %rax = 0011223344556677  </span><br><span class="line">（ rax包含了eax eax包含了ax ax包含了al）</span><br><span class="line">-1的16进制是0xFFFFFFFFFFFFFF,第一步结束后每一步rax的值是多少</span><br><span class="line">movb $-1 ,%al           ， %rax = 00112233445566FF   F = 1111</span><br><span class="line">movw $-1 , %ax          ， %rax = 001122334455FFFF   </span><br><span class="line">movl $-1 , %eax         ， %rax = 00000000FFFFFFFF</span><br><span class="line">movq $-1 ,%rax          ， %rax = FFFFFFFFFFFFFFFF </span><br></pre></td></tr></table></figure>
 
-<p><strong>表示取到 qword_6020A8 这个地址加 8 偏移的那个地址存储的值</strong></p>
-<p>汇编代码等同于：</p>
-<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="section">.text:0000000000400F85                 mov     rax, cs:qword_6020A8</span></span><br><span class="line"><span class="section">.text:0000000000400F8C                 mov     rax, [rax+8]</span></span><br></pre></td></tr></table></figure>
 
-<p>简单转化一下，也就是：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*(addr) = [addr]</span><br></pre></td></tr></table></figure>
-
-<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>在 pwn 的堆题目中，经常会有像一些”笔记管理系统”之类的题目，例如下面这里例子</p>
-<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/9mQhGPF.png" alt="img"></p>
-<p>代码提供了最基本的增删查改的功能。这个”笔记”的数据结构<strong>通常就是使用链表连接起来的</strong>，记录了当前 note 的大小、属性、内容等等。</p>
-<p><strong>例如，下面这个例子就是以指针为基础来存储这个 note 结构的</strong>。这里的 i 代表 note 的索引，若这里的 i &#x3D; 0 时：</p>
-<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/n366Lzt.png" alt="img"></p>
-<p><em>(qword_6020A8 + 16) 就*<em>代表从 qword_6020A8 这个地址出再往后偏移 16 个字节，取到这个地址存储的值，接着把 1 赋值给这个地方（也就是把 1 存入这个地址）</em></em></p>
-<p>同样的 *(qword_6020A8 + 24) 就代表偏移 24 个字节处的值为 len</p>
-<p>依次类推就可以在<strong>不连续的内存空间中</strong>，把整个 note 的数据结构存储下来了。</p>
-<h2 id="申请堆的本质"><a href="#申请堆的本质" class="headerlink" title="申请堆的本质"></a>申请堆的本质</h2><blockquote>
-<p>堆管理器 ptmalloc2 主要是通过 malloc&#x2F;free 函数来分配和释放内存块。</p>
-</blockquote>
-<p>ptmalloc2 的作用通俗的讲就是<strong>相当于一个”中间商”</strong>，在程序想要申请向系统申请堆空间时，这里的 ptmalloc2 就会申请一块很大的空间，并根据算法从这些内存中把空间真正的分配给程序。</p>
-<p>简单点说就是下面这个图中的情况：</p>
-<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/OHeE6wZ.png" alt="img"></p>
-<p>例子</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;malloc.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">char</span> *p;</span><br><span class="line">    p=<span class="built_in">malloc</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc test.c -o <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-
+<h5 id="例题2"><a href="#例题2" class="headerlink" title="例题2"></a>例题2</h5><p>把下列汇编代码用c语言表示  （rax一直保存的是返回值）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">decode1:</span><br><span class="line">    movq (%rdi) , %r8</span><br><span class="line">    movq (%rsi) , %rcx</span><br><span class="line">    movq (%rdx) , %rax</span><br><span class="line">    movq %r8    , (%rsi)</span><br><span class="line">    movq %rcx   , (%rdx)</span><br><span class="line">    movq %rax ,   (%rdx)      </span><br><span class="line">    ret </span><br></pre></td></tr></table></figure>
+<p>c语言</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">decode1</span><span class="params">(<span class="type">long</span> *xp,<span class="type">long</span> *yp,<span class="type">long</span> *zp)</span>&#123;</span><br><span class="line">     <span class="type">long</span> x = *xp;</span><br><span class="line">     <span class="type">long</span> y = *yp;</span><br><span class="line">     <span class="type">long</span> z = *zp;</span><br><span class="line">     *yp = x;</span><br><span class="line">     *zp = y;</span><br><span class="line">     *xp = z;</span><br><span class="line">     <span class="keyword">return</span> z;</span><br><span class="line"> &#125;    </span><br><span class="line">     </span><br></pre></td></tr></table></figure>
+<h4 id="push和pop"><a href="#push和pop" class="headerlink" title="push和pop"></a>push和pop</h4><p>push压入栈 pop弹出栈（pop弹出的值一直是一个最近压入栈的数据且仍在栈中）<br>由于栈是由大到小增长的，所以栈顶永远是地址最低的 %rsp保存着栈顶的元素<br>pushq popq 将四字压入栈中 将四字弹出栈<br>pushq %rbp &#x3D; subq $8,%rsp  movq %rbp,(%rsp)   （rsp地址减8）<br>popq <strong>%rax</strong>  &lt;&#x3D;&#x3D;&gt; movq (%rsp),(<strong>%rax</strong>) addq $8,%rsp （rsp地址加8）<br><strong>pop之后，值不会被删除，除非有一个新的值覆盖了原先的值</strong></p>
+<h4 id="算数和逻辑操作"><a href="#算数和逻辑操作" class="headerlink" title="算数和逻辑操作"></a>算数和逻辑操作</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">leaq  --&gt; 加载有效地址 </span><br><span class="line">inc --&gt; 加一 </span><br><span class="line">dec --&gt; 减一 </span><br><span class="line">neg --&gt; 取负 </span><br><span class="line">not --&gt; 取补 </span><br><span class="line">add --&gt; 加 </span><br><span class="line">sub --&gt; 减 </span><br><span class="line">imul --&gt; 乘 </span><br><span class="line">xor --&gt; 异或 </span><br><span class="line">or --&gt; 或 </span><br><span class="line">and --&gt; 与 </span><br><span class="line">sal --&gt; 算数左移 </span><br><span class="line"> sar --&gt; 算数右移 </span><br><span class="line"> shl --&gt;逻辑左移</span><br><span class="line">shr --&gt; 逻辑右移</span><br></pre></td></tr></table></figure>
+<h5 id="1-加载地址"><a href="#1-加载地址" class="headerlink" title="1.加载地址"></a>1.加载地址</h5><p>movq的一种变形 从内存读数据到寄存器 但是没有引用内存 不是单纯的读数据，而是将有效地址加载到目的操作数 <strong>描述简单的算数操作</strong></p>
+<h6 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h6><p>rdi &#x3D; x<br> leaq 7(%rdi,%rdi,4),%rax &#x3D;&#x3D; 将rax的值设置为5x+7</p>
+<h5 id="2-一元操作和二元操作"><a href="#2-一元操作和二元操作" class="headerlink" title="2.一元操作和二元操作"></a>2.一元操作和二元操作</h5><p> 只有一个操作数的是一元操作，既是源操作数也是目的操作数<br>地址          值              寄存器       值<br>0x100      0xFF             rax        0x100<br>0x108      0xAB             rcx        0x1<br> 0x118  0x11           rdx        0x3<br><strong>subq</strong> %rax,%rdx rdx &#x3D; rdx -rax<br><strong>addq</strong> %rcx , (%rax)   ;更新的其实是一个内存位置 位置为0x100<br><strong>imulq</strong> $16,(%rax,%rdx,8) ;更新的内存位置是0x118，值对应的是0x11*16&#x3D;0x110<br>他们的目的和最终值写出来<br>imulq 有符号乘法 一个操作数 这个指令要求就是必须两个数都在寄存器rax中 把高64位存放在rdx，低64位存放在rax里面<br><strong>salq</strong> $4,%rax(左移4位，扩大了2的4次方倍)</p>
+<h5 id="控制操作"><a href="#控制操作" class="headerlink" title="控制操作"></a>控制操作</h5><p>t  &#x3D; a + b<br>无符号溢出 <strong>CF</strong> （条件码）<br>  t&#x3D;&#x3D;0 <strong>ZF</strong><br> t &lt; 0  <strong>SF</strong><br> (a&lt;0&amp;&amp;b&lt;0) &amp;&amp; (t&lt;0 !&#x3D; a &lt;0) 有符号溢出 <strong>OF</strong><br><strong>leaq</strong> 不会改变任何条件码 xor 会将进位标志和溢出位标志设置成0<br><strong>cmpb</strong> 比较字节 <strong>cmpw</strong> 比较字  <strong>test</strong> 测试<br><strong>cmp</strong> rsi,rdi<br>cmp根据两个比较数的差来设置条件码 （除了不更新寄存器以外，和sub操作是一样的 test也是除了不更新寄存器以外，和 and 操作是一样的）<br><strong>testq</strong> %rax,%rax 检查rax是负数还是正数还是0<br> set指令设置条件码</p>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>pwn基础</category>
       </categories>
       <tags>
-        <tag>pwn</tag>
+        <tag>汇编</tag>
       </tags>
   </entry>
   <entry>
@@ -436,37 +397,118 @@
       </tags>
   </entry>
   <entry>
-    <title>汇编语言简单摘要</title>
-    <url>/2023/02/20/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%91%98%E8%A6%81/</url>
-    <content><![CDATA[<h3 id="x86-64位寄存器（16个）"><a href="#x86-64位寄存器（16个）" class="headerlink" title="x86-64位寄存器（16个）"></a>x86-64位寄存器（16个）</h3><p>rax：存放保存函数返回值<br>rbx：被调用者保存<br>rdi rsi rdx rcx 对应第1、2、3、4个参数<br>rsp：栈指针，存放栈帧的栈顶的偏移地址<br>r8 r9对应第5、6个参数</p>
-<h3 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h3><p>立即数寻址$Imm Imm(立即数)<br>寄存器寻址%ra R[ra] (寄存器)<br>绝对寻址Imm M[Imm] (存储器)<br>间接寻址（%ra）M[R[[ra]]</p>
-<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">下面有一点地址或寄存器的值，写出操作数的值</span><br><span class="line">地址          值              寄存器       值</span><br><span class="line">0x100      0xFF             rax        0x100</span><br><span class="line">0x104      0xab             rcx        0x1</span><br><span class="line">0x108      0x13             rdx        0x3</span><br><span class="line">0x10C      0x11</span><br></pre></td></tr></table></figure>
+    <title>堆学习(一)</title>
+    <url>/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p><strong>前言：栈草草的结束了，只掌握一些简单的rop利用，至于为什么这么早想学习堆，可能跟我的学习理念有关吧，我的学习理念是了解重要的学习框架，先将基础结构的相对简单的内容学会，再同步深入学习更深度的内容。现在相比较学习栈的其他花里胡哨的利用方式，我更想先学习堆的基本内容和简单利用</strong></p>
+<h1 id="什么是堆"><a href="#什么是堆" class="headerlink" title="什么是堆"></a>什么是堆</h1><p>堆不同于栈，堆是动态分配的（由操作系统内核或者堆管理器），只有在程序中需要时才会分配。在 CTF 的 pwn 程序中，栈是程序加载进内存后就会出现，而堆是由 malloc、alloc、realloc 函数分配内存后才会出现。</p>
+<p> <strong>堆的生长方向是从低地址向高地址生长的，而栈是从高地址向低地址生长的。</strong></p>
+<p>实际上堆可以申请到的内存空间比栈要大很多，在 linux 的 4G 的虚拟内存空间里最高可以达到 2.9 G 的空间</p>
+<blockquote>
+<p>对堆操作的<strong>是由堆管理器（ptmalloc2）来实现的，而不是操作系统内核</strong>。因为程序每次申请或者释放堆时都需要进行系统调用，系统调用的开销巨大，当频繁进行堆操作时，就会严重影响程序的性能</p>
+</blockquote>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20120910.png"></p>
+<p>俺以 <strong>glibc 库下的 ptmalloc2 堆管理器</strong>为例学习</p>
+<h2 id="堆的基本结构"><a href="#堆的基本结构" class="headerlink" title="堆的基本结构"></a>堆的基本结构</h2><p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20142218.png"></p>
+<p>当用户通过<strong>malloc</strong>等函数申请空间时，实际上是从堆中分配内存，ptmalloc根据用户的需要，为用户分配不同类型的chunk</p>
+<p>malloc_chunk结构</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span> &#123;</span></span><br><span class="line">    INTERNAL_SIZE_T prev_size; <span class="comment">/* Size of previous chunk (if free). */</span></span><br><span class="line">    INTERNAL_SIZE_T size; <span class="comment">/* Size in bytes, including overhead. */</span></span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">fd</span>;</span> <span class="comment">/* double links -- used only if free. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">bk</span>;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* Only used for large blocks: pointer to next larger size. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">fd_nextsize</span>;</span> <span class="comment">/* double links -- used only if free. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">bk_nextsize</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">操作数  值</span><br><span class="line">rax 0x100(寄存器)</span><br><span class="line">0x104 0xab（绝对寻址）</span><br><span class="line"><span class="variable">$0x108</span> 0x108（立即数寻址）</span><br><span class="line">(%rax) 0xFF（间接寻址）</span><br></pre></td></tr></table></figure>
+<p>每个程序分配的内存(这里指的是malloc函数)，在内部被一个叫”堆块”的所替代。一个堆块是由程序返回内存组成的(实际上是malloc的返回值)。这块区域在申请新的内存的时候会不断扩大。同样，当一定数量的内存释放时，堆也可以收缩。</p>
+<p><strong>1.pre_size 字段:</strong> 只有在前面一个堆块是空闲的时候才有值，用来指示前一个堆块的大小。前面一个堆块在使用时，他的值始终为 0<br><strong>2.size 字段:</strong> 是用来指示当前堆块的大小的（头部加上 user data 的大小）。但是这个字段的最后三位相当于三个 flag ，有另外的作用。</p>
+<p>​      <code>NON_MAIN_ARENA</code>，记录当前 chunk 是否不属于主线程，1 表示不属于，0 表示属于。</p>
+<p>​      <code>IS_MAPPED</code>，记录当前 chunk 是否是由 mmap 分配的。</p>
+<p>​      <code> PREV_INUSE</code>，记录前一个 chunk 块是否被分配。一般来说，堆中第一个被分配的内存块的 P 位都会被设置为 1，以便于防止访问前             面的非法内存。当一个 chunk 的 size 的 P 位为 0 时，我们能通过 prev_size 字段来获取上一个 chunk 的大小以及地址。这也方便进行空闲 chunk 之间的合并。</p>
+<p><strong>3..user data</strong> 就是用来存放用户数据的。使用malloc函数分配到的内存的返回地址是指user data(用户数据区)</p>
+<p>例如在64位程序中：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">malloc</span>(<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
 
-<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>两种汇编模式<br>ATT汇编movq movb<br>普通汇编 mov <strong>rax,rbx</strong>&#x3D;mov<strong>q %rbx,%rax</strong> （ATT）：把rbx的值赋给rax</p>
-<h4 id="mov"><a href="#mov" class="headerlink" title="mov"></a>mov</h4><p>mov 数据传送指令 将数据从一个位置复制到另一个位置的指令<br>mov 寄存器&#x2F;立即数 操作数用来指向一个执行所要使用源数据的值，放置结果的目的位置，mov 源操作数的值是一个立即数，值存放在内存或者寄存器中 目的操作数一个寄存器或者是一个内存地址。</p>
-<p><strong>单位</strong>：1字节 &#x3D; 8bit  1字 &#x3D; 8字节 &#x3D; 64bit</p>
-<p><strong>movb 一个字节</strong> (这个字代表双字节的意思，与上边的字不一样)<br><strong>movw 一个字<br>movl 双字（寄存器的高四字节设置成0）<br>movq 四字<br>movabsq I,R  R&lt;-I 传送的是绝对的四字 目的操作数只能是寄存器</strong><br>movl $0x4050,%eax      4bytes   立即数–寄存器<br>movw %bp,%sp           2bytes   寄存器–寄存器<br>movb (%rdi,%rcx),%al   1bytes  内存–寄存器<br>movb $-17,(%rsp)       1bytes   立即数–内存<br>movq %rax,-12(%rbp)    8bytes   寄存器–内存l</p>
-<h5 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">movabsq <span class="variable">$0x0011223344556677</span> , %rax = 0011223344556677  </span><br><span class="line">（ rax包含了eax eax包含了ax ax包含了al）</span><br><span class="line">-1的16进制是0xFFFFFFFFFFFFFF,第一步结束后每一步rax的值是多少</span><br><span class="line">movb $-1 ,%al           ， %rax = 00112233445566FF   F = 1111</span><br><span class="line">movw $-1 , %ax          ， %rax = 001122334455FFFF   </span><br><span class="line">movl $-1 , %eax         ， %rax = 00000000FFFFFFFF</span><br><span class="line">movq $-1 ,%rax          ， %rax = FFFFFFFFFFFFFFFF </span><br></pre></td></tr></table></figure>
+<p>申请到的堆块总大小为 16 + 8 + 8 + 1 &#x3D; 0x21</p>
+<p>1.第一个 16 字节是<strong>系统最小分配的内存</strong>，也就是说你如果想要申请的内存小于系统最小分配的内存的话，就会按照最小的内存来分配。</p>
+<ul>
+<li>在 64 位系统中这个值是 16 个字节，在 32 位系统中是 8 个字节</li>
+<li>例如，如果代码中是 malloc(0) 的话，<strong>堆管理器也会分配最小内存空间给你</strong></li>
+</ul>
+<p>2.第二个 8 字节是 pre size 字段的大小（32 位的为 4 字节）<br>3.第三个 8 字节为 size 字段的大小（32 位的为 4 字节）<br>4.最后一个 1 字节是 <strong>PREV_INUSE 的值，只有 0 或 1两个值</strong></p>
+<h2 id="指针与地址"><a href="#指针与地址" class="headerlink" title="指针与地址"></a>指针与地址</h2><p>首先要明确用户在调用 malloc 函数时返回的值为<strong>一个指针，指向分配到堆空间（用户数据区）</strong></p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20151811.png"></p>
+<p>first chunk（second chunk）表示第一和第二个结构，<strong>每个结构中都有一个 point_heap 指针来指向存储用户数据的堆块（chunk）。</strong></p>
+<p><strong>左边的这个本身就是一个堆块，用来存放一些全局信息</strong>。比如 max_size 存储了能够存储的最大结构数量；exist_num 表示已经存储的结构的数量。</p>
+<h3 id="IDA-中常见的指针表示形式"><a href="#IDA-中常见的指针表示形式" class="headerlink" title="IDA 中常见的指针表示形式"></a>IDA 中常见的指针表示形式</h3><p>在 IDA 伪代码中的指针形式形如下面的情况：</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">*(qword_6020A8 + <span class="number">8</span>)</span><br></pre></td></tr></table></figure>
 
+<p><strong>表示取到 qword_6020A8 这个地址加 8 偏移的那个地址存储的值</strong></p>
+<p>汇编代码等同于：</p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="section">.text:0000000000400F85                 mov     rax, cs:qword_6020A8</span></span><br><span class="line"><span class="section">.text:0000000000400F8C                 mov     rax, [rax+8]</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="例题2"><a href="#例题2" class="headerlink" title="例题2"></a>例题2</h5><p>把下列汇编代码用c语言表示  （rax一直保存的是返回值）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">decode1:</span><br><span class="line">    movq (%rdi) , %r8</span><br><span class="line">    movq (%rsi) , %rcx</span><br><span class="line">    movq (%rdx) , %rax</span><br><span class="line">    movq %r8    , (%rsi)</span><br><span class="line">    movq %rcx   , (%rdx)</span><br><span class="line">    movq %rax ,   (%rdx)      </span><br><span class="line">    ret </span><br></pre></td></tr></table></figure>
-<p>c语言</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">decode1</span><span class="params">(<span class="type">long</span> *xp,<span class="type">long</span> *yp,<span class="type">long</span> *zp)</span>&#123;</span><br><span class="line">     <span class="type">long</span> x = *xp;</span><br><span class="line">     <span class="type">long</span> y = *yp;</span><br><span class="line">     <span class="type">long</span> z = *zp;</span><br><span class="line">     *yp = x;</span><br><span class="line">     *zp = y;</span><br><span class="line">     *xp = z;</span><br><span class="line">     <span class="keyword">return</span> z;</span><br><span class="line"> &#125;    </span><br><span class="line">     </span><br></pre></td></tr></table></figure>
-<h4 id="push和pop"><a href="#push和pop" class="headerlink" title="push和pop"></a>push和pop</h4><p>push压入栈 pop弹出栈（pop弹出的值一直是一个最近压入栈的数据且仍在栈中）<br>由于栈是由大到小增长的，所以栈顶永远是地址最低的 %rsp保存着栈顶的元素<br>pushq popq 将四字压入栈中 将四字弹出栈<br>pushq %rbp &#x3D; subq $8,%rsp  movq %rbp,(%rsp)   （rsp地址减8）<br>popq <strong>%rax</strong>  &lt;&#x3D;&#x3D;&gt; movq (%rsp),(<strong>%rax</strong>) addq $8,%rsp （rsp地址加8）<br><strong>pop之后，值不会被删除，除非有一个新的值覆盖了原先的值</strong></p>
-<h4 id="算数和逻辑操作"><a href="#算数和逻辑操作" class="headerlink" title="算数和逻辑操作"></a>算数和逻辑操作</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">leaq  --&gt; 加载有效地址 </span><br><span class="line">inc --&gt; 加一 </span><br><span class="line">dec --&gt; 减一 </span><br><span class="line">neg --&gt; 取负 </span><br><span class="line">not --&gt; 取补 </span><br><span class="line">add --&gt; 加 </span><br><span class="line">sub --&gt; 减 </span><br><span class="line">imul --&gt; 乘 </span><br><span class="line">xor --&gt; 异或 </span><br><span class="line">or --&gt; 或 </span><br><span class="line">and --&gt; 与 </span><br><span class="line">sal --&gt; 算数左移 </span><br><span class="line"> sar --&gt; 算数右移 </span><br><span class="line"> shl --&gt;逻辑左移</span><br><span class="line">shr --&gt; 逻辑右移</span><br></pre></td></tr></table></figure>
-<h5 id="1-加载地址"><a href="#1-加载地址" class="headerlink" title="1.加载地址"></a>1.加载地址</h5><p>movq的一种变形 从内存读数据到寄存器 但是没有引用内存 不是单纯的读数据，而是将有效地址加载到目的操作数 <strong>描述简单的算数操作</strong></p>
-<h6 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h6><p>rdi &#x3D; x<br> leaq 7(%rdi,%rdi,4),%rax &#x3D;&#x3D; 将rax的值设置为5x+7</p>
-<h5 id="2-一元操作和二元操作"><a href="#2-一元操作和二元操作" class="headerlink" title="2.一元操作和二元操作"></a>2.一元操作和二元操作</h5><p> 只有一个操作数的是一元操作，既是源操作数也是目的操作数<br>地址          值              寄存器       值<br>0x100      0xFF             rax        0x100<br>0x108      0xAB             rcx        0x1<br> 0x118  0x11           rdx        0x3<br><strong>subq</strong> %rax,%rdx rdx &#x3D; rdx -rax<br><strong>addq</strong> %rcx , (%rax)   ;更新的其实是一个内存位置 位置为0x100<br><strong>imulq</strong> $16,(%rax,%rdx,8) ;更新的内存位置是0x118，值对应的是0x11*16&#x3D;0x110<br>他们的目的和最终值写出来<br>imulq 有符号乘法 一个操作数 这个指令要求就是必须两个数都在寄存器rax中 把高64位存放在rdx，低64位存放在rax里面<br><strong>salq</strong> $4,%rax(左移4位，扩大了2的4次方倍)</p>
-<h5 id="控制操作"><a href="#控制操作" class="headerlink" title="控制操作"></a>控制操作</h5><p>t  &#x3D; a + b<br>无符号溢出 <strong>CF</strong> （条件码）<br>  t&#x3D;&#x3D;0 <strong>ZF</strong><br> t &lt; 0  <strong>SF</strong><br> (a&lt;0&amp;&amp;b&lt;0) &amp;&amp; (t&lt;0 !&#x3D; a &lt;0) 有符号溢出 <strong>OF</strong><br><strong>leaq</strong> 不会改变任何条件码 xor 会将进位标志和溢出位标志设置成0<br><strong>cmpb</strong> 比较字节 <strong>cmpw</strong> 比较字  <strong>test</strong> 测试<br><strong>cmp</strong> rsi,rdi<br>cmp根据两个比较数的差来设置条件码 （除了不更新寄存器以外，和sub操作是一样的 test也是除了不更新寄存器以外，和 and 操作是一样的）<br><strong>testq</strong> %rax,%rax 检查rax是负数还是正数还是0<br> set指令设置条件码</p>
+<p>简单转化一下，也就是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*(addr) = [addr]</span><br></pre></td></tr></table></figure>
+
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>在 pwn 的堆题目中，经常会有像一些”笔记管理系统”之类的题目，例如下面这里例子</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/9mQhGPF.png" alt="img"></p>
+<p>代码提供了最基本的增删查改的功能。这个”笔记”的数据结构<strong>通常就是使用链表连接起来的</strong>，记录了当前 note 的大小、属性、内容等等。</p>
+<p><strong>例如，下面这个例子就是以指针为基础来存储这个 note 结构的</strong>。这里的 i 代表 note 的索引，若这里的 i &#x3D; 0 时：</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/n366Lzt.png" alt="img"></p>
+<p><em>(qword_6020A8 + 16) 就*<em>代表从 qword_6020A8 这个地址出再往后偏移 16 个字节，取到这个地址存储的值，接着把 1 赋值给这个地方（也就是把 1 存入这个地址）</em></em></p>
+<p>同样的 *(qword_6020A8 + 24) 就代表偏移 24 个字节处的值为 len</p>
+<p>依次类推就可以在<strong>不连续的内存空间中</strong>，把整个 note 的数据结构存储下来了。</p>
+<h2 id="申请堆的本质"><a href="#申请堆的本质" class="headerlink" title="申请堆的本质"></a>申请堆的本质</h2><blockquote>
+<p>堆管理器 ptmalloc2 主要是通过 malloc&#x2F;free 函数来分配和释放内存块。</p>
+</blockquote>
+<p>ptmalloc2 的作用通俗的讲就是<strong>相当于一个”中间商”</strong>，在程序想要申请向系统申请堆空间时，这里的 ptmalloc2 就会申请一块很大的空间，并根据算法从这些内存中把空间真正的分配给程序。</p>
+<p>简单点说就是下面这个图中的情况：</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/OHeE6wZ.png" alt="img"></p>
+<p>例子</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;malloc.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">char</span> *p;</span><br><span class="line">    p=<span class="built_in">malloc</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 gdb 中进行调试，在 call malloc 处下一个断点，<strong>在这里使用 vmmap 命令，查看内存分布</strong>。可以看到此时并没有发现堆段</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/AmbgBDz.png" alt="img"></p>
+<p>单步 n ，vmmap 命令再次查看内存，发现出现了堆段</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/4J2yIhn.png" alt="img"></p>
+<p>但是这里我们明明只是申请了 10 字节的大小，但是为什么这里的为什么给了这么大的堆段呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0x00602000     ~    0x00623000</span><br></pre></td></tr></table></figure>
+
+<p>计算一下，刚好是 132 kB</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(0x00623000-0x00602000)/1024 = 132 kB</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>原来这132KB的堆空间叫做arena，此时因为是主线程分配的，所以这个区域叫做 main arena</p>
+</blockquote>
+<p>也就是说这 132 KB 是”厂家”（内核）批发给”中间商”（ptmalloc2）的货物，<strong>以便下次程序在向系统申请小内存的时候，直接去”中间商”去取就行了</strong>，他就会在这 132KB 中按照要申请”货物”的多少进行分配下去。若”中间商”缺货了话，ptmalloc2 就继续去找”厂家”（系统内核）去取货</p>
+<h3 id="查看已分配的堆内存分布"><a href="#查看已分配的堆内存分布" class="headerlink" title="查看已分配的堆内存分布"></a>查看已分配的堆内存分布</h3><p>在上面我们动态调试的时候已经执行了 malloc 函数，申请到的堆指针是保存在 eax 中的<br><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/YTz6loS.png" alt="img"></p>
+<p>我们这里使用下面这个命令来查看内存堆块情况：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x/32gx 0x602010-0x10</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>32位的程序使用 x&#x2F;32xw 比较直观一点</li>
+</ul>
+<p>这里减去 0x10 表示从堆块的头部开始观察（包含 pre size 和 size 字段）</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/TEiVMUc.png" alt="img"></p>
 ]]></content>
       <categories>
-        <category>pwn基础</category>
+        <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>汇编</tag>
+        <tag>pwn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>现代c++学习笔记(三)</title>
+    <url>/2023/03/17/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0-%E4%B8%89/</url>
+    <content><![CDATA[<h1 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h1><h2 id="智能指针概述"><a href="#智能指针概述" class="headerlink" title="智能指针概述"></a>智能指针概述</h2><p>**1.**为什么要有智能指针：在Part2的第二节课已经讲过，直接使用new和delete运算符极其容易导致内存泄露，而且非常难以避免。于是人们发明了智能指针这种可以自动回收内存的工具。</p>
+<p> **2.**智能指针一共就三种：普通的指针可以单独一个指针占用一块内存，也可以多个指针共享一块内存。</p>
+<p>(1) 共享型智能指针：shared_ptr，同一块堆内存可以被多个shared_ptr共享。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span>* pi = <span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">10</span>);</span><br><span class="line">	<span class="function"><span class="type">int</span>* <span class="title">pi2</span><span class="params">(pi)</span></span>;<span class="comment">//pi2和pi共享一段内存</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>(2) 独享型智能指针：unique_ptr，同一块堆内存只能被一个unique_ptr拥有。无法拷贝和制造</p>
+<p>(3) 弱引用智能指针：weak_ptr，也是一种共享型智能指针，可以视为对共享型智能指针的一种补充</p>
+<p> <strong>3.</strong> <strong>（*）智能指针注意事项：</strong></p>
+<p><strong>智能指针和裸指针不要混用，接下来的几节课会反复强调这一点。</strong></p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>c++</tag>
       </tags>
   </entry>
   <entry>
