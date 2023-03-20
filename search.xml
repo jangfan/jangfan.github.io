@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hello World</title>
+    <url>/2023/02/18/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>pwn日常刷题记录</title>
     <url>/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="栈问题"><a href="#栈问题" class="headerlink" title="栈问题"></a>栈问题</h1><h2 id="get-started-3dsctf-2016"><a href="#get-started-3dsctf-2016" class="headerlink" title="get_started_3dsctf_2016"></a>get_started_3dsctf_2016</h2><p><strong>checksec</strong></p>
@@ -97,24 +115,6 @@
     <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2023/02/18/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>周计划</title>
     <url>/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/</url>
     <content><![CDATA[<h1 id="大一下学期目标"><a href="#大一下学期目标" class="headerlink" title="大一下学期目标"></a>大一下学期目标</h1><p><strong>主线</strong>：<strong>学习pwn的栈 堆和内核</strong></p>
@@ -150,12 +150,173 @@
 <h3 id="周四-1"><a href="#周四-1" class="headerlink" title="周四"></a>周四</h3><p>现代c++：虚函数及其实现原理 override关键字 ，静态成员变量与静态函数 ， 纯虚函数 ，RTTL</p>
 <h3 id="周五-1"><a href="#周五-1" class="headerlink" title="周五"></a>周五</h3><p>现代c++：多继承 ， 虚继承及其实现原理 ，智能指针概述</p>
 <h3 id="周六-1"><a href="#周六-1" class="headerlink" title="周六"></a>周六</h3><p>pwn：堆：main_arena和top chunk ， free函数和bins</p>
+<h3 id="周日-1"><a href="#周日-1" class="headerlink" title="周日"></a>周日</h3><p>划水</p>
+<h2 id="第六周"><a href="#第六周" class="headerlink" title="第六周"></a>第六周</h2><p>总目标：</p>
+<p>现代c++：智能指针，模板与泛型编程，复习</p>
+<p>pwn：堆题入门，gdb pwntools使用，栈刷题</p>
+<p>《程序员的自我修养》阅读</p>
+<h3 id="周一-2"><a href="#周一-2" class="headerlink" title="周一"></a>周一</h3><p>现代c++：shard_ptr ， weak_ptr</p>
+<p>pwn：堆深入理解并尝试例题</p>
+<h3 id="周二-2"><a href="#周二-2" class="headerlink" title="周二"></a>周二</h3><p>现代c++:uniqe_ptr,指针使用范围</p>
+<p>pwn:栈复习，堆刷题</p>
 ]]></content>
       <categories>
         <category>计划</category>
       </categories>
       <tags>
         <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>堆学习(一)</title>
+    <url>/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p><strong>前言：栈草草的结束了，只掌握一些简单的rop利用，至于为什么这么早想学习堆，可能跟我的学习理念有关吧，我的学习理念是了解重要的学习框架，先将基础结构的相对简单的内容学会，再同步深入学习更深度的内容。现在相比较学习栈的其他花里胡哨的利用方式，我更想先学习堆的基本内容和简单利用</strong></p>
+<h1 id="什么是堆"><a href="#什么是堆" class="headerlink" title="什么是堆"></a>什么是堆</h1><p>堆不同于栈，堆是动态分配的（由操作系统内核或者堆管理器），只有在程序中需要时才会分配。在 CTF 的 pwn 程序中，栈是程序加载进内存后就会出现，而堆是由 malloc、alloc、realloc 函数分配内存后才会出现。</p>
+<p> <strong>堆的生长方向是从低地址向高地址生长的，而栈是从高地址向低地址生长的。</strong></p>
+<p>实际上堆可以申请到的内存空间比栈要大很多，在 linux 的 4G 的虚拟内存空间里最高可以达到 2.9 G 的空间</p>
+<blockquote>
+<p>对堆操作的<strong>是由堆管理器（ptmalloc2）来实现的，而不是操作系统内核</strong>。因为程序每次申请或者释放堆时都需要进行系统调用，系统调用的开销巨大，当频繁进行堆操作时，就会严重影响程序的性能</p>
+</blockquote>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20120910.png"></p>
+<p>俺以 <strong>glibc 库下的 ptmalloc2 堆管理器</strong>为例学习</p>
+<h2 id="堆的基本结构"><a href="#堆的基本结构" class="headerlink" title="堆的基本结构"></a>堆的基本结构</h2><p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20142218.png"></p>
+<p>当用户通过<strong>malloc</strong>等函数申请空间时，实际上是从堆中分配内存，ptmalloc根据用户的需要，为用户分配不同类型的chunk</p>
+<p>malloc_chunk结构</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span> &#123;</span></span><br><span class="line">    INTERNAL_SIZE_T prev_size; <span class="comment">/* Size of previous chunk (if free). */</span></span><br><span class="line">    INTERNAL_SIZE_T size; <span class="comment">/* Size in bytes, including overhead. */</span></span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">fd</span>;</span> <span class="comment">/* double links -- used only if free. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">bk</span>;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* Only used for large blocks: pointer to next larger size. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">fd_nextsize</span>;</span> <span class="comment">/* double links -- used only if free. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">bk_nextsize</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>每个程序分配的内存(这里指的是malloc函数)，在内部被一个叫”堆块”的所替代。一个堆块是由程序返回内存组成的(实际上是malloc的返回值)。这块区域在申请新的内存的时候会不断扩大。同样，当一定数量的内存释放时，堆也可以收缩。</p>
+<p><strong>1.pre_size 字段:</strong> 只有在前面一个堆块是空闲的时候才有值，用来指示前一个堆块的大小。前面一个堆块在使用时，他的值始终为 0<br><strong>2.size 字段:</strong> 是用来指示当前堆块的大小的（头部加上 user data 的大小）。但是这个字段的最后三位相当于三个 flag ，有另外的作用。</p>
+<p>​      <code>NON_MAIN_ARENA</code>，记录当前 chunk 是否不属于主线程，1 表示不属于，0 表示属于。</p>
+<p>​      <code>IS_MAPPED</code>，记录当前 chunk 是否是由 mmap 分配的。</p>
+<p>​      <code> PREV_INUSE</code>，记录前一个 chunk 块是否被分配。一般来说，堆中第一个被分配的内存块的 P 位都会被设置为 1，以便于防止访问前             面的非法内存。当一个 chunk 的 size 的 P 位为 0 时，我们能通过 prev_size 字段来获取上一个 chunk 的大小以及地址。这也方便进行空闲 chunk 之间的合并。</p>
+<p><strong>3..user data</strong> 就是用来存放用户数据的。使用malloc函数分配到的内存的返回地址是指user data(用户数据区)</p>
+<p>例如在64位程序中：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">malloc</span>(<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+
+<p>申请到的堆块总大小为 16 + 8 + 8 + 1 &#x3D; 0x21</p>
+<p>1.第一个 16 字节是<strong>系统最小分配的内存</strong>，也就是说你如果想要申请的内存小于系统最小分配的内存的话，就会按照最小的内存来分配。</p>
+<ul>
+<li>在 64 位系统中这个值是 16 个字节，在 32 位系统中是 8 个字节</li>
+<li>例如，如果代码中是 malloc(0) 的话，<strong>堆管理器也会分配最小内存空间给你</strong></li>
+</ul>
+<p>2.第二个 8 字节是 pre size 字段的大小（32 位的为 4 字节）<br>3.第三个 8 字节为 size 字段的大小（32 位的为 4 字节）<br>4.最后一个 1 字节是 <strong>PREV_INUSE 的值，只有 0 或 1两个值</strong></p>
+<h2 id="指针与地址"><a href="#指针与地址" class="headerlink" title="指针与地址"></a>指针与地址</h2><p>首先要明确用户在调用 malloc 函数时返回的值为<strong>一个指针，指向分配到堆空间（用户数据区）</strong></p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20151811.png"></p>
+<p>first chunk（second chunk）表示第一和第二个结构，<strong>每个结构中都有一个 point_heap 指针来指向存储用户数据的堆块（chunk）。</strong></p>
+<p><strong>左边的这个本身就是一个堆块，用来存放一些全局信息</strong>。比如 max_size 存储了能够存储的最大结构数量；exist_num 表示已经存储的结构的数量。</p>
+<h3 id="IDA-中常见的指针表示形式"><a href="#IDA-中常见的指针表示形式" class="headerlink" title="IDA 中常见的指针表示形式"></a>IDA 中常见的指针表示形式</h3><p>在 IDA 伪代码中的指针形式形如下面的情况：</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">*(qword_6020A8 + <span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>表示取到 qword_6020A8 这个地址加 8 偏移的那个地址存储的值</strong></p>
+<p>汇编代码等同于：</p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="section">.text:0000000000400F85                 mov     rax, cs:qword_6020A8</span></span><br><span class="line"><span class="section">.text:0000000000400F8C                 mov     rax, [rax+8]</span></span><br></pre></td></tr></table></figure>
+
+<p>简单转化一下，也就是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*(addr) = [addr]</span><br></pre></td></tr></table></figure>
+
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>在 pwn 的堆题目中，经常会有像一些”笔记管理系统”之类的题目，例如下面这里例子</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/9mQhGPF.png" alt="img"></p>
+<p>代码提供了最基本的增删查改的功能。这个”笔记”的数据结构<strong>通常就是使用链表连接起来的</strong>，记录了当前 note 的大小、属性、内容等等。</p>
+<p><strong>例如，下面这个例子就是以指针为基础来存储这个 note 结构的</strong>。这里的 i 代表 note 的索引，若这里的 i &#x3D; 0 时：</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/n366Lzt.png" alt="img"></p>
+<p><em>(qword_6020A8 + 16) 就*<em>代表从 qword_6020A8 这个地址出再往后偏移 16 个字节，取到这个地址存储的值，接着把 1 赋值给这个地方（也就是把 1 存入这个地址）</em></em></p>
+<p>同样的 *(qword_6020A8 + 24) 就代表偏移 24 个字节处的值为 len</p>
+<p>依次类推就可以在<strong>不连续的内存空间中</strong>，把整个 note 的数据结构存储下来了。</p>
+<h2 id="申请堆的本质"><a href="#申请堆的本质" class="headerlink" title="申请堆的本质"></a>申请堆的本质</h2><blockquote>
+<p>堆管理器 ptmalloc2 主要是通过 malloc&#x2F;free 函数来分配和释放内存块。</p>
+</blockquote>
+<p>ptmalloc2 的作用通俗的讲就是<strong>相当于一个”中间商”</strong>，在程序想要申请向系统申请堆空间时，这里的 ptmalloc2 就会申请一块很大的空间，并根据算法从这些内存中把空间真正的分配给程序。</p>
+<p>简单点说就是下面这个图中的情况：</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/OHeE6wZ.png" alt="img"></p>
+<p>例子</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;malloc.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">char</span> *p;</span><br><span class="line">    p=<span class="built_in">malloc</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 gdb 中进行调试，在 call malloc 处下一个断点，<strong>在这里使用 vmmap 命令，查看内存分布</strong>。可以看到此时并没有发现堆段</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/AmbgBDz.png" alt="img"></p>
+<p>单步 n ，vmmap 命令再次查看内存，发现出现了堆段</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/4J2yIhn.png" alt="img"></p>
+<p>但是这里我们明明只是申请了 10 字节的大小，但是为什么这里的为什么给了这么大的堆段呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0x00602000     ~    0x00623000</span><br></pre></td></tr></table></figure>
+
+<p>计算一下，刚好是 132 kB</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(0x00623000-0x00602000)/1024 = 132 kB</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>原来这132KB的堆空间叫做arena，此时因为是主线程分配的，所以这个区域叫做 main arena</p>
+</blockquote>
+<p>也就是说这 132 KB 是”厂家”（内核）批发给”中间商”（ptmalloc2）的货物，<strong>以便下次程序在向系统申请小内存的时候，直接去”中间商”去取就行了</strong>，他就会在这 132KB 中按照要申请”货物”的多少进行分配下去。若”中间商”缺货了话，ptmalloc2 就继续去找”厂家”（系统内核）去取货</p>
+<h3 id="查看已分配的堆内存分布"><a href="#查看已分配的堆内存分布" class="headerlink" title="查看已分配的堆内存分布"></a>查看已分配的堆内存分布</h3><p>在上面我们动态调试的时候已经执行了 malloc 函数，申请到的堆指针是保存在 eax 中的<br><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/YTz6loS.png" alt="img"></p>
+<p>我们这里使用下面这个命令来查看内存堆块情况：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x/32gx 0x602010-0x10</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>32位的程序使用 x&#x2F;32xw 比较直观一点</li>
+</ul>
+<p>这里减去 0x10 表示从堆块的头部开始观察（包含 pre size 和 size 字段）</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/TEiVMUc.png" alt="img"></p>
+<h2 id="main-arena和top-chunk"><a href="#main-arena和top-chunk" class="headerlink" title="main_arena和top chunk"></a>main_arena和top chunk</h2><p><strong>1.main_arena</strong>是ptmalloc2堆管理器与1操作系统内核进行交互申请得到的，也就是上边申请的132KB，因为是主线程分配的，所以叫main_arena(通过增加program break loction)的方式增加main_arena的大小，在gdb调试中通过**”x&#x2F;32gx &amp;main_arena”**可以看到main_arena的内存分配情况。、</p>
+<p><strong>2.top chunk</strong>是堆中的一个堆块，带头的。程序以后分配的内存都要放在它的后边。在程序在向堆管理器申请内存的时候，没有合适的内存空间分配给它时，此时会从top chunk上剪切一部分chunk分配给它</p>
+<h2 id="free函数和bins"><a href="#free函数和bins" class="headerlink" title="free函数和bins"></a>free函数和bins</h2><h3 id="free函数"><a href="#free函数" class="headerlink" title="free函数"></a>free函数</h3><p>free函数与bins的分配息息相关。</p>
+<p>例子</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">char</span> *p;</span><br><span class="line">        p = <span class="built_in">malloc</span>(<span class="number">10</span>)；</span><br><span class="line">            <span class="built_in">memcpy</span>(p,<span class="string">&quot;Hello&quot;</span>,<span class="number">5</span>);</span><br><span class="line">        <span class="built_in">free</span>(p);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>程序将 “Hello” 字符串复制到申请到的堆内存空间中。</li>
+</ul>
+<p>编译后用 gdb 调试，在 call memcpy 处下一个断点，单步后将 “Hello” 复制到堆块中</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/MK9NWa8.png" alt="img"></p>
+<p>继续使用 x&#x2F;32gx 0x602010-0x10 命令查看堆块情况</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/SkUxKXN.png" alt="img"></p>
+<p>继续单步 n，执行 free 函数之后，查看堆块情况</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/iifOKJV.png" alt="img"></p>
+<p>这里可以看出原本堆块中存储的内容已经被清空，然后<strong>查看一下 main_arena 的值，发现其中 +0x8 的偏移处</strong>，存储了指向已经 free 了的指针（指向头部，而不是 user data）</p>
+<p>调用free函数，清空此堆块的use_data,并将此堆块的指针存储在main_arena中，或者fast_bin中。</p>
+<h3 id="bin"><a href="#bin" class="headerlink" title="bin"></a>bin</h3><p>bins这个概念与内存回收相关，堆管理器会根据用户已经申请到的内存空间大小进行释放，来决定放入哪类bins中，相当于垃圾分类。</p>
+<p><strong>描述</strong></p>
+<p>1.用户free掉的内存并不会马上还给系统，ptmalloc会统一管理heap和mmap映射区域中的空闲的chunk</p>
+<p>2.当用户进行下一次分配请求时，ptmalloc会首先试图在空闲的chunk中挑选一块给用户，避免了频繁的系统调用。</p>
+<p>3.ptmalloc将相似的chunk用双链表连接起来，这样的一个链表称为bin</p>
+<p>4.ptmalloc一共维护了128个bin，并使用一个数组来存储这些bin</p>
+<p>5.堆管理器将bin分为四类：<strong>fastbin|unsortedbin|smallbin|largebin</strong></p>
+<p>6.数组中bin 1为unsortedbin；2<del>63为smallbin；64</del>126为largebin</p>
+<p>![](<a href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-03-18 192154.png)</p>
+<h4 id="fastbin"><a href="#fastbin" class="headerlink" title="fastbin"></a>fastbin</h4><p>为了快速重新分配回内存而存在的结构，fastbin是使用最多的一类，结构也很简单</p>
+<blockquote>
+<p>fastbin所包含的chunk大小为16，24，32，80bytes。当分配一块较小的内存（&lt;&#x3D;64bytes），会首先在fastbin中移除并返回；否则通过其他方式(剪切top chunk)得到一块符合大小的chunk并返回。</p>
+</blockquote>
+<p><strong>描述</strong></p>
+<p>1.在32位操作系统中，当用户释放的堆块大小小于64B时使用fastbin进行管理，即chunk   空间最大为80字节<br>2.fastbin只使用了fd成员，是个单链表结构<br>3.fastbin不会对P位进行操作，也就是说它不会主动进行合并；只有在某些特定情况下，堆管理器才会对fastbin进行合并<br>4.fastbinY为管理fastbin的数组，每个成员分别管理不同大小的fastbin链表，且均指向了当前链表的尾节点，当尾节点被分配时，通过其fd指针指向前一个结点<br>5.当用户申请chunk大小小于或等于MAX_FAST_SIZE时，优先从fastbins中查找相应的空闲块，且规则为LIFO（Last in, first out, 后进先出）</p>
+<p>例子</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/image-20230318193939959.png"></p>
+<p>此时0x0804a00处的chunk(实际chunk的size段要减去PREV_INUSE字段值1)被free，那么会被存储在40bytes的fastbin的内存地址中（地址存储的是指针，64位地址占8个字节），在main_arena中表示16，24，82，，，，，80bytes的内存地址中分别已经存储了已经free的而且满足相同大小的chunk。</p>
+<p><strong>fastbin的特性</strong></p>
+<p><strong>1.使用单链表来维护释放的堆块</strong></p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-18%20195928.png"></p>
+<p><strong>2.使用先进后出的方式维护链表</strong></p>
+<p>当程序需要重新malloc内存并且从fastbin中挑选堆块，会选择后边的新加入的堆块拿来进行内存分配，这里的话也就是直接使用第二次释放的堆块，将这个堆块从链表中移除，根据fk指针找到这个堆块，此时main_arena也指向这里</p>
+<h3 id="unsortedbin"><a href="#unsortedbin" class="headerlink" title="unsortedbin"></a>unsortedbin</h3><p><strong>描述</strong>：</p>
+<ol>
+<li><p>当释放较小或较大的chunk的时候，为了增加分配效率，系统会先将最近释放的chunk添加到unsorted bin中</p>
+</li>
+<li><p>unsorted bin 为一个双向循环链表，对chunk的大小没有限制，即任何大小的chunk都可以放入unsorted bin链表中</p>
+</li>
+<li><p>当fastbin，smallbin中的chunk不能满足用户申请的chunk的大小时，堆管理器会考虑使用unsortedbin。它会在分配large chunk之前对堆中碎片进行合并，以减少对中的碎片。</p>
+<p>unsortedbin使用的是双链表对chunk进行链接，可以看成不满足能够进行内存分配的堆块都放在unsortedbin中</p>
+</li>
+</ol>
+<h4 id="smallbin"><a href="#smallbin" class="headerlink" title="smallbin"></a>smallbin</h4><p><strong>描述：</strong></p>
+<ol>
+<li>在32位操作系统中，当用户释放的堆块大小大于64B，小于等于512B时使用small bin进行管理</li>
+<li>small bin 为双向循环链表，且使用 FIFO（First in, first out, 先入先出） 算法</li>
+<li>当满足small bin条件的chunk被释放后，会优先被放入unosrted bin，只有在一定情况下，才会被分配到small bin中</li>
+<li>相邻的free chunk将会被合并成一个更大的fee chunk，增加内存利用率</li>
+</ol>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>pwn</tag>
       </tags>
   </entry>
   <entry>
@@ -397,105 +558,10 @@
       </tags>
   </entry>
   <entry>
-    <title>堆学习(一)</title>
-    <url>/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<p><strong>前言：栈草草的结束了，只掌握一些简单的rop利用，至于为什么这么早想学习堆，可能跟我的学习理念有关吧，我的学习理念是了解重要的学习框架，先将基础结构的相对简单的内容学会，再同步深入学习更深度的内容。现在相比较学习栈的其他花里胡哨的利用方式，我更想先学习堆的基本内容和简单利用</strong></p>
-<h1 id="什么是堆"><a href="#什么是堆" class="headerlink" title="什么是堆"></a>什么是堆</h1><p>堆不同于栈，堆是动态分配的（由操作系统内核或者堆管理器），只有在程序中需要时才会分配。在 CTF 的 pwn 程序中，栈是程序加载进内存后就会出现，而堆是由 malloc、alloc、realloc 函数分配内存后才会出现。</p>
-<p> <strong>堆的生长方向是从低地址向高地址生长的，而栈是从高地址向低地址生长的。</strong></p>
-<p>实际上堆可以申请到的内存空间比栈要大很多，在 linux 的 4G 的虚拟内存空间里最高可以达到 2.9 G 的空间</p>
-<blockquote>
-<p>对堆操作的<strong>是由堆管理器（ptmalloc2）来实现的，而不是操作系统内核</strong>。因为程序每次申请或者释放堆时都需要进行系统调用，系统调用的开销巨大，当频繁进行堆操作时，就会严重影响程序的性能</p>
-</blockquote>
-<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20120910.png"></p>
-<p>俺以 <strong>glibc 库下的 ptmalloc2 堆管理器</strong>为例学习</p>
-<h2 id="堆的基本结构"><a href="#堆的基本结构" class="headerlink" title="堆的基本结构"></a>堆的基本结构</h2><p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20142218.png"></p>
-<p>当用户通过<strong>malloc</strong>等函数申请空间时，实际上是从堆中分配内存，ptmalloc根据用户的需要，为用户分配不同类型的chunk</p>
-<p>malloc_chunk结构</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span> &#123;</span></span><br><span class="line">    INTERNAL_SIZE_T prev_size; <span class="comment">/* Size of previous chunk (if free). */</span></span><br><span class="line">    INTERNAL_SIZE_T size; <span class="comment">/* Size in bytes, including overhead. */</span></span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">fd</span>;</span> <span class="comment">/* double links -- used only if free. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">bk</span>;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* Only used for large blocks: pointer to next larger size. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">fd_nextsize</span>;</span> <span class="comment">/* double links -- used only if free. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">bk_nextsize</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>每个程序分配的内存(这里指的是malloc函数)，在内部被一个叫”堆块”的所替代。一个堆块是由程序返回内存组成的(实际上是malloc的返回值)。这块区域在申请新的内存的时候会不断扩大。同样，当一定数量的内存释放时，堆也可以收缩。</p>
-<p><strong>1.pre_size 字段:</strong> 只有在前面一个堆块是空闲的时候才有值，用来指示前一个堆块的大小。前面一个堆块在使用时，他的值始终为 0<br><strong>2.size 字段:</strong> 是用来指示当前堆块的大小的（头部加上 user data 的大小）。但是这个字段的最后三位相当于三个 flag ，有另外的作用。</p>
-<p>​      <code>NON_MAIN_ARENA</code>，记录当前 chunk 是否不属于主线程，1 表示不属于，0 表示属于。</p>
-<p>​      <code>IS_MAPPED</code>，记录当前 chunk 是否是由 mmap 分配的。</p>
-<p>​      <code> PREV_INUSE</code>，记录前一个 chunk 块是否被分配。一般来说，堆中第一个被分配的内存块的 P 位都会被设置为 1，以便于防止访问前             面的非法内存。当一个 chunk 的 size 的 P 位为 0 时，我们能通过 prev_size 字段来获取上一个 chunk 的大小以及地址。这也方便进行空闲 chunk 之间的合并。</p>
-<p><strong>3..user data</strong> 就是用来存放用户数据的。使用malloc函数分配到的内存的返回地址是指user data(用户数据区)</p>
-<p>例如在64位程序中：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">malloc</span>(<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
-
-<p>申请到的堆块总大小为 16 + 8 + 8 + 1 &#x3D; 0x21</p>
-<p>1.第一个 16 字节是<strong>系统最小分配的内存</strong>，也就是说你如果想要申请的内存小于系统最小分配的内存的话，就会按照最小的内存来分配。</p>
-<ul>
-<li>在 64 位系统中这个值是 16 个字节，在 32 位系统中是 8 个字节</li>
-<li>例如，如果代码中是 malloc(0) 的话，<strong>堆管理器也会分配最小内存空间给你</strong></li>
-</ul>
-<p>2.第二个 8 字节是 pre size 字段的大小（32 位的为 4 字节）<br>3.第三个 8 字节为 size 字段的大小（32 位的为 4 字节）<br>4.最后一个 1 字节是 <strong>PREV_INUSE 的值，只有 0 或 1两个值</strong></p>
-<h2 id="指针与地址"><a href="#指针与地址" class="headerlink" title="指针与地址"></a>指针与地址</h2><p>首先要明确用户在调用 malloc 函数时返回的值为<strong>一个指针，指向分配到堆空间（用户数据区）</strong></p>
-<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20151811.png"></p>
-<p>first chunk（second chunk）表示第一和第二个结构，<strong>每个结构中都有一个 point_heap 指针来指向存储用户数据的堆块（chunk）。</strong></p>
-<p><strong>左边的这个本身就是一个堆块，用来存放一些全局信息</strong>。比如 max_size 存储了能够存储的最大结构数量；exist_num 表示已经存储的结构的数量。</p>
-<h3 id="IDA-中常见的指针表示形式"><a href="#IDA-中常见的指针表示形式" class="headerlink" title="IDA 中常见的指针表示形式"></a>IDA 中常见的指针表示形式</h3><p>在 IDA 伪代码中的指针形式形如下面的情况：</p>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">*(qword_6020A8 + <span class="number">8</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>表示取到 qword_6020A8 这个地址加 8 偏移的那个地址存储的值</strong></p>
-<p>汇编代码等同于：</p>
-<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="section">.text:0000000000400F85                 mov     rax, cs:qword_6020A8</span></span><br><span class="line"><span class="section">.text:0000000000400F8C                 mov     rax, [rax+8]</span></span><br></pre></td></tr></table></figure>
-
-<p>简单转化一下，也就是：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*(addr) = [addr]</span><br></pre></td></tr></table></figure>
-
-<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>在 pwn 的堆题目中，经常会有像一些”笔记管理系统”之类的题目，例如下面这里例子</p>
-<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/9mQhGPF.png" alt="img"></p>
-<p>代码提供了最基本的增删查改的功能。这个”笔记”的数据结构<strong>通常就是使用链表连接起来的</strong>，记录了当前 note 的大小、属性、内容等等。</p>
-<p><strong>例如，下面这个例子就是以指针为基础来存储这个 note 结构的</strong>。这里的 i 代表 note 的索引，若这里的 i &#x3D; 0 时：</p>
-<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/n366Lzt.png" alt="img"></p>
-<p><em>(qword_6020A8 + 16) 就*<em>代表从 qword_6020A8 这个地址出再往后偏移 16 个字节，取到这个地址存储的值，接着把 1 赋值给这个地方（也就是把 1 存入这个地址）</em></em></p>
-<p>同样的 *(qword_6020A8 + 24) 就代表偏移 24 个字节处的值为 len</p>
-<p>依次类推就可以在<strong>不连续的内存空间中</strong>，把整个 note 的数据结构存储下来了。</p>
-<h2 id="申请堆的本质"><a href="#申请堆的本质" class="headerlink" title="申请堆的本质"></a>申请堆的本质</h2><blockquote>
-<p>堆管理器 ptmalloc2 主要是通过 malloc&#x2F;free 函数来分配和释放内存块。</p>
-</blockquote>
-<p>ptmalloc2 的作用通俗的讲就是<strong>相当于一个”中间商”</strong>，在程序想要申请向系统申请堆空间时，这里的 ptmalloc2 就会申请一块很大的空间，并根据算法从这些内存中把空间真正的分配给程序。</p>
-<p>简单点说就是下面这个图中的情况：</p>
-<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/OHeE6wZ.png" alt="img"></p>
-<p>例子</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;malloc.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">char</span> *p;</span><br><span class="line">    p=<span class="built_in">malloc</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在 gdb 中进行调试，在 call malloc 处下一个断点，<strong>在这里使用 vmmap 命令，查看内存分布</strong>。可以看到此时并没有发现堆段</p>
-<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/AmbgBDz.png" alt="img"></p>
-<p>单步 n ，vmmap 命令再次查看内存，发现出现了堆段</p>
-<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/4J2yIhn.png" alt="img"></p>
-<p>但是这里我们明明只是申请了 10 字节的大小，但是为什么这里的为什么给了这么大的堆段呢？</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0x00602000     ~    0x00623000</span><br></pre></td></tr></table></figure>
-
-<p>计算一下，刚好是 132 kB</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(0x00623000-0x00602000)/1024 = 132 kB</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>原来这132KB的堆空间叫做arena，此时因为是主线程分配的，所以这个区域叫做 main arena</p>
-</blockquote>
-<p>也就是说这 132 KB 是”厂家”（内核）批发给”中间商”（ptmalloc2）的货物，<strong>以便下次程序在向系统申请小内存的时候，直接去”中间商”去取就行了</strong>，他就会在这 132KB 中按照要申请”货物”的多少进行分配下去。若”中间商”缺货了话，ptmalloc2 就继续去找”厂家”（系统内核）去取货</p>
-<h3 id="查看已分配的堆内存分布"><a href="#查看已分配的堆内存分布" class="headerlink" title="查看已分配的堆内存分布"></a>查看已分配的堆内存分布</h3><p>在上面我们动态调试的时候已经执行了 malloc 函数，申请到的堆指针是保存在 eax 中的<br><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/YTz6loS.png" alt="img"></p>
-<p>我们这里使用下面这个命令来查看内存堆块情况：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x/32gx 0x602010-0x10</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>32位的程序使用 x&#x2F;32xw 比较直观一点</li>
-</ul>
-<p>这里减去 0x10 表示从堆块的头部开始观察（包含 pre size 和 size 字段）</p>
-<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/TEiVMUc.png" alt="img"></p>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>pwn</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>现代c++学习笔记(三)</title>
     <url>/2023/03/17/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0-%E4%B8%89/</url>
-    <content><![CDATA[<h1 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h1><h2 id="智能指针概述"><a href="#智能指针概述" class="headerlink" title="智能指针概述"></a>智能指针概述</h2><p>**1.**为什么要有智能指针：在Part2的第二节课已经讲过，直接使用new和delete运算符极其容易导致内存泄露，而且非常难以避免。于是人们发明了智能指针这种可以自动回收内存的工具。</p>
-<p> **2.**智能指针一共就三种：普通的指针可以单独一个指针占用一块内存，也可以多个指针共享一块内存。</p>
+    <content><![CDATA[<h1 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h1><h2 id="智能指针概述"><a href="#智能指针概述" class="headerlink" title="智能指针概述"></a>智能指针概述</h2><p> <strong>1.</strong> 为什么要有智能指针：在Part2的第二节课已经讲过，直接使用new和delete运算符极其容易导致内存泄露，而且非常难以避免。于是人们发明了智能指针这种可以自动回收内存的工具。</p>
+<p>  <strong>2.</strong> 智能指针一共就三种：普通的指针可以单独一个指针占用一块内存，也可以多个指针共享一块内存。</p>
 <p>(1) 共享型智能指针：shared_ptr，同一块堆内存可以被多个shared_ptr共享。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span>* pi = <span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">10</span>);</span><br><span class="line">	<span class="function"><span class="type">int</span>* <span class="title">pi2</span><span class="params">(pi)</span></span>;<span class="comment">//pi2和pi共享一段内存</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -503,6 +569,48 @@
 <p>(3) 弱引用智能指针：weak_ptr，也是一种共享型智能指针，可以视为对共享型智能指针的一种补充</p>
 <p> <strong>3.</strong> <strong>（*）智能指针注意事项：</strong></p>
 <p><strong>智能指针和裸指针不要混用，接下来的几节课会反复强调这一点。</strong></p>
+<h2 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="(*)shared_ptr"></a>(*)shared_ptr</h2><p><strong>1.shared_ptr的工作原理</strong> </p>
+<p> (1)我们在动态分配内存时，堆上的内存必须通过栈上的内存来寻址。也就是说栈上的指针（堆上的指针也可以指向堆内存，但终究是要通过栈来寻址的）是寻找堆内存的唯一方式。<br> (2)所以我们可以给堆内存添加一个引用计数，有几个指针指向它，它的引用计数就是几，当引用计数为0时，操作系统会自动释放这块堆内存。<br> <strong>2.Shared_ptr的常用操作</strong> </p>
+<p><strong>(1)shared_ptr的初始化</strong> </p>
+<p> ①使用new运算符初始化， 一般来说不推荐使用new进行初始化，因为C++标准提供了专门创建shared_ptr的函数“make_shared”，该函数是经过优化的，效率更高。<br> ②使用make_shared函数进行初始化：  </p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::shared_ptr&lt;<span class="type">int</span>&gt;sharedI = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">100</span>);</span><br><span class="line">std::shared_ptr&lt;<span class="type">int</span>&gt;<span class="built_in">sharedI2</span>(sharedI);<span class="comment">//允许多个智能指针指向同一块内存</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：千万不要用裸指针初始化shared_ptr，容易出现内存泄露的问题。</p>
+<p> ③当然使用复制构造函数初始化也是没有问题的。<br> 代码演示:   </p>
+<p>(2)shared_ptr的引用计数：  智能指针就是通过引用计数来判断释放堆内存时机的。<br>use_count()函数可以得到shared_ptr对象的引用计数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vld.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;memory&gt;</span> </span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; 	</span><br><span class="line">	std::shared_ptr&lt;<span class="type">int</span>&gt;sharedI = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">100</span>); 	</span><br><span class="line">	std::cout &lt;&lt; sharedI.<span class="built_in">use_count</span>() &lt;&lt; std::endl; 	</span><br><span class="line">	std::shared_ptr&lt;<span class="type">int</span>&gt;<span class="built_in">shareI2</span>(sharedI); 	</span><br><span class="line">	std::cout &lt;&lt; sharedI.<span class="built_in">use_count</span>() &lt;&lt; std::endl; 	</span><br><span class="line">	shareI2.<span class="built_in">reset</span>(); 	</span><br><span class="line">	std::cout &lt;&lt; sharedI.<span class="built_in">use_count</span>() &lt;&lt; std::endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;<span class="comment">//结果输出121</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>3.智能指针可以像普通指针那样使用，”share_ptr”早已对各种操作进行了重载，就当它是普通指针就可以了.</strong> </p>
+<p>**4.Shared_ptr的常用函数 **</p>
+<p>(3)unique函数：判断该shared_ptr对象是否独占若独占，返回true。否则返回false。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vld.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;memory&gt;</span> </span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; 	</span><br><span class="line">	std::shared_ptr&lt;<span class="type">int</span>&gt;sharedI = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">100</span>); 	</span><br><span class="line">	std::cout &lt;&lt; sharedI.<span class="built_in">unique</span>() &lt;&lt; std::endl;<span class="comment">//独占返回1 	</span></span><br><span class="line">	std::shared_ptr&lt;<span class="type">int</span>&gt;<span class="built_in">shareI2</span>(sharedI); 	</span><br><span class="line">	std::cout &lt;&lt; sharedI.<span class="built_in">unique</span>() &lt;&lt; std::endl;<span class="comment">//独占返回0 	</span></span><br><span class="line">	shareI2.<span class="built_in">reset</span>(); 	</span><br><span class="line">	std::cout &lt;&lt; sharedI.<span class="built_in">unique</span>() &lt;&lt; std::endl;<span class="comment">//返回1</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> (4)reset函数： </p>
+<p>①当reset函数有参数时，改变此shared_ptr对象指向的内存。<br>②当reset函数无参数时，将此shared_ptr对象置空，也就是将对象内存的指针设置为nullptr。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vld.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;memory&gt;</span> </span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; 	</span><br><span class="line">	std::shared_ptr&lt;<span class="type">int</span>&gt;sharedI = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">100</span>); 	</span><br><span class="line">	std::cout &lt;&lt; sharedI.<span class="built_in">unique</span>() &lt;&lt; std::endl;	</span><br><span class="line">	sharedI.<span class="built_in">reset</span>(<span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">1000</span>));<span class="comment">//原有堆内存被释放，指向新的堆内存,写法不能写成shared_ptr的初始化</span></span><br><span class="line">	std::shared_ptr&lt;<span class="type">int</span>&gt;sharedI2 = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">100</span>);</span><br><span class="line">	sharedI = sharedI2;</span><br><span class="line">	sharedI.<span class="built_in">reset</span>();<span class="comment">//置为空</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>(5)get函数，强烈不推荐使用</p>
+<p>(6)swap函数：交换两个智能指针所指向的内存</p>
+<p>①std命名空间中全局的swap函数 </p>
+<p>②shared_ptr类提供的swap函数</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vld.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;memory&gt;</span> </span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; 	</span><br><span class="line">	std::shared_ptr&lt;<span class="type">int</span>&gt;sharedI = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">100</span>); 	</span><br><span class="line">    std::shared_ptr&lt;<span class="type">int</span>&gt;sharedI2 = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">1000</span>);</span><br><span class="line">	sharedI.<span class="built_in">swap</span>(sharedI2);<span class="comment">//std::swap(sharedI,sharedI2)</span></span><br><span class="line">	std::cout &lt;&lt; *sharedI &lt;&lt; std::endl;</span><br><span class="line">	std::cout &lt;&lt; *sharedI2 &lt;&lt; std::endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/03/17/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0-%E4%B8%89/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-20%20165343-1679302470989-3.png"></p>
+<p> 5.关于智能指针创建数组的问题。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">sharedI</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>[<span class="number">100</span>]())</span></span>;</span><br><span class="line">std::cout&lt;&lt;sharedI.<span class="built_in">get</span>()[<span class="number">10</span>]&lt;&lt;std::endl;<span class="comment">//不能像普通数组一样使用</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">myFunc</span><span class="params">(std::shared_ptr&lt;<span class="type">int</span>&gt; sharedI)</span><span class="comment">//不用写const</span></span></span><br></pre></td></tr></table></figure>
+
+<p>6.用智能指针作为参数传递时直接值传递就可以了。shared_ptr的大小为固定的8或16字节（也就是两倍指针的的大小，32位系统指针为4个字节，64位系统指针为8个字节，shared_ptr中就两个指针），所以直接值传递就可以了。</p>
+<p> shared_ptr总结：在现代程序中，当想要共享一块堆内存时，优先使用shared_ptr，可以极大的减少内存泄露的问题。</p>
+<h3 id="（-）weak-ptr"><a href="#（-）weak-ptr" class="headerlink" title="（*）weak_ptr"></a>（*）weak_ptr</h3><p><strong>1.</strong> <strong>weak_ptr介绍：</strong></p>
+<p>(1) 这个智能指针是在C++11的时候引入的标准库，它的出现完全是为了弥补shared_ptr天生有缺陷的问题，其实shared_ptr可以说近乎完美。</p>
+<p>(2) 只是通过引用计数实现的方式也引来了引用成环的问题，这种问题靠它自己是没办法解决的，所以在C++11的时候将shared_ptr和weak_ptr一起引入了标准库，用来解决循环引用的问题。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vld.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;memory&gt;</span> </span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; 	</span><br><span class="line">	std::shared_ptr&lt;<span class="type">int</span>&gt;sharedI = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">100</span>);</span><br><span class="line">	std::cout &lt;&lt; sharedI.<span class="built_in">use_count</span>() &lt;&lt; std::endl;</span><br><span class="line">	std::weak_ptr&lt;<span class="type">int</span>&gt;<span class="built_in">weakI</span>(sharedI);<span class="comment">//weak_ptr指向同一个内存不增加引用计数</span></span><br><span class="line">	std::cout &lt;&lt; sharedI.<span class="built_in">use_count</span>() &lt;&lt; std::endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.</strong> <strong>shared_ptr的循环引用问题：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vld.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;memory&gt;</span> </span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	std::weak_ptr&lt;B&gt; weakB;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	std::shared_ptr&lt;A&gt; sharedA;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; 	</span><br><span class="line">	std::shared_ptr&lt;A&gt;sharedA = std::<span class="built_in">make_shared</span>&lt;A&gt;();</span><br><span class="line">	std::shared_ptr&lt;B&gt;shareB = std::<span class="built_in">make_shared</span>&lt;B&gt;();</span><br><span class="line">	sharedA-&gt;weakB = weakB;</span><br><span class="line">	weakB-&gt;sharedA = sharedA;<span class="comment">//如果为两个shared_ptr相互指引导致内存无法释放,所以将其中一个改为weak_ptr</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.</strong> <strong>weak_ptr的作用原理：</strong>weak_ptr的对象需要绑定到shared_ptr对象上，作用原理是weak_ptr不会改变shared_ptr对象的引用计数。只要shared_ptr对象的引用计数为0，就会释放内存，weak_ptr的对象不会影响释放内存的过程。</p>
+<p>总结：<strong>weak_ptr使用较少，就是为了处理shared_ptr循环引用问题而设计的。</strong></p>
 ]]></content>
       <categories>
         <category>学习笔记</category>

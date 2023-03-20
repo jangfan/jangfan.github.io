@@ -39,8 +39,13 @@
 <meta property="og:image" content="http://example.com/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/4J2yIhn.png">
 <meta property="og:image" content="http://example.com/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/YTz6loS.png">
 <meta property="og:image" content="http://example.com/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/TEiVMUc.png">
+<meta property="og:image" content="http://example.com/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/MK9NWa8.png">
+<meta property="og:image" content="http://example.com/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/SkUxKXN.png">
+<meta property="og:image" content="http://example.com/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/iifOKJV.png">
+<meta property="og:image" content="http://example.com/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/image-20230318193939959.png">
+<meta property="og:image" content="http://example.com/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-18%20195928.png">
 <meta property="article:published_time" content="2023-03-14T12:03:34.000Z">
-<meta property="article:modified_time" content="2023-03-17T10:18:01.972Z">
+<meta property="article:modified_time" content="2023-03-18T13:14:13.876Z">
 <meta property="article:author" content="fan fan">
 <meta property="article:tag" content="pwn">
 <meta name="twitter:card" content="summary">
@@ -238,7 +243,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-17 18:18:01" itemprop="dateModified" datetime="2023-03-17T18:18:01+08:00">2023-03-17</time>
+                <time title="修改时间：2023-03-18 21:14:13" itemprop="dateModified" datetime="2023-03-18T21:14:13+08:00">2023-03-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -359,6 +364,63 @@
 </ul>
 <p>这里减去 0x10 表示从堆块的头部开始观察（包含 pre size 和 size 字段）</p>
 <p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/TEiVMUc.png" alt="img"></p>
+<h2 id="main-arena和top-chunk"><a href="#main-arena和top-chunk" class="headerlink" title="main_arena和top chunk"></a>main_arena和top chunk</h2><p><strong>1.main_arena</strong>是ptmalloc2堆管理器与1操作系统内核进行交互申请得到的，也就是上边申请的132KB，因为是主线程分配的，所以叫main_arena(通过增加program break loction)的方式增加main_arena的大小，在gdb调试中通过**”x&#x2F;32gx &amp;main_arena”**可以看到main_arena的内存分配情况。、</p>
+<p><strong>2.top chunk</strong>是堆中的一个堆块，带头的。程序以后分配的内存都要放在它的后边。在程序在向堆管理器申请内存的时候，没有合适的内存空间分配给它时，此时会从top chunk上剪切一部分chunk分配给它</p>
+<h2 id="free函数和bins"><a href="#free函数和bins" class="headerlink" title="free函数和bins"></a>free函数和bins</h2><h3 id="free函数"><a href="#free函数" class="headerlink" title="free函数"></a>free函数</h3><p>free函数与bins的分配息息相关。</p>
+<p>例子</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">char</span> *p;</span><br><span class="line">        p = <span class="built_in">malloc</span>(<span class="number">10</span>)；</span><br><span class="line">            <span class="built_in">memcpy</span>(p,<span class="string">&quot;Hello&quot;</span>,<span class="number">5</span>);</span><br><span class="line">        <span class="built_in">free</span>(p);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>程序将 “Hello” 字符串复制到申请到的堆内存空间中。</li>
+</ul>
+<p>编译后用 gdb 调试，在 call memcpy 处下一个断点，单步后将 “Hello” 复制到堆块中</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/MK9NWa8.png" alt="img"></p>
+<p>继续使用 x&#x2F;32gx 0x602010-0x10 命令查看堆块情况</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/SkUxKXN.png" alt="img"></p>
+<p>继续单步 n，执行 free 函数之后，查看堆块情况</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/iifOKJV.png" alt="img"></p>
+<p>这里可以看出原本堆块中存储的内容已经被清空，然后<strong>查看一下 main_arena 的值，发现其中 +0x8 的偏移处</strong>，存储了指向已经 free 了的指针（指向头部，而不是 user data）</p>
+<p>调用free函数，清空此堆块的use_data,并将此堆块的指针存储在main_arena中，或者fast_bin中。</p>
+<h3 id="bin"><a href="#bin" class="headerlink" title="bin"></a>bin</h3><p>bins这个概念与内存回收相关，堆管理器会根据用户已经申请到的内存空间大小进行释放，来决定放入哪类bins中，相当于垃圾分类。</p>
+<p><strong>描述</strong></p>
+<p>1.用户free掉的内存并不会马上还给系统，ptmalloc会统一管理heap和mmap映射区域中的空闲的chunk</p>
+<p>2.当用户进行下一次分配请求时，ptmalloc会首先试图在空闲的chunk中挑选一块给用户，避免了频繁的系统调用。</p>
+<p>3.ptmalloc将相似的chunk用双链表连接起来，这样的一个链表称为bin</p>
+<p>4.ptmalloc一共维护了128个bin，并使用一个数组来存储这些bin</p>
+<p>5.堆管理器将bin分为四类：<strong>fastbin|unsortedbin|smallbin|largebin</strong></p>
+<p>6.数组中bin 1为unsortedbin；2<del>63为smallbin；64</del>126为largebin</p>
+<p>![](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-03-18 192154.png)</p>
+<h4 id="fastbin"><a href="#fastbin" class="headerlink" title="fastbin"></a>fastbin</h4><p>为了快速重新分配回内存而存在的结构，fastbin是使用最多的一类，结构也很简单</p>
+<blockquote>
+<p>fastbin所包含的chunk大小为16，24，32，80bytes。当分配一块较小的内存（&lt;&#x3D;64bytes），会首先在fastbin中移除并返回；否则通过其他方式(剪切top chunk)得到一块符合大小的chunk并返回。</p>
+</blockquote>
+<p><strong>描述</strong></p>
+<p>1.在32位操作系统中，当用户释放的堆块大小小于64B时使用fastbin进行管理，即chunk   空间最大为80字节<br>2.fastbin只使用了fd成员，是个单链表结构<br>3.fastbin不会对P位进行操作，也就是说它不会主动进行合并；只有在某些特定情况下，堆管理器才会对fastbin进行合并<br>4.fastbinY为管理fastbin的数组，每个成员分别管理不同大小的fastbin链表，且均指向了当前链表的尾节点，当尾节点被分配时，通过其fd指针指向前一个结点<br>5.当用户申请chunk大小小于或等于MAX_FAST_SIZE时，优先从fastbins中查找相应的空闲块，且规则为LIFO（Last in, first out, 后进先出）</p>
+<p>例子</p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/image-20230318193939959.png"></p>
+<p>此时0x0804a00处的chunk(实际chunk的size段要减去PREV_INUSE字段值1)被free，那么会被存储在40bytes的fastbin的内存地址中（地址存储的是指针，64位地址占8个字节），在main_arena中表示16，24，82，，，，，80bytes的内存地址中分别已经存储了已经free的而且满足相同大小的chunk。</p>
+<p><strong>fastbin的特性</strong></p>
+<p><strong>1.使用单链表来维护释放的堆块</strong></p>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-18%20195928.png"></p>
+<p><strong>2.使用先进后出的方式维护链表</strong></p>
+<p>当程序需要重新malloc内存并且从fastbin中挑选堆块，会选择后边的新加入的堆块拿来进行内存分配，这里的话也就是直接使用第二次释放的堆块，将这个堆块从链表中移除，根据fk指针找到这个堆块，此时main_arena也指向这里</p>
+<h3 id="unsortedbin"><a href="#unsortedbin" class="headerlink" title="unsortedbin"></a>unsortedbin</h3><p><strong>描述</strong>：</p>
+<ol>
+<li><p>当释放较小或较大的chunk的时候，为了增加分配效率，系统会先将最近释放的chunk添加到unsorted bin中</p>
+</li>
+<li><p>unsorted bin 为一个双向循环链表，对chunk的大小没有限制，即任何大小的chunk都可以放入unsorted bin链表中</p>
+</li>
+<li><p>当fastbin，smallbin中的chunk不能满足用户申请的chunk的大小时，堆管理器会考虑使用unsortedbin。它会在分配large chunk之前对堆中碎片进行合并，以减少对中的碎片。</p>
+<p>unsortedbin使用的是双链表对chunk进行链接，可以看成不满足能够进行内存分配的堆块都放在unsortedbin中</p>
+</li>
+</ol>
+<h4 id="smallbin"><a href="#smallbin" class="headerlink" title="smallbin"></a>smallbin</h4><p><strong>描述：</strong></p>
+<ol>
+<li>在32位操作系统中，当用户释放的堆块大小大于64B，小于等于512B时使用small bin进行管理</li>
+<li>small bin 为双向循环链表，且使用 FIFO（First in, first out, 先入先出） 算法</li>
+<li>当满足small bin条件的chunk被释放后，会优先被放入unosrted bin，只有在一定情况下，才会被分配到small bin中</li>
+<li>相邻的free chunk将会被合并成一个更大的fee chunk，增加内存利用率</li>
+</ol>
 
     </div>
 
@@ -444,7 +506,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%A0%86"><span class="nav-number">1.</span> <span class="nav-text">什么是堆</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">堆的基本结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E4%B8%8E%E5%9C%B0%E5%9D%80"><span class="nav-number">1.2.</span> <span class="nav-text">指针与地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IDA-%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E6%8C%87%E9%92%88%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">IDA 中常见的指针表示形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">链表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B3%E8%AF%B7%E5%A0%86%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="nav-number">1.3.</span> <span class="nav-text">申请堆的本质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%B7%B2%E5%88%86%E9%85%8D%E7%9A%84%E5%A0%86%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83"><span class="nav-number">1.3.1.</span> <span class="nav-text">查看已分配的堆内存分布</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%A0%86"><span class="nav-number">1.</span> <span class="nav-text">什么是堆</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">堆的基本结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E4%B8%8E%E5%9C%B0%E5%9D%80"><span class="nav-number">1.2.</span> <span class="nav-text">指针与地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IDA-%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E6%8C%87%E9%92%88%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">IDA 中常见的指针表示形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">链表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B3%E8%AF%B7%E5%A0%86%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="nav-number">1.3.</span> <span class="nav-text">申请堆的本质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%B7%B2%E5%88%86%E9%85%8D%E7%9A%84%E5%A0%86%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83"><span class="nav-number">1.3.1.</span> <span class="nav-text">查看已分配的堆内存分布</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main-arena%E5%92%8Ctop-chunk"><span class="nav-number">1.4.</span> <span class="nav-text">main_arena和top chunk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#free%E5%87%BD%E6%95%B0%E5%92%8Cbins"><span class="nav-number">1.5.</span> <span class="nav-text">free函数和bins</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#free%E5%87%BD%E6%95%B0"><span class="nav-number">1.5.1.</span> <span class="nav-text">free函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bin"><span class="nav-number">1.5.2.</span> <span class="nav-text">bin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#fastbin"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">fastbin</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unsortedbin"><span class="nav-number">1.5.3.</span> <span class="nav-text">unsortedbin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#smallbin"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">smallbin</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
