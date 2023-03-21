@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2023/03/17/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0-%E4%B8%89/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-20%20165343-1679302470989-3.png">
 <meta property="article:published_time" content="2023-03-17T10:19:37.000Z">
-<meta property="article:modified_time" content="2023-03-20T10:09:21.434Z">
+<meta property="article:modified_time" content="2023-03-21T08:28:20.236Z">
 <meta property="article:author" content="fan fan">
 <meta property="article:tag" content="c++">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-20 18:09:21" itemprop="dateModified" datetime="2023-03-20T18:09:21+08:00">2023-03-20</time>
+                <time title="修改时间：2023-03-21 16:28:20" itemprop="dateModified" datetime="2023-03-21T16:28:20+08:00">2023-03-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -307,7 +307,7 @@
 
 <p>6.用智能指针作为参数传递时直接值传递就可以了。shared_ptr的大小为固定的8或16字节（也就是两倍指针的的大小，32位系统指针为4个字节，64位系统指针为8个字节，shared_ptr中就两个指针），所以直接值传递就可以了。</p>
 <p> shared_ptr总结：在现代程序中，当想要共享一块堆内存时，优先使用shared_ptr，可以极大的减少内存泄露的问题。</p>
-<h3 id="（-）weak-ptr"><a href="#（-）weak-ptr" class="headerlink" title="（*）weak_ptr"></a>（*）weak_ptr</h3><p><strong>1.</strong> <strong>weak_ptr介绍：</strong></p>
+<h2 id="weak-ptr"><a href="#weak-ptr" class="headerlink" title="(*)weak_ptr"></a>(*)weak_ptr</h2><p><strong>1.</strong> <strong>weak_ptr介绍：</strong></p>
 <p>(1) 这个智能指针是在C++11的时候引入的标准库，它的出现完全是为了弥补shared_ptr天生有缺陷的问题，其实shared_ptr可以说近乎完美。</p>
 <p>(2) 只是通过引用计数实现的方式也引来了引用成环的问题，这种问题靠它自己是没办法解决的，所以在C++11的时候将shared_ptr和weak_ptr一起引入了标准库，用来解决循环引用的问题。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vld.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;memory&gt;</span> </span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; 	</span><br><span class="line">	std::shared_ptr&lt;<span class="type">int</span>&gt;sharedI = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">100</span>);</span><br><span class="line">	std::cout &lt;&lt; sharedI.<span class="built_in">use_count</span>() &lt;&lt; std::endl;</span><br><span class="line">	std::weak_ptr&lt;<span class="type">int</span>&gt;<span class="built_in">weakI</span>(sharedI);<span class="comment">//weak_ptr指向同一个内存不增加引用计数</span></span><br><span class="line">	std::cout &lt;&lt; sharedI.<span class="built_in">use_count</span>() &lt;&lt; std::endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -317,6 +317,37 @@
 
 <p><strong>3.</strong> <strong>weak_ptr的作用原理：</strong>weak_ptr的对象需要绑定到shared_ptr对象上，作用原理是weak_ptr不会改变shared_ptr对象的引用计数。只要shared_ptr对象的引用计数为0，就会释放内存，weak_ptr的对象不会影响释放内存的过程。</p>
 <p>总结：<strong>weak_ptr使用较少，就是为了处理shared_ptr循环引用问题而设计的。</strong></p>
+<h2 id="unique-ptr"><a href="#unique-ptr" class="headerlink" title="(*)unique_ptr"></a>(*)unique_ptr</h2><p><strong>1.</strong> <strong>uniqe_ptr介绍：</strong>独占式智能指针，在使用智能指针时，我们一般优先考虑独占式智能指针，因为消耗更小。如果发现内存需要共享，那么再去使用“shared_ptr”。</p>
+<p><strong>2</strong> <strong>unique_ptr的初始化</strong>：和shared_ptr完全类似</p>
+<p>(1) 使用new运算符进行初始化</p>
+<p>(2) 使用make_unique函数进行初始化</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vld.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;memory&gt;</span> </span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::unique_ptr&lt;<span class="type">int</span>&gt;<span class="built_in">uniqueI2</span>(<span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">100</span>));</span><br><span class="line">	std::unique_ptr&lt;<span class="type">int</span>&gt; uniqueI = std::<span class="built_in">make_unique</span>&lt;<span class="type">int</span>&gt;(<span class="number">100</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.</strong> <strong>unique_ptr的常用操作</strong></p>
+<p>(1) unque_ptr禁止复制构造函数，也禁止赋值运算符的重载。否则独占便毫无意义。</p>
+<p>(2) unqiue_ptr允许移动构造，移动赋值。移动语义代表之前的对象已经失去了意义，移动操作自然不影响独占的特性。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vld.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;memory&gt;</span> </span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::unique_ptr&lt;<span class="type">int</span>&gt; uniqueI = std::<span class="built_in">make_unique</span>&lt;<span class="type">int</span>&gt;(<span class="number">100</span>);</span><br><span class="line">    std::unique_ptr&lt;<span class="type">int</span>&gt;uniqueI2=std::<span class="built_in">make_unique</span>&lt;<span class="type">int</span>&gt;(<span class="number">200</span>);</span><br><span class="line">    uniqueI2=std::<span class="built_in">move</span>(uniqueI);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>(3) reset函数：</p>
+<p>① 不带参数的情况下：释放智能指针的对象，并将智能指针置空。</p>
+<p>② 带参数的情况下：释放智能指针的对象，并将智能指针指向新的对象。</p>
+<p> <strong>和shared_ptr使用方法一样</strong></p>
+<p><strong>4.</strong> <strong>将unque_ptr的对象转化为shared_ptr对象，</strong>当unique_ptr的对象为一个右值时，就可以将该对象转化为shared_ptr的对象。</p>
+<p><strong>这个使用的并不多，需要将独占式指针转化为共享式指针常常是因为先前设计失误。</strong></p>
+<p><strong>注意：shared_ptr对象无法转化为unique_ptr对象。</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vld.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;memory&gt;</span> </span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">myfunc</span><span class="params">(std::unique_ptr&lt;<span class="type">int</span>&gt; uniqueI)</span><span class="comment">//需要共享操作时</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::shared_ptr&lt;<span class="type">int</span>&gt;<span class="built_in">sharedI</span>(std::<span class="built_in">move</span>(uniqueI));<span class="comment">//转换</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::unique_ptr&lt;<span class="type">int</span>&gt; uniqueI = std::<span class="built_in">make_unique</span>&lt;<span class="type">int</span>&gt;(<span class="number">100</span>);</span><br><span class="line">    std::unique_ptr&lt;<span class="type">int</span>&gt;uniqueI2=std::<span class="built_in">make_unique</span>&lt;<span class="type">int</span>&gt;(<span class="number">200</span>);</span><br><span class="line">    uniqueI2=std::<span class="built_in">move</span>(uniqueI);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="只能指针适用范围"><a href="#只能指针适用范围" class="headerlink" title="(**)只能指针适用范围"></a>(**)只能指针适用范围</h2><p><strong>1.</strong> <strong>能使用智能指针就尽量使用智能指针，那么哪些情况属于不能使用智能指针的情况  呢？</strong></p>
+<p> 有些函数必须使用C语言的指针，这些函数又没有替代，这种情况下，才使用普通的指针，其它情况一律使用智能指针。</p>
+<p> 必须使用C语言指针的情况包括：</p>
+<p><strong>（1）</strong> <strong>网络传输函数</strong>，比如windows下的send，recv函数，只能使用c语言指针，无法替代.</p>
+<p><strong>（2）</strong> <strong>c语言的文件操作部分</strong>。这方面C++已经有了替代品，C++的文件操作完全支持智能指针，<strong>所以在做大型项目时，推荐使用C++的文件操作功能。</strong></p>
+<p><strong>除了以上两种情况，剩下的均推荐使用智能指针。</strong></p>
+<p><strong>2.</strong> <strong>我们应该使用哪个智能指针呢？</strong></p>
+<p><strong>(1)</strong> <strong>优先使用unique_ptr，内存需要共享时再使用shared_ptr。</strong></p>
+<p><strong>当使用shared_ptr时，如果出现了循环引用的情况，再去考虑使用weak_ptr</strong></p>
 
     </div>
 
@@ -399,7 +430,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="nav-number">1.</span> <span class="nav-text">智能指针</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">智能指针概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shared-ptr"><span class="nav-number">1.2.</span> <span class="nav-text">(*)shared_ptr</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88-%EF%BC%89weak-ptr"><span class="nav-number">1.2.1.</span> <span class="nav-text">（*）weak_ptr</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="nav-number">1.</span> <span class="nav-text">智能指针</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">智能指针概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shared-ptr"><span class="nav-number">1.2.</span> <span class="nav-text">(*)shared_ptr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#weak-ptr"><span class="nav-number">1.3.</span> <span class="nav-text">(*)weak_ptr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unique-ptr"><span class="nav-number">1.4.</span> <span class="nav-text">(*)unique_ptr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AA%E8%83%BD%E6%8C%87%E9%92%88%E9%80%82%E7%94%A8%E8%8C%83%E5%9B%B4"><span class="nav-number">1.5.</span> <span class="nav-text">(**)只能指针适用范围</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

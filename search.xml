@@ -110,11 +110,6 @@
       </tags>
   </entry>
   <entry>
-    <title>内核学习</title>
-    <url>/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>周计划</title>
     <url>/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/</url>
     <content><![CDATA[<h1 id="大一下学期目标"><a href="#大一下学期目标" class="headerlink" title="大一下学期目标"></a>大一下学期目标</h1><p><strong>主线</strong>：<strong>学习pwn的栈 堆和内核</strong></p>
@@ -165,6 +160,45 @@
       </categories>
       <tags>
         <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>内核学习</title>
+    <url>/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>汇编语言简单摘要</title>
+    <url>/2023/02/20/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%91%98%E8%A6%81/</url>
+    <content><![CDATA[<h3 id="x86-64位寄存器（16个）"><a href="#x86-64位寄存器（16个）" class="headerlink" title="x86-64位寄存器（16个）"></a>x86-64位寄存器（16个）</h3><p>rax：存放保存函数返回值<br>rbx：被调用者保存<br>rdi rsi rdx rcx 对应第1、2、3、4个参数<br>rsp：栈指针，存放栈帧的栈顶的偏移地址<br>r8 r9对应第5、6个参数</p>
+<h3 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h3><p>立即数寻址$Imm Imm(立即数)<br>寄存器寻址%ra R[ra] (寄存器)<br>绝对寻址Imm M[Imm] (存储器)<br>间接寻址（%ra）M[R[[ra]]</p>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">下面有一点地址或寄存器的值，写出操作数的值</span><br><span class="line">地址          值              寄存器       值</span><br><span class="line">0x100      0xFF             rax        0x100</span><br><span class="line">0x104      0xab             rcx        0x1</span><br><span class="line">0x108      0x13             rdx        0x3</span><br><span class="line">0x10C      0x11</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">操作数  值</span><br><span class="line">rax 0x100(寄存器)</span><br><span class="line">0x104 0xab（绝对寻址）</span><br><span class="line"><span class="variable">$0x108</span> 0x108（立即数寻址）</span><br><span class="line">(%rax) 0xFF（间接寻址）</span><br></pre></td></tr></table></figure>
+
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>两种汇编模式<br>ATT汇编movq movb<br>普通汇编 mov <strong>rax,rbx</strong>&#x3D;mov<strong>q %rbx,%rax</strong> （ATT）：把rbx的值赋给rax</p>
+<h4 id="mov"><a href="#mov" class="headerlink" title="mov"></a>mov</h4><p>mov 数据传送指令 将数据从一个位置复制到另一个位置的指令<br>mov 寄存器&#x2F;立即数 操作数用来指向一个执行所要使用源数据的值，放置结果的目的位置，mov 源操作数的值是一个立即数，值存放在内存或者寄存器中 目的操作数一个寄存器或者是一个内存地址。</p>
+<p><strong>单位</strong>：1字节 &#x3D; 8bit  1字 &#x3D; 8字节 &#x3D; 64bit</p>
+<p><strong>movb 一个字节</strong> (这个字代表双字节的意思，与上边的字不一样)<br><strong>movw 一个字<br>movl 双字（寄存器的高四字节设置成0）<br>movq 四字<br>movabsq I,R  R&lt;-I 传送的是绝对的四字 目的操作数只能是寄存器</strong><br>movl $0x4050,%eax      4bytes   立即数–寄存器<br>movw %bp,%sp           2bytes   寄存器–寄存器<br>movb (%rdi,%rcx),%al   1bytes  内存–寄存器<br>movb $-17,(%rsp)       1bytes   立即数–内存<br>movq %rax,-12(%rbp)    8bytes   寄存器–内存l</p>
+<h5 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">movabsq <span class="variable">$0x0011223344556677</span> , %rax = 0011223344556677  </span><br><span class="line">（ rax包含了eax eax包含了ax ax包含了al）</span><br><span class="line">-1的16进制是0xFFFFFFFFFFFFFF,第一步结束后每一步rax的值是多少</span><br><span class="line">movb $-1 ,%al           ， %rax = 00112233445566FF   F = 1111</span><br><span class="line">movw $-1 , %ax          ， %rax = 001122334455FFFF   </span><br><span class="line">movl $-1 , %eax         ， %rax = 00000000FFFFFFFF</span><br><span class="line">movq $-1 ,%rax          ， %rax = FFFFFFFFFFFFFFFF </span><br></pre></td></tr></table></figure>
+
+
+<h5 id="例题2"><a href="#例题2" class="headerlink" title="例题2"></a>例题2</h5><p>把下列汇编代码用c语言表示  （rax一直保存的是返回值）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">decode1:</span><br><span class="line">    movq (%rdi) , %r8</span><br><span class="line">    movq (%rsi) , %rcx</span><br><span class="line">    movq (%rdx) , %rax</span><br><span class="line">    movq %r8    , (%rsi)</span><br><span class="line">    movq %rcx   , (%rdx)</span><br><span class="line">    movq %rax ,   (%rdx)      </span><br><span class="line">    ret </span><br></pre></td></tr></table></figure>
+<p>c语言</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">decode1</span><span class="params">(<span class="type">long</span> *xp,<span class="type">long</span> *yp,<span class="type">long</span> *zp)</span>&#123;</span><br><span class="line">     <span class="type">long</span> x = *xp;</span><br><span class="line">     <span class="type">long</span> y = *yp;</span><br><span class="line">     <span class="type">long</span> z = *zp;</span><br><span class="line">     *yp = x;</span><br><span class="line">     *zp = y;</span><br><span class="line">     *xp = z;</span><br><span class="line">     <span class="keyword">return</span> z;</span><br><span class="line"> &#125;    </span><br><span class="line">     </span><br></pre></td></tr></table></figure>
+<h4 id="push和pop"><a href="#push和pop" class="headerlink" title="push和pop"></a>push和pop</h4><p>push压入栈 pop弹出栈（pop弹出的值一直是一个最近压入栈的数据且仍在栈中）<br>由于栈是由大到小增长的，所以栈顶永远是地址最低的 %rsp保存着栈顶的元素<br>pushq popq 将四字压入栈中 将四字弹出栈<br>pushq %rbp &#x3D; subq $8,%rsp  movq %rbp,(%rsp)   （rsp地址减8）<br>popq <strong>%rax</strong>  &lt;&#x3D;&#x3D;&gt; movq (%rsp),(<strong>%rax</strong>) addq $8,%rsp （rsp地址加8）<br><strong>pop之后，值不会被删除，除非有一个新的值覆盖了原先的值</strong></p>
+<h4 id="算数和逻辑操作"><a href="#算数和逻辑操作" class="headerlink" title="算数和逻辑操作"></a>算数和逻辑操作</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">leaq  --&gt; 加载有效地址 </span><br><span class="line">inc --&gt; 加一 </span><br><span class="line">dec --&gt; 减一 </span><br><span class="line">neg --&gt; 取负 </span><br><span class="line">not --&gt; 取补 </span><br><span class="line">add --&gt; 加 </span><br><span class="line">sub --&gt; 减 </span><br><span class="line">imul --&gt; 乘 </span><br><span class="line">xor --&gt; 异或 </span><br><span class="line">or --&gt; 或 </span><br><span class="line">and --&gt; 与 </span><br><span class="line">sal --&gt; 算数左移 </span><br><span class="line"> sar --&gt; 算数右移 </span><br><span class="line"> shl --&gt;逻辑左移</span><br><span class="line">shr --&gt; 逻辑右移</span><br></pre></td></tr></table></figure>
+<h5 id="1-加载地址"><a href="#1-加载地址" class="headerlink" title="1.加载地址"></a>1.加载地址</h5><p>movq的一种变形 从内存读数据到寄存器 但是没有引用内存 不是单纯的读数据，而是将有效地址加载到目的操作数 <strong>描述简单的算数操作</strong></p>
+<h6 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h6><p>rdi &#x3D; x<br> leaq 7(%rdi,%rdi,4),%rax &#x3D;&#x3D; 将rax的值设置为5x+7</p>
+<h5 id="2-一元操作和二元操作"><a href="#2-一元操作和二元操作" class="headerlink" title="2.一元操作和二元操作"></a>2.一元操作和二元操作</h5><p> 只有一个操作数的是一元操作，既是源操作数也是目的操作数<br>地址          值              寄存器       值<br>0x100      0xFF             rax        0x100<br>0x108      0xAB             rcx        0x1<br> 0x118  0x11           rdx        0x3<br><strong>subq</strong> %rax,%rdx rdx &#x3D; rdx -rax<br><strong>addq</strong> %rcx , (%rax)   ;更新的其实是一个内存位置 位置为0x100<br><strong>imulq</strong> $16,(%rax,%rdx,8) ;更新的内存位置是0x118，值对应的是0x11*16&#x3D;0x110<br>他们的目的和最终值写出来<br>imulq 有符号乘法 一个操作数 这个指令要求就是必须两个数都在寄存器rax中 把高64位存放在rdx，低64位存放在rax里面<br><strong>salq</strong> $4,%rax(左移4位，扩大了2的4次方倍)</p>
+<h5 id="控制操作"><a href="#控制操作" class="headerlink" title="控制操作"></a>控制操作</h5><p>t  &#x3D; a + b<br>无符号溢出 <strong>CF</strong> （条件码）<br>  t&#x3D;&#x3D;0 <strong>ZF</strong><br> t &lt; 0  <strong>SF</strong><br> (a&lt;0&amp;&amp;b&lt;0) &amp;&amp; (t&lt;0 !&#x3D; a &lt;0) 有符号溢出 <strong>OF</strong><br><strong>leaq</strong> 不会改变任何条件码 xor 会将进位标志和溢出位标志设置成0<br><strong>cmpb</strong> 比较字节 <strong>cmpw</strong> 比较字  <strong>test</strong> 测试<br><strong>cmp</strong> rsi,rdi<br>cmp根据两个比较数的差来设置条件码 （除了不更新寄存器以外，和sub操作是一样的 test也是除了不更新寄存器以外，和 and 操作是一样的）<br><strong>testq</strong> %rax,%rax 检查rax是负数还是正数还是0<br> set指令设置条件码</p>
+]]></content>
+      <categories>
+        <category>pwn基础</category>
+      </categories>
+      <tags>
+        <tag>汇编</tag>
       </tags>
   </entry>
   <entry>
@@ -311,46 +345,28 @@
 <li>当满足small bin条件的chunk被释放后，会优先被放入unosrted bin，只有在一定情况下，才会被分配到small bin中</li>
 <li>相邻的free chunk将会被合并成一个更大的fee chunk，增加内存利用率</li>
 </ol>
+<h1 id="深入理解堆"><a href="#深入理解堆" class="headerlink" title="深入理解堆"></a>深入理解堆</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>堆管理器处于用户程序和内核中间主要做以下工作：</strong></p>
+<p>1.响应用户申请的内存，向操作系统申请内存，然后返回给用户程序。</p>
+<p>2.管理用户释放的内存</p>
+<p>注意：在内存分配与使用的时候，linux有一个基本内存管理思想，只有当真正访问一个地址的时候，系统才会建立虚拟页面与物理页面的映射关系。所以虽然操作系统已经给程序分配了很大的一块内存，但是这块内存其实是虚拟内存。只有当用户使用相应内存的时候，系统才会真正分配物理页面给用户使用。</p>
+<h2 id="堆的基本操作"><a href="#堆的基本操作" class="headerlink" title="堆的基本操作"></a>堆的基本操作</h2><h3 id="malloc"><a href="#malloc" class="headerlink" title="malloc"></a>malloc</h3><p>malloc函数返回对应大小字节内存的指针，还进行了对异常情况的处理。如果申请的字节数为0，返回当前系统允许的堆的最小内存。如果申请的字节数为负数的时候，由于在大多数系统上，size_t是无符号数，所以程序就会申请很大的内存空间，通常会失败，因为没有足够的空间可以分配。</p>
+<h3 id="free"><a href="#free" class="headerlink" title="free"></a>free</h3><p>free函数会释放由p指向的内存块，这个内存块可以通过malloc或者相关函数realloc得到的。同时也进行了对异常情况进行了处理。</p>
+<p>当p为空指针，函数不执行。</p>
+<p>当p已经释放，再次释放会出现乱七八糟的情况，这就是double free。</p>
+<h2 id="内存分配后的系统调用"><a href="#内存分配后的系统调用" class="headerlink" title="内存分配后的系统调用"></a>内存分配后的系统调用</h2><p>无论是malloc函数还是free函数，我们动态申请或者释放内存的时候，都经常使用，但是它们并不是与系统进行交互的函数。这些函数背后的系统调用只要是(s)brk以及mmap，munmap函数。</p>
+<h3 id="s-brk"><a href="#s-brk" class="headerlink" title="(s)brk"></a>(s)brk</h3><blockquote>
+<p>对于堆的操作，操作系统提供了brk函数，glibc库提供了sbrk函数</p>
+<p>malloc的底层实现，用于分配开辟内存，但是brk函数是系统调用而sbrk不是，sbrk调用了sbrk</p>
+</blockquote>
+<p>初始时，堆的起始地址start_brk以及堆的末尾brk指向同一地址。根据是否开启ASLR，两者的具体位置会不同。开启时start_brk和brk都指向data&#x2F;bss段的结尾；开启后，start_brk和brk也会指向同一位置，只是这个位置在data&#x2F;bss段的随机位置</p>
+<h3 id="mmap"><a href="#mmap" class="headerlink" title="mmap"></a>mmap</h3><p>malloc会使用mmap来创建独立的匿名映射段。匿名映射主要目的主要是可以申请以0填充的内存，并且仅被调用进程所使用</p>
+<p>###多线程支持</p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
       </categories>
       <tags>
         <tag>pwn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>汇编语言简单摘要</title>
-    <url>/2023/02/20/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%91%98%E8%A6%81/</url>
-    <content><![CDATA[<h3 id="x86-64位寄存器（16个）"><a href="#x86-64位寄存器（16个）" class="headerlink" title="x86-64位寄存器（16个）"></a>x86-64位寄存器（16个）</h3><p>rax：存放保存函数返回值<br>rbx：被调用者保存<br>rdi rsi rdx rcx 对应第1、2、3、4个参数<br>rsp：栈指针，存放栈帧的栈顶的偏移地址<br>r8 r9对应第5、6个参数</p>
-<h3 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h3><p>立即数寻址$Imm Imm(立即数)<br>寄存器寻址%ra R[ra] (寄存器)<br>绝对寻址Imm M[Imm] (存储器)<br>间接寻址（%ra）M[R[[ra]]</p>
-<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">下面有一点地址或寄存器的值，写出操作数的值</span><br><span class="line">地址          值              寄存器       值</span><br><span class="line">0x100      0xFF             rax        0x100</span><br><span class="line">0x104      0xab             rcx        0x1</span><br><span class="line">0x108      0x13             rdx        0x3</span><br><span class="line">0x10C      0x11</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">操作数  值</span><br><span class="line">rax 0x100(寄存器)</span><br><span class="line">0x104 0xab（绝对寻址）</span><br><span class="line"><span class="variable">$0x108</span> 0x108（立即数寻址）</span><br><span class="line">(%rax) 0xFF（间接寻址）</span><br></pre></td></tr></table></figure>
-
-<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>两种汇编模式<br>ATT汇编movq movb<br>普通汇编 mov <strong>rax,rbx</strong>&#x3D;mov<strong>q %rbx,%rax</strong> （ATT）：把rbx的值赋给rax</p>
-<h4 id="mov"><a href="#mov" class="headerlink" title="mov"></a>mov</h4><p>mov 数据传送指令 将数据从一个位置复制到另一个位置的指令<br>mov 寄存器&#x2F;立即数 操作数用来指向一个执行所要使用源数据的值，放置结果的目的位置，mov 源操作数的值是一个立即数，值存放在内存或者寄存器中 目的操作数一个寄存器或者是一个内存地址。</p>
-<p><strong>单位</strong>：1字节 &#x3D; 8bit  1字 &#x3D; 8字节 &#x3D; 64bit</p>
-<p><strong>movb 一个字节</strong> (这个字代表双字节的意思，与上边的字不一样)<br><strong>movw 一个字<br>movl 双字（寄存器的高四字节设置成0）<br>movq 四字<br>movabsq I,R  R&lt;-I 传送的是绝对的四字 目的操作数只能是寄存器</strong><br>movl $0x4050,%eax      4bytes   立即数–寄存器<br>movw %bp,%sp           2bytes   寄存器–寄存器<br>movb (%rdi,%rcx),%al   1bytes  内存–寄存器<br>movb $-17,(%rsp)       1bytes   立即数–内存<br>movq %rax,-12(%rbp)    8bytes   寄存器–内存l</p>
-<h5 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">movabsq <span class="variable">$0x0011223344556677</span> , %rax = 0011223344556677  </span><br><span class="line">（ rax包含了eax eax包含了ax ax包含了al）</span><br><span class="line">-1的16进制是0xFFFFFFFFFFFFFF,第一步结束后每一步rax的值是多少</span><br><span class="line">movb $-1 ,%al           ， %rax = 00112233445566FF   F = 1111</span><br><span class="line">movw $-1 , %ax          ， %rax = 001122334455FFFF   </span><br><span class="line">movl $-1 , %eax         ， %rax = 00000000FFFFFFFF</span><br><span class="line">movq $-1 ,%rax          ， %rax = FFFFFFFFFFFFFFFF </span><br></pre></td></tr></table></figure>
-
-
-<h5 id="例题2"><a href="#例题2" class="headerlink" title="例题2"></a>例题2</h5><p>把下列汇编代码用c语言表示  （rax一直保存的是返回值）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">decode1:</span><br><span class="line">    movq (%rdi) , %r8</span><br><span class="line">    movq (%rsi) , %rcx</span><br><span class="line">    movq (%rdx) , %rax</span><br><span class="line">    movq %r8    , (%rsi)</span><br><span class="line">    movq %rcx   , (%rdx)</span><br><span class="line">    movq %rax ,   (%rdx)      </span><br><span class="line">    ret </span><br></pre></td></tr></table></figure>
-<p>c语言</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">decode1</span><span class="params">(<span class="type">long</span> *xp,<span class="type">long</span> *yp,<span class="type">long</span> *zp)</span>&#123;</span><br><span class="line">     <span class="type">long</span> x = *xp;</span><br><span class="line">     <span class="type">long</span> y = *yp;</span><br><span class="line">     <span class="type">long</span> z = *zp;</span><br><span class="line">     *yp = x;</span><br><span class="line">     *zp = y;</span><br><span class="line">     *xp = z;</span><br><span class="line">     <span class="keyword">return</span> z;</span><br><span class="line"> &#125;    </span><br><span class="line">     </span><br></pre></td></tr></table></figure>
-<h4 id="push和pop"><a href="#push和pop" class="headerlink" title="push和pop"></a>push和pop</h4><p>push压入栈 pop弹出栈（pop弹出的值一直是一个最近压入栈的数据且仍在栈中）<br>由于栈是由大到小增长的，所以栈顶永远是地址最低的 %rsp保存着栈顶的元素<br>pushq popq 将四字压入栈中 将四字弹出栈<br>pushq %rbp &#x3D; subq $8,%rsp  movq %rbp,(%rsp)   （rsp地址减8）<br>popq <strong>%rax</strong>  &lt;&#x3D;&#x3D;&gt; movq (%rsp),(<strong>%rax</strong>) addq $8,%rsp （rsp地址加8）<br><strong>pop之后，值不会被删除，除非有一个新的值覆盖了原先的值</strong></p>
-<h4 id="算数和逻辑操作"><a href="#算数和逻辑操作" class="headerlink" title="算数和逻辑操作"></a>算数和逻辑操作</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">leaq  --&gt; 加载有效地址 </span><br><span class="line">inc --&gt; 加一 </span><br><span class="line">dec --&gt; 减一 </span><br><span class="line">neg --&gt; 取负 </span><br><span class="line">not --&gt; 取补 </span><br><span class="line">add --&gt; 加 </span><br><span class="line">sub --&gt; 减 </span><br><span class="line">imul --&gt; 乘 </span><br><span class="line">xor --&gt; 异或 </span><br><span class="line">or --&gt; 或 </span><br><span class="line">and --&gt; 与 </span><br><span class="line">sal --&gt; 算数左移 </span><br><span class="line"> sar --&gt; 算数右移 </span><br><span class="line"> shl --&gt;逻辑左移</span><br><span class="line">shr --&gt; 逻辑右移</span><br></pre></td></tr></table></figure>
-<h5 id="1-加载地址"><a href="#1-加载地址" class="headerlink" title="1.加载地址"></a>1.加载地址</h5><p>movq的一种变形 从内存读数据到寄存器 但是没有引用内存 不是单纯的读数据，而是将有效地址加载到目的操作数 <strong>描述简单的算数操作</strong></p>
-<h6 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h6><p>rdi &#x3D; x<br> leaq 7(%rdi,%rdi,4),%rax &#x3D;&#x3D; 将rax的值设置为5x+7</p>
-<h5 id="2-一元操作和二元操作"><a href="#2-一元操作和二元操作" class="headerlink" title="2.一元操作和二元操作"></a>2.一元操作和二元操作</h5><p> 只有一个操作数的是一元操作，既是源操作数也是目的操作数<br>地址          值              寄存器       值<br>0x100      0xFF             rax        0x100<br>0x108      0xAB             rcx        0x1<br> 0x118  0x11           rdx        0x3<br><strong>subq</strong> %rax,%rdx rdx &#x3D; rdx -rax<br><strong>addq</strong> %rcx , (%rax)   ;更新的其实是一个内存位置 位置为0x100<br><strong>imulq</strong> $16,(%rax,%rdx,8) ;更新的内存位置是0x118，值对应的是0x11*16&#x3D;0x110<br>他们的目的和最终值写出来<br>imulq 有符号乘法 一个操作数 这个指令要求就是必须两个数都在寄存器rax中 把高64位存放在rdx，低64位存放在rax里面<br><strong>salq</strong> $4,%rax(左移4位，扩大了2的4次方倍)</p>
-<h5 id="控制操作"><a href="#控制操作" class="headerlink" title="控制操作"></a>控制操作</h5><p>t  &#x3D; a + b<br>无符号溢出 <strong>CF</strong> （条件码）<br>  t&#x3D;&#x3D;0 <strong>ZF</strong><br> t &lt; 0  <strong>SF</strong><br> (a&lt;0&amp;&amp;b&lt;0) &amp;&amp; (t&lt;0 !&#x3D; a &lt;0) 有符号溢出 <strong>OF</strong><br><strong>leaq</strong> 不会改变任何条件码 xor 会将进位标志和溢出位标志设置成0<br><strong>cmpb</strong> 比较字节 <strong>cmpw</strong> 比较字  <strong>test</strong> 测试<br><strong>cmp</strong> rsi,rdi<br>cmp根据两个比较数的差来设置条件码 （除了不更新寄存器以外，和sub操作是一样的 test也是除了不更新寄存器以外，和 and 操作是一样的）<br><strong>testq</strong> %rax,%rax 检查rax是负数还是正数还是0<br> set指令设置条件码</p>
-]]></content>
-      <categories>
-        <category>pwn基础</category>
-      </categories>
-      <tags>
-        <tag>汇编</tag>
       </tags>
   </entry>
   <entry>
@@ -601,7 +617,7 @@
 
 <p>6.用智能指针作为参数传递时直接值传递就可以了。shared_ptr的大小为固定的8或16字节（也就是两倍指针的的大小，32位系统指针为4个字节，64位系统指针为8个字节，shared_ptr中就两个指针），所以直接值传递就可以了。</p>
 <p> shared_ptr总结：在现代程序中，当想要共享一块堆内存时，优先使用shared_ptr，可以极大的减少内存泄露的问题。</p>
-<h3 id="（-）weak-ptr"><a href="#（-）weak-ptr" class="headerlink" title="（*）weak_ptr"></a>（*）weak_ptr</h3><p><strong>1.</strong> <strong>weak_ptr介绍：</strong></p>
+<h2 id="weak-ptr"><a href="#weak-ptr" class="headerlink" title="(*)weak_ptr"></a>(*)weak_ptr</h2><p><strong>1.</strong> <strong>weak_ptr介绍：</strong></p>
 <p>(1) 这个智能指针是在C++11的时候引入的标准库，它的出现完全是为了弥补shared_ptr天生有缺陷的问题，其实shared_ptr可以说近乎完美。</p>
 <p>(2) 只是通过引用计数实现的方式也引来了引用成环的问题，这种问题靠它自己是没办法解决的，所以在C++11的时候将shared_ptr和weak_ptr一起引入了标准库，用来解决循环引用的问题。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vld.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;memory&gt;</span> </span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; 	</span><br><span class="line">	std::shared_ptr&lt;<span class="type">int</span>&gt;sharedI = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">100</span>);</span><br><span class="line">	std::cout &lt;&lt; sharedI.<span class="built_in">use_count</span>() &lt;&lt; std::endl;</span><br><span class="line">	std::weak_ptr&lt;<span class="type">int</span>&gt;<span class="built_in">weakI</span>(sharedI);<span class="comment">//weak_ptr指向同一个内存不增加引用计数</span></span><br><span class="line">	std::cout &lt;&lt; sharedI.<span class="built_in">use_count</span>() &lt;&lt; std::endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -611,6 +627,37 @@
 
 <p><strong>3.</strong> <strong>weak_ptr的作用原理：</strong>weak_ptr的对象需要绑定到shared_ptr对象上，作用原理是weak_ptr不会改变shared_ptr对象的引用计数。只要shared_ptr对象的引用计数为0，就会释放内存，weak_ptr的对象不会影响释放内存的过程。</p>
 <p>总结：<strong>weak_ptr使用较少，就是为了处理shared_ptr循环引用问题而设计的。</strong></p>
+<h2 id="unique-ptr"><a href="#unique-ptr" class="headerlink" title="(*)unique_ptr"></a>(*)unique_ptr</h2><p><strong>1.</strong> <strong>uniqe_ptr介绍：</strong>独占式智能指针，在使用智能指针时，我们一般优先考虑独占式智能指针，因为消耗更小。如果发现内存需要共享，那么再去使用“shared_ptr”。</p>
+<p><strong>2</strong> <strong>unique_ptr的初始化</strong>：和shared_ptr完全类似</p>
+<p>(1) 使用new运算符进行初始化</p>
+<p>(2) 使用make_unique函数进行初始化</p>
+ <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vld.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;memory&gt;</span> </span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::unique_ptr&lt;<span class="type">int</span>&gt;<span class="built_in">uniqueI2</span>(<span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">100</span>));</span><br><span class="line">	std::unique_ptr&lt;<span class="type">int</span>&gt; uniqueI = std::<span class="built_in">make_unique</span>&lt;<span class="type">int</span>&gt;(<span class="number">100</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.</strong> <strong>unique_ptr的常用操作</strong></p>
+<p>(1) unque_ptr禁止复制构造函数，也禁止赋值运算符的重载。否则独占便毫无意义。</p>
+<p>(2) unqiue_ptr允许移动构造，移动赋值。移动语义代表之前的对象已经失去了意义，移动操作自然不影响独占的特性。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vld.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;memory&gt;</span> </span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::unique_ptr&lt;<span class="type">int</span>&gt; uniqueI = std::<span class="built_in">make_unique</span>&lt;<span class="type">int</span>&gt;(<span class="number">100</span>);</span><br><span class="line">    std::unique_ptr&lt;<span class="type">int</span>&gt;uniqueI2=std::<span class="built_in">make_unique</span>&lt;<span class="type">int</span>&gt;(<span class="number">200</span>);</span><br><span class="line">    uniqueI2=std::<span class="built_in">move</span>(uniqueI);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>(3) reset函数：</p>
+<p>① 不带参数的情况下：释放智能指针的对象，并将智能指针置空。</p>
+<p>② 带参数的情况下：释放智能指针的对象，并将智能指针指向新的对象。</p>
+<p> <strong>和shared_ptr使用方法一样</strong></p>
+<p><strong>4.</strong> <strong>将unque_ptr的对象转化为shared_ptr对象，</strong>当unique_ptr的对象为一个右值时，就可以将该对象转化为shared_ptr的对象。</p>
+<p><strong>这个使用的并不多，需要将独占式指针转化为共享式指针常常是因为先前设计失误。</strong></p>
+<p><strong>注意：shared_ptr对象无法转化为unique_ptr对象。</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vld.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;memory&gt;</span> </span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">myfunc</span><span class="params">(std::unique_ptr&lt;<span class="type">int</span>&gt; uniqueI)</span><span class="comment">//需要共享操作时</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::shared_ptr&lt;<span class="type">int</span>&gt;<span class="built_in">sharedI</span>(std::<span class="built_in">move</span>(uniqueI));<span class="comment">//转换</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::unique_ptr&lt;<span class="type">int</span>&gt; uniqueI = std::<span class="built_in">make_unique</span>&lt;<span class="type">int</span>&gt;(<span class="number">100</span>);</span><br><span class="line">    std::unique_ptr&lt;<span class="type">int</span>&gt;uniqueI2=std::<span class="built_in">make_unique</span>&lt;<span class="type">int</span>&gt;(<span class="number">200</span>);</span><br><span class="line">    uniqueI2=std::<span class="built_in">move</span>(uniqueI);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="只能指针适用范围"><a href="#只能指针适用范围" class="headerlink" title="(**)只能指针适用范围"></a>(**)只能指针适用范围</h2><p><strong>1.</strong> <strong>能使用智能指针就尽量使用智能指针，那么哪些情况属于不能使用智能指针的情况  呢？</strong></p>
+<p> 有些函数必须使用C语言的指针，这些函数又没有替代，这种情况下，才使用普通的指针，其它情况一律使用智能指针。</p>
+<p> 必须使用C语言指针的情况包括：</p>
+<p><strong>（1）</strong> <strong>网络传输函数</strong>，比如windows下的send，recv函数，只能使用c语言指针，无法替代.</p>
+<p><strong>（2）</strong> <strong>c语言的文件操作部分</strong>。这方面C++已经有了替代品，C++的文件操作完全支持智能指针，<strong>所以在做大型项目时，推荐使用C++的文件操作功能。</strong></p>
+<p><strong>除了以上两种情况，剩下的均推荐使用智能指针。</strong></p>
+<p><strong>2.</strong> <strong>我们应该使用哪个智能指针呢？</strong></p>
+<p><strong>(1)</strong> <strong>优先使用unique_ptr，内存需要共享时再使用shared_ptr。</strong></p>
+<p><strong>当使用shared_ptr时，如果出现了循环引用的情况，再去考虑使用weak_ptr</strong></p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
