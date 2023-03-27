@@ -1,86 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>内核学习</title>
-    <url>/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2023/02/18/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>周计划</title>
-    <url>/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/</url>
-    <content><![CDATA[<h1 id="大一下学期目标"><a href="#大一下学期目标" class="headerlink" title="大一下学期目标"></a>大一下学期目标</h1><p><strong>主线</strong>：<strong>学习pwn的栈 堆和内核</strong></p>
-<p><strong>主线</strong>：<strong>完成现代c++的学习</strong></p>
-<p><strong>完成《深入了解操作系统》的阅读以及lab的练习</strong></p>
-<p><strong>完成<em>MIT.6S081</em>课程学习和lab的练习</strong></p>
-<h2 id="第4周"><a href="#第4周" class="headerlink" title="第4周"></a>第4周</h2><p>总目标：</p>
-<p><strong>现代c++：</strong>part1，part2 </p>
-<p><strong>pwn：</strong>理解堆</p>
-<p><strong>xv6：</strong>lab1完成</p>
-<p><strong>re:</strong> 简单了解逆向</p>
-<h3 id="周一"><a href="#周一" class="headerlink" title="周一"></a>周一</h3><p>现代c++：程序的执行过程，new关键字及内存内存，命名空间，c++的标准输入输出简历</p>
-<p>pwn：堆理解</p>
-<p>逆向刷题</p>
-<p>pwn刷题</p>
-<h3 id="周二"><a href="#周二" class="headerlink" title="周二"></a>周二</h3><p>现代c++：const关键字介绍 ，auto关键字使用</p>
-<p>pwn ：刷题整理</p>
-<h3 id="周三"><a href="#周三" class="headerlink" title="周三"></a>周三</h3><p>划水</p>
-<h3 id="周四"><a href="#周四" class="headerlink" title="周四"></a>周四</h3><p>现代c++：静态变量，指针和引用 ，左值，右值，左值引用，右值引用，move函数，临时对象 ，可调用对象</p>
-<p>pwn:pwn栈题总结</p>
-<h3 id="周五"><a href="#周五" class="headerlink" title="周五"></a>周五</h3><p>划水</p>
-<h3 id="周六"><a href="#周六" class="headerlink" title="周六"></a>周六</h3><p>xv6操作系统lab1完成</p>
-<h3 id="周日"><a href="#周日" class="headerlink" title="周日"></a>周日</h3><p>划水</p>
-<h2 id="第五周"><a href="#第五周" class="headerlink" title="第五周"></a>第五周</h2><p>总目标：</p>
-<p>现代c++：part3，part4</p>
-<p>堆：深入理解并开始刷题，栈题整理</p>
-<p>csapp：第一章第二章</p>
-<h3 id="周一-1"><a href="#周一-1" class="headerlink" title="周一"></a>周一</h3><p>现代c++：类介绍，构造函数，析构函数，this，长成员函数于常对象，inline，mutable，default，delete</p>
-<p>pwn:栈题整理</p>
-<h3 id="周二-1"><a href="#周二-1" class="headerlink" title="周二"></a>周二</h3><p>现代c++：友元类和友元函数， 重载运算符，普通继承及其实现原理</p>
-<p>pwn:栈题整理，堆理解</p>
-<h3 id="周三-1"><a href="#周三-1" class="headerlink" title="周三"></a>周三</h3><p>理解堆</p>
-<h3 id="周四-1"><a href="#周四-1" class="headerlink" title="周四"></a>周四</h3><p>现代c++：虚函数及其实现原理 override关键字 ，静态成员变量与静态函数 ， 纯虚函数 ，RTTL</p>
-<h3 id="周五-1"><a href="#周五-1" class="headerlink" title="周五"></a>周五</h3><p>现代c++：多继承 ， 虚继承及其实现原理 ，智能指针概述</p>
-<h3 id="周六-1"><a href="#周六-1" class="headerlink" title="周六"></a>周六</h3><p>pwn：堆：main_arena和top chunk ， free函数和bins</p>
-<h3 id="周日-1"><a href="#周日-1" class="headerlink" title="周日"></a>周日</h3><p>划水</p>
-<h2 id="第六周"><a href="#第六周" class="headerlink" title="第六周"></a>第六周</h2><p>总目标：</p>
-<p>现代c++：智能指针，模板与泛型编程，复习</p>
-<p>pwn：堆题入门，gdb pwntools使用，栈刷题</p>
-<p>《程序员的自我修养》阅读</p>
-<h3 id="周一-2"><a href="#周一-2" class="headerlink" title="周一"></a>周一</h3><p>现代c++：shard_ptr ， weak_ptr</p>
-<p>pwn：堆深入理解并尝试例题</p>
-<h3 id="周二-2"><a href="#周二-2" class="headerlink" title="周二"></a>周二</h3><p>现代c++:uniqe_ptr,指针使用范围</p>
-<p>pwn:栈复习，堆理解</p>
-<h3 id="周三-2"><a href="#周三-2" class="headerlink" title="周三"></a>周三</h3><p>现代c++模板介绍，类模板与模板实现原理</p>
-<h3 id="周四-2"><a href="#周四-2" class="headerlink" title="周四"></a>周四</h3><p>周四发现甲流了(其实周三就有点感觉了)，一直到周日没翻开过电脑</p>
-<p><img src="/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/%E5%91%A8%E8%AE%A1%E5%88%92-1/image-20230327171754073.png" alt="image-20230327171754073"></p>
-<h2 id="第七周"><a href="#第七周" class="headerlink" title="第七周"></a>第七周</h2><h3 id="周一-3"><a href="#周一-3" class="headerlink" title="周一"></a>周一</h3><p>现代c++:模板与泛型编程，类模板与模板实现原理，intitializer_list与typename</p>
-]]></content>
-      <categories>
-        <category>计划</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>pwn日常刷题记录</title>
     <url>/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="栈问题"><a href="#栈问题" class="headerlink" title="栈问题"></a>栈问题</h1><h2 id="get-started-3dsctf-2016"><a href="#get-started-3dsctf-2016" class="headerlink" title="get_started_3dsctf_2016"></a>get_started_3dsctf_2016</h2><p><strong>checksec</strong></p>
@@ -169,6 +89,120 @@
       </categories>
       <tags>
         <tag>刷题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/02/18/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>内核学习</title>
+    <url>/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>周计划</title>
+    <url>/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/</url>
+    <content><![CDATA[<h1 id="大一下学期目标"><a href="#大一下学期目标" class="headerlink" title="大一下学期目标"></a>大一下学期目标</h1><p><strong>主线</strong>：<strong>学习pwn的栈 堆和内核</strong></p>
+<p><strong>主线</strong>：<strong>完成现代c++的学习</strong></p>
+<p><strong>完成《深入了解操作系统》的阅读以及lab的练习</strong></p>
+<p><strong>完成<em>MIT.6S081</em>课程学习和lab的练习</strong></p>
+<h2 id="第4周"><a href="#第4周" class="headerlink" title="第4周"></a>第4周</h2><p>总目标：</p>
+<p><strong>现代c++：</strong>part1，part2 </p>
+<p><strong>pwn：</strong>理解堆</p>
+<p><strong>xv6：</strong>lab1完成</p>
+<p><strong>re:</strong> 简单了解逆向</p>
+<h3 id="周一"><a href="#周一" class="headerlink" title="周一"></a>周一</h3><p>现代c++：程序的执行过程，new关键字及内存内存，命名空间，c++的标准输入输出简历</p>
+<p>pwn：堆理解</p>
+<p>逆向刷题</p>
+<p>pwn刷题</p>
+<h3 id="周二"><a href="#周二" class="headerlink" title="周二"></a>周二</h3><p>现代c++：const关键字介绍 ，auto关键字使用</p>
+<p>pwn ：刷题整理</p>
+<h3 id="周三"><a href="#周三" class="headerlink" title="周三"></a>周三</h3><p>划水</p>
+<h3 id="周四"><a href="#周四" class="headerlink" title="周四"></a>周四</h3><p>现代c++：静态变量，指针和引用 ，左值，右值，左值引用，右值引用，move函数，临时对象 ，可调用对象</p>
+<p>pwn:pwn栈题总结</p>
+<h3 id="周五"><a href="#周五" class="headerlink" title="周五"></a>周五</h3><p>划水</p>
+<h3 id="周六"><a href="#周六" class="headerlink" title="周六"></a>周六</h3><p>xv6操作系统lab1完成</p>
+<h3 id="周日"><a href="#周日" class="headerlink" title="周日"></a>周日</h3><p>划水</p>
+<h2 id="第五周"><a href="#第五周" class="headerlink" title="第五周"></a>第五周</h2><p>总目标：</p>
+<p>现代c++：part3，part4</p>
+<p>堆：深入理解并开始刷题，栈题整理</p>
+<p>csapp：第一章第二章</p>
+<h3 id="周一-1"><a href="#周一-1" class="headerlink" title="周一"></a>周一</h3><p>现代c++：类介绍，构造函数，析构函数，this，长成员函数于常对象，inline，mutable，default，delete</p>
+<p>pwn:栈题整理</p>
+<h3 id="周二-1"><a href="#周二-1" class="headerlink" title="周二"></a>周二</h3><p>现代c++：友元类和友元函数， 重载运算符，普通继承及其实现原理</p>
+<p>pwn:栈题整理，堆理解</p>
+<h3 id="周三-1"><a href="#周三-1" class="headerlink" title="周三"></a>周三</h3><p>理解堆</p>
+<h3 id="周四-1"><a href="#周四-1" class="headerlink" title="周四"></a>周四</h3><p>现代c++：虚函数及其实现原理 override关键字 ，静态成员变量与静态函数 ， 纯虚函数 ，RTTL</p>
+<h3 id="周五-1"><a href="#周五-1" class="headerlink" title="周五"></a>周五</h3><p>现代c++：多继承 ， 虚继承及其实现原理 ，智能指针概述</p>
+<h3 id="周六-1"><a href="#周六-1" class="headerlink" title="周六"></a>周六</h3><p>pwn：堆：main_arena和top chunk ， free函数和bins</p>
+<h3 id="周日-1"><a href="#周日-1" class="headerlink" title="周日"></a>周日</h3><p>划水</p>
+<h2 id="第六周"><a href="#第六周" class="headerlink" title="第六周"></a>第六周</h2><p>总目标：</p>
+<p>现代c++：智能指针，模板与泛型编程，复习</p>
+<p>pwn：堆题入门，gdb pwntools使用，栈刷题</p>
+<p>《程序员的自我修养》阅读</p>
+<h3 id="周一-2"><a href="#周一-2" class="headerlink" title="周一"></a>周一</h3><p>现代c++：shard_ptr ， weak_ptr</p>
+<p>pwn：堆深入理解并尝试例题</p>
+<h3 id="周二-2"><a href="#周二-2" class="headerlink" title="周二"></a>周二</h3><p>现代c++:uniqe_ptr,指针使用范围</p>
+<p>pwn:栈复习，堆理解</p>
+<h3 id="周三-2"><a href="#周三-2" class="headerlink" title="周三"></a>周三</h3><p>现代c++模板介绍，类模板与模板实现原理</p>
+<h3 id="周四-2"><a href="#周四-2" class="headerlink" title="周四"></a>周四</h3><p>周四发现甲流了(其实周三就有点感觉了)，一直到周日没翻开过电脑</p>
+<p><img src="/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/%E5%91%A8%E8%AE%A1%E5%88%92-1/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-27%20171751.png"></p>
+<h2 id="第七周"><a href="#第七周" class="headerlink" title="第七周"></a>第七周</h2><h3 id="周一-3"><a href="#周一-3" class="headerlink" title="周一"></a>周一</h3><p>现代c++:模板与泛型编程，类模板与模板实现原理，intitializer_list与typename</p>
+]]></content>
+      <categories>
+        <category>计划</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>汇编语言简单摘要</title>
+    <url>/2023/02/20/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%91%98%E8%A6%81/</url>
+    <content><![CDATA[<h3 id="x86-64位寄存器（16个）"><a href="#x86-64位寄存器（16个）" class="headerlink" title="x86-64位寄存器（16个）"></a>x86-64位寄存器（16个）</h3><p>rax：存放保存函数返回值<br>rbx：被调用者保存<br>rdi rsi rdx rcx 对应第1、2、3、4个参数<br>rsp：栈指针，存放栈帧的栈顶的偏移地址<br>r8 r9对应第5、6个参数</p>
+<h3 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h3><p>立即数寻址$Imm Imm(立即数)<br>寄存器寻址%ra R[ra] (寄存器)<br>绝对寻址Imm M[Imm] (存储器)<br>间接寻址（%ra）M[R[[ra]]</p>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">下面有一点地址或寄存器的值，写出操作数的值</span><br><span class="line">地址          值              寄存器       值</span><br><span class="line">0x100      0xFF             rax        0x100</span><br><span class="line">0x104      0xab             rcx        0x1</span><br><span class="line">0x108      0x13             rdx        0x3</span><br><span class="line">0x10C      0x11</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">操作数  值</span><br><span class="line">rax 0x100(寄存器)</span><br><span class="line">0x104 0xab（绝对寻址）</span><br><span class="line"><span class="variable">$0x108</span> 0x108（立即数寻址）</span><br><span class="line">(%rax) 0xFF（间接寻址）</span><br></pre></td></tr></table></figure>
+
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>两种汇编模式<br>ATT汇编movq movb<br>普通汇编 mov <strong>rax,rbx</strong>&#x3D;mov<strong>q %rbx,%rax</strong> （ATT）：把rbx的值赋给rax</p>
+<h4 id="mov"><a href="#mov" class="headerlink" title="mov"></a>mov</h4><p>mov 数据传送指令 将数据从一个位置复制到另一个位置的指令<br>mov 寄存器&#x2F;立即数 操作数用来指向一个执行所要使用源数据的值，放置结果的目的位置，mov 源操作数的值是一个立即数，值存放在内存或者寄存器中 目的操作数一个寄存器或者是一个内存地址。</p>
+<p><strong>单位</strong>：1字节 &#x3D; 8bit  1字 &#x3D; 8字节 &#x3D; 64bit</p>
+<p><strong>movb 一个字节</strong> (这个字代表双字节的意思，与上边的字不一样)<br><strong>movw 一个字<br>movl 双字（寄存器的高四字节设置成0）<br>movq 四字<br>movabsq I,R  R&lt;-I 传送的是绝对的四字 目的操作数只能是寄存器</strong><br>movl $0x4050,%eax      4bytes   立即数–寄存器<br>movw %bp,%sp           2bytes   寄存器–寄存器<br>movb (%rdi,%rcx),%al   1bytes  内存–寄存器<br>movb $-17,(%rsp)       1bytes   立即数–内存<br>movq %rax,-12(%rbp)    8bytes   寄存器–内存l</p>
+<h5 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">movabsq <span class="variable">$0x0011223344556677</span> , %rax = 0011223344556677  </span><br><span class="line">（ rax包含了eax eax包含了ax ax包含了al）</span><br><span class="line">-1的16进制是0xFFFFFFFFFFFFFF,第一步结束后每一步rax的值是多少</span><br><span class="line">movb $-1 ,%al           ， %rax = 00112233445566FF   F = 1111</span><br><span class="line">movw $-1 , %ax          ， %rax = 001122334455FFFF   </span><br><span class="line">movl $-1 , %eax         ， %rax = 00000000FFFFFFFF</span><br><span class="line">movq $-1 ,%rax          ， %rax = FFFFFFFFFFFFFFFF </span><br></pre></td></tr></table></figure>
+
+
+<h5 id="例题2"><a href="#例题2" class="headerlink" title="例题2"></a>例题2</h5><p>把下列汇编代码用c语言表示  （rax一直保存的是返回值）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">decode1:</span><br><span class="line">    movq (%rdi) , %r8</span><br><span class="line">    movq (%rsi) , %rcx</span><br><span class="line">    movq (%rdx) , %rax</span><br><span class="line">    movq %r8    , (%rsi)</span><br><span class="line">    movq %rcx   , (%rdx)</span><br><span class="line">    movq %rax ,   (%rdx)      </span><br><span class="line">    ret </span><br></pre></td></tr></table></figure>
+<p>c语言</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">decode1</span><span class="params">(<span class="type">long</span> *xp,<span class="type">long</span> *yp,<span class="type">long</span> *zp)</span>&#123;</span><br><span class="line">     <span class="type">long</span> x = *xp;</span><br><span class="line">     <span class="type">long</span> y = *yp;</span><br><span class="line">     <span class="type">long</span> z = *zp;</span><br><span class="line">     *yp = x;</span><br><span class="line">     *zp = y;</span><br><span class="line">     *xp = z;</span><br><span class="line">     <span class="keyword">return</span> z;</span><br><span class="line"> &#125;    </span><br><span class="line">     </span><br></pre></td></tr></table></figure>
+<h4 id="push和pop"><a href="#push和pop" class="headerlink" title="push和pop"></a>push和pop</h4><p>push压入栈 pop弹出栈（pop弹出的值一直是一个最近压入栈的数据且仍在栈中）<br>由于栈是由大到小增长的，所以栈顶永远是地址最低的 %rsp保存着栈顶的元素<br>pushq popq 将四字压入栈中 将四字弹出栈<br>pushq %rbp &#x3D; subq $8,%rsp  movq %rbp,(%rsp)   （rsp地址减8）<br>popq <strong>%rax</strong>  &lt;&#x3D;&#x3D;&gt; movq (%rsp),(<strong>%rax</strong>) addq $8,%rsp （rsp地址加8）<br><strong>pop之后，值不会被删除，除非有一个新的值覆盖了原先的值</strong></p>
+<h4 id="算数和逻辑操作"><a href="#算数和逻辑操作" class="headerlink" title="算数和逻辑操作"></a>算数和逻辑操作</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">leaq  --&gt; 加载有效地址 </span><br><span class="line">inc --&gt; 加一 </span><br><span class="line">dec --&gt; 减一 </span><br><span class="line">neg --&gt; 取负 </span><br><span class="line">not --&gt; 取补 </span><br><span class="line">add --&gt; 加 </span><br><span class="line">sub --&gt; 减 </span><br><span class="line">imul --&gt; 乘 </span><br><span class="line">xor --&gt; 异或 </span><br><span class="line">or --&gt; 或 </span><br><span class="line">and --&gt; 与 </span><br><span class="line">sal --&gt; 算数左移 </span><br><span class="line"> sar --&gt; 算数右移 </span><br><span class="line"> shl --&gt;逻辑左移</span><br><span class="line">shr --&gt; 逻辑右移</span><br></pre></td></tr></table></figure>
+<h5 id="1-加载地址"><a href="#1-加载地址" class="headerlink" title="1.加载地址"></a>1.加载地址</h5><p>movq的一种变形 从内存读数据到寄存器 但是没有引用内存 不是单纯的读数据，而是将有效地址加载到目的操作数 <strong>描述简单的算数操作</strong></p>
+<h6 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h6><p>rdi &#x3D; x<br> leaq 7(%rdi,%rdi,4),%rax &#x3D;&#x3D; 将rax的值设置为5x+7</p>
+<h5 id="2-一元操作和二元操作"><a href="#2-一元操作和二元操作" class="headerlink" title="2.一元操作和二元操作"></a>2.一元操作和二元操作</h5><p> 只有一个操作数的是一元操作，既是源操作数也是目的操作数<br>地址          值              寄存器       值<br>0x100      0xFF             rax        0x100<br>0x108      0xAB             rcx        0x1<br> 0x118  0x11           rdx        0x3<br><strong>subq</strong> %rax,%rdx rdx &#x3D; rdx -rax<br><strong>addq</strong> %rcx , (%rax)   ;更新的其实是一个内存位置 位置为0x100<br><strong>imulq</strong> $16,(%rax,%rdx,8) ;更新的内存位置是0x118，值对应的是0x11*16&#x3D;0x110<br>他们的目的和最终值写出来<br>imulq 有符号乘法 一个操作数 这个指令要求就是必须两个数都在寄存器rax中 把高64位存放在rdx，低64位存放在rax里面<br><strong>salq</strong> $4,%rax(左移4位，扩大了2的4次方倍)</p>
+<h5 id="控制操作"><a href="#控制操作" class="headerlink" title="控制操作"></a>控制操作</h5><p>t  &#x3D; a + b<br>无符号溢出 <strong>CF</strong> （条件码）<br>  t&#x3D;&#x3D;0 <strong>ZF</strong><br> t &lt; 0  <strong>SF</strong><br> (a&lt;0&amp;&amp;b&lt;0) &amp;&amp; (t&lt;0 !&#x3D; a &lt;0) 有符号溢出 <strong>OF</strong><br><strong>leaq</strong> 不会改变任何条件码 xor 会将进位标志和溢出位标志设置成0<br><strong>cmpb</strong> 比较字节 <strong>cmpw</strong> 比较字  <strong>test</strong> 测试<br><strong>cmp</strong> rsi,rdi<br>cmp根据两个比较数的差来设置条件码 （除了不更新寄存器以外，和sub操作是一样的 test也是除了不更新寄存器以外，和 and 操作是一样的）<br><strong>testq</strong> %rax,%rax 检查rax是负数还是正数还是0<br> set指令设置条件码</p>
+]]></content>
+      <categories>
+        <category>pwn基础</category>
+      </categories>
+      <tags>
+        <tag>汇编</tag>
       </tags>
   </entry>
   <entry>
@@ -541,40 +575,6 @@
       </categories>
       <tags>
         <tag>c++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>汇编语言简单摘要</title>
-    <url>/2023/02/20/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%91%98%E8%A6%81/</url>
-    <content><![CDATA[<h3 id="x86-64位寄存器（16个）"><a href="#x86-64位寄存器（16个）" class="headerlink" title="x86-64位寄存器（16个）"></a>x86-64位寄存器（16个）</h3><p>rax：存放保存函数返回值<br>rbx：被调用者保存<br>rdi rsi rdx rcx 对应第1、2、3、4个参数<br>rsp：栈指针，存放栈帧的栈顶的偏移地址<br>r8 r9对应第5、6个参数</p>
-<h3 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h3><p>立即数寻址$Imm Imm(立即数)<br>寄存器寻址%ra R[ra] (寄存器)<br>绝对寻址Imm M[Imm] (存储器)<br>间接寻址（%ra）M[R[[ra]]</p>
-<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">下面有一点地址或寄存器的值，写出操作数的值</span><br><span class="line">地址          值              寄存器       值</span><br><span class="line">0x100      0xFF             rax        0x100</span><br><span class="line">0x104      0xab             rcx        0x1</span><br><span class="line">0x108      0x13             rdx        0x3</span><br><span class="line">0x10C      0x11</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">操作数  值</span><br><span class="line">rax 0x100(寄存器)</span><br><span class="line">0x104 0xab（绝对寻址）</span><br><span class="line"><span class="variable">$0x108</span> 0x108（立即数寻址）</span><br><span class="line">(%rax) 0xFF（间接寻址）</span><br></pre></td></tr></table></figure>
-
-<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>两种汇编模式<br>ATT汇编movq movb<br>普通汇编 mov <strong>rax,rbx</strong>&#x3D;mov<strong>q %rbx,%rax</strong> （ATT）：把rbx的值赋给rax</p>
-<h4 id="mov"><a href="#mov" class="headerlink" title="mov"></a>mov</h4><p>mov 数据传送指令 将数据从一个位置复制到另一个位置的指令<br>mov 寄存器&#x2F;立即数 操作数用来指向一个执行所要使用源数据的值，放置结果的目的位置，mov 源操作数的值是一个立即数，值存放在内存或者寄存器中 目的操作数一个寄存器或者是一个内存地址。</p>
-<p><strong>单位</strong>：1字节 &#x3D; 8bit  1字 &#x3D; 8字节 &#x3D; 64bit</p>
-<p><strong>movb 一个字节</strong> (这个字代表双字节的意思，与上边的字不一样)<br><strong>movw 一个字<br>movl 双字（寄存器的高四字节设置成0）<br>movq 四字<br>movabsq I,R  R&lt;-I 传送的是绝对的四字 目的操作数只能是寄存器</strong><br>movl $0x4050,%eax      4bytes   立即数–寄存器<br>movw %bp,%sp           2bytes   寄存器–寄存器<br>movb (%rdi,%rcx),%al   1bytes  内存–寄存器<br>movb $-17,(%rsp)       1bytes   立即数–内存<br>movq %rax,-12(%rbp)    8bytes   寄存器–内存l</p>
-<h5 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">movabsq <span class="variable">$0x0011223344556677</span> , %rax = 0011223344556677  </span><br><span class="line">（ rax包含了eax eax包含了ax ax包含了al）</span><br><span class="line">-1的16进制是0xFFFFFFFFFFFFFF,第一步结束后每一步rax的值是多少</span><br><span class="line">movb $-1 ,%al           ， %rax = 00112233445566FF   F = 1111</span><br><span class="line">movw $-1 , %ax          ， %rax = 001122334455FFFF   </span><br><span class="line">movl $-1 , %eax         ， %rax = 00000000FFFFFFFF</span><br><span class="line">movq $-1 ,%rax          ， %rax = FFFFFFFFFFFFFFFF </span><br></pre></td></tr></table></figure>
-
-
-<h5 id="例题2"><a href="#例题2" class="headerlink" title="例题2"></a>例题2</h5><p>把下列汇编代码用c语言表示  （rax一直保存的是返回值）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">decode1:</span><br><span class="line">    movq (%rdi) , %r8</span><br><span class="line">    movq (%rsi) , %rcx</span><br><span class="line">    movq (%rdx) , %rax</span><br><span class="line">    movq %r8    , (%rsi)</span><br><span class="line">    movq %rcx   , (%rdx)</span><br><span class="line">    movq %rax ,   (%rdx)      </span><br><span class="line">    ret </span><br></pre></td></tr></table></figure>
-<p>c语言</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">decode1</span><span class="params">(<span class="type">long</span> *xp,<span class="type">long</span> *yp,<span class="type">long</span> *zp)</span>&#123;</span><br><span class="line">     <span class="type">long</span> x = *xp;</span><br><span class="line">     <span class="type">long</span> y = *yp;</span><br><span class="line">     <span class="type">long</span> z = *zp;</span><br><span class="line">     *yp = x;</span><br><span class="line">     *zp = y;</span><br><span class="line">     *xp = z;</span><br><span class="line">     <span class="keyword">return</span> z;</span><br><span class="line"> &#125;    </span><br><span class="line">     </span><br></pre></td></tr></table></figure>
-<h4 id="push和pop"><a href="#push和pop" class="headerlink" title="push和pop"></a>push和pop</h4><p>push压入栈 pop弹出栈（pop弹出的值一直是一个最近压入栈的数据且仍在栈中）<br>由于栈是由大到小增长的，所以栈顶永远是地址最低的 %rsp保存着栈顶的元素<br>pushq popq 将四字压入栈中 将四字弹出栈<br>pushq %rbp &#x3D; subq $8,%rsp  movq %rbp,(%rsp)   （rsp地址减8）<br>popq <strong>%rax</strong>  &lt;&#x3D;&#x3D;&gt; movq (%rsp),(<strong>%rax</strong>) addq $8,%rsp （rsp地址加8）<br><strong>pop之后，值不会被删除，除非有一个新的值覆盖了原先的值</strong></p>
-<h4 id="算数和逻辑操作"><a href="#算数和逻辑操作" class="headerlink" title="算数和逻辑操作"></a>算数和逻辑操作</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">leaq  --&gt; 加载有效地址 </span><br><span class="line">inc --&gt; 加一 </span><br><span class="line">dec --&gt; 减一 </span><br><span class="line">neg --&gt; 取负 </span><br><span class="line">not --&gt; 取补 </span><br><span class="line">add --&gt; 加 </span><br><span class="line">sub --&gt; 减 </span><br><span class="line">imul --&gt; 乘 </span><br><span class="line">xor --&gt; 异或 </span><br><span class="line">or --&gt; 或 </span><br><span class="line">and --&gt; 与 </span><br><span class="line">sal --&gt; 算数左移 </span><br><span class="line"> sar --&gt; 算数右移 </span><br><span class="line"> shl --&gt;逻辑左移</span><br><span class="line">shr --&gt; 逻辑右移</span><br></pre></td></tr></table></figure>
-<h5 id="1-加载地址"><a href="#1-加载地址" class="headerlink" title="1.加载地址"></a>1.加载地址</h5><p>movq的一种变形 从内存读数据到寄存器 但是没有引用内存 不是单纯的读数据，而是将有效地址加载到目的操作数 <strong>描述简单的算数操作</strong></p>
-<h6 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h6><p>rdi &#x3D; x<br> leaq 7(%rdi,%rdi,4),%rax &#x3D;&#x3D; 将rax的值设置为5x+7</p>
-<h5 id="2-一元操作和二元操作"><a href="#2-一元操作和二元操作" class="headerlink" title="2.一元操作和二元操作"></a>2.一元操作和二元操作</h5><p> 只有一个操作数的是一元操作，既是源操作数也是目的操作数<br>地址          值              寄存器       值<br>0x100      0xFF             rax        0x100<br>0x108      0xAB             rcx        0x1<br> 0x118  0x11           rdx        0x3<br><strong>subq</strong> %rax,%rdx rdx &#x3D; rdx -rax<br><strong>addq</strong> %rcx , (%rax)   ;更新的其实是一个内存位置 位置为0x100<br><strong>imulq</strong> $16,(%rax,%rdx,8) ;更新的内存位置是0x118，值对应的是0x11*16&#x3D;0x110<br>他们的目的和最终值写出来<br>imulq 有符号乘法 一个操作数 这个指令要求就是必须两个数都在寄存器rax中 把高64位存放在rdx，低64位存放在rax里面<br><strong>salq</strong> $4,%rax(左移4位，扩大了2的4次方倍)</p>
-<h5 id="控制操作"><a href="#控制操作" class="headerlink" title="控制操作"></a>控制操作</h5><p>t  &#x3D; a + b<br>无符号溢出 <strong>CF</strong> （条件码）<br>  t&#x3D;&#x3D;0 <strong>ZF</strong><br> t &lt; 0  <strong>SF</strong><br> (a&lt;0&amp;&amp;b&lt;0) &amp;&amp; (t&lt;0 !&#x3D; a &lt;0) 有符号溢出 <strong>OF</strong><br><strong>leaq</strong> 不会改变任何条件码 xor 会将进位标志和溢出位标志设置成0<br><strong>cmpb</strong> 比较字节 <strong>cmpw</strong> 比较字  <strong>test</strong> 测试<br><strong>cmp</strong> rsi,rdi<br>cmp根据两个比较数的差来设置条件码 （除了不更新寄存器以外，和sub操作是一样的 test也是除了不更新寄存器以外，和 and 操作是一样的）<br><strong>testq</strong> %rax,%rax 检查rax是负数还是正数还是0<br> set指令设置条件码</p>
-]]></content>
-      <categories>
-        <category>pwn基础</category>
-      </categories>
-      <tags>
-        <tag>汇编</tag>
       </tags>
   </entry>
   <entry>
