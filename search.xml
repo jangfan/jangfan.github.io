@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>内核学习</title>
+    <url>/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2023/02/18/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -17,6 +22,63 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>周计划</title>
+    <url>/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/</url>
+    <content><![CDATA[<h1 id="大一下学期目标"><a href="#大一下学期目标" class="headerlink" title="大一下学期目标"></a>大一下学期目标</h1><p><strong>主线</strong>：<strong>学习pwn的栈 堆和内核</strong></p>
+<p><strong>主线</strong>：<strong>完成现代c++的学习</strong></p>
+<p><strong>完成《深入了解操作系统》的阅读以及lab的练习</strong></p>
+<p><strong>完成<em>MIT.6S081</em>课程学习和lab的练习</strong></p>
+<h2 id="第4周"><a href="#第4周" class="headerlink" title="第4周"></a>第4周</h2><p>总目标：</p>
+<p><strong>现代c++：</strong>part1，part2 </p>
+<p><strong>pwn：</strong>理解堆</p>
+<p><strong>xv6：</strong>lab1完成</p>
+<p><strong>re:</strong> 简单了解逆向</p>
+<h3 id="周一"><a href="#周一" class="headerlink" title="周一"></a>周一</h3><p>现代c++：程序的执行过程，new关键字及内存内存，命名空间，c++的标准输入输出简历</p>
+<p>pwn：堆理解</p>
+<p>逆向刷题</p>
+<p>pwn刷题</p>
+<h3 id="周二"><a href="#周二" class="headerlink" title="周二"></a>周二</h3><p>现代c++：const关键字介绍 ，auto关键字使用</p>
+<p>pwn ：刷题整理</p>
+<h3 id="周三"><a href="#周三" class="headerlink" title="周三"></a>周三</h3><p>划水</p>
+<h3 id="周四"><a href="#周四" class="headerlink" title="周四"></a>周四</h3><p>现代c++：静态变量，指针和引用 ，左值，右值，左值引用，右值引用，move函数，临时对象 ，可调用对象</p>
+<p>pwn:pwn栈题总结</p>
+<h3 id="周五"><a href="#周五" class="headerlink" title="周五"></a>周五</h3><p>划水</p>
+<h3 id="周六"><a href="#周六" class="headerlink" title="周六"></a>周六</h3><p>xv6操作系统lab1完成</p>
+<h3 id="周日"><a href="#周日" class="headerlink" title="周日"></a>周日</h3><p>划水</p>
+<h2 id="第五周"><a href="#第五周" class="headerlink" title="第五周"></a>第五周</h2><p>总目标：</p>
+<p>现代c++：part3，part4</p>
+<p>堆：深入理解并开始刷题，栈题整理</p>
+<p>csapp：第一章第二章</p>
+<h3 id="周一-1"><a href="#周一-1" class="headerlink" title="周一"></a>周一</h3><p>现代c++：类介绍，构造函数，析构函数，this，长成员函数于常对象，inline，mutable，default，delete</p>
+<p>pwn:栈题整理</p>
+<h3 id="周二-1"><a href="#周二-1" class="headerlink" title="周二"></a>周二</h3><p>现代c++：友元类和友元函数， 重载运算符，普通继承及其实现原理</p>
+<p>pwn:栈题整理，堆理解</p>
+<h3 id="周三-1"><a href="#周三-1" class="headerlink" title="周三"></a>周三</h3><p>理解堆</p>
+<h3 id="周四-1"><a href="#周四-1" class="headerlink" title="周四"></a>周四</h3><p>现代c++：虚函数及其实现原理 override关键字 ，静态成员变量与静态函数 ， 纯虚函数 ，RTTL</p>
+<h3 id="周五-1"><a href="#周五-1" class="headerlink" title="周五"></a>周五</h3><p>现代c++：多继承 ， 虚继承及其实现原理 ，智能指针概述</p>
+<h3 id="周六-1"><a href="#周六-1" class="headerlink" title="周六"></a>周六</h3><p>pwn：堆：main_arena和top chunk ， free函数和bins</p>
+<h3 id="周日-1"><a href="#周日-1" class="headerlink" title="周日"></a>周日</h3><p>划水</p>
+<h2 id="第六周"><a href="#第六周" class="headerlink" title="第六周"></a>第六周</h2><p>总目标：</p>
+<p>现代c++：智能指针，模板与泛型编程，复习</p>
+<p>pwn：堆题入门，gdb pwntools使用，栈刷题</p>
+<p>《程序员的自我修养》阅读</p>
+<h3 id="周一-2"><a href="#周一-2" class="headerlink" title="周一"></a>周一</h3><p>现代c++：shard_ptr ， weak_ptr</p>
+<p>pwn：堆深入理解并尝试例题</p>
+<h3 id="周二-2"><a href="#周二-2" class="headerlink" title="周二"></a>周二</h3><p>现代c++:uniqe_ptr,指针使用范围</p>
+<p>pwn:栈复习，堆理解</p>
+<h3 id="周三-2"><a href="#周三-2" class="headerlink" title="周三"></a>周三</h3><p>现代c++模板介绍，类模板与模板实现原理</p>
+<h3 id="周四-2"><a href="#周四-2" class="headerlink" title="周四"></a>周四</h3><p>周四发现甲流了(其实周三就有点感觉了)，一直到周日没翻开过电脑</p>
+<p><img src="/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/%E5%91%A8%E8%AE%A1%E5%88%92-1/image-20230327171754073.png" alt="image-20230327171754073"></p>
+<h2 id="第七周"><a href="#第七周" class="headerlink" title="第七周"></a>第七周</h2><h3 id="周一-3"><a href="#周一-3" class="headerlink" title="周一"></a>周一</h3><p>现代c++:模板与泛型编程，类模板与模板实现原理，intitializer_list与typename</p>
+]]></content>
+      <categories>
+        <category>计划</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
   </entry>
   <entry>
     <title>pwn日常刷题记录</title>
@@ -107,66 +169,6 @@
       </categories>
       <tags>
         <tag>刷题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>内核学习</title>
-    <url>/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>周计划</title>
-    <url>/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/</url>
-    <content><![CDATA[<h1 id="大一下学期目标"><a href="#大一下学期目标" class="headerlink" title="大一下学期目标"></a>大一下学期目标</h1><p><strong>主线</strong>：<strong>学习pwn的栈 堆和内核</strong></p>
-<p><strong>主线</strong>：<strong>完成现代c++的学习</strong></p>
-<p><strong>完成《深入了解操作系统》的阅读以及lab的练习</strong></p>
-<p><strong>完成<em>MIT.6S081</em>课程学习和lab的练习</strong></p>
-<h2 id="第4周"><a href="#第4周" class="headerlink" title="第4周"></a>第4周</h2><p>总目标：</p>
-<p><strong>现代c++：</strong>part1，part2 </p>
-<p><strong>pwn：</strong>理解堆</p>
-<p><strong>xv6：</strong>lab1完成</p>
-<p><strong>re:</strong> 简单了解逆向</p>
-<h3 id="周一"><a href="#周一" class="headerlink" title="周一"></a>周一</h3><p>现代c++：程序的执行过程，new关键字及内存内存，命名空间，c++的标准输入输出简历</p>
-<p>pwn：堆理解</p>
-<p>逆向刷题</p>
-<p>pwn刷题</p>
-<h3 id="周二"><a href="#周二" class="headerlink" title="周二"></a>周二</h3><p>现代c++：const关键字介绍 ，auto关键字使用</p>
-<p>pwn ：刷题整理</p>
-<h3 id="周三"><a href="#周三" class="headerlink" title="周三"></a>周三</h3><p>划水</p>
-<h3 id="周四"><a href="#周四" class="headerlink" title="周四"></a>周四</h3><p>现代c++：静态变量，指针和引用 ，左值，右值，左值引用，右值引用，move函数，临时对象 ，可调用对象</p>
-<p>pwn:pwn栈题总结</p>
-<h3 id="周五"><a href="#周五" class="headerlink" title="周五"></a>周五</h3><p>划水</p>
-<h3 id="周六"><a href="#周六" class="headerlink" title="周六"></a>周六</h3><p>xv6操作系统lab1完成</p>
-<h3 id="周日"><a href="#周日" class="headerlink" title="周日"></a>周日</h3><p>划水</p>
-<h2 id="第五周"><a href="#第五周" class="headerlink" title="第五周"></a>第五周</h2><p>总目标：</p>
-<p>现代c++：part3，part4</p>
-<p>堆：深入理解并开始刷题，栈题整理</p>
-<p>csapp：第一章第二章</p>
-<h3 id="周一-1"><a href="#周一-1" class="headerlink" title="周一"></a>周一</h3><p>现代c++：类介绍，构造函数，析构函数，this，长成员函数于常对象，inline，mutable，default，delete</p>
-<p>pwn:栈题整理</p>
-<h3 id="周二-1"><a href="#周二-1" class="headerlink" title="周二"></a>周二</h3><p>现代c++：友元类和友元函数， 重载运算符，普通继承及其实现原理</p>
-<p>pwn:栈题整理，堆理解</p>
-<h3 id="周三-1"><a href="#周三-1" class="headerlink" title="周三"></a>周三</h3><p>理解堆</p>
-<h3 id="周四-1"><a href="#周四-1" class="headerlink" title="周四"></a>周四</h3><p>现代c++：虚函数及其实现原理 override关键字 ，静态成员变量与静态函数 ， 纯虚函数 ，RTTL</p>
-<h3 id="周五-1"><a href="#周五-1" class="headerlink" title="周五"></a>周五</h3><p>现代c++：多继承 ， 虚继承及其实现原理 ，智能指针概述</p>
-<h3 id="周六-1"><a href="#周六-1" class="headerlink" title="周六"></a>周六</h3><p>pwn：堆：main_arena和top chunk ， free函数和bins</p>
-<h3 id="周日-1"><a href="#周日-1" class="headerlink" title="周日"></a>周日</h3><p>划水</p>
-<h2 id="第六周"><a href="#第六周" class="headerlink" title="第六周"></a>第六周</h2><p>总目标：</p>
-<p>现代c++：智能指针，模板与泛型编程，复习</p>
-<p>pwn：堆题入门，gdb pwntools使用，栈刷题</p>
-<p>《程序员的自我修养》阅读</p>
-<h3 id="周一-2"><a href="#周一-2" class="headerlink" title="周一"></a>周一</h3><p>现代c++：shard_ptr ， weak_ptr</p>
-<p>pwn：堆深入理解并尝试例题</p>
-<h3 id="周二-2"><a href="#周二-2" class="headerlink" title="周二"></a>周二</h3><p>现代c++:uniqe_ptr,指针使用范围</p>
-<p>pwn:栈复习，堆理解</p>
-<h3 id="周三-2"><a href="#周三-2" class="headerlink" title="周三"></a>周三</h3><p>现代c++模板介绍，类模板与模板实现原理</p>
-<h3 id="周四-2"><a href="#周四-2" class="headerlink" title="周四"></a>周四</h3><p>pwn刷题</p>
-]]></content>
-      <categories>
-        <category>计划</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
       </tags>
   </entry>
   <entry>
