@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="文章改动 GCC简介GCC 官方文档网站 GCC（GNU Compiler Collection，GNU编译程序集合）是最重要的开放源码软件。其他所有开放源码软件都在某种层次上依赖于它。甚至其他语言，例如 Python，都是由 C 语言开发的，由 GNU 编译程序编译的。这个软件对于整个自由软件运动而言具有根本性的意义。如果没有它或类似的软件，就不可能有自由软件运动。GCC 为 Linux 的出现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GNU Makefile编译C&#x2F;C++(Linux系统、VSCODE)">
+<meta property="og:url" content="http://example.com/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/index.html">
+<meta property="og:site_name" content="fanfan&#39;s blog">
+<meta property="og:description" content="文章改动 GCC简介GCC 官方文档网站 GCC（GNU Compiler Collection，GNU编译程序集合）是最重要的开放源码软件。其他所有开放源码软件都在某种层次上依赖于它。甚至其他语言，例如 Python，都是由 C 语言开发的，由 GNU 编译程序编译的。这个软件对于整个自由软件运动而言具有根本性的意义。如果没有它或类似的软件，就不可能有自由软件运动。GCC 为 Linux 的出现">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-17T01:54:24.000Z">
+<meta property="article:modified_time" content="2023-04-17T12:22:51.824Z">
+<meta property="article:author" content="fan fan">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>GNU Makefile编译C/C++(Linux系统、VSCODE) | fanfan's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">fanfan's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">IT博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">13</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="fan fan">
+      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fanfan's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GNU Makefile编译C/C++(Linux系统、VSCODE)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-17 09:54:24 / 修改时间：20:22:51" itemprop="dateCreated datePublished" datetime="2023-04-17T09:54:24+08:00">2023-04-17</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://github.com/liheqian1993/GNC-Tutorial">文章改动</a></p>
+<h1 id="GCC简介"><a href="#GCC简介" class="headerlink" title="GCC简介"></a>GCC简介</h1><p><a target="_blank" rel="noopener" href="https://gcc.gnu.org/onlinedocs/">GCC 官方文档网站</a></p>
+<p>GCC（GNU Compiler Collection，GNU编译程序集合）是最重要的开放源码软件。其他所有开放源码软件都在某种层次上依赖于它。甚至其他语言，例如 Python，都是由 C 语言开发的，由 GNU 编译程序编译的。这个软件对于整个自由软件运动而言具有根本性的意义。如果没有它或类似的软件，就不可能有自由软件运动。GCC 为 Linux 的出现提供了可能性。GCC 是由许多组件组成的，但它们也并不总是出现的。有些部分是和语言相关的，所以如果没有安装某种特定语言，系统中就不会出现相关的文件。</p>
+<p><strong>常见组成部分</strong> </p>
+<ul>
+<li><strong>c++：</strong> gcc 的一个版本，默认语言设置为 C++，而且在链接的时候自动包含标准 C++ 库。这和 g++ 一样</li>
+<li><strong>configure：</strong> GCC 源代码树根目录中的一个脚本。用于设置配置值和创建 GCC 编译程序必需的 make 程序文件</li>
+<li><strong>g++：</strong> gcc 的一个版本，默认语言设置为 C++，而且在链接的时候自动包含标准 C++库。这和 c++ 一样</li>
+<li><strong>gcc：</strong> 该驱动程序等同于执行编译程序和连接程序以产生需要的输出</li>
+<li><strong>libgcc：</strong> 该库包含的例程被作为编译程序的一部分，是因为它们可被链接到实际的可执行程序中。它们是特殊的例程，链接到可执行程序，来执行基本的任务，例如浮点运算。这些库中的例程通常都是平台相关的</li>
+<li><strong>libstdc++：</strong> 运行时库，包括定义为标准语言一部分的所有的 C++类和函数</li>
+</ul>
+<p><strong>包含的常见软件</strong></p>
+<ul>
+<li><strong>ar：</strong> 这是一个程序，可通过从文档中增加、删除和析取文件来维护库文件。通常使用该工具是为了创建和管理连接程序使用的目标库文档。该程序是 binutils 包的一部分</li>
+<li><strong>as：</strong> GNU 汇编器。实际上它是一族汇编器，因为它可以被编译或能够在各种不同平台上工作。该程序是 binutjls 包的一部分 autoconf：产生的 shell 脚本自动配置源代码包去编译某个特定版本的 UNIX</li>
+<li><strong>gdb：</strong> GNU 调试器，可用于检查程序运行时的值和行为 GNATS：GNU 的调试跟踪系统（GNU Bug Tracking System）。一个跟踪 GCC和其他 GNU 软件问题的在线系统</li>
+<li><strong>gprof：</strong> 该程序会监督编译程序的执行过程，并报告程序中各个函数的运行时间，可以根据所提供的配置文件来优化程序。该程序是 binutils 包的一部分</li>
+<li><strong>ld：</strong> GNU 连接程序。该程序将目标文件的集合组合成可执行程序。该程序是 binutils 包的一部分</li>
+<li><strong>libtool：</strong> 一个基本库，支持 make 程序的描述文件使用的简化共享库用法的脚本</li>
+<li><strong>make：</strong> 一个工具程序，它会读 makefile 脚本来确定程序中的哪个部分需要编译和连接，然后发布必要的命令。它读出的脚本（叫做 makefile 或 Makefile）定义了文件关系和依赖关系</li>
+</ul>
+<p><strong>GCC默认头文件搜索路径</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> | gcc -v -x c -E -</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>&#x2F;usr&#x2F;lib&#x2F;gcc&#x2F;x86_64-linux-gnu&#x2F;7&#x2F;include</li>
+<li>&#x2F;usr&#x2F;local&#x2F;include</li>
+<li>&#x2F;usr&#x2F;lib&#x2F;gcc&#x2F;x86_64-linux-gnu&#x2F;7&#x2F;include-fixed</li>
+<li>&#x2F;usr&#x2F;include&#x2F;x86_64-linux-gnu</li>
+<li>&#x2F;usr&#x2F;include</li>
+</ul>
+<h1 id="简单编译原理"><a href="#简单编译原理" class="headerlink" title="简单编译原理"></a>简单编译原理</h1><h2 id="1-hello-world在计算机的表示"><a href="#1-hello-world在计算机的表示" class="headerlink" title="1 hello, world在计算机的表示"></a>1 hello, world在计算机的表示</h2><p>hello 程序的生命周期是从一个源程序（或者说源文件）开始的，程序员通过编辑器创建并保存的文本文件，文件名是 hello.c。源程序实际上就是一个由值 0 和 1组成的位（又称为比特）序列，8 个位被组织成一组，称为字节。每个字节表示程序中的某些文本字符</p>
+<p>大部分计算机使用 ASCII 标准来表示文本字符</p>
+<ul>
+<li>用一个唯一的单字节大小的整数值息来表示每个字符</li>
+<li>hello.c 程序是以字节序列的方式储存在文件中的</li>
+</ul>
+<p>hello.c 的表示方法说明了一个基本思想∶ 系统中所有的信息——包括磁盘文件、内存中的程序、内存中存放的用户数据以及网络上传送的数据，都是由一串比特表示</p>
+<p>![img](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-04-17 102936.png)</p>
+<h2 id="2-编译过程"><a href="#2-编译过程" class="headerlink" title="2 编译过程"></a>2 编译过程</h2><p>hello 程序的生命周期从一个高级 C 语言程序开始</p>
+<p>为了在系统上运行 hello.c 程序，每条 C 语句都必须被其他程序转化为一系列的低级机器语言指令</p>
+<p>然后这些指令按照一种称为可执行目标程序的格式打好包，并以二进制磁盘文件的形式存放起来</p>
+<p>GCC 编译器读取源程序文件 hello.c，并把它翻译成一个可执行目标文件 hello。这个翻译过程可分为四个阶段完成，如下图所示</p>
+<p>执行这四个阶段的程序（预处理器、编译器、汇编器和链接器）一起构成了编译系统（compilation system）</p>
+<p>![img](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-04-17 102947.png)</p>
+<p> </p>
+<h3 id="2-1-预处理阶段"><a href="#2-1-预处理阶段" class="headerlink" title="2.1 预处理阶段"></a>2.1 预处理阶段</h3><p><code>预处理器（cpp）</code>根据以字符#开头的命令，修改原始的 C 程序。比如 hello.c中第 1行的#include &lt; stdio.h&gt;命令告诉<strong>预处理器读取系统头文件 stdio.h 的内容，并把它直接插入程序文本中。</strong>结果就得到了另一个 C程序，通常是以.i作为文件扩展名。</p>
+<h3 id="2-2-编译阶段"><a href="#2-2-编译阶段" class="headerlink" title="2.2 编译阶段"></a>2.2 编译阶段</h3><p><code>编译器（ccl）</code>将文本文件 hello.i翻译成文本文件 hello.s，它包含一 个汇编语言程序。该程序包含函数 main 的定义，如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">main:</span><br><span class="line">subq    $8, %rsp </span><br><span class="line">mov1    $.LCO,%edi </span><br><span class="line">call    puts </span><br><span class="line">mov1    $0,%eax </span><br><span class="line">addq    $8,%rsp </span><br><span class="line">ret</span><br></pre></td></tr></table></figure>
+
+<p>每条语句都以一种文本格式描述了一条低级机器语言指令。汇编语言非常有用，它为不同高级语言的不同编译器提供了通用的输出语言</p>
+<h3 id="2-3-汇编阶段"><a href="#2-3-汇编阶段" class="headerlink" title="2.3 汇编阶段"></a>2.3 汇编阶段</h3><p><code>汇编器（as）</code>将 hello.s 翻译成机器语言指令，把这些指令打包成一种叫做可重定位目标程序（relocatable object program）的格式，并将结果保存在目标文件 hello.o中。</p>
+<p>hello.o 文件是一个二进制文件，它包含的17 个字节是函数 main的指令编码。如果我们在文本编辑器中打开 hello.o文件，将看到一堆乱码。</p>
+<h3 id="2-4-链接阶段"><a href="#2-4-链接阶段" class="headerlink" title="2.4 链接阶段"></a>2.4 链接阶段</h3><p>注意，hello程序调用了 printf 函数，它是每个 C 编译器都提供的标准 C 库中的一个函数。printf 函数存在于一个名为 printf.o 的单独的预编译好了的目标文件中，而这个文件必须以某种方式合并到我们的 hello.o 程序中。</p>
+<p><code>链接器（ld）</code>就负责处理这种合并。结果就得到 hello 文件，它是一个可执行目标文件（或者简称为可执行文件），可以被加载到内存中，由系统执行。</p>
+<h2 id="3-hello-world的执行过程"><a href="#3-hello-world的执行过程" class="headerlink" title="3 hello, world的执行过程"></a>3 hello, world的执行过程</h2><h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><ul>
+<li>shell 等待我们输入一个命令</li>
+<li>当我们在键盘上输入字符串”.&#x2F;hello”（注意这里是编译好的可执行目标文件）后</li>
+<li>shell 程序将字符逐一读入寄存器</li>
+<li>再把它存放到内存中</li>
+</ul>
+<p>![img](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-04-17 102955.png)</p>
+<p> </p>
+<h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><ul>
+<li>当我们在键盘上敲回车键时，shell 程序就知道我们已经结束了命令的输人</li>
+<li>然后 shell 执行一系列指令来加载可执行的 hello 文件</li>
+<li>这些指令将 hello 目标文件中的代码和数据从磁盘复制到主存</li>
+<li>数据包括最终会被输出的字符串”hello，world\n”。</li>
+</ul>
+<p>![img](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-04-17 103000.png)</p>
+<p> </p>
+<h3 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h3><ul>
+<li>一旦目标文件 hello 中的代码和数据被加载到主存</li>
+<li>处理器就开始执行 hello 程序的 main 程序中的机器语言指令</li>
+<li>这些指令将 “hello，world\n” 字符串中的字节从主存复制到寄存器文件</li>
+<li>再从寄存器文件中复制到显示设备，最终显示在屏幕上</li>
+</ul>
+<p>![img](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-04-17 103005.png)</p>
+<p> </p>
+<p> </p>
+<h2 id="4-程序在计算机内的存储"><a href="#4-程序在计算机内的存储" class="headerlink" title="4 程序在计算机内的存储"></a>4 程序在计算机内的存储</h2><ul>
+<li>hello程序的机器指令最初是存放在磁盘上</li>
+<li>当程序加载时，它们被复制到主存</li>
+<li>当处理器运行程序时，指令又从主存复制到处理器</li>
+</ul>
+<p>相似地，数据串 “hello，world\n”开始时在磁盘上，然后被复制到主存，最后从主存上复制到显示设备</p>
+<h1 id="C语言的编译"><a href="#C语言的编译" class="headerlink" title="C语言的编译"></a>C语言的编译</h1><p>编译 C 语言相关的后缀</p>
+<blockquote>
+<p>.a 静态库文件</p>
+<p>.c 源文件</p>
+<p>.h 头文件</p>
+<p>.i  预处理文件</p>
+<p>.o 目标文件</p>
+<p>.s 汇编语言文件</p>
+<p>.so 动态库 共享库有 运行时库 文件</p>
+</blockquote>
+<h2 id="2-Compiling-C"><a href="#2-Compiling-C" class="headerlink" title="2 Compiling C"></a>2 Compiling C</h2><h3 id="2-1-Preprocessing"><a href="#2-1-Preprocessing" class="headerlink" title="2.1 Preprocessing"></a>2.1 Preprocessing</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">不会生成 .i 文件</span></span><br><span class="line">gcc -E main.c</span><br><span class="line">gcc -E main.c -o helloworld.i</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-E 选项告诉编译器只进行预处理操作</li>
+<li>-o 选项把预处理的结果输出到指定文件</li>
+</ul>
+<p> </p>
+<h3 id="2-2-Generating-Assembly-Language"><a href="#2-2-Generating-Assembly-Language" class="headerlink" title="2.2 Generating Assembly Language"></a>2.2 Generating Assembly Language</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -S main.c</span><br><span class="line">gcc -S main.c -o xxx.s</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-S 选项告诉编译器，进行预处理和编译成汇编语言操作</li>
+</ul>
+<p>每个平台对应的汇编语言的形式是不同的，例如有很多型号的开发板，有很多型号的 CPU</p>
+<h3 id="2-3-Source-File-to-Object-File"><a href="#2-3-Source-File-to-Object-File" class="headerlink" title="2.3 Source File to Object File"></a>2.3 Source File to Object File</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gcc -c main.c</span><br><span class="line">gcc -c main.c -o xxx.o</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编译多个 .c 文件</span></span><br><span class="line">gcc -c main.c add.c minus.c</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-Single-Source-to-Executable"><a href="#2-4-Single-Source-to-Executable" class="headerlink" title="2.4 Single Source to Executable"></a>2.4 Single Source to Executable</h3><ul>
+<li>注意：后面三个命令执行后并没有按编译过程出现 .i .s 或 .o 文件，并不意味着没有经历这些过程</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc main.c</span><br><span class="line">gcc main.c -o xxx</span><br></pre></td></tr></table></figure>
+
+<p>执行程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./可执行文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-Multiple-Sources-to-Executable"><a href="#2-5-Multiple-Sources-to-Executable" class="headerlink" title="2.5 Multiple Sources to Executable"></a>2.5 Multiple Sources to Executable</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc main.c add.c minus.c -o exec</span><br><span class="line">./exec</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Creating-a-Static-Library"><a href="#3-Creating-a-Static-Library" class="headerlink" title="3 Creating a Static Library"></a>3 Creating a Static Library</h2><ul>
+<li><p>编译成 .o 的文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -c [.c] -o [自定义文件名] </span><br><span class="line">gcc -c [.c] [.c] ...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编静态库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ar -r [lib自定义库名.a] [.o] [.o] ...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>链接成可执行文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc [.c] [.a] -o [自定义输出文件名]</span><br><span class="line">gcc [.c] -o [自定义输出文件名] -l[库名] -L[库所在路径]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="4-Creating-a-Shared-Library"><a href="#4-Creating-a-Shared-Library" class="headerlink" title="4 Creating a Shared Library"></a>4 Creating a Shared Library</h2><blockquote>
+<p>编译二进制.o文件</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -c -fpic [.c/.cpp][.c/.cpp]... </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>编库</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared [.o][.o]... -o [lib自定义库名.so]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>链接库到可执行文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc [.c/.cpp] -o [自定义可执行文件名]  -l[库名] -L[库路径] -Wl,-rpath=[库路径]</span><br></pre></td></tr></table></figure>
+
+<h1 id="C-的编译"><a href="#C-的编译" class="headerlink" title="C++的编译"></a>C++的编译</h1><p>编译c++的相关后缀</p>
+<blockquote>
+<p>.a  静态库</p>
+<p>.c .c++ .cc .cp .cpp .cxx </p>
+<p>.h 头文件</p>
+<p>.hpp 头文件</p>
+<p>.ii 与处理文件</p>
+<p>.o 目标文件</p>
+<p>.so 动态库</p>
+<p>.s 汇编语言文件</p>
+</blockquote>
+<h2 id="2-Compiling-C-1"><a href="#2-Compiling-C-1" class="headerlink" title="2 Compiling C++"></a>2 Compiling C++</h2><h3 id="2-1-Preprocessing-1"><a href="#2-1-Preprocessing-1" class="headerlink" title="2.1 Preprocessing"></a>2.1 Preprocessing</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -E helloworld.c</span><br><span class="line">g++ -E helloworld.c -o helloworld.i</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-E 选项告诉编译器只进行预处理操作</li>
+<li>-o 选项把预处理的结果输出到指定文件</li>
+</ul>
+<h3 id="2-2-Generating-Assembly-Language-1"><a href="#2-2-Generating-Assembly-Language-1" class="headerlink" title="2.2 Generating Assembly Language"></a>2.2 Generating Assembly Language</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -S helloworld.c</span><br><span class="line">g++ -S helloworld.c -o helloworld.s</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-S 选项告诉编译器，进行预处理和编译成汇编语言操作</li>
+</ul>
+<p>每个平台对应的汇编语言的形式是不同的，例如有很多型号的开发板，有很多型号的 CPU </p>
+<h3 id="2-3-Source-File-to-Object-File-1"><a href="#2-3-Source-File-to-Object-File-1" class="headerlink" title="2.3 Source File to Object File"></a>2.3 Source File to Object File</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g++ -c helloworld.c</span><br><span class="line">g++ -c helloworld.c -o harumph.o</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编译多个 .c 文件</span></span><br><span class="line">g++ -c helloworld.c helloworld1.c helloworld2.c</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-Single-Source-to-Executable-1"><a href="#2-4-Single-Source-to-Executable-1" class="headerlink" title="2.4 Single Source to Executable"></a>2.4 Single Source to Executable</h3><ul>
+<li>注意：后面三个命令执行后并没有按编译过程出现 .i .s 或 .o 文件，并不意味着没有经历这些过程</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ helloworld.c</span><br><span class="line">g++ helloworld.c -o howdy</span><br></pre></td></tr></table></figure>
+
+<p>执行程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./可执行文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-Multiple-Source-to-Executable"><a href="#2-5-Multiple-Source-to-Executable" class="headerlink" title="2.5 Multiple Source to Executable"></a>2.5 Multiple Source to Executable</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ g++ hellomain.c sayhello.c -o hello</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Creating-a-Static-Library-1"><a href="#3-Creating-a-Static-Library-1" class="headerlink" title="3 Creating a Static Library"></a>3 Creating a Static Library</h2><ul>
+<li><p>编译成 .o 的文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ -c [.c] -o [自定义文件名] </span><br><span class="line">g++ -c [.c] [.c] ...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编静态库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ar -r [lib自定义库名.a] [.o] [.o] ...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>链接成可执行文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g++ [.c] [.a] -o [自定义输出文件名]</span><br><span class="line">g++ [.c] -o [自定义输出文件名] -l[库名] -L[库所在路径]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="4-Creating-a-Shared-Library-1"><a href="#4-Creating-a-Shared-Library-1" class="headerlink" title="4 Creating a Shared Library"></a>4 Creating a Shared Library</h2><ul>
+<li><p>编译二进制.o文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -c -fpic [.c/.cpp][.c/.cpp]... </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -shared [.o][.o]... -o [lib自定义库名.so]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>连接动态库到可执行文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ [.c/.cpp] -o [自定义可执行文件名]  -l[库名] -L[库路径] -Wl,-rpath=[库路径]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="makefile"><a href="#makefile" class="headerlink" title="makefile"></a>makefile</h1><ul>
+<li>GNU Make 官方网站：<a target="_blank" rel="noopener" href="https://www.gnu.org/software/make/">https://www.gnu.org/software/make/</a></li>
+<li>GNU Make 官方文档下载地址：<a target="_blank" rel="noopener" href="https://www.gnu.org/software/make/manual/">https://www.gnu.org/software/make/manual/</a></li>
+<li>Makefile Tutorial：<a target="_blank" rel="noopener" href="https://makefiletutorial.com/">https://makefiletutorial.com/</a></li>
+</ul>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><h3 id="1-基本格式"><a href="#1-基本格式" class="headerlink" title="1 基本格式"></a>1 基本格式</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">targets : prerequisties</span><br><span class="line">[tab键]command</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>target：目标文件，可以是 OjectFile，也可以是执行文件，还可以是一个标签（Label），对于标签这种特性，在后续的“伪目标”章节中会有叙述。</li>
+<li>prerequisite：要生成那个 target 所需要的文件或是目标。</li>
+<li>command：是 make 需要执行的命令，</li>
+</ul>
+<h3 id="2-Makefile-规则"><a href="#2-Makefile-规则" class="headerlink" title="2 Makefile 规则"></a>2 Makefile 规则</h3><ul>
+<li>make 会在当前目录下找到一个名字叫 <code>Makefile</code> 或 <code>makefile</code> 的文件</li>
+<li>如果找到，它会找文件中第一个目标文件（target），并把这个文件作为最终的目标文件</li>
+<li>如果 target 文件不存在，或是 target 文件依赖的 .o 文件(prerequities)的文件修改时间要比 target 这个文件新，就会执行后面所定义的命令 command 来生成 target 这个文件</li>
+<li>如果 target 依赖的 .o 文件（prerequisties）也存在，make 会在当前文件中找到 target 为 .o 文件的依赖性，如果找到，再根据那个规则生成 .o 文件</li>
+</ul>
+<h3 id="3-伪目标"><a href="#3-伪目标" class="headerlink" title="3 伪目标"></a>3 伪目标</h3><p>“伪目标” 不是一个文件，只是一个标签。我们要显示地指明这个 “目标” 才能让其生效</p>
+<p>“伪目标” 的取名不能和文件名重名，否则不会执行命令</p>
+<p>为了避免和文件重名的这种情况，我们可以使用一个特殊的标记 <code>.PHONY</code> 来显示地指明一个目标是“伪目标”，向 make 说明，不管是否有这个文件，这个目标就是 “伪目标”</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.PHONY : clean</span><br></pre></td></tr></table></figure>
+
+<p>只要有这个声明，不管是否有“clean”文件，要运行 “clean” 这个目标，只有”make clean” 这个命令</p>
+<h2 id="Variable"><a href="#Variable" class="headerlink" title="Variable"></a>Variable</h2><p>变量在声明时需要给予初值，而在使用时，需要给在变量名前加上 <code>$</code> 符号，并用小括号 <code>()</code> 把变量给包括起来。</p>
+<h3 id="1-变量的定义"><a href="#1-变量的定义" class="headerlink" title="1 变量的定义"></a>1 变量的定义</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cpp := src/main.cpp </span><br><span class="line">obj := objs/main.o</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-变量的引用"><a href="#2-变量的引用" class="headerlink" title="2 变量的引用"></a>2 变量的引用</h3><ul>
+<li>可以用 <code>()</code> 或 <code>&#123;&#125;</code></li>
+</ul>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cpp := src/main.cpp </span><br><span class="line">obj := objs/main.o</span><br><span class="line"></span><br><span class="line"><span class="variable">$(obj)</span> : $&#123;cpp&#125;</span><br><span class="line">	@g++ -c <span class="variable">$(cpp)</span> -o <span class="variable">$(obj)</span></span><br><span class="line"></span><br><span class="line">compile : <span class="variable">$(obj)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-预定义变量"><a href="#3-预定义变量" class="headerlink" title="3 预定义变量"></a>3 预定义变量</h3><ul>
+<li><code>$@</code>: 目标(target)的完整名称</li>
+<li><code>$&lt;</code>: 第一个依赖文件（prerequisties）的名称</li>
+<li><code>$^</code>: 所有的依赖文件（prerequisties），以空格分开，不包含重复的依赖文件</li>
+</ul>
+<figure class="highlight make"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cpp := src/main.cpp </span><br><span class="line">obj := objs/main.o</span><br><span class="line"></span><br><span class="line"><span class="variable">$(obj)</span> : $&#123;cpp&#125;</span><br><span class="line">	@g++ -c <span class="variable">$&lt;</span> -o <span class="variable">$@</span></span><br><span class="line">	@echo <span class="variable">$^</span></span><br><span class="line"></span><br><span class="line">compile : <span class="variable">$(obj)</span></span><br><span class="line">.PHONY : compile</span><br></pre></td></tr></table></figure>
+
+<h2 id="Operator-amp-Symbols"><a href="#Operator-amp-Symbols" class="headerlink" title="Operator&amp;Symbols"></a>Operator&amp;Symbols</h2><h3 id="1-x3D"><a href="#1-x3D" class="headerlink" title="1 &#x3D;"></a>1 &#x3D;</h3><ul>
+<li>简单的赋值运算符</li>
+<li>用于将右边的值分配给左边的变量</li>
+<li>如果在后面的语句中重新定义了该变量，则将使用新的值</li>
+</ul>
+<blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight make"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HOST_ARCH   = aarch64</span><br><span class="line">TARGET_ARCH = <span class="variable">$(HOST_ARCH)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 更改了变量 a</span></span><br><span class="line">HOST_ARCH   = amd64</span><br><span class="line"></span><br><span class="line"><span class="section">debug:</span></span><br><span class="line">	@echo <span class="variable">$(TARGET_ARCH)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-x3D"><a href="#2-x3D" class="headerlink" title="2 :&#x3D;"></a>2 :&#x3D;</h3><ul>
+<li>立即赋值运算符</li>
+<li>用于在定义变量时立即求值</li>
+<li>该值在定义后不再更改</li>
+<li>即使在后面的语句中重新定义了该变量</li>
+</ul>
+<blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight make"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HOST_ARCH   := aarch64</span><br><span class="line">TARGET_ARCH := <span class="variable">$(HOST_ARCH)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 更改了变量 a</span></span><br><span class="line">HOST_ARCH := amd64</span><br><span class="line"></span><br><span class="line"><span class="section">debug:</span></span><br><span class="line">	@echo <span class="variable">$(TARGET_ARCH)</span></span><br></pre></td></tr></table></figure>
+
+<p> </p>
+<h3 id="3-x3D"><a href="#3-x3D" class="headerlink" title="3 ?&#x3D;"></a>3 ?&#x3D;</h3><ul>
+<li>默认赋值运算符</li>
+<li>如果该变量已经定义，则不进行任何操作</li>
+<li>如果该变量尚未定义，则求值并分配</li>
+</ul>
+<figure class="highlight make"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HOST_ARCH  = aarch64</span><br><span class="line">HOST_ARCH ?= amd64</span><br><span class="line"></span><br><span class="line"><span class="section">debug:</span></span><br><span class="line">    @echo <span class="variable">$(HOST_ARCH)</span></span><br></pre></td></tr></table></figure>
+
+<p> </p>
+<h3 id="4-累加-x3D"><a href="#4-累加-x3D" class="headerlink" title="4 累加 +&#x3D;"></a>4 累加 +&#x3D;</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CXXFLAGS := -m64 -fPIC -g -O0 -std=c++11 -w -fopenmp</span><br><span class="line"></span><br><span class="line">CXXFLAGS += <span class="variable">$(include_paths)</span></span><br></pre></td></tr></table></figure>
+
+<p> </p>
+<h3 id="5"><a href="#5" class="headerlink" title="5 \"></a>5 \</h3><ul>
+<li>续行符</li>
+</ul>
+<blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight make"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LDLIBS := cudart opencv_core \</span><br><span class="line">          gomp nvinfer protobuf cudnn pthread \</span><br><span class="line">          cublas nvcaffe_parser nvinfer_plugin </span><br></pre></td></tr></table></figure>
+
+<p> </p>
+<h3 id="6-与"><a href="#6-与" class="headerlink" title="6 * 与 %"></a>6 * 与 %</h3><ul>
+<li><code>*</code>: 通配符表示匹配任意字符串，可以用在目录名或文件名中</li>
+<li><code>%</code>: 通配符表示匹配任意字符串，并将匹配到的字符串作为变量使用</li>
+</ul>
+<h2 id="functions"><a href="#functions" class="headerlink" title="functions"></a>functions</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/10/%E5%B8%B8%E8%A7%81%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E5%92%8C%E7%BC%96%E7%A0%81%E8%AF%86%E5%88%AB/" rel="prev" title="常见加密算法和编码识别">
+      <i class="fa fa-chevron-left"></i> 常见加密算法和编码识别
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GCC%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">GCC简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">简单编译原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-hello-world%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.1.</span> <span class="nav-text">1 hello, world在计算机的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">2 编译过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E9%A2%84%E5%A4%84%E7%90%86%E9%98%B6%E6%AE%B5"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 预处理阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E7%BC%96%E8%AF%91%E9%98%B6%E6%AE%B5"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2 编译阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E6%B1%87%E7%BC%96%E9%98%B6%E6%AE%B5"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3 汇编阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E9%93%BE%E6%8E%A5%E9%98%B6%E6%AE%B5"><span class="nav-number">2.2.4.</span> <span class="nav-text">2.4 链接阶段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-hello-world%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">2.3.</span> <span class="nav-text">3 hello, world的执行过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="nav-number">2.3.1.</span> <span class="nav-text">第一步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5"><span class="nav-number">2.3.2.</span> <span class="nav-text">第二步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5"><span class="nav-number">2.3.3.</span> <span class="nav-text">第三步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%A8%8B%E5%BA%8F%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%86%85%E7%9A%84%E5%AD%98%E5%82%A8"><span class="nav-number">2.4.</span> <span class="nav-text">4 程序在计算机内的存储</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C%E8%AF%AD%E8%A8%80%E7%9A%84%E7%BC%96%E8%AF%91"><span class="nav-number">3.</span> <span class="nav-text">C语言的编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Compiling-C"><span class="nav-number">3.1.</span> <span class="nav-text">2 Compiling C</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Preprocessing"><span class="nav-number">3.1.1.</span> <span class="nav-text">2.1 Preprocessing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Generating-Assembly-Language"><span class="nav-number">3.1.2.</span> <span class="nav-text">2.2 Generating Assembly Language</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Source-File-to-Object-File"><span class="nav-number">3.1.3.</span> <span class="nav-text">2.3 Source File to Object File</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Single-Source-to-Executable"><span class="nav-number">3.1.4.</span> <span class="nav-text">2.4 Single Source to Executable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-Multiple-Sources-to-Executable"><span class="nav-number">3.1.5.</span> <span class="nav-text">2.5 Multiple Sources to Executable</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Creating-a-Static-Library"><span class="nav-number">3.2.</span> <span class="nav-text">3 Creating a Static Library</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Creating-a-Shared-Library"><span class="nav-number">3.3.</span> <span class="nav-text">4 Creating a Shared Library</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E7%9A%84%E7%BC%96%E8%AF%91"><span class="nav-number">4.</span> <span class="nav-text">C++的编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Compiling-C-1"><span class="nav-number">4.1.</span> <span class="nav-text">2 Compiling C++</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Preprocessing-1"><span class="nav-number">4.1.1.</span> <span class="nav-text">2.1 Preprocessing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Generating-Assembly-Language-1"><span class="nav-number">4.1.2.</span> <span class="nav-text">2.2 Generating Assembly Language</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Source-File-to-Object-File-1"><span class="nav-number">4.1.3.</span> <span class="nav-text">2.3 Source File to Object File</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Single-Source-to-Executable-1"><span class="nav-number">4.1.4.</span> <span class="nav-text">2.4 Single Source to Executable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-Multiple-Source-to-Executable"><span class="nav-number">4.1.5.</span> <span class="nav-text">2.5 Multiple Source to Executable</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Creating-a-Static-Library-1"><span class="nav-number">4.2.</span> <span class="nav-text">3 Creating a Static Library</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Creating-a-Shared-Library-1"><span class="nav-number">4.3.</span> <span class="nav-text">4 Creating a Shared Library</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#makefile"><span class="nav-number">5.</span> <span class="nav-text">makefile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Intro"><span class="nav-number">5.1.</span> <span class="nav-text">Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A0%BC%E5%BC%8F"><span class="nav-number">5.1.1.</span> <span class="nav-text">1 基本格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Makefile-%E8%A7%84%E5%88%99"><span class="nav-number">5.1.2.</span> <span class="nav-text">2 Makefile 规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BC%AA%E7%9B%AE%E6%A0%87"><span class="nav-number">5.1.3.</span> <span class="nav-text">3 伪目标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Variable"><span class="nav-number">5.2.</span> <span class="nav-text">Variable</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%8F%98%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">5.2.1.</span> <span class="nav-text">1 变量的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8F%98%E9%87%8F%E7%9A%84%E5%BC%95%E7%94%A8"><span class="nav-number">5.2.2.</span> <span class="nav-text">2 变量的引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%A2%84%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="nav-number">5.2.3.</span> <span class="nav-text">3 预定义变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operator-amp-Symbols"><span class="nav-number">5.3.</span> <span class="nav-text">Operator&amp;Symbols</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-x3D"><span class="nav-number">5.3.1.</span> <span class="nav-text">1 &#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-x3D"><span class="nav-number">5.3.2.</span> <span class="nav-text">2 :&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-x3D"><span class="nav-number">5.3.3.</span> <span class="nav-text">3 ?&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%B4%AF%E5%8A%A0-x3D"><span class="nav-number">5.3.4.</span> <span class="nav-text">4 累加 +&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5"><span class="nav-number">5.3.5.</span> <span class="nav-text">5 \</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E4%B8%8E"><span class="nav-number">5.3.6.</span> <span class="nav-text">6 * 与 %</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#functions"><span class="nav-number">5.4.</span> <span class="nav-text">functions</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fan fan"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">fan fan</p>
+  <div class="site-description" itemprop="description">我追逐的不是别人，而是我满怀期待的内心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jangfan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jangfan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fan fan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,100' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'Mck7Dy6F2oIhwijhmzrGcdqG-gzGzoHsz',
+      appKey     : '6xnXjGK9mDWbcv6boCozpd4m',
+      placeholder: "欢迎在此留下您的足迹# Comment box placeholder",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body> 
+</html>
+<!-- 爆炸烟花 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/src/firework.js"></script>
+
