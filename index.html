@@ -216,10 +216,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-04-20 18:41:21 / 修改时间：19:06:36" itemprop="dateCreated datePublished" datetime="2023-04-20T18:41:21+08:00">2023-04-20</time>
+              <time title="创建时间：2023-04-20 18:41:21" itemprop="dateCreated datePublished" datetime="2023-04-20T18:41:21+08:00">2023-04-20</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-25 19:57:43" itemprop="dateModified" datetime="2023-04-25T19:57:43+08:00">2023-04-25</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -257,7 +263,9 @@
       
           <p><strong>前言：</strong>最近开始学堆了，但是栈方面只掌握一些的简单的rop利用，之所以写这个文章就是想着先进行复习再继续学习栈的高级利用方式（堆学习也不会落下），前面可能写的比较简单，后面的高级利用会进行详写。（文章学习来自Wiki）</p>
 <h1 id="stack-overflow"><a href="#stack-overflow" class="headerlink" title="stack overflow"></a>stack overflow</h1><h2 id="x86"><a href="#x86" class="headerlink" title="x86"></a>x86</h2><p>栈是一种先进后出的数据结构，操作主要有压栈(push)和出栈(pop),汇编语言运行时，会充分利用栈，每个程序运行时都有虚拟地址空间，其中一部分就是该程序对应的栈，保存函数调用信息和局部变量。程序的栈从进程地址空间的高地址向低地址增长的。</p>
-
+<h3 id="基本rop"><a href="#基本rop" class="headerlink" title="基本rop"></a>基本rop</h3><p>nx保护开启会使栈上或堆上注入代码的方式难以发挥攻击的效果，所以我们需要用ROP来绕过保护，主要思想为在栈缓冲区溢出的基础上，利用程序已有的小片段来改变寄存器或者变量的值，控制程序的执行流程，gadget主要以ret来结尾的指令序列，ret改变了程序的执行顺序。</p>
+<h4 id="ret2text"><a href="#ret2text" class="headerlink" title="ret2text"></a>ret2text</h4><p>控制程序执行程序本身已有的代码(.text)。找到漏洞函数和后门函数的地址，控制程序返回后门函数就可以getshell了，确定我们能够控制的内存的起始地址距离main函数的返回地址的字节数进行覆盖</p>
+<h3 id="ret2shellcode"><a href="#ret2shellcode" class="headerlink" title="ret2shellcode"></a>ret2shellcode</h3><p>控制程序执行shellcode代码，shellcode是用于完成某个功能的汇编代码，常用于获取目标系统的shell，shellcode需要我们自己来填充，填充的区域需要具有可执行权限。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/04/20/%E6%A0%88%E5%A4%8D%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/#more" rel="contents">
