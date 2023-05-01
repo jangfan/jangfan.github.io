@@ -1,214 +1,275 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <!-- semantic UI 样式资源 -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
-<link rel="stylesheet" href="/css/Mycss.css">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-  
-<link rel="stylesheet" href="/css/content.css">
-
-  
-<link rel="stylesheet" href="/lib/enlighterjs.min.css">
-
-  
-<link rel="stylesheet" href="/css/gototop.css">
-
-  
-<link rel="stylesheet" href="/css/search.css">
-
-  
-<link rel="stylesheet" href="/css/mobile.css">
-
-  
-<link rel="stylesheet" href="/css/countdowntimer.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
 
-  <!--Title-->
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-<title>
-    
-    pwn栈刷题记录 |
-    
-    fanfan&#39;s blog
-</title>
+  <meta name="description" content="栈问题get_started_3dsctf_2016checksec 12345Arch:     i386-32-littleRELRO:    Partial RELROStack:    No canary foundNX:       NX enabledPIE:      No PIE (0x8048000)    123456789101112131415161718192021222">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pwn栈刷题记录">
+<meta property="og:url" content="http://example.com/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="fanfan&#39;s blog">
+<meta property="og:description" content="栈问题get_started_3dsctf_2016checksec 12345Arch:     i386-32-littleRELRO:    Partial RELROStack:    No canary foundNX:       NX enabledPIE:      No PIE (0x8048000)    123456789101112131415161718192021222">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095347-1678706371578-4.png">
+<meta property="og:image" content="http://example.com/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095410.png">
+<meta property="og:image" content="http://example.com/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095400.png">
+<meta property="og:image" content="http://example.com/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-14%20200914.png">
+<meta property="article:published_time" content="2023-03-07T12:22:58.000Z">
+<meta property="article:modified_time" content="2023-05-01T04:02:58.147Z">
+<meta property="article:author" content="fan fan">
+<meta property="article:tag" content="刷题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-13%20095347-1678706371578-4.png">
 
-<link rel="alternate" href="/atom.xml" title="fanfan&#39;s blog" type="application/atom+xml">
+<link rel="canonical" href="http://example.com/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">
 
 
-<link rel="icon" href="/img/avatar.jpg">
-
-
-
-  
-  <!-- Chatra {literal} -->
-<script>
-  (function(d, w, c) {
-      w.ChatraID = 'qa9FdZWL3XK6QTerz';
-      var s = d.createElement('script');
-      w[c] = w[c] || function() {
-          (w[c].q = w[c].q || []).push(arguments);
-      };
-      s.async = true;
-      s.src = 'https://call.chatra.io/chatra.js';
-      if (d.head) d.head.appendChild(s);
-  })(document, window, 'Chatra');
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
 </script>
-<!-- /Chatra {/literal} -->
 
+  <title>pwn栈刷题记录 | fanfan's blog</title>
   
-<meta name="generator" content="Hexo 6.3.0"></head>
 
 
-<body>
-  <!-- header -->
-<header class="ui segment attached background-deep-green border-none">
-  <div class="ui container header-container grid  stackable">
-    <div class="left floated six wide column">
-      <h1 class="ui header font-thin-yellow">
-        <div class="content">
-          <a href="/" class="title-href">Nothinglin的个人博客</a>
-          <div class="ui divider title-divider"></div>
-          <div class="sub header font-thin-yellow">不积跬步无以至千里，后继才能薄发</div>
-        </div>
-      </h1>
-    </div>
-    <div class="right floated six wide column">
-      <div class="ui content floated right">
-        <div class="content ">
-          <div class="sub header font-thin-yellow row-flex-right">
-            <a href="#" class="ui label margin-left-5 wechat-link">
-              <img class="margin-2" src="/img/wechat.png">
-            </a>
-            <div class="ui special popup">
-              <img src="/img/mywechat.jpg" alt="加我微信">
-            </div>
-
-            <a href="#" class="ui label margin-left-5 public-link">
-              <img class="margin-2" src="/img/public.png">
-            </a>
-            <div class="ui special popup">
-              <img src="/img/subscribe.jpg" alt="加我微信">
-            </div>
-
-            <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/nothing-86-28-47" class="ui label margin-left-5 zhihu-link">
-              <img class="margin-2" src="/img/zhihu.png">
-            </a>
-
-            <a target="_blank" rel="noopener" href="https://www.jianshu.com/u/a47e6b0d2a32" class="ui label margin-left-5 jianshu-link">
-              <img class="margin-2" src="/img/jianshu.png">
-            </a>
-
-            <a target="_blank" rel="noopener" href="https://github.com/Nothing-lin" class="ui label margin-left-5 github-link">
-              <img class="margin-2" src="/img/github.png">
-            </a>
 
 
-            <a href="" class="ui label margin-left-5 weibo-link">
-              <img class="margin-2" src="/img/weibo.png">
-            </a>
 
 
-            <a href="" class="ui label margin-left-5 rss-link">
-              <img class="margin-2" src="/img/rss.png">
-            </a>
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
-          </div>
-          <div class="ui divider title-divider"></div>
-          <div class="sub header font-thin-yellow row-flex-right">
-            <a href="/2021/06/28/推荐一款好用的文本编辑器Typora0/" class="ui label margin-left-5">
-              友情链接
-            </a>
-            <a class="ui label margin-left-5">
-              关于作者
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
-  </div>
-</header>
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-  <!-- 菜单导航栏 -->
-<div class="ui segment attached background-thin-yellow padding-less">
-  <div class="ui container">
-    <div class="ui menu border-background-less borderless stackable mobile-hide">
-      <a href="#" class="ui icon button background-thin-yellow menu-button">
-        <div class="page-title">
-          Nothinglin的个人博客
-        </div>
-        <i class="black sidebar icon top-left"></i>
-      </a>
-      <a href="/" class="item moblie-hide" data-path="/">首页</a>
-      <a href="/archive" class="item moblie-hide" data-path="/archive/">文章列表</a>
-      <a href="/categories" class="item moblie-hide" data-path="/categories/">分类列表</a>
-      <a href="/tags" class="item moblie-hide" data-path="/tags/">标签列表</a>
-      <a href="/friendcircle" class="item moblie-hide" data-path="/friendcircle/">友链资讯</a>
-      <a href="/shuoshuo" class="item moblie-hide">个人随想录</a>
-      <a target="_blank" rel="noopener" href="https://nothinglin.gitbook.io/kao-yan-bi-ji/" class="item moblie-hide">知识库</a>
-      <a target="_blank" rel="noopener" href="http://nothinglin-space.my-free.workers.dev/0:/" class="item moblie-hide">资料库</a>
-      <a href="/comments" class="item moblie-hide">留言</a>
-      <a href="" class="ui item right moblie-hide" id="nav-search"><i class="icon search"></i></a>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
-  <!-- 搜索框的弹出内容 -->
-  <div class="ui modal">
-    <!-- 上半部分 -->
-    <div class="header search-title-background search-title-center">
-      <h3>搜索</h3>
-    </div>
-    <!-- 中部 -->
-    <div class="image local-search col-flex">
-      <div class="ui segment background-thin-yellow">
-        <div class="ui action input row-flex">
-          <input type="text" placeholder="搜索..." id="local-search-input">
-          <button class="ui button" id="local-search-close">清空</button>
-        </div>
-        <div id="local-search-result" class="search-result overflow-y local-search col-flex"></div>
-      </div>
-    </div>
-    <div class="actions background-thin-yellow">
-      点击旁边阴影部分可以退出搜索
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">fanfan's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">IT博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
-  <!-- 文章主体布局 -->
-  <div class="ui container margin-top-30">
-    <div class="ui grid stackable">
-      <!-- 文章列表 -->
-<div class="eleven wide column">
-  <div class="ui segment background-thin-yellow content">
-    <div class="ui segment background-thin-yellow border-background-less">
-      <div class="ui segment background-thin-yellow border-background-less">
-        <h2 class="ui center aligned icon header">pwn栈刷题记录</h2>
-        <div class="ui segment background-thin-yellow border-background-less">
-          <!-- 文章info -->
-          <div class="row-flex-center">
-            <h5 class="header margin-left-right-10"><i class="address user icon"></i></h5>
-            <h5 class="header margin-left-right-10"><i class="address calendar alternate outline icon"></i>2023年03月07日</h5>
-            <h5 class="header margin-left-right-10"><i class="address eye icon"></i><span id="twikoo_visitors">0</span></h5>
-            <h5 class="header margin-left-right-10"><i class="address folder open outline icon"></i>
-              
-              <a class="category-link" href="/categories/pwn/">pwn</a>
-              </h5>
-            <h5 class="header margin-left-right-10"><i class="address tag icon"></i>
-              
-              <a class="tag-none-link" href="/tags/%E5%88%B7%E9%A2%98/" rel="tag">刷题</a>
-              </h5>
-          </div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="fan fan">
+      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fanfan's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          pwn栈刷题记录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-07 20:22:58" itemprop="dateCreated datePublished" datetime="2023-03-07T20:22:58+08:00">2023-03-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-01 12:02:58" itemprop="dateModified" datetime="2023-05-01T12:02:58+08:00">2023-05-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/03/07/buuctf%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
         </div>
-        <!-- 分割线 -->
-        <div class="ui divider title-divider"></div>
-      </div>
-      <div class="ui segment background-thin-yellow content border-background-less top-15"> <h1 id="栈问题"><a href="#栈问题" class="headerlink" title="栈问题"></a>栈问题</h1><h2 id="get-started-3dsctf-2016"><a href="#get-started-3dsctf-2016" class="headerlink" title="get_started_3dsctf_2016"></a>get_started_3dsctf_2016</h2><p><strong>checksec</strong></p>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="栈问题"><a href="#栈问题" class="headerlink" title="栈问题"></a>栈问题</h1><h2 id="get-started-3dsctf-2016"><a href="#get-started-3dsctf-2016" class="headerlink" title="get_started_3dsctf_2016"></a>get_started_3dsctf_2016</h2><p><strong>checksec</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Arch:     i386-32-little</span><br><span class="line">RELRO:    Partial RELRO</span><br><span class="line">Stack:    No canary found</span><br><span class="line">NX:       NX enabled</span><br><span class="line">PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure>
 
 
@@ -332,766 +393,255 @@
 
 <p>get_flag函数接受一个参数 k，向目标程序发送一个字符串（请求），并根据目标程序的响应获取 flag 的值。在这个函数中，先将 k 发送给目标程序，然后获取响应中 0x 开头的字符串（栈中地址），将该字符串逆序（[::-1]）后截断去掉换行符，再按照每两个字符转换成相应的 ascii 码，并组成新的字符串 f 返回。</p>
 <p>for 循环从 12 到 19，每次将一个参数中的某一个参数设置成 fmt 字符串的参数位置（如12$p’、13$p’），然后调用 get_flag() 函数获取返回值，并将返回值添加到 flag 中。</p>
-</div>
-
-
-      <!-- 文章结尾处理 -->
-      <div class="ui divider title-divider"></div>
-      <div class="post-rating">
-        <p>如果喜欢这篇文章，可以给作者评个份哦~</p>
-        <!-- 评分 -->
-        
-        <!-- 文章评论功能 -->
-<div id="wpac-rating"></div>
-<script type="text/javascript">
-  wpac_init = window.wpac_init || [];
-  wpac_init.push({
-    widget: 'Rating',
-    id: 30332
-  });
-  (function() {
-    if ('WIDGETPACK_LOADED' in window) return;
-    WIDGETPACK_LOADED = true;
-    var mc = document.createElement('script');
-    mc.type = 'text/javascript';
-    mc.async = true;
-    mc.src = 'https://embed.widgetpack.com/widget.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(mc, s.nextSibling);
-  })();
-</script>
-
-        
-        <p class="extra-speaking">原文声明: "转载本站文章请注明作者和出处Nothinglin ，请勿用于任何商业用途"</p>
-        <p>公众号：苦逼的学生仔</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- 上一篇、下一篇 -->
-  <div class="ui segment background-thin-yellow content">
-    <div class="ui segment background-thin-yellow border-background-less page-prev-next">
-      
-      <a href="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/" title='堆学习'>
-        <span class="page-prev">上一篇</span>
-      </a>
-      
-
-      
-      <a href="/2023/03/05/%E7%8E%B0%E4%BB%A3C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title='现代C++学习笔记'>
-        <span class="page-next">下一篇</span>
-      </a>
-      
 
     </div>
-  </div>
 
-  <!-- 文章评论功能 -->
-  <div class="ui segment background-thin-yellow content">
-    <div class="ui segment background-thin-yellow border-background-less">
-      <!-- 评论系统 -->
-      <!-- 来必力 -->
-      
-      <!-- twikoo -->
-      
-      <div id="tcomment"></div>
-<script src="https://cdn.jsdelivr.net/npm/twikoo@1.4.12/dist/twikoo.all.min.js"></script>
-<script>
-  twikoo.init({
-    envId: 'https://www.nothinglintwikoo.ml/',
-    el: '#tcomment',
-    region: 'ap-guangzhou', // 环境地域，默认为 ap-shanghai，如果您的环境地域不是上海，需传此参数
-    path: 'window.location.pathname', // 用于区分不同文章的自定义 js 路径，如果您的文章路径不是 location.pathname，需传此参数
-    lang: 'zh-CN', // 用于手动设定评论区语言，支持的语言列表 https://github.com/imaegoo/twikoo/blob/dev/src/js/utils/i18n/index.js
-  })
-</script>
-
-      
-
-    </div>
-  </div>
-
-</div>
-
-      <!-- 侧边栏 -->
-<div class="five wide column">
-  <!-- 文章目录 -->
-  
-  <!-- 文章内容页面中的目录栏 -->
-<div class="ui segment background-thin-yellow article-toc">
-  <div class="ui segment background-title-red padding-title">
-    <h4 class="header ">文章目录：</h4>
-  </div>
-  <div class="container-toc">
-  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%88%E9%97%AE%E9%A2%98"><span class="toc-text">栈问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#get-started-3dsctf-2016"><span class="toc-text">get_started_3dsctf_2016</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OGeek2019-babyrop"><span class="toc-text">[OGeek2019]babyrop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jarvisoj-level2-x64"><span class="toc-text">jarvisoj_level2_x64</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ciscn-2019-en-2"><span class="toc-text">ciscn_2019_en_2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#not-the-same-3dsctf-2016"><span class="toc-text">not_the_same_3dsctf_2016</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ciscn-2019-n-5"><span class="toc-text">ciscn_2019_n_5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%81%E4%BA%BA%E4%B8%89%E9%A1%B9-%E7%AC%AC%E4%BA%94%E8%B5%9B%E5%8C%BA-2018-rop"><span class="toc-text">铁人三项(第五赛区)_2018_rop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bjdctf-2020-babyrop"><span class="toc-text">bjdctf_2020_babyrop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bjdctf-2020-babystack2"><span class="toc-text">bjdctf_2020_babystack2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ciscn-2019-es-2"><span class="toc-text">ciscn_2019_es_2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pwn2-sctf-2016"><span class="toc-text">pwn2_sctf_2016</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jarvisoj-level3"><span class="toc-text">jarvisoj_level3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HarekazeCTF2019-baby-rop2"><span class="toc-text">[HarekazeCTF2019]baby_rop2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2021-%E9%B9%A4%E5%9F%8E%E6%9D%AF-littleof"><span class="toc-text">[2021 鹤城杯]littleof</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ciscn-2019-s-3"><span class="toc-text">ciscn_2019_s_3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-pz-hackover-2016"><span class="toc-text">ez_pz_hackover_2016</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#picoctf-2018-rop-chain"><span class="toc-text">picoctf_2018_rop chain</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jarvisoj-level3-x64"><span class="toc-text">jarvisoj_level3_x64</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HUBUCTF-2022-%E6%96%B0%E7%94%9F%E8%B5%9B-fmt"><span class="toc-text">[HUBUCTF 2022 新生赛]fmt</span></a></li></ol></li></ol>
-  </div>
-</div>
-
-  
-
-  <div class="ui segment background-thin-yellow">
-    <div class="ui segment background-title-red padding-title">
-      <h4 class="header ">成就墙：</h4>
-    </div>
-    <!-- <p>这里是饼图文章统计，直观地展示文章的分类数目和其下的文章数~</p> -->
-    <div id="categories-echarts" style="height: 100%"></div>
-
-  </div>
-
-  <div class="ui segment background-thin-yellow">
-    <div class="ui segment background-title-red padding-title">
-      <h4 class="header ">考研倒计时：</h4>
-    </div>
-
-    <div class="countdowntimer">
-  <ul id="countdown">
-    <li>
-      <p class="timeRefDays">days</p>
-      <span class="days"></span>
-    </li>
-    <li>
-      <p class="timeRefHours">hours</p>
-      <span class="hours"></span>
-    </li>
-    <li>
-      <p class="timeRefMinutes">minutes</p>
-      <span class="minutes"></span>
-    </li>
-    <li>
-      <p class="timeRefSeconds">seconds</p>
-      <span class="seconds"></span>
-    </li>
-  </ul>
-</div>
-
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_bmfjctya.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop autoplay></lottie-player>
-  </div>
-
-  <div class="ui segment background-thin-yellow">
-    <div class="ui segment background-title-red padding-title">
-      <h4 class="header ">最新留言：</h4>
-    </div>
-    <!-- <p>这里是饼图文章统计，直观地展示文章的分类数目和其下的文章数~</p> -->
     
-  <div id="hot-comments"></div>
-  <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/twikoo@1.4.12/dist/twikoo.all.min.js"></script>
-  <script type="text/javascript">
-    //判断网址,防止访客网址不写http和https
-    function wangzhi(e) {
-      http = e.slice(0, 4)
-      https = e.slice(0, 5)
-      if (http == "http" || https == "https") {
-        return e
-      } else if (e == "" || e == null || e == undefined) {
-        return e
-      } else {
-        e = 'http://' + e
-        return e
-      }
-    }
+    
+    
 
-    //调用twikoo最新评论主函数
-    function newcomment() {
-      twikoo.getRecentComments({
-        envId: 'https://twikoo-nine-lemon.vercel.app', // 环境 ID
-        pageSize: 7, // 获取多少条，默认：10，最大：100
-        includeReply: false // 是否包括最新回复，默认：false
-      }).then(function(res) {
-        console.log(res);
-        var hotComments = $("#hot-comments");
-        for (var i = 0; i < res.length; i++) {
-          if (i === 0) {
-            console.log(res[0]);
-          }
-          var nick = res[i].nick; //访客姓名
-          var content = res[i].commentText; //评论内容
-          var newcontent = content.substring(0, 50); //字数截取后评论内容
-          var url = res[i].url; //文章链接
-          var avatar = res[i].avatar; //评论者头像
-          var link = wangzhi(res[i].link); //评论者网址
-          var updatedAt = res[i].relativeTime; //评论时间
-          var commentId = '#' + res[i].id; //评论id
-          hotComments.append('<li class="px1 pb2 flex items-center"><img style="width: 40px;height:40px" class="circle mx1 listavatar" src="' + avatar +
-            '"><div class="w100"><div class="flex justify-between"><div class="h6 listauthor overflow-hidden" title="' + nick + '"><a  target="_blank" rel="noopener external nofollow noreferrer" href="' + link + '">' + nick +
-            '</a></div><span class="h6 mr1 listdate wenzi hang1">' + updatedAt + '</span></div> <a href="' + url + commentId + '"><div class="h5 list-comcontent overflow-hidden">' + newcontent + '</div></a></div></li>');
-        }
-      }).catch(function(err) {
-        console.error(err);
-      });
-    }
-
-    $(function() {
-      newcomment(); //调用newcomment
-    });
-  </script>
-
-  </div>
-
-  <div class="ui segment background-thin-yellow">
-    <div class="ui segment background-title-red padding-title">
-      <h4 class="header ">文章分类：</h4>
-    </div>
-    <div class="row-flex flex-wrap categories-lists">
-      
-      <a href="/categories/pwn/" class="category-tab">pwn</a>
-      
-      <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-tab">学习笔记</a>
-      
-      <a href="/categories/%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/" class="category-tab">逆向分析</a>
-      
-      <a href="/categories/pwn%E5%9F%BA%E7%A1%80/" class="category-tab">pwn基础</a>
-      
-      <a class="category-tab" id="category-next"><i class="angle double right icon"></i>更多</a>
-    </div>
-  </div>
-
-  <div class="ui segment background-thin-yellow">
-    <div class="ui segment background-title-red padding-title">
-      <h4 class="header ">文章标签：</h4>
-    </div>
-    <div class="row-flex flex-wrap tabs-lists">
-      
-      <a href="/tags/linux/" class="category-tab">linux</a>
-      
-      <a href="/tags/%E5%88%B7%E9%A2%98/" class="category-tab">刷题</a>
-      
-      <a href="/tags/pwn/" class="category-tab">pwn</a>
-      
-      <a href="/tags/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81/" class="category-tab">加密编码</a>
-      
-      <a href="/tags/%E6%B1%87%E7%BC%96/" class="category-tab">汇编</a>
-      
-      <a href="/tags/c/" class="category-tab">c++</a>
-      
-      <a class="category-tab" id="tab-next"><i class="angle double right icon"></i>更多</a>
-    </div>
-  </div>
-
-  <div class="ui segment background-thin-yellow">
-    <div class="ui segment background-title-red padding-title">
-      <h4 class="header ">订阅作者：</h4>
-    </div>
-
-    <div class="ui card margin-auto">
-      <div class="image">
-        <img src="/img/subscribe.jpg">
-      </div>
-    </div>
-  </div>
-</div>
-<!-- 不要删，下面这两个不是多余的，它是文章列表和侧边栏布局的div结尾标签 -->
-
-    </div>
-  </div>
-  <footer class="ui segment attached background-deep-green margin-top-30">
-  <div class="ui container ">
-    <div class="ui grid stackable footer-hide">
-      <!-- 缩略图 -->
-      <div class="four wide column">
-        <div class="ui card margin-10">
-          <div class="image padding-5">
-            <img class="ui small image" src="/img/nothinglin.jpg">
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%88%B7%E9%A2%98/" rel="tag"><i class="fa fa-tag"></i> 刷题</a>
           </div>
-        </div>
-      </div>
-      <!-- 内容简介 -->
-      <div class="eleven wide column post-calendar">
+
         
-<div id="post-calendar" class="card-content"></div>
 
-<style type="text/css">
-    #post-calendar {
-        width: 847px;
-        height: 236px;
-        margin-bottom: 30px;
-        background-color: #FFFFFF;
-        border-radius: 5px;
-    }
-   #post-calendar  canvas{
-      margin-top:30px!important;
-      margin-bottom:20px!important;
-      padding-bottom:30px;
-    }
-</style>
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/cungudafa/cdn/js/echarts.min.js"></script>
-<script type="text/javascript">
-    let myChart = echarts.init(document.getElementById('post-calendar'));
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/03/05/%E7%8E%B0%E4%BB%A3C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="现代C++学习笔记">
+      <i class="fa fa-chevron-left"></i> 现代C++学习笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/" rel="next" title="堆学习">
+      堆学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
     
-    var option = {
-        title: {
-            top: 0,
-            text: 'Articles-Contributions',
-            left: 'center',
-            textStyle: {
-                color: '#3C4858'
-            }
-        },
-        tooltip: {
-            padding: 10,
-            backgroundColor: '#555',
-            borderColor: '#777',
-            borderWidth: 1,
-            formatter: function (obj) {
-                var value = obj.value;
-                return '<div style="font-size: 14px;">' + value[0] + '：' + value[1] + '</div>';
-            }
-        },
-        visualMap: {
-            show: true,
-            showLabel: true,
-            categories: [0, 1, 2, 3, 4],
-            calculable: true,
-            inRange: {
-                symbol: 'rect',
-                color: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127']
-            },
-            itemWidth: 12,
-            itemHeight: 12,
-            orient: 'horizontal',
-            left: 'center',
-            bottom: 0
-        },
-        calendar: [{
-            left: 'center',
-            range: ["2022-05-02", "2023-05-02"],
-            cellSize: [13, 13],
-            splitLine: {
-                show: false
-            },
-            itemStyle: {
-                width: '1.88679%',
-                height: '15px',
-                color: '#EEEEEE',
-                borderColor: '#FFF',
-                borderWidth: 2
-            },
-            yearLabel: {
-                show: false
-            },
-            monthLabel: {
-                nameMap: 'cn',
-                fontWeight: 'lighter',
-                fontSize: 12
-            },
-            dayLabel: {
-                show: true,
-                formatter: '{start}  1st',
-                fontWeight: 'lighter',
-                nameMap: ['日',' ',' ','三',' ',' ','六',],
-                fontSize: 12
-            }
-        }],
-        series: [{
-            type: 'heatmap',
-            coordinateSystem: 'calendar',
-            calendarIndex: 0,
-            data: [["2022-05-02", 0], ["2022-05-03", 0], ["2022-05-04", 0], ["2022-05-05", 0], ["2022-05-06", 0], ["2022-05-07", 0], ["2022-05-08", 0], ["2022-05-09", 0], ["2022-05-10", 0], ["2022-05-11", 0], ["2022-05-12", 0], ["2022-05-13", 0], ["2022-05-14", 0], ["2022-05-15", 0], ["2022-05-16", 0], ["2022-05-17", 0], ["2022-05-18", 0], ["2022-05-19", 0], ["2022-05-20", 0], ["2022-05-21", 0], ["2022-05-22", 0], ["2022-05-23", 0], ["2022-05-24", 0], ["2022-05-25", 0], ["2022-05-26", 0], ["2022-05-27", 0], ["2022-05-28", 0], ["2022-05-29", 0], ["2022-05-30", 0], ["2022-05-31", 0], ["2022-06-01", 0], ["2022-06-02", 0], ["2022-06-03", 0], ["2022-06-04", 0], ["2022-06-05", 0], ["2022-06-06", 0], ["2022-06-07", 0], ["2022-06-08", 0], ["2022-06-09", 0], ["2022-06-10", 0], ["2022-06-11", 0], ["2022-06-12", 0], ["2022-06-13", 0], ["2022-06-14", 0], ["2022-06-15", 0], ["2022-06-16", 0], ["2022-06-17", 0], ["2022-06-18", 0], ["2022-06-19", 0], ["2022-06-20", 0], ["2022-06-21", 0], ["2022-06-22", 0], ["2022-06-23", 0], ["2022-06-24", 0], ["2022-06-25", 0], ["2022-06-26", 0], ["2022-06-27", 0], ["2022-06-28", 0], ["2022-06-29", 0], ["2022-06-30", 0], ["2022-07-01", 0], ["2022-07-02", 0], ["2022-07-03", 0], ["2022-07-04", 0], ["2022-07-05", 0], ["2022-07-06", 0], ["2022-07-07", 0], ["2022-07-08", 0], ["2022-07-09", 0], ["2022-07-10", 0], ["2022-07-11", 0], ["2022-07-12", 0], ["2022-07-13", 0], ["2022-07-14", 0], ["2022-07-15", 0], ["2022-07-16", 0], ["2022-07-17", 0], ["2022-07-18", 0], ["2022-07-19", 0], ["2022-07-20", 0], ["2022-07-21", 0], ["2022-07-22", 0], ["2022-07-23", 0], ["2022-07-24", 0], ["2022-07-25", 0], ["2022-07-26", 0], ["2022-07-27", 0], ["2022-07-28", 0], ["2022-07-29", 0], ["2022-07-30", 0], ["2022-07-31", 0], ["2022-08-01", 0], ["2022-08-02", 0], ["2022-08-03", 0], ["2022-08-04", 0], ["2022-08-05", 0], ["2022-08-06", 0], ["2022-08-07", 0], ["2022-08-08", 0], ["2022-08-09", 0], ["2022-08-10", 0], ["2022-08-11", 0], ["2022-08-12", 0], ["2022-08-13", 0], ["2022-08-14", 0], ["2022-08-15", 0], ["2022-08-16", 0], ["2022-08-17", 0], ["2022-08-18", 0], ["2022-08-19", 0], ["2022-08-20", 0], ["2022-08-21", 0], ["2022-08-22", 0], ["2022-08-23", 0], ["2022-08-24", 0], ["2022-08-25", 0], ["2022-08-26", 0], ["2022-08-27", 0], ["2022-08-28", 0], ["2022-08-29", 0], ["2022-08-30", 0], ["2022-08-31", 0], ["2022-09-01", 0], ["2022-09-02", 0], ["2022-09-03", 0], ["2022-09-04", 0], ["2022-09-05", 0], ["2022-09-06", 0], ["2022-09-07", 0], ["2022-09-08", 0], ["2022-09-09", 0], ["2022-09-10", 0], ["2022-09-11", 0], ["2022-09-12", 0], ["2022-09-13", 0], ["2022-09-14", 0], ["2022-09-15", 0], ["2022-09-16", 0], ["2022-09-17", 0], ["2022-09-18", 0], ["2022-09-19", 0], ["2022-09-20", 0], ["2022-09-21", 0], ["2022-09-22", 0], ["2022-09-23", 0], ["2022-09-24", 0], ["2022-09-25", 0], ["2022-09-26", 0], ["2022-09-27", 0], ["2022-09-28", 0], ["2022-09-29", 0], ["2022-09-30", 0], ["2022-10-01", 0], ["2022-10-02", 0], ["2022-10-03", 0], ["2022-10-04", 0], ["2022-10-05", 0], ["2022-10-06", 0], ["2022-10-07", 0], ["2022-10-08", 0], ["2022-10-09", 0], ["2022-10-10", 0], ["2022-10-11", 0], ["2022-10-12", 0], ["2022-10-13", 0], ["2022-10-14", 0], ["2022-10-15", 0], ["2022-10-16", 0], ["2022-10-17", 0], ["2022-10-18", 0], ["2022-10-19", 0], ["2022-10-20", 0], ["2022-10-21", 0], ["2022-10-22", 0], ["2022-10-23", 0], ["2022-10-24", 0], ["2022-10-25", 0], ["2022-10-26", 0], ["2022-10-27", 0], ["2022-10-28", 0], ["2022-10-29", 0], ["2022-10-30", 0], ["2022-10-31", 0], ["2022-11-01", 0], ["2022-11-02", 0], ["2022-11-03", 0], ["2022-11-04", 0], ["2022-11-05", 0], ["2022-11-06", 0], ["2022-11-07", 0], ["2022-11-08", 0], ["2022-11-09", 0], ["2022-11-10", 0], ["2022-11-11", 0], ["2022-11-12", 0], ["2022-11-13", 0], ["2022-11-14", 0], ["2022-11-15", 0], ["2022-11-16", 0], ["2022-11-17", 0], ["2022-11-18", 0], ["2022-11-19", 0], ["2022-11-20", 0], ["2022-11-21", 0], ["2022-11-22", 0], ["2022-11-23", 0], ["2022-11-24", 0], ["2022-11-25", 0], ["2022-11-26", 0], ["2022-11-27", 0], ["2022-11-28", 0], ["2022-11-29", 0], ["2022-11-30", 0], ["2022-12-01", 0], ["2022-12-02", 0], ["2022-12-03", 0], ["2022-12-04", 0], ["2022-12-05", 0], ["2022-12-06", 0], ["2022-12-07", 0], ["2022-12-08", 0], ["2022-12-09", 0], ["2022-12-10", 0], ["2022-12-11", 0], ["2022-12-12", 0], ["2022-12-13", 0], ["2022-12-14", 0], ["2022-12-15", 0], ["2022-12-16", 0], ["2022-12-17", 0], ["2022-12-18", 0], ["2022-12-19", 0], ["2022-12-20", 0], ["2022-12-21", 0], ["2022-12-22", 0], ["2022-12-23", 0], ["2022-12-24", 0], ["2022-12-25", 0], ["2022-12-26", 0], ["2022-12-27", 0], ["2022-12-28", 0], ["2022-12-29", 0], ["2022-12-30", 0], ["2022-12-31", 0], ["2023-01-01", 0], ["2023-01-02", 0], ["2023-01-03", 0], ["2023-01-04", 0], ["2023-01-05", 0], ["2023-01-06", 0], ["2023-01-07", 0], ["2023-01-08", 0], ["2023-01-09", 0], ["2023-01-10", 0], ["2023-01-11", 0], ["2023-01-12", 0], ["2023-01-13", 0], ["2023-01-14", 0], ["2023-01-15", 0], ["2023-01-16", 0], ["2023-01-17", 0], ["2023-01-18", 0], ["2023-01-19", 0], ["2023-01-20", 0], ["2023-01-21", 0], ["2023-01-22", 0], ["2023-01-23", 0], ["2023-01-24", 0], ["2023-01-25", 0], ["2023-01-26", 0], ["2023-01-27", 0], ["2023-01-28", 0], ["2023-01-29", 0], ["2023-01-30", 0], ["2023-01-31", 0], ["2023-02-01", 0], ["2023-02-02", 0], ["2023-02-03", 0], ["2023-02-04", 0], ["2023-02-05", 0], ["2023-02-06", 0], ["2023-02-07", 0], ["2023-02-08", 0], ["2023-02-09", 0], ["2023-02-10", 0], ["2023-02-11", 0], ["2023-02-12", 0], ["2023-02-13", 0], ["2023-02-14", 0], ["2023-02-15", 0], ["2023-02-16", 0], ["2023-02-17", 0], ["2023-02-18", 1], ["2023-02-19", 0], ["2023-02-20", 1], ["2023-02-21", 0], ["2023-02-22", 0], ["2023-02-23", 0], ["2023-02-24", 0], ["2023-02-25", 0], ["2023-02-26", 0], ["2023-02-27", 0], ["2023-02-28", 0], ["2023-03-01", 0], ["2023-03-02", 0], ["2023-03-03", 0], ["2023-03-04", 0], ["2023-03-05", 1], ["2023-03-06", 0], ["2023-03-07", 1], ["2023-03-08", 0], ["2023-03-09", 0], ["2023-03-10", 0], ["2023-03-11", 0], ["2023-03-12", 0], ["2023-03-13", 0], ["2023-03-14", 2], ["2023-03-15", 0], ["2023-03-16", 0], ["2023-03-17", 0], ["2023-03-18", 0], ["2023-03-19", 0], ["2023-03-20", 0], ["2023-03-21", 0], ["2023-03-22", 0], ["2023-03-23", 0], ["2023-03-24", 0], ["2023-03-25", 0], ["2023-03-26", 0], ["2023-03-27", 0], ["2023-03-28", 0], ["2023-03-29", 0], ["2023-03-30", 0], ["2023-03-31", 0], ["2023-04-01", 0], ["2023-04-02", 0], ["2023-04-03", 0], ["2023-04-04", 0], ["2023-04-05", 0], ["2023-04-06", 0], ["2023-04-07", 0], ["2023-04-08", 0], ["2023-04-09", 0], ["2023-04-10", 2], ["2023-04-11", 0], ["2023-04-12", 0], ["2023-04-13", 0], ["2023-04-14", 0], ["2023-04-15", 0], ["2023-04-16", 0], ["2023-04-17", 1], ["2023-04-18", 0], ["2023-04-19", 0], ["2023-04-20", 1], ["2023-04-21", 0], ["2023-04-22", 0], ["2023-04-23", 0], ["2023-04-24", 0], ["2023-04-25", 0], ["2023-04-26", 0], ["2023-04-27", 0], ["2023-04-28", 0], ["2023-04-29", 0], ["2023-04-30", 0], ["2023-05-01", 0], ["2023-05-02", 0]]
-        }]
-    };
-    myChart.setOption(option);
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
 </script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%88%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">栈问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#get-started-3dsctf-2016"><span class="nav-number">1.1.</span> <span class="nav-text">get_started_3dsctf_2016</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OGeek2019-babyrop"><span class="nav-number">1.2.</span> <span class="nav-text">[OGeek2019]babyrop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jarvisoj-level2-x64"><span class="nav-number">1.3.</span> <span class="nav-text">jarvisoj_level2_x64</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ciscn-2019-en-2"><span class="nav-number">1.4.</span> <span class="nav-text">ciscn_2019_en_2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#not-the-same-3dsctf-2016"><span class="nav-number">1.5.</span> <span class="nav-text">not_the_same_3dsctf_2016</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ciscn-2019-n-5"><span class="nav-number">1.6.</span> <span class="nav-text">ciscn_2019_n_5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%81%E4%BA%BA%E4%B8%89%E9%A1%B9-%E7%AC%AC%E4%BA%94%E8%B5%9B%E5%8C%BA-2018-rop"><span class="nav-number">1.7.</span> <span class="nav-text">铁人三项(第五赛区)_2018_rop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bjdctf-2020-babyrop"><span class="nav-number">1.8.</span> <span class="nav-text">bjdctf_2020_babyrop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bjdctf-2020-babystack2"><span class="nav-number">1.9.</span> <span class="nav-text">bjdctf_2020_babystack2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ciscn-2019-es-2"><span class="nav-number">1.10.</span> <span class="nav-text">ciscn_2019_es_2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pwn2-sctf-2016"><span class="nav-number">1.11.</span> <span class="nav-text">pwn2_sctf_2016</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jarvisoj-level3"><span class="nav-number">1.12.</span> <span class="nav-text">jarvisoj_level3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HarekazeCTF2019-baby-rop2"><span class="nav-number">1.13.</span> <span class="nav-text">[HarekazeCTF2019]baby_rop2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2021-%E9%B9%A4%E5%9F%8E%E6%9D%AF-littleof"><span class="nav-number">1.14.</span> <span class="nav-text">[2021 鹤城杯]littleof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ciscn-2019-s-3"><span class="nav-number">1.15.</span> <span class="nav-text">ciscn_2019_s_3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ez-pz-hackover-2016"><span class="nav-number">1.16.</span> <span class="nav-text">ez_pz_hackover_2016</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#picoctf-2018-rop-chain"><span class="nav-number">1.17.</span> <span class="nav-text">picoctf_2018_rop chain</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jarvisoj-level3-x64"><span class="nav-number">1.18.</span> <span class="nav-text">jarvisoj_level3_x64</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HUBUCTF-2022-%E6%96%B0%E7%94%9F%E8%B5%9B-fmt"><span class="nav-number">1.19.</span> <span class="nav-text">[HUBUCTF 2022 新生赛]fmt</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fan fan"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">fan fan</p>
+  <div class="site-description" itemprop="description">我追逐的不是别人，而是我满怀期待的内心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jangfan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jangfan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
 
       </div>
 
     </div>
-    <!-- 分割线 -->
-    <div class="ui divider title-divider footer-hide"></div>
-    <div class="ui container margin-top-10 page-footer">www.nothinglin.ml © 2021 | Powered by Hexo | Based on Theme: hexo-theme-Nothinglin by Nothinglin.</div>
-    <div class="ui container margin-top-10 page-footer">本博客已运行:<span id=span_dt_dt ></span>天了
-<script language=javascript>
-  function show_date_time() {
-    window.setTimeout("show_date_time()", 1000);
-    BirthDay = new Date("5/2/2021 22:22:45");
-    today = new Date();
-    timeold = (today.getTime() - BirthDay.getTime());
-    sectimeold = timeold / 1000
-    secondsold = Math.floor(sectimeold);
-    msPerDay = 24 * 60 * 60 * 1000
-    e_daysold = timeold / msPerDay
-    daysold = Math.floor(e_daysold);
-    e_hrsold = (e_daysold - daysold) * 24;
-    hrsold = Math.floor(e_hrsold);
-    e_minsold = (e_hrsold - hrsold) * 60;
-    minsold = Math.floor((e_hrsold - hrsold) * 60);
-    seconds = Math.floor((e_minsold - minsold) * 60);
-    span_dt_dt.innerHTML = '<font style=color:#f3eee5>' + daysold + '</font> 天 <font style=color:#f3eee5>' + hrsold + '</font> 时 <font style=color:#f3eee5>' + minsold + '</font> 分 <font style=color:#f3eee5>' + seconds + '</font> 秒';
-  }
-  show_date_time();
-</script>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fan fan</span>
 </div>
-    <div class="ui container margin-top-10 page-footer">
-      本站总浏览次数：<a href="https://www.hitwebcounter.com" target="_blank" class="counter-a"><img src="https://hitwebcounter.com/counter/counter.php?page=7909387&style=0006&nbdigits=1&type=page&initCount=0" title="Free Counter" Alt="web counter"   border="0" class="counter-img"/></a>  次 |
-      本站总访问人数：<a href="https://www.hitwebcounter.com" target="_blank"  class="counter-a"><img src="https://hitwebcounter.com/counter/counter.php?page=7909389&style=0006&nbdigits=1&type=ip&initCount=0" title="Free Counter" Alt="web counter"   border="0" class="counter-img"/></a>  人
-
-    </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
-</footer>
 
-  <!-- gototop按钮 -->
-  <button class="gototop"><i class="arrow alternate circle up outline icon big font-thin-yellow"></i></button>
-  <!-- semantic ui js资源 -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-  <script type="text/javascript">
-  $(document).ready(function() {
-
-    var list = $(".tabs-lists a");
-    var numToShow = 15;
-    var button = $("#tab-next");
-    var numInList = list.length;
-    list.hide();
-    if (numInList > numToShow) {
-      button.show();
-    }
-    list.slice(0, numToShow).show();
-
-    button.click(function() {
-      var showing = list.filter(':visible').length;
-      list.slice(showing - 1, showing + numToShow).fadeIn();
-      var nowShowing = list.filter(':visible').length;
-      if (nowShowing >= numInList) {
-        button.hide();
-      }
-    });
-
-  });
-</script>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-
-    var list = $(".categories-lists a");
-    var numToShow = 15;
-    var button = $("#category-next");
-    var numInList = list.length;
-    list.hide();
-    if (numInList > numToShow) {
-      button.show();
-    }
-    list.slice(0, numToShow).show();
-
-    button.click(function() {
-      var showing = list.filter(':visible').length;
-      list.slice(showing - 1, showing + numToShow).fadeIn();
-      var nowShowing = list.filter(':visible').length;
-      if (nowShowing >= numInList) {
-        button.hide();
-      }
-    });
-
-  });
-</script>
+        
 
 
-<script type="text/javascript">
-  $(document).ready(function() {
-
-    var list = $(".tag1-lists a");
-    var numToShow = 15;
-    var button = $("#tag1-next");
-    var numInList = list.length;
-    list.hide();
-    if (numInList > numToShow) {
-      button.show();
-    }
-    list.slice(0, numToShow).show();
-
-    button.click(function() {
-      var showing = list.filter(':visible').length;
-      list.slice(showing - 1, showing + numToShow).fadeIn();
-      var nowShowing = list.filter(':visible').length;
-      if (nowShowing >= numInList) {
-        button.hide();
-      }
-    });
-
-  });
-</script>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-
-    var list = $(".tag2-lists a");
-    var numToShow = 15;
-    var button = $("#tag2-next");
-    var numInList = list.length;
-    list.hide();
-    if (numInList > numToShow) {
-      button.show();
-    }
-    list.slice(0, numToShow).show();
-
-    button.click(function() {
-      var showing = list.filter(':visible').length;
-      list.slice(showing - 1, showing + numToShow).fadeIn();
-      var nowShowing = list.filter(':visible').length;
-      if (nowShowing >= numInList) {
-        button.hide();
-      }
-    });
-
-  });
-</script>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-
-    var list = $(".category1-lists a");
-    var numToShow = 15;
-    var button = $("#category1-next");
-    var numInList = list.length;
-    list.hide();
-    if (numInList > numToShow) {
-      button.show();
-    }
-    list.slice(0, numToShow).show();
-
-    button.click(function() {
-      var showing = list.filter(':visible').length;
-      list.slice(showing - 1, showing + numToShow).fadeIn();
-      var nowShowing = list.filter(':visible').length;
-      if (nowShowing >= numInList) {
-        button.hide();
-      }
-    });
-
-  });
-</script>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-
-    var list = $(".category2-lists a");
-    var numToShow = 15;
-    var button = $("#category2-next");
-    var numInList = list.length;
-    list.hide();
-    if (numInList > numToShow) {
-      button.show();
-    }
-    list.slice(0, numToShow).show();
-
-    button.click(function() {
-      var showing = list.filter(':visible').length;
-      list.slice(showing - 1, showing + numToShow).fadeIn();
-      var nowShowing = list.filter(':visible').length;
-      if (nowShowing >= numInList) {
-        button.hide();
-      }
-    });
-
-  });
-</script>
-
-  <!-- 代码高亮插件 -->
-
-<script src="/lib/enlighterjs.min.js"></script>
-
-<script type="text/javascript">
-  // INIT CODE - simple page-wide initialization based on css selectors
-  // - highlight all pre + code tags (CSS3 selectors)
-  // - use javascript as default language
-  // - use theme "enlighter" as default theme
-  // - replace tabs with 2 spaces
-  EnlighterJS.init('pre', 'code', {
-    language: 'javascript',
-    theme: 'enlighter',
-    textOverflow: 'scroll',
-    indent: 2
-  });
-</script>
-
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
-<script type="text/javascript">
-  var dom = document.getElementById("categories-echarts");
-  var categoriesChart = echarts.init(dom);
-  var app = {};
-  var option;
 
 
-<!-- 核心关键 -->
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,100' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
   
 
 
-  option = {
-    series: [{
-      name: '分类统计',
-      type: 'pie',
-      radius: '55%',
-      data: [{"name":"pwn","value":2},{"name":"学习笔记","value":3},{"name":"逆向分析","value":1},{"name":"pwn基础","value":1}]
-    }],
-      tooltip: {}
-  };
 
-  if (option && typeof option === 'object') {
-    categoriesChart.setOption(option);
-  }
-</script>
 
   
-<script src="/js/jquery.gototop.min.js"></script>
+<script src="/js/local-search.js"></script>
 
-<!-- gototop 脚本 -->
-<script type="text/javascript">
-  $(function() {
-    // $(".gototop").gototop();
-    $(".gototop").gototop({
-      position: 0,
-      duration: 1250,
-      visibleAt: 300,
-      classname: "isvisible"
-    });
-  });
-</script>
 
-  
-<script src="/js/search.js"></script>
 
-<script type="text/javascript">
-  //单击弹出窗口事件
-  $(document).ready(function() {
-    $("#nav-search").click(function() {
-      $('.ui.modal').modal('show');
-      event.preventDefault();
-    });
-    //搜索功能初始化
-    if ($('.local-search').length) {
-      $.getScript('/js/search.js', function() {
-        searchFunc("/search.xml", 'local-search-input', 'local-search-result');
-      });
-    }
-  });
 
-</script>
 
-  <!-- 这是nav菜单栏的选中状态代码 -->
-<script type="text/javascript">
-  $(document).ready(function() {
-    // 获取导航栏中元素
-    let navs = document.querySelectorAll(".item");
-    // 获取当前页面中的地址
-    let pagePath = window.location.pathname;
-    for (let nav of navs) {
-      // 获取属性
-      let navPath = nav.getAttribute("data-path");
-      // alert(pagePath)
-      // console.log(nav.className)
-      if (navPath === pagePath) {
-        // console.log(pagePath)
-        nav.className = "item menu-active";
-      }
-    }
-  });
-</script>
 
-  <script type="text/javascript">
-  $(document).ready(function() {
-    // 获取导航栏中元素
-    let pagePath = window.location.href;
-    // alert(pagePath)
-    let tabs = document.querySelectorAll(".tabs-nav");
-    for (let tab of tabs) {
-      // console.log(nav.href);
-      let tabPath = tab.href;
-      if (tabPath === pagePath) {
-        // console.log(pagePath)
-        tab.className = "tabs-nav  tabs-active";
-      }
-    }
-  });
-</script>
 
-  <!-- 目录栏中滚动定位对应超链接 -->
-<script type="text/javascript">
-  //是否激活目录栏样式
-  function isActiveCatalog() {
-    //设置初始高度向下20
-    let offsetHeight = 20;
 
-    //获取当前页面滚动位置距离页面顶部的高度值***
-    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 
-    //hexo渲染的文章页面标题H1、2、····,它的类名是headerlink，获取该类名对应的文章标题标签、
-    let headerLinkList = document.getElementsByClassName("headerlink");
 
-    //hexo渲染生成的目录栏中，标题列表超链接的类名是toc-link获取其全部对应标签内容装进变量里
-    let catalogLinkList = document.getElementsByClassName("toc-link");
 
-    //获取目录栏中所有标题标签元素进行遍历判断与设定
-    for (let i = 0; i < catalogLinkList.length; i++) {
-      //定义这一个目录标题的高度，我也还不是很明白offsettop和scrollTop之间的区别
-      let currentTopCatalog = headerLinkList[i].offsetTop - offsetHeight;
-
-      //定义下一个目录标题的高度******
-      let nextTopCatalog = i + 1 === headerLinkList.length ? //判断这一个目录是不是最后一个标题，如果是就赋值无穷，不是就赋值下一个目录标题的高度
-        Infinity : headerLinkList[i + 1].offsetTop - offsetHeight;
-
-      //判断目录标题是不是为当前标题(设置当前目录标题为激活状态)**********
-      if (scrollTop >= currentTopCatalog && scrollTop < nextTopCatalog) {
-        catalogLinkList[i].className = "toc-link toc-active"
-      } else {
-        catalogLinkList[i].className = "toc-link"
-      }
-
-    }
-
-  }
-
-  isActiveCatalog()
-  document.addEventListener("scroll", isActiveCatalog, false);
-</script>
-
-  <script type="text/javascript">
-  $('.menu-button').click(function(){
-    $('.item').toggleClass('moblie-hide')
-  })
-</script>
-
-  <script type="text/javascript">
-  $('.wechat-link')
-    .popup({
-      inline: true,
-      on: 'click'
-    });
-
-  $('.public-link')
-    .popup({
-      inline: true,
-      on: 'click'
-    });
-
-</script>
-
-  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-<!-- 实现fancybox的脚本 -->
- <script type="text/javascript">
-   // 集成fancybox, 为所有img元素添加父元素
-   $("p img").each(function () {
-      // $(this).attr("data-fancybox", "gallery"); 直接给img添加data-fancybox会导致点击图片后图片消失
-       var element = document.createElement("a");
-       $(element).attr("data-fancybox", "gallery");
-       $(element).attr("href", $(this).attr("src"));
-       $(this).wrap(element);
-   });
- </script>
-
-  <!-- 朋友圈功能 -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-  
-<script src="/js/request.js"></script>
 
 
   
 
   
 
-  
-<script src="/js/countdown.js"></script>
 
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'Mck7Dy6F2oIhwijhmzrGcdqG-gzGzoHsz',
+      appKey     : '6xnXjGK9mDWbcv6boCozpd4m',
+      placeholder: "欢迎在此留下您的足迹# Comment box placeholder",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 
-</body>
-
+</body> 
 </html>
+<!-- 爆炸烟花 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/src/firework.js"></script>
+
