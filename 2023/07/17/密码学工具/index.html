@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="古典密码单表代换加密明密文一一对应，  在密钥空间较小的情况下，采用暴力破解方式 在密文长度足够长的时候，使用词频分析，http:&#x2F;&#x2F;quipqiup.com&#x2F;  当密钥空间足够大，而密文长度足够短的情况下，破解较为困难。 凯撒密码基本破解：1）遍历26个偏移量2）利用词频分析(不一定得到正确的明文) 工具：1）JPK，可解带密钥与不带密钥2）http:&#x2F;&#x2F;planetcalc.com&#x2F;1434&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="密码学基础">
+<meta property="og:url" content="http://example.com/2023/07/17/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="fanfan&#39;s blog">
+<meta property="og:description" content="古典密码单表代换加密明密文一一对应，  在密钥空间较小的情况下，采用暴力破解方式 在密文长度足够长的时候，使用词频分析，http:&#x2F;&#x2F;quipqiup.com&#x2F;  当密钥空间足够大，而密文长度足够短的情况下，破解较为困难。 凯撒密码基本破解：1）遍历26个偏移量2）利用词频分析(不一定得到正确的明文) 工具：1）JPK，可解带密钥与不带密钥2）http:&#x2F;&#x2F;planetcalc.com&#x2F;1434&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-07-17%20151502.png">
+<meta property="article:published_time" content="2023-07-17T03:32:03.000Z">
+<meta property="article:modified_time" content="2023-07-19T00:37:10.435Z">
+<meta property="article:author" content="fan fan">
+<meta property="article:tag" content="密码分析">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-07-17%20151502.png">
+
+<link rel="canonical" href="http://example.com/2023/07/17/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%B7%A5%E5%85%B7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>密码学基础 | fanfan's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">fanfan's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">IT博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/17/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="fan fan">
+      <meta itemprop="description" content="我追逐的不是别人，而是我满怀期待的内心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fanfan's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          密码学基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-17 11:32:03" itemprop="dateCreated datePublished" datetime="2023-07-17T11:32:03+08:00">2023-07-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-19 08:37:10" itemprop="dateModified" datetime="2023-07-19T08:37:10+08:00">2023-07-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/crypto/" itemprop="url" rel="index"><span itemprop="name">crypto</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/07/17/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%B7%A5%E5%85%B7/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/07/17/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%B7%A5%E5%85%B7/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="古典密码"><a href="#古典密码" class="headerlink" title="古典密码"></a>古典密码</h2><h3 id="单表代换加密"><a href="#单表代换加密" class="headerlink" title="单表代换加密"></a>单表代换加密</h3><p>明密文一一对应，</p>
+<ul>
+<li>在密钥空间较小的情况下，采用暴力破解方式</li>
+<li>在密文长度足够长的时候，使用词频分析，<a target="_blank" rel="noopener" href="http://quipqiup.com/">http://quipqiup.com/</a></li>
+</ul>
+<p>当密钥空间足够大，而密文长度足够短的情况下，破解较为困难。</p>
+<h4 id="凯撒密码"><a href="#凯撒密码" class="headerlink" title="凯撒密码"></a>凯撒密码</h4><p>基本破解：1）遍历26个偏移量2）利用词频分析(不一定得到正确的明文)</p>
+<p>工具：1）JPK，可解带密钥与不带密钥2）<a target="_blank" rel="noopener" href="http://planetcalc.com/1434/">http://planetcalc.com/1434/</a>   3）<a target="_blank" rel="noopener" href="http://www.qqxiuzi.cn/bianma/ROT5-13-18-47.php">http://www.qqxiuzi.cn/bianma/ROT5-13-18-47.php</a></p>
+<h4 id="移位密码"><a href="#移位密码" class="headerlink" title="移位密码"></a>移位密码</h4><p>和凯撒密码的区别是在其不仅会处理字母，还会处理数字和特殊字符，常见的ascII码表进行移位</p>
+<p>基本破解：遍历所有可能性进破解</p>
+<h4 id="Atbash-Cipher"><a href="#Atbash-Cipher" class="headerlink" title="Atbash Cipher"></a>Atbash Cipher</h4><p>它使用字母表中的最后一个字母代表第一个字母，倒数第二个字母代表第二个字母</p>
+<p>工具：<a target="_blank" rel="noopener" href="http://www.practicalcryptography.com/ciphers/classical-era/atbash-cipher/">http://www.practicalcryptography.com/ciphers/classical-era/atbash-cipher/</a></p>
+<h4 id="简单替换密码"><a href="#简单替换密码" class="headerlink" title="简单替换密码"></a>简单替换密码</h4><p>将每个明文字母替换为与之唯一对应且不同的字母。它与恺撒密码之间的区别是其密码字母表的字母不是简单的移位，而是完全是混乱的，解密时，我们一般是知道了每一个字母的对应规则，才可以正常解密。一般采用词频分析。</p>
+<p>工具：<a target="_blank" rel="noopener" href="http://quipqiup.com/">http://quipqiup.com/</a></p>
+<h4 id="仿射密码"><a href="#仿射密码" class="headerlink" title="仿射密码"></a>仿射密码</h4><p>加密函数是 E(x)&#x3D;(ax+b)(mod m)</p>
+<p>解密函数是 D(x)&#x3D;a^(-1)(x−b)(mod m)</p>
+<p>1）x 表示明文按照某种编码得到的数字2）a和 m互质3）m 是编码系统中字母的数目。</p>
+<p>当a&#x3D;1 时，仿射加密是凯撒加密</p>
+<h3 id="多表代换加密"><a href="#多表代换加密" class="headerlink" title="多表代换加密"></a>多表代换加密</h3><h4 id="playfair"><a href="#playfair" class="headerlink" title="playfair"></a>playfair</h4><p>基本算法，选取一串英文字母，除去重复出现的字母，将剩下的字母逐个逐个加入 5 × 5 的矩阵内，剩下的空间由未加入的英文字母依 a-z 的顺序加入。注意，将 q 去除，或将 i 和 j 视作同一字。将要加密的明文分成两个一组。若组内的字母相同，将 X（或 Q）加到该组的第一个字母后，重新分组。若剩下一个字，也加入 X 。在每组中，找出两个字母在矩阵中的地方，1）若两个字母不同行也不同列，在矩阵中找出另外两个字母（第一个字母对应行优先），使这四个字母成为一个长方形的四个角。2）若两个字母同行，取这两个字母右方的字母（若字母在最右方则取最左方的字母）。3）若两个字母同列，取这两个字母下方的字母（若字母在最下方则取最上方的字母）。</p>
+<p>工具；CAP4</p>
+<h4 id="polubius"><a href="#polubius" class="headerlink" title="polubius"></a>polubius</h4><p>棋盘密码，一般是将给定的明文加密为两两组合的数字，常用密码表5×5，26个字母依次填入，i&#x2F;j代表同一个，行和列的序号都是1~5。明文加密之后一个字母被加密成他的行列号。还有一种打乱的密码表</p>
+<p>工具：CrypTool</p>
+<h4 id="维吉尼亚"><a href="#维吉尼亚" class="headerlink" title="维吉尼亚"></a>维吉尼亚</h4><p>使用一系列凯撒密码组成密码字母表的加密算法，26×26，第一行偏移量为0，从A开始，第二行偏移为1，从B开始，偏移量依次加一，最后从Z开始。加密方式是先将密钥填充和明文一个长度，然后明文(行)和对应的密钥字母(列)在密码表中相交叉的位置的字母</p>
+<p>已知密钥</p>
+<p>1）Python 的 pycipher 库2）<a target="_blank" rel="noopener" href="http://planetcalc.com/2468/">在线解密 Vigenère cipher</a>3）CAP4</p>
+<p>未知密钥1）<a target="_blank" rel="noopener" href="http://www.mygeocachingprofile.com/codebreaker.vigenerecipher.aspx">Vigenère Cipher Codebreaker</a>2）<a target="_blank" rel="noopener" href="https://www.guballa.de/vigenere-solver">Vigenere Solver</a> </p>
+<h4 id="nihilist"><a href="#nihilist" class="headerlink" title="nihilist"></a>nihilist</h4><p>关键词密码，利用密钥(关键词)构造棋盘矩阵5×5，将关键词不重复的依次填入矩阵，剩下字母按照字母顺序填入 ij等价。明文字母所在的行列号就是加密后的结果</p>
+<h4 id="hill"><a href="#hill" class="headerlink" title="hill"></a>hill</h4><p>希尔密码，使用每个字母在字母表中的顺序作为其对应的数字，然后将明文转化为 n 维向量，跟一个 n × n 的矩阵相乘，再将得出的结果模 26。注意用作加密的矩阵（即密匙）在 Zn26 必须是可逆的，否则就不可能解码。只有矩阵的行列式和 26 互质，才是可逆的。</p>
+<img src="https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图 2023-07-17 151502.png" style="zoom:50%;">
+
+<p>工具 1)<a target="_blank" rel="noopener" href="http://www.practicalcryptography.com/ciphers/hill-cipher/">http://www.practicalcryptography.com/ciphers/hill-cipher/</a>  2) CAP4  3) Cryptool</p>
+<h4 id="autokeyipher"><a href="#autokeyipher" class="headerlink" title="autokeyipher"></a>autokeyipher</h4><p>自动密钥密码也是多表替换密码，与维吉尼亚密码密码类似,但是是用不同方式产生密钥。分为关键词自动密钥密码和原文自动密钥密码。加密方式和维吉尼亚加密方式一样</p>
+<p>工具</p>
+<p>已知关键词：Python 的 pycipher 库</p>
+<p>未知关键词：<a target="_blank" rel="noopener" href="http://www.practicalcryptography.com/cryptanalysis/stochastic-searching/cryptanalysis-autokey-cipher/">http://www.practicalcryptography.com/cryptanalysis/stochastic-searching/cryptanalysis-autokey-cipher/</a></p>
+<h3 id="其他类型加密"><a href="#其他类型加密" class="headerlink" title="其他类型加密"></a>其他类型加密</h3><p>培根密码：<a target="_blank" rel="noopener" href="http://rumkin.com/tools/cipher/baconian.php">http://rumkin.com/tools/cipher/baconian.php</a></p>
+<p>栅栏密码：<a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/bianma/zhalanmima.php">https://www.qqxiuzi.cn/bianma/zhalanmima.php</a></p>
+<p>曲路密码：</p>
+<p>列移位相加：<a target="_blank" rel="noopener" href="http://www.practicalcryptography.com/ciphers/classical-era/columnar-transposition/">http://www.practicalcryptography.com/ciphers/classical-era/columnar-transposition/</a> </p>
+<p>01248密码：云影密码（只有 0，1，2，4，8）</p>
+<p>JSfuck：<a target="_blank" rel="noopener" href="http://www.jsfuck.com/">JSFuck 在线加密网站</a></p>
+<p>BrainFuck：<a target="_blank" rel="noopener" href="https://www.splitbrain.org/services/ook">https://www.splitbrain.org/services/ook</a></p>
+<p>猪圈密码：<a target="_blank" rel="noopener" href="http://www.simonsingh.net/The_Black_Chamber/pigpen.html">http://www.simonsingh.net/The_Black_Chamber/pigpen.html</a></p>
+<p>舞动的小人密码：</p>
+<p>键盘密码</p>
+<h2 id="流密码"><a href="#流密码" class="headerlink" title="流密码"></a>流密码</h2><p>流密码的密钥长度会与明文的长度相同,流密码的密钥派生自一个较短的密钥，派生算法通常为一个伪随机数生成算法。目前来说流加密都是对称加密。关键在于设计好的<strong>伪随机数生成器</strong>，流密码加解密非常简单，在已知明文的情况下，可以非常容易地获取密钥流。</p>
+<h3 id="伪随机数生成器-PRNG"><a href="#伪随机数生成器-PRNG" class="headerlink" title="伪随机数生成器(PRNG)"></a>伪随机数生成器(PRNG)</h3><p>是用来生成接近于绝对随机数序列的数序列的算法。PRNG会依赖一个初始值(种子)，来生成伪随机数序列(种子确定，所生成的随机数序列就是确定的)</p>
+<p><strong>密码安全伪随机数生成器(CSPRNG)<strong>，特殊的伪随机数生成器,生成的伪随机数应该满足更高的要求，</strong>比如当生成器的部分初始状态或者运行时的状态被攻击者获知时，攻击者仍然不能够获取泄漏状态之前的生成的随机数。</strong></p>
+<h3 id="线性同余生成器-LCG"><a href="#线性同余生成器-LCG" class="headerlink" title="线性同余生成器(LCG)"></a>线性同余生成器(LCG)</h3><p>n级反馈移位寄存器，首先会有n个初态元素(a0，a1,,,,,an-1)，F是反馈函数和反馈逻辑，根据函数类型，可以分为线性反馈移位寄存器(LFSR)和非线性。</p>
+<p>所以ai+n&#x3D;F(ai,ai+1,,,,,,ai+n-1)</p>
+<p>反馈移位寄存器都会定义在某个有限域上,可以将其视为同一个空间中的变换，对于一个序列来说，我们一般定义其生成函数为其序列对应的<strong>幂级数</strong>的和。</p>
+<h3 id="反馈移位寄存器"><a href="#反馈移位寄存器" class="headerlink" title="反馈移位寄存器"></a>反馈移位寄存器</h3><h3 id="特殊流密码"><a href="#特殊流密码" class="headerlink" title="特殊流密码"></a>特殊流密码</h3><h2 id="块加密"><a href="#块加密" class="headerlink" title="块加密"></a>块加密</h2><h2 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h2><h2 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h2><h2 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h2><h2 id="攻击思想"><a href="#攻击思想" class="headerlink" title="攻击思想"></a>攻击思想</h2><h2 id="证书格式"><a href="#证书格式" class="headerlink" title="证书格式"></a>证书格式</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%AF%86%E7%A0%81%E5%88%86%E6%9E%90/" rel="tag"><i class="fa fa-tag"></i> 密码分析</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/05/17/pwnable%E6%B8%B8%E8%AE%B0/" rel="prev" title="pwnable游记">
+      <i class="fa fa-chevron-left"></i> pwnable游记
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">古典密码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E8%A1%A8%E4%BB%A3%E6%8D%A2%E5%8A%A0%E5%AF%86"><span class="nav-number">1.1.</span> <span class="nav-text">单表代换加密</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%AF%E6%92%92%E5%AF%86%E7%A0%81"><span class="nav-number">1.1.1.</span> <span class="nav-text">凯撒密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E4%BD%8D%E5%AF%86%E7%A0%81"><span class="nav-number">1.1.2.</span> <span class="nav-text">移位密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Atbash-Cipher"><span class="nav-number">1.1.3.</span> <span class="nav-text">Atbash Cipher</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%9B%BF%E6%8D%A2%E5%AF%86%E7%A0%81"><span class="nav-number">1.1.4.</span> <span class="nav-text">简单替换密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BF%E5%B0%84%E5%AF%86%E7%A0%81"><span class="nav-number">1.1.5.</span> <span class="nav-text">仿射密码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8%E4%BB%A3%E6%8D%A2%E5%8A%A0%E5%AF%86"><span class="nav-number">1.2.</span> <span class="nav-text">多表代换加密</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#playfair"><span class="nav-number">1.2.1.</span> <span class="nav-text">playfair</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#polubius"><span class="nav-number">1.2.2.</span> <span class="nav-text">polubius</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%B4%E5%90%89%E5%B0%BC%E4%BA%9A"><span class="nav-number">1.2.3.</span> <span class="nav-text">维吉尼亚</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nihilist"><span class="nav-number">1.2.4.</span> <span class="nav-text">nihilist</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hill"><span class="nav-number">1.2.5.</span> <span class="nav-text">hill</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#autokeyipher"><span class="nav-number">1.2.6.</span> <span class="nav-text">autokeyipher</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%B1%BB%E5%9E%8B%E5%8A%A0%E5%AF%86"><span class="nav-number">1.3.</span> <span class="nav-text">其他类型加密</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E5%AF%86%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">流密码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%94%9F%E6%88%90%E5%99%A8-PRNG"><span class="nav-number">2.1.</span> <span class="nav-text">伪随机数生成器(PRNG)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%90%8C%E4%BD%99%E7%94%9F%E6%88%90%E5%99%A8-LCG"><span class="nav-number">2.2.</span> <span class="nav-text">线性同余生成器(LCG)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E9%A6%88%E7%A7%BB%E4%BD%8D%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">反馈移位寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E6%B5%81%E5%AF%86%E7%A0%81"><span class="nav-number">2.4.</span> <span class="nav-text">特殊流密码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%97%E5%8A%A0%E5%AF%86"><span class="nav-number">3.</span> <span class="nav-text">块加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">4.</span> <span class="nav-text">非对称加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">哈希函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D"><span class="nav-number">6.</span> <span class="nav-text">数字签名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%80%9D%E6%83%B3"><span class="nav-number">7.</span> <span class="nav-text">攻击思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%81%E4%B9%A6%E6%A0%BC%E5%BC%8F"><span class="nav-number">8.</span> <span class="nav-text">证书格式</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fan fan"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">fan fan</p>
+  <div class="site-description" itemprop="description">我追逐的不是别人，而是我满怀期待的内心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jangfan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jangfan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fan fan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,100' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'Mck7Dy6F2oIhwijhmzrGcdqG-gzGzoHsz',
+      appKey     : '6xnXjGK9mDWbcv6boCozpd4m',
+      placeholder: "欢迎在此留下您的足迹# Comment box placeholder",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body> 
+</html>
+<!-- 爆炸烟花 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/src/firework.js"></script>
+
