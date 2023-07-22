@@ -1,0 +1,692 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="fan fan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="古典密码单表代换加密明密文一一对应，  在密钥空间较小的情况下，采用暴力破解方式 在密文长度足够长的时候，使用词频分析，http:&#x2F;&#x2F;quipqiup.com&#x2F;  当密钥空间足够大，而密文长度足够短的情况下，破解较为困难。 凯撒密码基本破解：1）遍历26个偏移量2）利用词频分析(不一定得到正确的明文) 工具：1）JPK，可解带密钥与不带密钥2）http:&#x2F;&#x2F;planetcalc.com&#x2F;1434&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="密码学基础">
+<meta property="og:url" content="http://example.com/2023/07/17/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="Pfang1n&#39;s blog">
+<meta property="og:description" content="古典密码单表代换加密明密文一一对应，  在密钥空间较小的情况下，采用暴力破解方式 在密文长度足够长的时候，使用词频分析，http:&#x2F;&#x2F;quipqiup.com&#x2F;  当密钥空间足够大，而密文长度足够短的情况下，破解较为困难。 凯撒密码基本破解：1）遍历26个偏移量2）利用词频分析(不一定得到正确的明文) 工具：1）JPK，可解带密钥与不带密钥2）http:&#x2F;&#x2F;planetcalc.com&#x2F;1434&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-07-17%20151502.png">
+<meta property="article:published_time" content="2023-07-17T03:32:03.000Z">
+<meta property="article:modified_time" content="2023-07-19T00:37:10.435Z">
+<meta property="article:author" content="fan fan">
+<meta property="article:tag" content="密码分析">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-07-17%20151502.png">
+  
+  
+  
+  <title>密码学基础 - Pfang1n&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="密码学基础"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-17 11:32" pubdate>
+          2023年7月17日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">密码学基础</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="古典密码"><a href="#古典密码" class="headerlink" title="古典密码"></a>古典密码</h2><h3 id="单表代换加密"><a href="#单表代换加密" class="headerlink" title="单表代换加密"></a>单表代换加密</h3><p>明密文一一对应，</p>
+<ul>
+<li>在密钥空间较小的情况下，采用暴力破解方式</li>
+<li>在密文长度足够长的时候，使用词频分析，<a target="_blank" rel="noopener" href="http://quipqiup.com/">http://quipqiup.com/</a></li>
+</ul>
+<p>当密钥空间足够大，而密文长度足够短的情况下，破解较为困难。</p>
+<h4 id="凯撒密码"><a href="#凯撒密码" class="headerlink" title="凯撒密码"></a>凯撒密码</h4><p>基本破解：1）遍历26个偏移量2）利用词频分析(不一定得到正确的明文)</p>
+<p>工具：1）JPK，可解带密钥与不带密钥2）<a target="_blank" rel="noopener" href="http://planetcalc.com/1434/">http://planetcalc.com/1434/</a>   3）<a target="_blank" rel="noopener" href="http://www.qqxiuzi.cn/bianma/ROT5-13-18-47.php">http://www.qqxiuzi.cn/bianma/ROT5-13-18-47.php</a></p>
+<h4 id="移位密码"><a href="#移位密码" class="headerlink" title="移位密码"></a>移位密码</h4><p>和凯撒密码的区别是在其不仅会处理字母，还会处理数字和特殊字符，常见的ascII码表进行移位</p>
+<p>基本破解：遍历所有可能性进破解</p>
+<h4 id="Atbash-Cipher"><a href="#Atbash-Cipher" class="headerlink" title="Atbash Cipher"></a>Atbash Cipher</h4><p>它使用字母表中的最后一个字母代表第一个字母，倒数第二个字母代表第二个字母</p>
+<p>工具：<a target="_blank" rel="noopener" href="http://www.practicalcryptography.com/ciphers/classical-era/atbash-cipher/">http://www.practicalcryptography.com/ciphers/classical-era/atbash-cipher/</a></p>
+<h4 id="简单替换密码"><a href="#简单替换密码" class="headerlink" title="简单替换密码"></a>简单替换密码</h4><p>将每个明文字母替换为与之唯一对应且不同的字母。它与恺撒密码之间的区别是其密码字母表的字母不是简单的移位，而是完全是混乱的，解密时，我们一般是知道了每一个字母的对应规则，才可以正常解密。一般采用词频分析。</p>
+<p>工具：<a target="_blank" rel="noopener" href="http://quipqiup.com/">http://quipqiup.com/</a></p>
+<h4 id="仿射密码"><a href="#仿射密码" class="headerlink" title="仿射密码"></a>仿射密码</h4><p>加密函数是 E(x)&#x3D;(ax+b)(mod m)</p>
+<p>解密函数是 D(x)&#x3D;a^(-1)(x−b)(mod m)</p>
+<p>1）x 表示明文按照某种编码得到的数字2）a和 m互质3）m 是编码系统中字母的数目。</p>
+<p>当a&#x3D;1 时，仿射加密是凯撒加密</p>
+<h3 id="多表代换加密"><a href="#多表代换加密" class="headerlink" title="多表代换加密"></a>多表代换加密</h3><h4 id="playfair"><a href="#playfair" class="headerlink" title="playfair"></a>playfair</h4><p>基本算法，选取一串英文字母，除去重复出现的字母，将剩下的字母逐个逐个加入 5 × 5 的矩阵内，剩下的空间由未加入的英文字母依 a-z 的顺序加入。注意，将 q 去除，或将 i 和 j 视作同一字。将要加密的明文分成两个一组。若组内的字母相同，将 X（或 Q）加到该组的第一个字母后，重新分组。若剩下一个字，也加入 X 。在每组中，找出两个字母在矩阵中的地方，1）若两个字母不同行也不同列，在矩阵中找出另外两个字母（第一个字母对应行优先），使这四个字母成为一个长方形的四个角。2）若两个字母同行，取这两个字母右方的字母（若字母在最右方则取最左方的字母）。3）若两个字母同列，取这两个字母下方的字母（若字母在最下方则取最上方的字母）。</p>
+<p>工具；CAP4</p>
+<h4 id="polubius"><a href="#polubius" class="headerlink" title="polubius"></a>polubius</h4><p>棋盘密码，一般是将给定的明文加密为两两组合的数字，常用密码表5×5，26个字母依次填入，i&#x2F;j代表同一个，行和列的序号都是1~5。明文加密之后一个字母被加密成他的行列号。还有一种打乱的密码表</p>
+<p>工具：CrypTool</p>
+<h4 id="维吉尼亚"><a href="#维吉尼亚" class="headerlink" title="维吉尼亚"></a>维吉尼亚</h4><p>使用一系列凯撒密码组成密码字母表的加密算法，26×26，第一行偏移量为0，从A开始，第二行偏移为1，从B开始，偏移量依次加一，最后从Z开始。加密方式是先将密钥填充和明文一个长度，然后明文(行)和对应的密钥字母(列)在密码表中相交叉的位置的字母</p>
+<p>已知密钥</p>
+<p>1）Python 的 pycipher 库2）<a target="_blank" rel="noopener" href="http://planetcalc.com/2468/">在线解密 Vigenère cipher</a>3）CAP4</p>
+<p>未知密钥1）<a target="_blank" rel="noopener" href="http://www.mygeocachingprofile.com/codebreaker.vigenerecipher.aspx">Vigenère Cipher Codebreaker</a>2）<a target="_blank" rel="noopener" href="https://www.guballa.de/vigenere-solver">Vigenere Solver</a> </p>
+<h4 id="nihilist"><a href="#nihilist" class="headerlink" title="nihilist"></a>nihilist</h4><p>关键词密码，利用密钥(关键词)构造棋盘矩阵5×5，将关键词不重复的依次填入矩阵，剩下字母按照字母顺序填入 ij等价。明文字母所在的行列号就是加密后的结果</p>
+<h4 id="hill"><a href="#hill" class="headerlink" title="hill"></a>hill</h4><p>希尔密码，使用每个字母在字母表中的顺序作为其对应的数字，然后将明文转化为 n 维向量，跟一个 n × n 的矩阵相乘，再将得出的结果模 26。注意用作加密的矩阵（即密匙）在 Zn26 必须是可逆的，否则就不可能解码。只有矩阵的行列式和 26 互质，才是可逆的。</p>
+<img src="https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图 2023-07-17 151502.png" srcset="/img/loading.gif" lazyload style="zoom:50%;">
+
+<p>工具 1)<a target="_blank" rel="noopener" href="http://www.practicalcryptography.com/ciphers/hill-cipher/">http://www.practicalcryptography.com/ciphers/hill-cipher/</a>  2) CAP4  3) Cryptool</p>
+<h4 id="autokeyipher"><a href="#autokeyipher" class="headerlink" title="autokeyipher"></a>autokeyipher</h4><p>自动密钥密码也是多表替换密码，与维吉尼亚密码密码类似,但是是用不同方式产生密钥。分为关键词自动密钥密码和原文自动密钥密码。加密方式和维吉尼亚加密方式一样</p>
+<p>工具</p>
+<p>已知关键词：Python 的 pycipher 库</p>
+<p>未知关键词：<a target="_blank" rel="noopener" href="http://www.practicalcryptography.com/cryptanalysis/stochastic-searching/cryptanalysis-autokey-cipher/">http://www.practicalcryptography.com/cryptanalysis/stochastic-searching/cryptanalysis-autokey-cipher/</a></p>
+<h3 id="其他类型加密"><a href="#其他类型加密" class="headerlink" title="其他类型加密"></a>其他类型加密</h3><p>培根密码：<a target="_blank" rel="noopener" href="http://rumkin.com/tools/cipher/baconian.php">http://rumkin.com/tools/cipher/baconian.php</a></p>
+<p>栅栏密码：<a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/bianma/zhalanmima.php">https://www.qqxiuzi.cn/bianma/zhalanmima.php</a></p>
+<p>曲路密码：</p>
+<p>列移位相加：<a target="_blank" rel="noopener" href="http://www.practicalcryptography.com/ciphers/classical-era/columnar-transposition/">http://www.practicalcryptography.com/ciphers/classical-era/columnar-transposition/</a> </p>
+<p>01248密码：云影密码（只有 0，1，2，4，8）</p>
+<p>JSfuck：<a target="_blank" rel="noopener" href="http://www.jsfuck.com/">JSFuck 在线加密网站</a></p>
+<p>BrainFuck：<a target="_blank" rel="noopener" href="https://www.splitbrain.org/services/ook">https://www.splitbrain.org/services/ook</a></p>
+<p>猪圈密码：<a target="_blank" rel="noopener" href="http://www.simonsingh.net/The_Black_Chamber/pigpen.html">http://www.simonsingh.net/The_Black_Chamber/pigpen.html</a></p>
+<p>舞动的小人密码：</p>
+<p>键盘密码</p>
+<h2 id="流密码"><a href="#流密码" class="headerlink" title="流密码"></a>流密码</h2><p>流密码的密钥长度会与明文的长度相同,流密码的密钥派生自一个较短的密钥，派生算法通常为一个伪随机数生成算法。目前来说流加密都是对称加密。关键在于设计好的<strong>伪随机数生成器</strong>，流密码加解密非常简单，在已知明文的情况下，可以非常容易地获取密钥流。</p>
+<h3 id="伪随机数生成器-PRNG"><a href="#伪随机数生成器-PRNG" class="headerlink" title="伪随机数生成器(PRNG)"></a>伪随机数生成器(PRNG)</h3><p>是用来生成接近于绝对随机数序列的数序列的算法。PRNG会依赖一个初始值(种子)，来生成伪随机数序列(种子确定，所生成的随机数序列就是确定的)</p>
+<p><strong>密码安全伪随机数生成器(CSPRNG)<strong>，特殊的伪随机数生成器,生成的伪随机数应该满足更高的要求，</strong>比如当生成器的部分初始状态或者运行时的状态被攻击者获知时，攻击者仍然不能够获取泄漏状态之前的生成的随机数。</strong></p>
+<h3 id="线性同余生成器-LCG"><a href="#线性同余生成器-LCG" class="headerlink" title="线性同余生成器(LCG)"></a>线性同余生成器(LCG)</h3><p>n级反馈移位寄存器，首先会有n个初态元素(a0，a1,,,,,an-1)，F是反馈函数和反馈逻辑，根据函数类型，可以分为线性反馈移位寄存器(LFSR)和非线性。</p>
+<p>所以ai+n&#x3D;F(ai,ai+1,,,,,,ai+n-1)</p>
+<p>反馈移位寄存器都会定义在某个有限域上,可以将其视为同一个空间中的变换，对于一个序列来说，我们一般定义其生成函数为其序列对应的<strong>幂级数</strong>的和。</p>
+<h3 id="反馈移位寄存器"><a href="#反馈移位寄存器" class="headerlink" title="反馈移位寄存器"></a>反馈移位寄存器</h3><h3 id="特殊流密码"><a href="#特殊流密码" class="headerlink" title="特殊流密码"></a>特殊流密码</h3><h2 id="块加密"><a href="#块加密" class="headerlink" title="块加密"></a>块加密</h2><h2 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h2><h2 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h2><h2 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h2><h2 id="攻击思想"><a href="#攻击思想" class="headerlink" title="攻击思想"></a>攻击思想</h2><h2 id="证书格式"><a href="#证书格式" class="headerlink" title="证书格式"></a>证书格式</h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/crypto/" class="category-chain-item">crypto</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AF%86%E7%A0%81%E5%88%86%E6%9E%90/" class="print-no-link">#密码分析</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>密码学基础</div>
+      <div>http://example.com/2023/07/17/密码学工具/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>fan fan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年7月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/17/pwnable%E6%B8%B8%E8%AE%B0/" title="pwnable游记">
+                        <span class="hidden-mobile">pwnable游记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
