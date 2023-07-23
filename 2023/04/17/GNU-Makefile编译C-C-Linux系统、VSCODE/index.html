@@ -23,11 +23,17 @@
 <meta property="og:site_name" content="Pfang1n&#39;s blog">
 <meta property="og:description" content="文章改动 GCC简介GCC 官方文档网站 GCC（GNU Compiler Collection，GNU编译程序集合）是最重要的开放源码软件。其他所有开放源码软件都在某种层次上依赖于它。甚至其他语言，例如 Python，都是由 C 语言开发的，由 GNU 编译程序编译的。这个软件对于整个自由软件运动而言具有根本性的意义。如果没有它或类似的软件，就不可能有自由软件运动。GCC 为 Linux 的出现">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/image-20230723221227877.png">
+<meta property="og:image" content="http://example.com/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/image-20230723221242441.png">
+<meta property="og:image" content="http://example.com/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/image-20230723221304655.png">
+<meta property="og:image" content="http://example.com/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/image-20230723221316876.png">
+<meta property="og:image" content="http://example.com/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/image-20230723221358592.png">
 <meta property="article:published_time" content="2023-04-17T01:54:24.000Z">
-<meta property="article:modified_time" content="2023-07-23T11:26:37.112Z">
+<meta property="article:modified_time" content="2023-07-23T14:20:48.774Z">
 <meta property="article:author" content="fan fan">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/image-20230723221227877.png">
   
   
   
@@ -252,7 +258,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.3k 字
+          6.9k 字
         
       </span>
     
@@ -263,7 +269,7 @@
         
         
         
-          61 分钟
+          58 分钟
         
       </span>
     
@@ -344,13 +350,13 @@
 <li>hello.c 程序是以字节序列的方式储存在文件中的</li>
 </ul>
 <p>hello.c 的表示方法说明了一个基本思想∶ 系统中所有的信息——包括磁盘文件、内存中的程序、内存中存放的用户数据以及网络上传送的数据，都是由一串比特表示</p>
-<p>![img](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-04-17 102936.png)</p>
+<p><img src="/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/image-20230723221227877.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="2-编译过程"><a href="#2-编译过程" class="headerlink" title="2 编译过程"></a>2 编译过程</h2><p>hello 程序的生命周期从一个高级 C 语言程序开始</p>
 <p>为了在系统上运行 hello.c 程序，每条 C 语句都必须被其他程序转化为一系列的低级机器语言指令</p>
 <p>然后这些指令按照一种称为可执行目标程序的格式打好包，并以二进制磁盘文件的形式存放起来</p>
 <p>GCC 编译器读取源程序文件 hello.c，并把它翻译成一个可执行目标文件 hello。这个翻译过程可分为四个阶段完成，如下图所示</p>
 <p>执行这四个阶段的程序（预处理器、编译器、汇编器和链接器）一起构成了编译系统（compilation system）</p>
-<p>![img](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-04-17 102947.png)</p>
+<p><img src="/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/image-20230723221242441.png" srcset="/img/loading.gif" lazyload></p>
 <p> </p>
 <h3 id="2-1-预处理阶段"><a href="#2-1-预处理阶段" class="headerlink" title="2.1 预处理阶段"></a>2.1 预处理阶段</h3><p><code>预处理器（cpp）</code>根据以字符#开头的命令，修改原始的 C 程序。比如 hello.c中第 1行的#include &lt; stdio.h&gt;命令告诉<strong>预处理器读取系统头文件 stdio.h 的内容，并把它直接插入程序文本中。</strong>结果就得到了另一个 C程序，通常是以.i作为文件扩展名。</p>
 <h3 id="2-2-编译阶段"><a href="#2-2-编译阶段" class="headerlink" title="2.2 编译阶段"></a>2.2 编译阶段</h3><p><code>编译器（ccl）</code>将文本文件 hello.i翻译成文本文件 hello.s，它包含一 个汇编语言程序。该程序包含函数 main 的定义，如下所示：</p>
@@ -367,7 +373,7 @@
 <li>shell 程序将字符逐一读入寄存器</li>
 <li>再把它存放到内存中</li>
 </ul>
-<p>![img](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-04-17 102955.png)</p>
+<p><img src="/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/image-20230723221304655.png" srcset="/img/loading.gif" lazyload></p>
 <p> </p>
 <h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><ul>
 <li>当我们在键盘上敲回车键时，shell 程序就知道我们已经结束了命令的输人</li>
@@ -375,7 +381,7 @@
 <li>这些指令将 hello 目标文件中的代码和数据从磁盘复制到主存</li>
 <li>数据包括最终会被输出的字符串”hello，world\n”。</li>
 </ul>
-<p>![img](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-04-17 103000.png)</p>
+<p><img src="/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/image-20230723221316876.png" srcset="/img/loading.gif" lazyload></p>
 <p> </p>
 <h3 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h3><ul>
 <li>一旦目标文件 hello 中的代码和数据被加载到主存</li>
@@ -383,7 +389,7 @@
 <li>这些指令将 “hello，world\n” 字符串中的字节从主存复制到寄存器文件</li>
 <li>再从寄存器文件中复制到显示设备，最终显示在屏幕上</li>
 </ul>
-<p>![img](<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/jangfan/picb@main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE">https://cdn.jsdelivr.net/gh/jangfan/picb@main/屏幕截图</a> 2023-04-17 103005.png)</p>
+<p><img src="/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/image-20230723221358592.png" srcset="/img/loading.gif" lazyload></p>
 <p> </p>
 <p> </p>
 <h2 id="4-程序在计算机内的存储"><a href="#4-程序在计算机内的存储" class="headerlink" title="4 程序在计算机内的存储"></a>4 程序在计算机内的存储</h2><ul>
@@ -610,7 +616,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%9D%82%E8%AE%B0/" class="category-chain-item">杂记</a>
+  <a href="/categories/Useful-articles/" class="category-chain-item">Useful articles</a>
   
   
 
