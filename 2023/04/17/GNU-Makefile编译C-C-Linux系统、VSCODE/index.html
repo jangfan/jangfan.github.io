@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://example.com/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/image-20230723221316876.png">
 <meta property="og:image" content="http://example.com/2023/04/17/GNU-Makefile%E7%BC%96%E8%AF%91C-C-Linux%E7%B3%BB%E7%BB%9F%E3%80%81VSCODE/image-20230723221358592.png">
 <meta property="article:published_time" content="2023-04-17T01:54:24.000Z">
-<meta property="article:modified_time" content="2023-07-23T14:20:48.774Z">
+<meta property="article:modified_time" content="2023-07-24T03:07:49.388Z">
 <meta property="article:author" content="fan fan">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -258,7 +258,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.9k 字
+          11k 字
         
       </span>
     
@@ -269,7 +269,7 @@
         
         
         
-          58 分钟
+          96 分钟
         
       </span>
     
@@ -598,7 +598,154 @@
 <li><code>*</code>: 通配符表示匹配任意字符串，可以用在目录名或文件名中</li>
 <li><code>%</code>: 通配符表示匹配任意字符串，并将匹配到的字符串作为变量使用</li>
 </ul>
-<h2 id="functions"><a href="#functions" class="headerlink" title="functions"></a>functions</h2>
+<h2 id="functions"><a href="#functions" class="headerlink" title="functions"></a>functions</h2><p>Makefile 的常用函数</p>
+<p>函数调用，很像变量的使用，也是以 “$” 来标识的，其语法如下：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs makefile">$(fn, arguments) or $&#123;fn, arguments&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>fn: 函数名</li>
+<li>​     arguments: 函数参数，参数间以逗号 <code>,</code> 分隔，而函数名和参数之间以“空格”分隔&amp;emsp;</li>
+</ul>
+<h3 id="1-shell"><a href="#1-shell" class="headerlink" title="1 shell"></a>1 shell</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-variable">$(<span class="hljs-built_in">shell</span> &lt;command&gt; &lt;arguments&gt;)</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>名称：shell 命令函数 —— shell</li>
+<li>功能：调用 shell 命令 command</li>
+<li>返回：函数返回 shell 命令 command 的执行结果</li>
+</ul>
+<blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment"># shell 指令，src 文件夹下找到 .cpp 文件</span><br>cpp_srcs := <span class="hljs-variable">$(<span class="hljs-built_in">shell</span> find src -name &quot;*.cpp&quot;)</span> <span class="hljs-comment">#找到所有.cpp文件</span><br><span class="hljs-comment"># shell 指令, 获取计算机架构</span><br>HOST_ARCH := <span class="hljs-variable">$(<span class="hljs-built_in">shell</span> uname -m)</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-subst"><a href="#2-subst" class="headerlink" title="2 subst"></a>2 subst</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-variable">$(<span class="hljs-built_in">subst</span> &lt;from&gt;,&lt;to&gt;,&lt;text&gt;)</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>名称：字符串替换函数——subst</li>
+<li>功能：把字串 &lt;text&gt; 中的 &lt;from&gt; 字符串替换成 &lt;to&gt;</li>
+<li>返回：函数返回被替换过后的字符串<blockquote>
+<p>示例：</p>
+</blockquote>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><br>cpp_srcs := <span class="hljs-variable">$(<span class="hljs-built_in">shell</span> find src -name &quot;*.cpp&quot;)</span><br>cpp_objs := <span class="hljs-variable">$(<span class="hljs-built_in">subst</span> src/,objs/,<span class="hljs-variable">$(cpp_objs)</span>)</span> <br><br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>&amp;emsp;</p>
+<h3 id="3-patsubst"><a href="#3-patsubst" class="headerlink" title="3 patsubst"></a>3 patsubst</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> &lt;pattern&gt;,&lt;replacement&gt;,&lt;text&gt;)</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>名称：模式字符串替换函数 —— patsubst</li>
+<li>功能：通配符 <code>%</code>，表示任意长度的字串，从 text 中取出 patttern， 替换成 replacement</li>
+<li>返回：函数返回被替换过后的字符串<blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile">cpp_srcs := <span class="hljs-variable">$(<span class="hljs-built_in">shell</span> find src -name &quot;*.cpp&quot;)</span> <span class="hljs-comment">#shell指令，src文件夹下找到.cpp文件</span><br>cpp_objs := <span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> %.cpp,%.o,<span class="hljs-variable">$(cpp_srcs)</span>)</span> <span class="hljs-comment">#cpp_srcs变量下cpp文件替换成 .o文件</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="4-foreach"><a href="#4-foreach" class="headerlink" title="4 foreach"></a>4 foreach</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-variable">$(<span class="hljs-built_in">foreach</span> &lt;var&gt;,&lt;list&gt;,&lt;text&gt;)</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>名称：循环函数——foreach。</li>
+<li>功能：把字串&lt;list&gt;中的元素逐一取出来，执行&lt;text&gt;包含的表达式</li>
+<li>返回：&lt;text&gt;所返回的每个字符串所组成的整个字符串（以空格分隔）</li>
+</ul>
+<blockquote>
+<p>示例：</p>
+</blockquote>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs makefile">library_paths := /datav/shared/100_du/03.08/lean/protobuf-3.11.4/lib \<br>                 /usr/local/cuda-10.1/lib64 \<br><br>library_paths := <span class="hljs-variable">$(<span class="hljs-built_in">foreach</span> item,<span class="hljs-variable">$(library_paths)</span>,-L<span class="hljs-variable">$(item)</span>)</span><br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>同等效果</p>
+</blockquote>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs makefile">I_flag := $(include_paths:%=-I%)<br></code></pre></td></tr></table></figure>
+
+<h3 id="5-dir"><a href="#5-dir" class="headerlink" title="5 dir"></a>5 dir</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-variable">$(<span class="hljs-built_in">dir</span> &lt;names...&gt;)</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>名称：取目录函数——dir。</li>
+<li>功能：从文件名序列<names>中取出目录部分。目录部分是指最后一个反斜杠（“&#x2F;”）之前<br>的部分。如果没有反斜杠，那么返回“.&#x2F;”。</names></li>
+<li>返回：返回文件名序列<names>的目录部分。</names></li>
+<li>示例： <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-variable">$(<span class="hljs-built_in">dir</span> src/foo.c hacks)</span>    <span class="hljs-comment"># 返回值是“src/ ./”。</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="6-notdir"><a href="#6-notdir" class="headerlink" title="6 notdir"></a>6 notdir</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-variable">$(<span class="hljs-built_in">notdir</span> &lt;names...&gt;)</span><br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs makefile">libs   := <span class="hljs-variable">$(<span class="hljs-built_in">notdir</span> $(<span class="hljs-built_in">shell</span> find /usr/lib -name lib*)</span>)&amp;emsp;<br></code></pre></td></tr></table></figure>
+
+<h3 id="7-filter"><a href="#7-filter" class="headerlink" title="7 filter"></a>7 filter</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-variable">$(<span class="hljs-built_in">filter</span> &lt;names...&gt;)</span><br>libs    := <span class="hljs-variable">$(<span class="hljs-built_in">notdir</span> $(<span class="hljs-built_in">shell</span> find /usr/lib -name lib*)</span>)<br>a_libs  := <span class="hljs-variable">$(<span class="hljs-built_in">filter</span> %.a,<span class="hljs-variable">$(libs)</span>)</span><br>so_libs := <span class="hljs-variable">$(<span class="hljs-built_in">filter</span> %.so,<span class="hljs-variable">$(libs)</span>)</span>;<br></code></pre></td></tr></table></figure>
+
+<h3 id="8-basename"><a href="#8-basename" class="headerlink" title="8 basename"></a>8 basename</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-variable">$(<span class="hljs-built_in">basename</span> &lt;names...&gt;)</span><br>libs    := <span class="hljs-variable">$(<span class="hljs-built_in">notdir</span> $(<span class="hljs-built_in">shell</span> find /usr/lib -name lib*)</span>)<br>a_libs  := <span class="hljs-variable">$(<span class="hljs-built_in">subst</span> lib,,$(<span class="hljs-built_in">basename</span> $(<span class="hljs-built_in">filter</span> %.a,<span class="hljs-variable">$(libs)</span>)</span>))<br>so_libs := <span class="hljs-variable">$(<span class="hljs-built_in">subst</span> lib,,$(<span class="hljs-built_in">basename</span> $(<span class="hljs-built_in">filter</span> %.so,<span class="hljs-variable">$(libs)</span>)</span>))<br></code></pre></td></tr></table></figure>
+
+<h1 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h1><h2 id="1-编译过程"><a href="#1-编译过程" class="headerlink" title="1 编译过程"></a>1 编译过程</h2><h3 id="1-1-预处理"><a href="#1-1-预处理" class="headerlink" title="1.1 预处理"></a>1.1 预处理</h3><blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs makefile">cpp_srcs := <span class="hljs-variable">$(<span class="hljs-built_in">shell</span> find src -name *.cpp)</span><br>pp_files := <span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> src/%.cpp,src/%.i,<span class="hljs-variable">$(cpp_srcs)</span>)</span><br><br>src/%.i : src/%.cpp<br>    @g++ -E <span class="hljs-variable">$^</span> -o <span class="hljs-variable">$@</span><br><br>preprocess : <span class="hljs-variable">$(pp_files)</span><br><br>clean :<br>    @rm -f src/*.i<br><br>debug :<br>    @echo <span class="hljs-variable">$(pp_files)</span><br><br>.PHONY : debug preprocess clean<br></code></pre></td></tr></table></figure>
+
+<p>&amp;emsp;</p>
+<h3 id="1-2-编译成汇编语言"><a href="#1-2-编译成汇编语言" class="headerlink" title="1.2 编译成汇编语言"></a>1.2 编译成汇编语言</h3><blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs makefile">cpp_srcs := <span class="hljs-variable">$(<span class="hljs-built_in">shell</span> find src -name *.cpp)</span><br>as_files := <span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> src/%.cpp,src/%.s,<span class="hljs-variable">$(cpp_srcs)</span>)</span><br><br>src/%.s : src/%.cpp<br>    @g++ -S <span class="hljs-variable">$^</span> -o <span class="hljs-variable">$@</span><br><br>assemble : <span class="hljs-variable">$(as_files)</span><br><br>clean :<br>    @rm -f src/*.s<br><br>debug :<br>    @echo <span class="hljs-variable">$(as_files)</span><br><br>.PHONY : debug assemble clean<br></code></pre></td></tr></table></figure>
+
+<p>&amp;emsp;</p>
+<h3 id="1-3-编译成目标文件"><a href="#1-3-编译成目标文件" class="headerlink" title="1.3 编译成目标文件"></a>1.3 编译成目标文件</h3><blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs makefile">cpp_srcs := <span class="hljs-variable">$(<span class="hljs-built_in">shell</span> find src -name *.cpp)</span><br>cpp_objs := <span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> src/%.cpp,objs/%.o,<span class="hljs-variable">$(cpp_srcs)</span>)</span><br><br>objs/%.o : src/%.cpp<br>    @mkdir -p <span class="hljs-variable">$(<span class="hljs-built_in">dir</span> <span class="hljs-variable">$@</span>)</span><br>    @g++ -c <span class="hljs-variable">$^</span> -o <span class="hljs-variable">$@</span><br><br>objects : <span class="hljs-variable">$(cpp_objs)</span><br><br>clean :<br>    @rm -rf objs src/*.o<br><br>debug :<br>    @echo <span class="hljs-variable">$(as_files)</span><br><br>.PHONY : debug objects clean<br></code></pre></td></tr></table></figure>
+
+<p>&amp;emsp;</p>
+<h3 id="1-4-链接可执行文件"><a href="#1-4-链接可执行文件" class="headerlink" title="1.4 链接可执行文件"></a>1.4 链接可执行文件</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs makefile">cpp_srcs := <span class="hljs-variable">$(<span class="hljs-built_in">shell</span> find src -name *.cpp)</span><br>cpp_objs := <span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> src/%.cpp,objs/%.o,<span class="hljs-variable">$(cpp_srcs)</span>)</span><br><br><br>objs/%.o : src/%.cpp<br>    @mkdir -p <span class="hljs-variable">$(<span class="hljs-built_in">dir</span> <span class="hljs-variable">$@</span>)</span><br>    @g++ -c <span class="hljs-variable">$^</span> -o <span class="hljs-variable">$@</span><br><br>workspace/exec : <span class="hljs-variable">$(cpp_objs)</span><br>    @mkdir workspace/exec<br>    @g++ <span class="hljs-variable">$^</span> -o <span class="hljs-variable">$@</span><br><br>run : workspace<br>    @./<span class="hljs-variable">$&lt;</span><br><br>clean :<br>    @rm -rf objs workspace/exec<br><br>debug :<br>    @echo <span class="hljs-variable">$(as_files)</span><br><br>.PHONY : debug run clean<br></code></pre></td></tr></table></figure>
+
+
+<p>&amp;emsp;</p>
+<h2 id="2-编译选项"><a href="#2-编译选项" class="headerlink" title="2 编译选项"></a>2 编译选项</h2><blockquote>
+<p>编译选项</p>
+</blockquote>
+<ul>
+<li><code>-m64</code>: 指定编译为 64 位应用程序</li>
+<li><code>-std=</code>: 指定编译标准，例如：-std&#x3D;c++11、-std&#x3D;c++14</li>
+<li><code>-g</code>: 包含调试信息</li>
+<li><code>-w</code>: 不显示警告</li>
+<li><code>-O</code>: 优化等级，通常使用：-O3</li>
+<li><code>-I</code>: 加在头文件路径前</li>
+<li><code>fPIC</code>: (Position-Independent Code), 产生的没有绝对地址，全部使用相对地址，代码可以被加载到内存的任意位置，且可以正确的执行。这正是共享库所要求的，共享库被加载时，在内存的位置不是固定的</li>
+</ul>
+<blockquote>
+<p>链接选项</p>
+</blockquote>
+<ul>
+<li><code>-l</code>: 加在库名前面</li>
+<li><code>-L</code>: 加在库路径前面</li>
+<li><code>-Wl,&lt;选项&gt;</code>: 将逗号分隔的 &lt;选项&gt; 传递给链接器</li>
+<li><code>-rpath=</code>: “运行” 的时候，去找的目录。运行的时候，要找 .so 文件，会从这个选项里指定的地方去找</li>
+</ul>
+<p>&amp;emsp;</p>
+<h2 id="3-Implicit-Rules"><a href="#3-Implicit-Rules" class="headerlink" title="3 Implicit Rules"></a>3 Implicit Rules</h2><ul>
+<li>CC: Program for compiling C programs; default cc</li>
+<li>CXX: Program for compiling C++ programs; default g++</li>
+<li>CFLAGS: Extra flags to give to the C compiler</li>
+<li>CXXFLAGS: Extra flags to give to the C++ compiler</li>
+<li>CPPFLAGS: Extra flags to give to the C preprocessor</li>
+<li>LDFLAGS: Extra flags to give to compilers when they are supposed to invoke the linker</li>
+</ul>
+<p>&amp;emsp;</p>
+<h2 id="4-编译带头文件的程序"><a href="#4-编译带头文件的程序" class="headerlink" title="4 编译带头文件的程序"></a>4 编译带头文件的程序</h2><blockquote>
+<p>add.hpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> ADD_HPP</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> ADD_HPP</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span></span>;<br><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">// ADD_HPP</span></span><br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>add.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> a+b;<br>&#125;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>minus.hpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> MINUS_HPP</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MINUS_HPP</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minus</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span></span>;<br><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">// MINUS_HPP</span></span><br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>minus.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minus</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> a-b;<br>&#125;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>main.cpp</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;add.hpp&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;minus.hpp&quot;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> a=<span class="hljs-number">10</span>; <span class="hljs-type">int</span> b=<span class="hljs-number">5</span>;<br>    <span class="hljs-type">int</span> res = <span class="hljs-built_in">add</span>(a, b);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;a + b = %d\n&quot;</span>, res);<br>    res = <span class="hljs-built_in">minus</span>(a, b);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;a - b = %d\n&quot;</span>, res);<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Makefile</p>
+</blockquote>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs makefile">cpp_srcs := <span class="hljs-variable">$(<span class="hljs-built_in">shell</span> find src -name *.cpp)</span><br>cpp_objs := <span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> src/%.cpp,objs/%.o,<span class="hljs-variable">$(cpp_srcs)</span>)</span><br><br><span class="hljs-comment"># 你的头文件所在文件夹路径（建议绝对路径）</span><br>include_paths := <br>I_flag        := $(include_paths:%=-I%)<br><br><br>objs/%.o : src/%.cpp<br>    @mkdir -p <span class="hljs-variable">$(<span class="hljs-built_in">dir</span> <span class="hljs-variable">$@</span>)</span><br>    @g++ -c <span class="hljs-variable">$^</span> -o <span class="hljs-variable">$@</span> <span class="hljs-variable">$(I_flag)</span><br><br>workspace/exec : <span class="hljs-variable">$(cpp_objs)</span><br>    @mkdir -p <span class="hljs-variable">$(<span class="hljs-built_in">dir</span> <span class="hljs-variable">$@</span>)</span><br>    @g++ <span class="hljs-variable">$^</span> -o <span class="hljs-variable">$@</span> <br><br>run : workspace/exec<br>    @./<span class="hljs-variable">$&lt;</span><br><br>debug :<br>    @echo <span class="hljs-variable">$(I_flag)</span><br><br>clean :<br>    @rm -rf objs<br><br>.PHONY : debug run<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
