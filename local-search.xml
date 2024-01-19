@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>srop</title>
+    <link href="/2024/01/18/srop/"/>
+    <url>/2024/01/18/srop/</url>
+    
+    <content type="html"><![CDATA[<p>之前对srop一直只是听过,最近研究了三道srop的题目，顺便整理一下srop的思路</p><h2 id="ciscn-2019-es-7"><a href="#ciscn-2019-es-7" class="headerlink" title="ciscn_2019_es_7"></a>ciscn_2019_es_7</h2><p><img src="/2024/01/18/srop/image-20240118213208269.png" alt="image-20240118213208269"></p><p>典型的栈溢出(栈大小为0x10,读取0x300，显示0x30)</p><p>特别之处在于程序使用系统调用号来调用read和write函数</p><h2 id="rootersctf-2019-srop"><a href="#rootersctf-2019-srop" class="headerlink" title="rootersctf_2019_srop"></a>rootersctf_2019_srop</h2><h2 id="360chunqiu2017-smallest"><a href="#360chunqiu2017-smallest" class="headerlink" title="360chunqiu2017_smallest"></a>360chunqiu2017_smallest</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>刷题总结</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>srop</tag>
+      
+      <tag>pwn</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>s4_pwn_wp</title>
     <link href="/2023/12/05/s4-pwn-wp/"/>
     <url>/2023/12/05/s4-pwn-wp/</url>
@@ -64,7 +91,7 @@
     
     <tags>
       
-      <tag>刷题</tag>
+      <tag>pwnable</tag>
       
     </tags>
     
